@@ -1,0 +1,40 @@
+{
+    "headers": [
+        {
+            "source": "/(.*).js",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "text/javascript"
+              }
+            ]
+          },
+          {
+            "source": "/(.*).mp3",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "audio/mpeg"
+              }
+            ]
+          },
+          {
+            "source": "/(.*).html",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "text/html"
+              }
+            ]
+          },
+          {
+            "source": "/(.*).css",
+            "headers": [
+              {
+                "key": "Content-Type",
+                "value": "text/css"
+              }
+            ]
+          }
+    ]
+}
