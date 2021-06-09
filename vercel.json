@@ -1,40 +1,49 @@
 {
-    "headers": [
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers": [
         {
-            "source": "/(.*).js",
-            "headers": [
-              {
-                "key": "Content-Type",
-                "value": "text/javascript"
-              }
-            ]
-          },
-          {
-            "source": "/(.*).mp3",
-            "headers": [
-              {
-                "key": "Content-Type",
-                "value": "audio/mpeg"
-              }
-            ]
-          },
-          {
-            "source": "/(.*).html",
-            "headers": [
-              {
-                "key": "Content-Type",
-                "value": "text/html"
-              }
-            ]
-          },
-          {
-            "source": "/(.*).css",
-            "headers": [
-              {
-                "key": "Content-Type",
-                "value": "text/css"
-              }
-            ]
-          }
-    ]
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).js",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/javascript"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).mp3",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "audio/mpeg"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).html",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/html"
+        }
+      ]
+    },
+    {
+      "source": "/(.*).css",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/css"
+        }
+      ]
+    }
+  ]
 }
