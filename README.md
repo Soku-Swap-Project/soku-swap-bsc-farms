@@ -12,3 +12,4 @@ This project contains the main features of the sokuswap bsc farm application.
 This repo is responsible for the BSC Farms for SokuSwap
 
 If you want to contribute, please refer to the [contributing guidelines](./CONTRIBUTING.md) of this project.
+
