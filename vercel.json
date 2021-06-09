@@ -1,7 +1,4 @@
 {
-    "redirects":[
-        {"source":"/","destinatio":"/bsc/farms/"}
-    ],
     "headers": [
         {
             "source": "/(.*).js",
