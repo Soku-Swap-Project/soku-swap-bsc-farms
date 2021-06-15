@@ -1,8 +1,8 @@
 {
-  "rewrites": [
+  "redirects": [
     {
-      "source": "/bsc/farms/(.*)",
-      "destination": "/$1"
+      "source": "/bsc/farms/",
+      "destination": "/"
     }
   ],
   "headers": [
