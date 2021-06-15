@@ -1,14 +1,4 @@
 {
-  "redirects": [
-    {
-      "source": "/bsc/farms/",
-      "destination": "/ethereum/farms"
-    },
-    {
-      "source": "/",
-      "destination": "/ethereum/farms"
-    }
-  ],
   "headers": [
     {
       "source": "/service-worker.js",
