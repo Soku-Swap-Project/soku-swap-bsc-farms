@@ -2,7 +2,11 @@
   "redirects": [
     {
       "source": "/bsc/farms/",
-      "destination": "/"
+      "destination": "/ethereum/farms"
+    },
+    {
+      "source": "/",
+      "destination": "/ethereum/farms"
     }
   ],
   "headers": [
