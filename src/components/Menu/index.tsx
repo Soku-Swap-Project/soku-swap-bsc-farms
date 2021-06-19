@@ -48,12 +48,12 @@ const Menu = (props) => {
               <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="/images/Web-Corner-Logo.png" />
             </NavLink>
             <div className="navbar__options">
-              <NavLink className="nav_link" activeClassName="active" to="/bsc/swap">
+              <a className="nav_link" href="/bsc/swap">
                 <li>Swap</li>
-              </NavLink>
-              <NavLink className="nav_link" to="/bsc/pool" activeClassName="active">
+              </a>
+              <a className="nav_link" href="/bsc/pool">
                 <li>Pool</li>
-              </NavLink>
+              </a>
               <a className="nav_link" href="https://www.binance.org/en/bridge">
                 <li>Bridge</li>
               </a>
