@@ -45,7 +45,7 @@ const Menu = (props) => {
         <nav>
           <ul className="navbar__items">
             <NavLink to="/">
-              <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="/images/Web-Corner-Logo.png" />
+              <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="images/Web-Corner-Logo.png" />
             </NavLink>
             <div className="navbar__options">
               <a className="nav_link" href="/bsc/swap">
