@@ -45,13 +45,13 @@ const Menu = (props) => {
         <nav>
           <ul className="navbar__items">
             <NavLink to="/">
-              <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="images/Web-Corner-Logo.png" />
+              <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="/images/Web-Corner-Logo.png" />
             </NavLink>
             <div className="navbar__options">
-              <NavLink className="nav_link" activeClassName="active" to="/swap">
+              <NavLink className="nav_link" activeClassName="active" to="/bsc/swap">
                 <li>Swap</li>
               </NavLink>
-              <NavLink className="nav_link" to="/pool" activeClassName="active">
+              <NavLink className="nav_link" to="/bsc/pool" activeClassName="active">
                 <li>Pool</li>
               </NavLink>
               <a className="nav_link" href="https://www.binance.org/en/bridge">
