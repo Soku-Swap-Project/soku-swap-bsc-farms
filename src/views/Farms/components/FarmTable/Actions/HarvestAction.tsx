@@ -7,6 +7,7 @@ import { useHarvest } from 'hooks/useHarvest'
 import { useTranslation } from 'contexts/Localization'
 import { usePriceCakeBusd } from 'state/hooks'
 import { useCountUp } from 'react-countup'
+import { useWeb3React } from '@web3-react/core'
 
 import { ActionContainer, ActionTitles, Title, Subtle, ActionContent, Earned, Staked } from './styles'
 
@@ -20,6 +21,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   let earnings = 0
   let earningsBusd = 0
   let displayBalance = userDataReady ? earnings.toLocaleString() : <Skeleton width={60} />
+  const { account } = useWeb3React()
 
   // If user didn't connect wallet default balance will be 0
   if (!earningsBigNumber.isZero()) {
@@ -46,29 +48,36 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   }, [earningsBusd, updateValue])
 
   return (
-    <ActionContainer>
-      {/* <ActionTitles>
-        <Title>CAKE </Title>
-        <Subtle>{t('Earned').toUpperCase()}</Subtle>
-      </ActionTitles>
-      <ActionContent>
-        <div>
-          <Earned>{displayBalance}</Earned>
-          {countUp > 0 && <Staked>~{countUp}USD</Staked>}
-        </div>
-        <Button
-          disabled={!earnings || pendingTx || !userDataReady}
-          onClick={async () => {
-            setPendingTx(true)
-            await onReward()
-            setPendingTx(false)
-          }}
-          ml="4px"
-        >
-          {t('Harvest')}
-        </Button>
-      </ActionContent> */}
-    </ActionContainer>
+    <>
+      {account ? (
+        <ActionContainer>
+          <ActionTitles>
+            <Title>SOKU </Title>
+            <Subtle>{t('Earned').toUpperCase()}</Subtle>
+          </ActionTitles>
+          <ActionContent>
+            <div>
+              <Earned>{displayBalance}</Earned>
+              {countUp > 0 && <Staked>~{countUp}USD</Staked>}
+            </div>
+            <Button
+              style={{ background: '#04bbfb' }}
+              disabled={!earnings || pendingTx || !userDataReady}
+              onClick={async () => {
+                setPendingTx(true)
+                await onReward()
+                setPendingTx(false)
+              }}
+              ml="4px"
+            >
+              {t('Claim')}
+            </Button>
+          </ActionContent>
+        </ActionContainer>
+      ) : (
+        ''
+      )}
+    </>
   )
 }
 

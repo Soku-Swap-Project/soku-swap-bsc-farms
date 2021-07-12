@@ -31,7 +31,7 @@ const Container = styled.div`
   }
 
   @media (max-width: 600px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
   }
 `
 
@@ -43,7 +43,7 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
   const handleRenderFarming = (): JSX.Element => {
     if (rawStakedBalance) {
       return (
-        <Text color="secondary" fontSize="12px" bold textTransform="uppercase">
+        <Text color="#04bbfb" fontSize="12px" bold textTransform="uppercase">
           {t('Farming')}
         </Text>
       )
@@ -54,10 +54,14 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
 
   return (
     <Container>
-      <IconImage src={`/images/farms/${image}.svg`} alt="icon" width={40} height={40} mr="8px" />
+      <IconImage src="https://i.ibb.co/17rrFQK/sokuswap-token.png" alt="icon" width={40} height={40} mr="8px" />
+
+      {/* /images/farms/${image}.svg */}
       <div>
         {handleRenderFarming()}
-        <Text bold>{label}</Text>
+        <Text bold style={{ textTransform: 'uppercase' }}>
+          {image}
+        </Text>
       </div>
     </Container>
   )

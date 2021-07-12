@@ -3,6 +3,15 @@ const tokens = {
     symbol: 'BNB',
     projectLink: 'https://www.binance.com/',
   },
+  soku: {
+    symbol: 'SOKU',
+    address: {
+      56: '0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53',
+      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   cake: {
     symbol: 'CAKE',
     address: {

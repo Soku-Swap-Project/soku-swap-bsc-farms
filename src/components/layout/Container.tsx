@@ -13,7 +13,7 @@ const Container = styled.div`
   }
 
   @media (max-width: 600px) {
-    max-width: 90vw;
+    max-width: 100vw;
   }
 `
 

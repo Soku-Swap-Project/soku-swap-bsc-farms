@@ -6,8 +6,16 @@ import Web3 from 'web3'
 import getNodeUrl from './getRpcUrl'
 
 const POLLING_INTERVAL = 12000
+// Mainnet
 const rpcUrl = getNodeUrl()
 const chainId = parseInt(process.env.REACT_APP_CHAIN_ID, 10)
+
+// Testnet
+// const chainId = 97
+// const rpcUrl = 'https://data-seed-prebsc-1-s1.binance.org:8545/'
+
+// console.log(rpcUrl)
+// console.log(chainId)
 
 const injected = new InjectedConnector({ supportedChainIds: [chainId] })
 

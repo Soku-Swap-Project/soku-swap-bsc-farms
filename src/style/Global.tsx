@@ -37,6 +37,35 @@ const GlobalStyle = createGlobalStyle`
     width: 18px;
 
   }
+
+  input[pattern='^[0-9]*[.,]?[0-9]*$']:focus:not(:disabled) {
+    box-shadow: 0px 0px 4px 2px #04bbfb
+}
+
+input[pattern='^[0-9]*[.,]?[0-9]*$']::placeholder {
+  /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(5,72,156);
+  opacity: 1; /* Firefox */
+}
+
+input[pattern='^[0-9]*[.,]?[0-9]*$']:-ms-input-placeholder {
+  /* Internet Explorer 10-11 */
+  color: rgb(5,72,156);
+}
+
+input[pattern='^[0-9]*[.,]?[0-9]*$']::-ms-input-placeholder {
+  /* Microsoft Edge */
+  color: rgb(5,72,156);
+}
+
+input[pattern='^[0-9]*[.,]?[0-9]*$'] {
+  color: rgb(5, 72, 156);
+}
+
+ {
+    border: 1px solid red;
+  }
+
   #import-pool-link {
     color: #04bbfb;
   }

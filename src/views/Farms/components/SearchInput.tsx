@@ -9,6 +9,7 @@ const StyledInput = styled(Input)`
   // margin-left: auto;
   background: #fff;
   padding: 1.5rem 0.75rem;
+  color: rgb(5, 72, 156);
 `
 
 const InputWrapper = styled.div`

@@ -152,10 +152,10 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
   const info = `https://pancakeswap.info/pair/${lpAddress}`
   const origin = window.location.origin
 
-  console.log(quoteToken)
-  console.log(token)
+  // console.log(quoteToken)
+  // console.log(token)
 
-  console.log(window.location)
+  // console.log(window.location)
 
   return (
     <Container
@@ -200,23 +200,23 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           {farm.isCommunity ? <CommunityTag /> : <CoreTag />}
           {dual ? <DualTag /> : null}
         </TagsContainer>
-      </InfoContainer>
+      </InfoContainer> */}
       <ValueContainer>
-        <ValueWrapper>
+        {/* <ValueWrapper>
           <Text>{t('APR')}</Text>
           <Apr {...apr} />
         </ValueWrapper>
         <ValueWrapper>
           <Text>{t('Multiplier')}</Text>
           <Multiplier {...multiplier} />
-        </ValueWrapper>
+        </ValueWrapper> */}
         <ValueWrapper>
           <Text>{t('Liquidity')}</Text>
           <Liquidity {...liquidity} />
         </ValueWrapper>
-      </ValueContainer> */}
+      </ValueContainer>
       <ActionContainer>
-        {/* <HarvestAction {...farm} userDataReady={userDataReady} /> */}
+        <HarvestAction {...farm} userDataReady={userDataReady} />
         <StakedAction {...farm} userDataReady={userDataReady} />
       </ActionContainer>
     </Container>

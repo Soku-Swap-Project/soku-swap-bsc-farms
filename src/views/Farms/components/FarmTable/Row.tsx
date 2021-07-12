@@ -53,6 +53,8 @@ const CellInner = styled.div`
 const StyledTr = styled.tr`
   cursor: pointer !important;
   border-bottom: 2px solid ${({ theme }) => theme.colors.cardBorder};
+  border-radius: 16px;
+  width: 20%;
 `
 
 const EarnedMobileCell = styled.td`
@@ -147,11 +149,11 @@ const Row: React.FunctionComponent<RowPropsWithLoading> = (props) => {
             </FarmMobileCell>
           </tr>
           <tr>
-            {/* <EarnedMobileCell>
+            <EarnedMobileCell>
               <CellLayout label={t('Earned')}>
                 <Earned {...props.earned} userDataReady={userDataReady} />
               </CellLayout>
-            </EarnedMobileCell> */}
+            </EarnedMobileCell>
             <AprMobileCell>
               <CellLayout label={t('APR')}>
                 <Apr {...props.apr} hideButton />
