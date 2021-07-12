@@ -68,46 +68,9 @@ const App: React.FC = () => {
       <Menu />
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-          <Route path="/" exact>
+          <Route path="/bsc/farms">
             <Farms />
           </Route>
-          {/* <Route path=0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"/pools">
-            <Pools />
-          </Route>
-          <Route path="/lottery">
-            <Lottery />
-          </Route>
-          <Route path="/ifo">
-            <Ifos />
-          </Route>
-          <Route path="/collectibles">
-            <Collectibles />
-          </Route>
-          <Route exact path="/teams">
-            <Teams />
-          </Route>
-          <Route path="/teams/:id">
-            <Team />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route path="/competition">
-            <TradingCompetition />
-          </Route>
-          <Route path="/prediction">
-            <Predictions />
-          </Route> */}
-          {/* Redirect */}
-          {/* <Route path="/staking">
-            <Redirect to="/pools" />
-          </Route>
-          <Route path="/syrup">
-            <Redirect to="/pools" />
-          </Route>
-          <Route path="/nft">
-            <Redirect to="/collectibles" />
-          </Route> */}
           {/* 404 */}
           <Route component={NotFound} />
         </Switch>
