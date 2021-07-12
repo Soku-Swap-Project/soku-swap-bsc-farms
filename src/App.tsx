@@ -40,7 +40,7 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
-const App = () => {
+const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
   useFetchProfile()
@@ -68,11 +68,7 @@ const App = () => {
       <Menu />
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-<<<<<<< Updated upstream
-          <Route path="/">
-=======
-          <Route path="/farms" exact>
->>>>>>> Stashed changes
+          <Route path="/" exact>
             <Farms />
           </Route>
           {/* <Route path=0xcA143Ce32Fe78f1f7019d7d551a6402fC5350c73"/pools">
@@ -165,4 +161,4 @@ const App = () => {
   )
 }
 
-export default App
+export default React.memo(App)
