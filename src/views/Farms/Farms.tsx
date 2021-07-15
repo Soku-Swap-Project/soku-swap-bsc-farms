@@ -180,6 +180,9 @@ const Farms: React.FC = () => {
         const quoteTokenPriceUsd = prices[getAddress(farm.quoteToken.address).toLowerCase()]
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
         const apr = isActive ? getFarmApr(farm.poolWeight, cakePrice, totalLiquidity) : 0
+        // console.log('PW', farm.poolWeight)
+        // console.log('CP', cakePrice.toString())
+        // console.log('TL', totalLiquidity.toString())
 
         return { ...farm, apr, liquidity: totalLiquidity }
       })
@@ -280,7 +283,7 @@ const Farms: React.FC = () => {
     const tokenAddress = token.address
     const quoteTokenAddress = quoteToken.address
     const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('SOKU', '')
-    console.log('Farm APR', farm.apr)
+    // console.log('Farm APR', farm.apr)
 
     const row: RowProps = {
       apr: {

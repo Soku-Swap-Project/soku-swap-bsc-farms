@@ -17,6 +17,7 @@ export const BSC_BLOCK_TIME = 3
 // CAKE/Block in src/views/Home/components/CakeStats.tsx = 20 (40 - Amount sent to burn pool)
 
 export const CAKE_PER_BLOCK = new BigNumber(40)
+// console.log(CAKE_PER_BLOCK.toString())
 export const BLOCKS_PER_YEAR = new BigNumber((60 / BSC_BLOCK_TIME) * 60 * 24 * 365) // 10512000
 export const BASE_URL = 'https://sokuswap.finance'
 export const BASE_EXCHANGE_URL = 'https://app.sokuswap.finance'
