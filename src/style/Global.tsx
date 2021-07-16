@@ -158,18 +158,31 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
   scrollbar-width: none; /* Firefox */
 }
 
-  /* 'x' and Wallet names on Connect to a Wallet */
-  button[id='wallet-connect-metamask'] div,
-  button[id='wallet-connect-trustwallet'] div,
-  button[id='wallet-connect-mathwallet'] div,
-  button[id='wallet-connect-tokenpocket'] div,
-  button[id='wallet-connect-walletconnect'] div,
-  button[id='wallet-connect-binance chain wallet'] div,
-  button[id='wallet-connect-safepal wallet'] div {
-    color: #04bbfb !important;
-    fill: #04bbfb !important;
-    font-family: 'Poppins' !important;
-  }
+/* 'x' and Wallet names on Connect to a Wallet */
+button[id='wallet-connect-metamask'] div,
+button[id='wallet-connect-walletconnect'] div,
+button[id='wallet-connect-binance chain wallet'] div,
+.fKQcGp {
+  color: #04bbfb !important;
+  fill: #04bbfb !important;
+}
+
+/* button[id='wallet-connect-trustwallet'],
+button[id='wallet-connect-mathwallet'],
+button[id='wallet-connect-tokenpocket'],
+button[id='wallet-connect-walletconnect'],
+button[id='wallet-connect-binance chain wallet'],
+button[id='wallet-connect-safepal wallet'] {
+  display: none;
+} */
+
+button[id='wallet-connect-tokenpocket'],
+button[id='wallet-connect-trustwallet'],
+button[id='wallet-connect-mathwallet'],
+button[id='wallet-connect-tokenpocket'],
+button[id='wallet-connect-safepal wallet'] {
+  display: none;
+}
   
   a[href="https://docs.pancakeswap.finance/guides/faq#how-do-i-set-up-my-wallet-on-binance-smart-chain"] {
     display: none;

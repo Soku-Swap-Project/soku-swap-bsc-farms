@@ -52,7 +52,7 @@ const App: React.FC = () => {
   const { onPresentConnectModal } = useWalletModal(login, logout)
 
   const openHiddenLinks = () => {
-    const hiddenLinks = document.getElementsByClassName('hidden_navLinks')
+    const hiddenLinks = document.getElementsByClassName('hidden_navLinksMobile')
     // console.log(hiddenLinks)
     if (hiddenLinks[0]?.id === 'hidden_navLinks') {
       hiddenLinks[0].id = 'open'
