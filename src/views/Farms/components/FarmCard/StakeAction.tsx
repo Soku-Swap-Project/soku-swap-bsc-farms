@@ -55,6 +55,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
   const renderStakingButtons = () => {
     return stakedBalance.eq(0) ? (
       <Button
+        style={{ background: '#04bbfb' }}
         onClick={onPresentDeposit}
         disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
       >
@@ -62,7 +63,7 @@ const StakeAction: React.FC<FarmCardActionsProps> = ({
       </Button>
     ) : (
       <IconButtonWrapper>
-        <IconButton variant="tertiary" onClick={onPresentWithdraw} mr="6px">
+        <IconButton style={{ background: '#04bbfb' }} onClick={onPresentWithdraw} mr="6px">
           <MinusIcon color="primary" width="14px" />
         </IconButton>
         <IconButton

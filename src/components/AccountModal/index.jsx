@@ -31,7 +31,7 @@ export default function AccountModal() {
   // const { chainId } = useActiveWeb3React()
 
   const truncatedFirstHalf = account?.substring(0, 5)
-  const truncatedLastHalf = account?.substring(account.length - 5, account.length)
+  const truncatedLastHalf = account?.substring(account?.length - 5, account?.length)
   const truncatedAddress = `${truncatedFirstHalf}...${truncatedLastHalf}`
 
   const handleOpen = () => {
@@ -48,6 +48,10 @@ export default function AccountModal() {
   const year = date.getFullYear()
 
   const earnedAmount = 50
+
+  const logoutAccount = () => {
+    return logout
+  }
 
   const body = (
     <div className={`account__modal ${classes.paper}`}>
@@ -73,7 +77,7 @@ export default function AccountModal() {
           <h2>View on BscScan</h2>
           <span className="material-icons ">open_in_new</span>
         </a>
-        <button className="account_logout" onClick={logout}>
+        <button className="account_logout" onClick={logoutAccount()}>
           <h2>Log Out</h2>
           <span className="material-icons ">logout</span>
         </button>

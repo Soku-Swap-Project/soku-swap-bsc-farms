@@ -3,6 +3,24 @@ const tokens = {
     symbol: 'BNB',
     projectLink: 'https://www.binance.com/',
   },
+  soku: {
+    symbol: 'SOKU',
+    address: {
+      56: '0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53',
+      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  syrup: {
+    symbol: "SOKU 'Syrup'",
+    address: {
+      56: '0x017f1cBaCa5ca88D8E63Ba4f5393a03653e3947A',
+      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   cake: {
     symbol: 'CAKE',
     address: {
@@ -570,15 +588,15 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://compound.finance/',
   },
-  syrup: {
-    symbol: 'SYRUP',
-    address: {
-      56: '0x009cF7bC57584b7998236eff51b98A168DceA9B0',
-      97: '0xfE1e507CeB712BDe086f3579d2c03248b2dB77f9',
-    },
-    decimals: 18,
-    projectLink: 'https://pancakeswap.finance/',
-  },
+  // syrup: {
+  //   symbol: 'SYRUP',
+  //   address: {
+  //     56: '0x009cF7bC57584b7998236eff51b98A168DceA9B0',
+  //     97: '0xfE1e507CeB712BDe086f3579d2c03248b2dB77f9',
+  //   },
+  //   decimals: 18,
+  //   projectLink: 'https://pancakeswap.finance/',
+  // },
   bifi: {
     symbol: 'BIFI',
     address: {

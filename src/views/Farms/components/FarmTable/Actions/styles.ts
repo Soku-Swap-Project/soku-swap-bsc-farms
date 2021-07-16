@@ -1,12 +1,15 @@
 import styled from 'styled-components'
 
 export const ActionContainer = styled.div`
-  padding: 16px 0px;
-  // border: 2px solid ${({ theme }) => theme.colors.input};
+  padding: 16px 20px;
+  border-bottom: 1px solid #ebebeb;
+  border-top: 1px solid #ebebeb;
+
   border-radius: 16px;
   flex-grow: 1;
   flex-basis: 0;
   margin-bottom: 16px;
+  margin-top: 16px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     // margin-left: 12px;
@@ -30,12 +33,12 @@ export const ActionTitles = styled.div`
 `
 
 export const Title = styled.span`
-  color: ${({ theme }) => theme.colors.secondary};
+  color: #04bbfb;
 `
 
 // TODO: Use `Text` instead
 export const Subtle = styled.span`
-  color: ${({ theme }) => theme.colors.textSubtle};
+  color: #05195a;
 `
 
 export const ActionContent = styled.div`
@@ -46,10 +49,10 @@ export const ActionContent = styled.div`
 export const Earned = styled.div`
   font-weight: 600;
   font-size: 20px;
-  color: ${({ theme }) => theme.colors.text};
+  color: #05195a;
 `
 
 export const Staked = styled.div`
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.textSubtle};
+  color: #04bbfb;
 `

@@ -1,12 +1,7 @@
 export default {
   masterChef: {
-    // Pancake
     97: '0x1d32c2945C8FDCBc7156c553B7cEa4325a17f4f9',
-    56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
-
-    // Soku
-    // 97: '0x186B09041249bf6438543e67580824F6647323B1',
-    // 56: '0x73feaa1eE314F8c655E354234017bE2193C9E24E',
+    56: '0x3aeD3c4B8341F655632Ccd93b6f7De5A60888714',
   },
   sousChef: {
     97: '0xd3af5fe61dbaf8f73149bfcfa9fb653ff096029a',
@@ -20,9 +15,13 @@ export default {
     97: '0x8175c10383511b3a1C68f9dB222dc14A19CC950e',
     56: '0x5e74094Cd416f55179DBd0E45b1a8ED030e396A1',
   },
+  lotteryV2: {
+    97: '0xc78819a896815310C1722774aFB1459c6B434FFC',
+    56: '',
+  },
   multiCall: {
-    56: '0x1ee38d535d541c55c9dae27b12edf090c608e6fb',
-    97: '0x67ADCB4dF3931b0C5Da724058ADC2174a9844412',
+    56: '0xfF6FD90A470Aaa0c1B8A54681746b07AcdFedc9B',
+    97: '0x8F3273Fb89B075b1645095ABaC6ed17B2d4Bc576',
   },
   pancakeProfile: {
     56: '0xDf4dBf6536201370F95e06A0F8a7a70fE40E388a',
@@ -66,6 +65,14 @@ export default {
   },
   chainlinkOracle: {
     56: '0x0567F2323251f0Aab15c8dFb1967E4e8A7D42aeE',
+    97: '',
+  },
+  bunnySpecialCakeVault: {
+    56: '0x5B4a770Abe7Eafb2601CA4dF9d73EA99363E60a4',
+    97: '',
+  },
+  bunnySpecialPrediction: {
+    56: '0x342c99e9aC24157657095eC69CB04b73257e7A9C',
     97: '',
   },
 }

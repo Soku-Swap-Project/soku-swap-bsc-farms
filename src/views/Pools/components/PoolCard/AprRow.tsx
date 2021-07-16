@@ -22,7 +22,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   const { stakingToken, earningToken, totalStaked, isFinished, tokenPerBlock } = pool
 
   const tooltipContent = isAutoVault
-    ? t('APY includes compounding, APR doesn’t. This pool’s CAKE is compounded automatically, so we show APY.')
+    ? t('APY includes compounding, APR doesn’t. This pool’s SOKU is compounded automatically, so we show APY.')
     : t('This pool’s rewards aren’t compounded automatically, so we show APR')
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
@@ -63,9 +63,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     return apr
   }
 
-  const apyModalLink =
-    stakingToken.address &&
-    `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[process.env.REACT_APP_CHAIN_ID]}`
+  const apyModalLink = stakingToken.address && `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[97]}`
 
   const [onPresentApyModal] = useModal(
     <ApyCalculatorModal
@@ -83,7 +81,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   return (
     <Flex alignItems="center" justifyContent="space-between">
       {tooltipVisible && tooltip}
-      <TooltipText ref={targetRef}>{isAutoVault ? `${t('APY')}:` : `${t('APR')}:`}</TooltipText>
+      <TooltipText ref={targetRef}>{isAutoVault ? `${t('APY')}:` : `${t('APP')}:`}</TooltipText>
       {isFinished || !apr ? (
         <Skeleton width="82px" height="32px" />
       ) : (

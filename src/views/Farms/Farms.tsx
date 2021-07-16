@@ -71,6 +71,7 @@ const FilterContainer = styled.div`
   align-items: center;
   width: 100%;
   padding: 8px 0px;
+  justify-content: center;
 
   ${({ theme }) => theme.mediaQueries.sm} {
     width: auto;
@@ -179,6 +180,9 @@ const Farms: React.FC = () => {
         const quoteTokenPriceUsd = prices[getAddress(farm.quoteToken.address).toLowerCase()]
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
         const apr = isActive ? getFarmApr(farm.poolWeight, cakePrice, totalLiquidity) : 0
+        // console.log('PW', farm.poolWeight)
+        // console.log('CP', cakePrice.toString())
+        // console.log('TL', totalLiquidity.toString())
 
         return { ...farm, apr, liquidity: totalLiquidity }
       })
@@ -278,7 +282,8 @@ const Farms: React.FC = () => {
     const { token, quoteToken } = farm
     const tokenAddress = token.address
     const quoteTokenAddress = quoteToken.address
-    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('PANCAKE', '')
+    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('SOKU', '')
+    // console.log('Farm APR', farm.apr)
 
     const row: RowProps = {
       apr: {
@@ -381,7 +386,7 @@ const Farms: React.FC = () => {
       <Page>
         <ControlContainer>
           <FilterContainer>
-            <LabelWrapper style={{ marginLeft: 16 }}>
+            <LabelWrapper>
               <SearchInput onChange={handleChangeQuery} />
             </LabelWrapper>
           </FilterContainer>

@@ -107,15 +107,19 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
               <Earned>{displayBalance()}</Earned>
             </div>
             <IconButtonWrapper>
-              <IconButton variant="secondary" onClick={onPresentWithdraw} mr="6px">
-                <MinusIcon color="primary" width="14px" />
+              <IconButton
+                style={{ background: 'transparent', border: '2px solid #05195a' }}
+                onClick={onPresentWithdraw}
+                mr="6px"
+              >
+                <MinusIcon color="#05195a" width="14px" />
               </IconButton>
               <IconButton
-                variant="secondary"
+                style={{ background: 'transparent', border: '2px solid #05195a' }}
                 onClick={onPresentDeposit}
                 disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
               >
-                <AddIcon color="primary" width="14px" />
+                <AddIcon color="#05195a" width="14px" />
               </IconButton>
             </IconButtonWrapper>
           </ActionContent>
@@ -131,9 +135,9 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
         </ActionTitles>
         <ActionContent>
           <Button
+            style={{ background: '#04bbfb', borderRadius: '24px' }}
             width="100%"
             onClick={onPresentDeposit}
-            variant="secondary"
             disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
           >
             {t('Stake LP')}

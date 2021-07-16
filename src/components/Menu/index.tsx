@@ -57,9 +57,9 @@ const Menu = (props) => {
               <a className="nav_link" href="https://www.binance.org/en/bridge">
                 <li>Bridge</li>
               </a>
-              <a className="nav_link" href={`${origin}/bsc/farms`}>
+              {/* <a className="nav_link" href={`${origin}/bsc/farms`}>
                 <li>Farms</li>
-              </a>
+              </a> */}
               {/* <NavLink className="nav_link" to="/soku" activeClassName="active">
             <li>SOKU</li>
           </NavLink> */}
@@ -102,7 +102,12 @@ const Menu = (props) => {
               </a>
             </li>
             <li className="hidden_navLink">
-              <a href="https://sokuswap-1.gitbook.io/sokuswap-whitepaper/" rel="noreferrer noopener" target="_blank">
+              <a
+                href="https://sokuswap-1.gitbook.io/sokuswap-whitepaper/"
+                rel="noreferrer noopener"
+                className="disabled_link"
+                target="_blank"
+              >
                 <span className="material-icons">school</span>
                 <p>Docs</p>
               </a>

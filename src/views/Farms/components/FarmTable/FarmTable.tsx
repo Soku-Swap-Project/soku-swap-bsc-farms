@@ -21,7 +21,7 @@ const Container = styled.div`
 `
 
 const TableWrapper = styled.div`
-  overflow: visible;
+  overflow: hidden;
 
   &::-webkit-scrollbar {
     display: none;
@@ -82,12 +82,12 @@ const FarmTable: React.FC<ITableProps> = (props) => {
             </TableBody>
           </StyledTable>
         </TableWrapper>
-        {/* <ScrollButtonContainer>
-          <Button variant="text" onClick={scrollToTop}>
+        <ScrollButtonContainer>
+          {/* <Button variant="text" onClick={scrollToTop}>
             {t('To Top')}
             <ChevronUpIcon color="primary" />
-          </Button>
-        </ScrollButtonContainer> */}
+          </Button> */}
+        </ScrollButtonContainer>
       </TableContainer>
     </Container>
   )

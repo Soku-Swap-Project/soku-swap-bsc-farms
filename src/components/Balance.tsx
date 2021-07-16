@@ -29,7 +29,7 @@ const Balance: React.FC<BalanceProps> = ({
   const showUnit = Boolean(value && unit)
 
   return (
-    <Text color={isDisabled ? 'textDisabled' : color} {...props}>
+    <Text style={{ color: '#05195a' }} color={isDisabled ? 'textDisabled' : '#05195a'} {...props}>
       {showPrefix && <span>{prefix}</span>}
       <CountUp start={previousValue.current} end={value} decimals={decimals} duration={1} separator="," />
       {showUnit && <span>{unit}</span>}
