@@ -183,6 +183,10 @@ button[id='wallet-connect-tokenpocket'],
 button[id='wallet-connect-safepal wallet'] {
   display: none;
 }
+
+img[alt="icon"] {
+  object-fit: contain !important;
+}
   
   a[href="https://docs.pancakeswap.finance/guides/faq#how-do-i-set-up-my-wallet-on-binance-smart-chain"] {
     display: none;
