@@ -341,12 +341,12 @@ export const useGetApiPrice = (address: string) => {
 }
 
 export const usePriceBnbBusd = (): BigNumber => {
-  const bnbBusdFarm = useFarmFromPid(2)
+  const bnbBusdFarm = useFarmFromPid(1)
   return bnbBusdFarm.tokenPriceVsQuote ? bnbBusdFarm.tokenPriceVsQuote : BIG_ZERO
 }
 
 export const usePriceCakeBusd = (): BigNumber => {
-  const cakeBnbFarm = useFarmFromPid(1)
+  const cakeBnbFarm = useFarmFromPid(2)
   const bnbBusdPrice = usePriceBnbBusd()
 
   const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? cakeBnbFarm.tokenPriceVsQuote : BIG_ZERO
