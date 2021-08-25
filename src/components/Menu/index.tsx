@@ -44,9 +44,9 @@ const Menu = (props) => {
       <div className="sokuswap__navbar">
         <nav>
           <ul className="navbar__items">
-            <NavLink to="/">
+            <a className="nav_link" href="/bsc/#/swap">
               <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="images/Web-Corner-Logo.png" />
-            </NavLink>
+            </a>
             <div className="navbar__options">
               <a className="nav_link" href="/bsc/#/swap">
                 <li>Swap</li>
