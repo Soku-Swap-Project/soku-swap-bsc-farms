@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useEffect, useCallback, useState, useMemo, useRef } from 'react'
 import { Route, useRouteMatch, useLocation } from 'react-router-dom'
 import { useAppDispatch } from 'state'
@@ -31,6 +32,31 @@ import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
 
 import './index.css'
+import Web3 from 'web3'
+
+// const rp = require('request-promise')
+// const requestOptions = {
+//   method: 'GET',
+//   uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
+//   qs: {
+//     start: '1',
+//     limit: '5000',
+//     convert: 'USD',
+//   },
+//   headers: {
+//     CMC_PRO_API_KEY: '47a1f2fd-4600-44d1-89ee-a5006779ba7f',
+//   },
+//   json: true,
+//   gzip: true,
+// }
+
+// rp(requestOptions)
+//   .then((response) => {
+//     console.log('API call response:', response)
+//   })
+//   .catch((err) => {
+//     console.log('API call error:', err.message)
+//   })
 
 const ControlContainer = styled.div`
   display: flex;
@@ -118,6 +144,9 @@ const Farms: React.FC = () => {
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
   const prices = useGetApiPrices()
+  // const [earnablePrice, setEarnablePrice] = useState(0)
+  let earnablePrice
+  const Web3 = require('web3')
 
   const dispatch = useAppDispatch()
   const { fastRefresh } = useRefresh()
@@ -177,8 +206,45 @@ const Farms: React.FC = () => {
           return farm
         }
 
+        //1. Import coingecko-api
+        const CoinGecko = require('coingecko-api')
+
+        //2. Initiate the CoinGecko API Client
+        const CoinGeckoClient = new CoinGecko()
+
+        //3. Make calls
+        var func = async () => {
+          const res = await CoinGeckoClient.coins.fetch('earnable')
+          const data = res.data
+          const earn_price = new BigNumber(data.market_data.current_price.usd).toString()
+          const formatted_price = parseFloat(earn_price).toLocaleString(undefined, { minimumSignificantDigits: 3 })
+
+          earnablePrice = formatted_price
+
+          console.log(parseFloat(formatted_price))
+
+          // console.log(parseFloat(earn_price).toLocaleString(undefined, { minimumSignificantDigits: 3 }))
+
+          // console.log(earn_price)
+          // console.log(data.market_data.current_price)
+          // console.log(data.market_data.current_price.usd)
+        }
+
+        func()
+
         const quoteTokenPriceUsd = prices[getAddress(farm.quoteToken.address).toLowerCase()]
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
+        let price
+
+        if (quoteTokenPriceUsd != null) {
+          price = quoteTokenPriceUsd
+        } else {
+          price = earnablePrice
+        }
+        // console.log(farm)
+
+        console.log(farm.lpTotalInQuoteToken)
+        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(price)
+        // console.log(totalLiquidity)
         const apr = isActive ? getFarmApr(farm.poolWeight, cakePrice, totalLiquidity) : 0
         // console.log('PW', farm.poolWeight)
         // console.log('CP', cakePrice.toString())

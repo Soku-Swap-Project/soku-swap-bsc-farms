@@ -334,7 +334,7 @@ export const useGetApiPrice = (address: string) => {
   const prices = useGetApiPrices()
 
   if (!prices) {
-    return null
+    return 0
   }
 
   return prices[address.toLowerCase()]
