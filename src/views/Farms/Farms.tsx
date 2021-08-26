@@ -242,7 +242,7 @@ const Farms: React.FC = () => {
         }
         // console.log(farm)
 
-        console.log(farm.lpTotalInQuoteToken)
+        // console.log(farm.lpTotalInQuoteToken)
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(price)
         // console.log(totalLiquidity)
         const apr = isActive ? getFarmApr(farm.poolWeight, cakePrice, totalLiquidity) : 0
