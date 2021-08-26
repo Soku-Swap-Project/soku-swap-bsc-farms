@@ -1,6 +1,8 @@
 import tokens from './tokens'
 import { FarmConfig } from './types'
 
+// console.log(tokens.earnable)
+
 const farms: FarmConfig[] = [
   /**
    * These 3 farms (PID 0, 251, 252) should always be at the top of the file.
@@ -44,6 +46,16 @@ const farms: FarmConfig[] = [
     },
     token: tokens.soku,
     quoteToken: tokens.busd,
+  },
+  {
+    pid: 3,
+    lpSymbol: 'SOKU-EARN LP',
+    lpAddresses: {
+      97: '',
+      56: '0x3B611daa2F3f851D60E505823419a39A82361f39',
+    },
+    token: tokens.soku,
+    quoteToken: tokens.earnable,
   },
   /**
    * V3 by order of release (some may be out of PID order due to multiplier boost)

@@ -12,6 +12,15 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  earnable: {
+    symbol: 'EARN',
+    address: {
+      56: '0x11ba78277d800502c84c5aed1374ff0a91f19f7e',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://earnable.one/',
+  },
   syrup: {
     symbol: "SOKU 'Syrup'",
     address: {
