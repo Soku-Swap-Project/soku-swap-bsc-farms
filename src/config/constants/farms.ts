@@ -1,7 +1,7 @@
 import tokens from './tokens'
 import { FarmConfig } from './types'
 
-console.log(tokens.earnable)
+// console.log(tokens.earnable)
 
 const farms: FarmConfig[] = [
   /**

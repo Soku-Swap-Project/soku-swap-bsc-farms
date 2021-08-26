@@ -221,7 +221,7 @@ const Farms: React.FC = () => {
 
           earnablePrice = formatted_price
 
-          console.log(parseFloat(formatted_price))
+          // console.log(parseFloat(formatted_price))
 
           // console.log(parseFloat(earn_price).toLocaleString(undefined, { minimumSignificantDigits: 3 }))
 
