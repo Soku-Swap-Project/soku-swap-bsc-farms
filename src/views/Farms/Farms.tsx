@@ -31,6 +31,10 @@ import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
 
 import './index.css'
+<<<<<<< Updated upstream
+=======
+import Web3 from 'web3'
+>>>>>>> Stashed changes
 
 const ControlContainer = styled.div`
   display: flex;
@@ -117,6 +121,11 @@ const Farms: React.FC = () => {
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
   const prices = useGetApiPrices()
+<<<<<<< Updated upstream
+=======
+
+  const Web3 = require('web3')
+>>>>>>> Stashed changes
 
   const dispatch = useAppDispatch()
   const { fastRefresh } = useRefresh()
@@ -177,6 +186,10 @@ const Farms: React.FC = () => {
         }
 
         const quoteTokenPriceUsd = prices[getAddress(farm.quoteToken.address).toLowerCase()]
+<<<<<<< Updated upstream
+=======
+
+>>>>>>> Stashed changes
         const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
         const apr = isActive ? getFarmApr(farm.poolWeight, cakePrice, totalLiquidity) : 0
 

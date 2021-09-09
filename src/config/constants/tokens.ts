@@ -1,8 +1,51 @@
 const tokens = {
   bnb: {
     symbol: 'BNB',
+    name: 'BNB',
     projectLink: 'https://www.binance.com/',
   },
+<<<<<<< Updated upstream
+=======
+  soku: {
+    symbol: 'SOKU',
+    name: 'SOKU',
+    address: {
+      56: '0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53',
+      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  earnable: {
+    symbol: 'EARN',
+    name: 'earnable',
+    address: {
+      56: '0x11ba78277d800502c84c5aed1374ff0a91f19f7e',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://earnable.one/',
+  },
+  taste: {
+    symbol: 'TASTE',
+    name: 'tastenft',
+    address: {
+      56: '0xdb238123939637d65a03e4b2b485650b4f9d91cb',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://earnable.one/',
+  },
+  syrup: {
+    symbol: "SOKU 'Syrup'",
+    address: {
+      56: '0x017f1cBaCa5ca88D8E63Ba4f5393a03653e3947A',
+      97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+>>>>>>> Stashed changes
   cake: {
     symbol: 'CAKE',
     address: {
@@ -428,6 +471,7 @@ const tokens = {
   },
   wbnb: {
     symbol: 'wBNB',
+    name: 'wbnb',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
@@ -599,6 +643,7 @@ const tokens = {
   },
   busd: {
     symbol: 'BUSD',
+    name: 'binance-usd',
     address: {
       56: '0xe9e7cea3dedca5984780bafc599bd69add087d56',
       97: '',
