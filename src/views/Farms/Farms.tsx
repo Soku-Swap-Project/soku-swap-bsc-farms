@@ -144,8 +144,6 @@ const Farms: React.FC = () => {
   const { account } = useWeb3React()
   const [sortOption, setSortOption] = useState('hot')
   const prices = useGetApiPrices()
-  // const [earnablePrice, setEarnablePrice] = useState(0)
-  let earnablePrice
   const Web3 = require('web3')
 
   const dispatch = useAppDispatch()
@@ -206,49 +204,9 @@ const Farms: React.FC = () => {
           return farm
         }
 
-        //1. Import coingecko-api
-        const CoinGecko = require('coingecko-api')
-
-        //2. Initiate the CoinGecko API Client
-        const CoinGeckoClient = new CoinGecko()
-
-        //3. Make calls
-        var func = async () => {
-          const res = await CoinGeckoClient.coins.fetch('earnable')
-          const data = res.data
-          const earn_price = new BigNumber(data.market_data.current_price.usd).toString()
-          const formatted_price = parseFloat(earn_price).toLocaleString(undefined, { minimumSignificantDigits: 3 })
-
-          earnablePrice = formatted_price
-
-          // console.log(parseFloat(formatted_price))
-
-          // console.log(parseFloat(earn_price).toLocaleString(undefined, { minimumSignificantDigits: 3 }))
-
-          // console.log(earn_price)
-          // console.log(data.market_data.current_price)
-          // console.log(data.market_data.current_price.usd)
-        }
-
-        func()
-
         const quoteTokenPriceUsd = prices[getAddress(farm.quoteToken.address).toLowerCase()]
-        let price
-
-        if (quoteTokenPriceUsd != null) {
-          price = quoteTokenPriceUsd
-        } else {
-          price = earnablePrice
-        }
-        // console.log(farm)
-
-        // console.log(farm.lpTotalInQuoteToken)
-        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(price)
-        // console.log(totalLiquidity)
+        const totalLiquidity = new BigNumber(farm.lpTotalInQuoteToken).times(quoteTokenPriceUsd)
         const apr = isActive ? getFarmApr(farm.poolWeight, cakePrice, totalLiquidity) : 0
-        // console.log('PW', farm.poolWeight)
-        // console.log('CP', cakePrice.toString())
-        // console.log('TL', totalLiquidity.toString())
 
         return { ...farm, apr, liquidity: totalLiquidity }
       })
