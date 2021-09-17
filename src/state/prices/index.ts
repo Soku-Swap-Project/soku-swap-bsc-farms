@@ -74,7 +74,7 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
   Object.assign(data.data, earn)
   Object.assign(data.data, tastenft)
 
-  console.log(data.data)
+  // console.log(data.data)
 
   // Return normalized token names
   return {

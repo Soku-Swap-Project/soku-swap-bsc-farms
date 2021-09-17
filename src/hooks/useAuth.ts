@@ -9,50 +9,41 @@ import {
   UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
   WalletConnectConnector,
 } from '@web3-react/walletconnect-connector'
-import { ConnectorNames, connectorLocalStorageKey } from '@pancakeswap/uikit'
-import { connectorsByName } from 'utils/web3React'
-import { setupNetwork } from 'utils/wallet'
+import { connectorLocalStorageKey, ConnectorNames } from '@pancakeswap-libs/uikit'
 import useToast from 'hooks/useToast'
+import { connectorsByName } from 'connectors'
 import { profileClear } from 'state/profile'
 import { useAppDispatch } from 'state'
-import { useTranslation } from 'contexts/Localization'
 
 const useAuth = () => {
-  const { t } = useTranslation()
-  const dispatch = useAppDispatch()
   const { activate, deactivate } = useWeb3React()
   const { toastError } = useToast()
+  const dispatch = useAppDispatch()
 
   const login = useCallback((connectorID: ConnectorNames) => {
     const connector = connectorsByName[connectorID]
-    // console.log(connector)
     if (connector) {
       activate(connector, async (error: Error) => {
+        window.localStorage.removeItem(connectorLocalStorageKey)
         if (error instanceof UnsupportedChainIdError) {
-          const hasSetup = await setupNetwork()
-          if (hasSetup) {
-            activate(connector)
+          toastError('Unsupported Chain Id', 'Unsupported Chain Id Error. Check your chain Id.')
+        } else if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
+          toastError('Provider Error', 'No provider was found')
+        } else if (
+          error instanceof UserRejectedRequestErrorInjected ||
+          error instanceof UserRejectedRequestErrorWalletConnect
+        ) {
+          if (connector instanceof WalletConnectConnector) {
+            const walletConnector = connector as WalletConnectConnector
+            walletConnector.walletConnectProvider = null
           }
+          toastError('Authorization Error', 'Please authorize to access your account')
         } else {
-          window.localStorage.removeItem(connectorLocalStorageKey)
-          if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
-            toastError(t('Provider Error'), t('No provider was found'))
-          } else if (
-            error instanceof UserRejectedRequestErrorInjected ||
-            error instanceof UserRejectedRequestErrorWalletConnect
-          ) {
-            if (connector instanceof WalletConnectConnector) {
-              const walletConnector = connector as WalletConnectConnector
-              walletConnector.walletConnectProvider = null
-            }
-            toastError(t('Authorization Error'), t('Please authorize to access your account'))
-          } else {
-            toastError(error.name, error.message)
-          }
+          toastError(error.name, error.message)
         }
       })
     } else {
-      toastError(t('Unable to find connector'), t('The connector config is wrong'))
+      toastError("Can't find connector", 'The connector config is wrong')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
