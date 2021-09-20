@@ -23,16 +23,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://earnable.one/',
   },
-  taste: {
-    symbol: 'TASTE',
-    name: 'tastenft',
-    address: {
-      56: '0xdb238123939637d65a03e4b2b485650b4f9d91cb',
-      97: '',
-    },
-    decimals: 18,
-    projectLink: 'https://earnable.one/',
-  },
+  // taste: {
+  //   symbol: 'TASTE',
+  //   name: 'tastenft',
+  //   address: {
+  //     56: '0xdb238123939637d65a03e4b2b485650b4f9d91cb',
+  //     97: '',
+  //   },
+  //   decimals: 18,
+  //   projectLink: 'https://earnable.one/',
+  // },
   syrup: {
     symbol: "SOKU 'Syrup'",
     address: {

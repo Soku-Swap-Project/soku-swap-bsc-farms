@@ -62,17 +62,17 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
     },
   }
 
-  const tastenft = {
-    '0xdb238123939637d65a03e4b2b485650b4f9d91cb': {
-      name: 'TasteNFT',
-      symbol: 'TASTE',
-      price: tastenft_price,
-      price_BNB: tastenft_price,
-    },
-  }
+  // const tastenft = {
+  //   '0xdb238123939637d65a03e4b2b485650b4f9d91cb': {
+  //     name: 'TasteNFT',
+  //     symbol: 'TASTE',
+  //     price: tastenft_price,
+  //     price_BNB: tastenft_price,
+  //   },
+  // }
 
   Object.assign(data.data, earn)
-  Object.assign(data.data, tastenft)
+  // Object.assign(data.data, tastenft)
 
   // console.log(data.data)
 
