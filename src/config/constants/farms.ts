@@ -57,16 +57,26 @@ const farms: FarmConfig[] = [
     token: tokens.soku,
     quoteToken: tokens.earnable,
   },
-  // {
-  //   pid: 4,
-  //   lpSymbol: 'SOKU-TASTE LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0x17229D744683142C688e4dA11227F6134dA49cFD',
-  //   },
-  //   token: tokens.soku,
-  //   quoteToken: tokens.taste,
-  // },
+  {
+    pid: 4,
+    lpSymbol: 'SOKU-TASTE LP',
+    lpAddresses: {
+      97: '',
+      56: '0x17229D744683142C688e4dA11227F6134dA49cFD',
+    },
+    token: tokens.soku,
+    quoteToken: tokens.taste,
+  },
+  {
+    pid: 5,
+    lpSymbol: 'SOKU-YUMMY LP',
+    lpAddresses: {
+      97: '',
+      56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
+    },
+    token: tokens.soku,
+    quoteToken: tokens.yummy,
+  },
   /**
    * V3 by order of release (some may be out of PID order due to multiplier boost)
    */
