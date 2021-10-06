@@ -24,6 +24,7 @@ interface CakeVaultProps {
 }
 
 const CakeVaultCard: React.FC<CakeVaultProps> = ({ pool, showStakedOnly }) => {
+  // console.log('pool', pool)
   const { t } = useTranslation()
   const { isXl } = useMatchBreakpoints()
   const { account } = useWeb3React()
@@ -31,6 +32,7 @@ const CakeVaultCard: React.FC<CakeVaultProps> = ({ pool, showStakedOnly }) => {
     userData: { userShares, isLoading: isVaultUserDataLoading },
     fees: { performanceFee },
   } = useCakeVault()
+
   //   Estimate & manual for now. 288 = once every 5 mins. We can change once we have a better sense of this
   const timesCompoundedDaily = 288
   const accountHasSharesStaked = userShares && userShares.gt(0)
@@ -48,8 +50,8 @@ const CakeVaultCard: React.FC<CakeVaultProps> = ({ pool, showStakedOnly }) => {
           isPromotedPool
           isStaking={accountHasSharesStaked}
           isAutoVault
-          earningTokenSymbol="CAKE"
-          stakingTokenSymbol="CAKE"
+          earningTokenSymbol="SOKU"
+          stakingTokenSymbol="SOKU"
         />
         <StyledCardBody isLoading={isLoading}>
           <AprRow

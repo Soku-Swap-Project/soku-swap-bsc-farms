@@ -92,6 +92,7 @@ export const useFarmFromTokenSymbol = (tokenSymbol: string, preferredQuoteTokens
 export const useBusdPriceFromPid = (pid: number): BigNumber => {
   const farm = useFarmFromPid(pid)
   const bnbPriceBusd = usePriceBnbBusd()
+  // console.log('bnb price', bnbPriceBusd)
   const quoteTokenFarm = useFarmFromTokenSymbol(farm?.quoteToken?.symbol)
 
   // Catch in case a farm isn't found
@@ -104,7 +105,13 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
     return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
+  if (farm.quoteToken.symbol === 'SOKU') {
+    // console.log('farm', farm.tokenPriceVsQuote)
+    return bnbPriceBusd.gt(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
   if (farm.quoteToken.symbol === 'wBNB') {
+    // console.log('farm', farm.tokenPriceVsQuote)
     return bnbPriceBusd.gt(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
@@ -114,12 +121,12 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   // i.e. for farm PNT - pBTC
   // we find the pBTC farm (pBTC - BNB)'s quote token - BNB
   // from the BNB - pBTC BUSD price, we can calculate the PNT - BUSD price
-  if (quoteTokenFarm.quoteToken.symbol === 'wBNB') {
+  if (quoteTokenFarm?.quoteToken?.symbol === 'wBNB') {
     const quoteTokenInBusd = bnbPriceBusd.gt(0) && bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
     return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
   }
 
-  if (quoteTokenFarm.quoteToken.symbol === 'BUSD') {
+  if (quoteTokenFarm?.quoteToken?.symbol === 'BUSD') {
     const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
     return quoteTokenInBusd ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
   }
@@ -128,9 +135,10 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   return BIG_ZERO
 }
 
-export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber | null => {
+export const useBusdPriceFromToken = (tokenSymbol: string) => {
   const tokenFarmForPriceCalc = useFarmFromTokenSymbol(tokenSymbol)
   const tokenPrice = useBusdPriceFromPid(tokenFarmForPriceCalc?.pid)
+
   return tokenPrice
 }
 
@@ -342,12 +350,16 @@ export const useGetApiPrice = (address: string) => {
 
 export const usePriceBnbBusd = (): BigNumber => {
   const bnbBusdFarm = useFarmFromPid(1)
+  // return bnbBusdFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdFarm.tokenPriceVsQuote) : BIG_ZERO
+
   return bnbBusdFarm.tokenPriceVsQuote ? bnbBusdFarm.tokenPriceVsQuote : BIG_ZERO
 }
 
 export const usePriceCakeBusd = (): BigNumber => {
   const cakeBnbFarm = useFarmFromPid(2)
   const bnbBusdPrice = usePriceBnbBusd()
+
+  // const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : BIG_ZERO
 
   const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? cakeBnbFarm.tokenPriceVsQuote : BIG_ZERO
 

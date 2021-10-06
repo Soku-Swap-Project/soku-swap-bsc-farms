@@ -31,9 +31,6 @@ export const getPoolApr = (
 export const getFarmApr = (poolWeight: BigNumber, cakePriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
   const yearlyCakeRewardAllocation = SOKU_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
   const apr = yearlyCakeRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
-  // console.log('cake price', cakePriceUsd)
-  // console.log('pool liquidity', poolLiquidityUsd.toString())
-  // const updatedApr = apr.times(1.1)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 

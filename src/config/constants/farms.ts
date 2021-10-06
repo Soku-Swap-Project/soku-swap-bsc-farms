@@ -14,7 +14,7 @@ const farms: FarmConfig[] = [
       97: '0x9C21123D94b93361a29B2C2EFB3d5CD8B17e0A9e',
       56: '0x0e4B5Ea0259eB3D66E6FCB7Cc8785817F8490a53',
     },
-    token: tokens.syrup,
+    token: tokens.soku,
     quoteToken: tokens.wbnb,
   },
   // {
@@ -57,16 +57,16 @@ const farms: FarmConfig[] = [
     token: tokens.soku,
     quoteToken: tokens.earnable,
   },
-  // {
-  //   pid: 4,
-  //   lpSymbol: 'SOKU-TASTE LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0x17229D744683142C688e4dA11227F6134dA49cFD',
-  //   },
-  //   token: tokens.soku,
-  //   quoteToken: tokens.taste,
-  // },
+  {
+    pid: 4,
+    lpSymbol: 'SOKU-TASTE LP (DO NOT STAKE. YOU WILL LOSE YOUR LP)',
+    lpAddresses: {
+      97: '',
+      56: '0x17229D744683142C688e4dA11227F6134dA49cFD',
+    },
+    token: tokens.soku,
+    quoteToken: tokens.taste,
+  },
   {
     pid: 5,
     lpSymbol: 'SOKU-YUMMY LP',

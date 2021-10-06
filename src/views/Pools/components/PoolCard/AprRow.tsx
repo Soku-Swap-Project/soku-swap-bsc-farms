@@ -9,6 +9,7 @@ import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
 import { Pool } from 'state/types'
 import { BASE_EXCHANGE_URL } from 'config'
+import BigNumber from 'bignumber.js'
 
 interface AprRowProps {
   pool: Pool
@@ -28,10 +29,25 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
 
   const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
-  const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
+
+  // console.log('earning token price', earningTokenPrice?.toString())
+  // console.log('earning token', earningToken)
+
+  // const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
+  const earningTokenPriceAsNumber = 0.00001 && 0.0001
 
   const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
-  const stakingTokenPriceAsNumber = stakingTokenPrice && stakingTokenPrice.toNumber()
+  // console.log('staking token price', stakingTokenPrice.toFormat())
+  // console.log('staking token', stakingToken)
+
+  // const stakingTokenPriceAsNumber = stakingTokenPrice && stakingTokenPrice.toNumber()
+  const stakingTokenPriceAsNumber = 0.000001 && 0.001
+
+  console.log(stakingTokenPriceAsNumber)
+  console.log(earningTokenPriceAsNumber)
+  console.log(totalStaked)
+  console.log(stakingToken.decimals)
+  console.log(tokenPerBlock)
 
   const apr = getPoolApr(
     stakingTokenPriceAsNumber,
@@ -39,6 +55,8 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     getBalanceNumber(totalStaked, stakingToken.decimals),
     parseFloat(tokenPerBlock),
   )
+
+  // console.log('apr', apr)
 
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
   const isHighValueToken = Math.round(earningTokenPriceAsNumber / 1000) > 0

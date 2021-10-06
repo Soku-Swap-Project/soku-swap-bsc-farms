@@ -59,7 +59,7 @@ const getTasteYUMMYPrice = async () => {
   yummy_price = formatted_price
 }
 
-// getTasteNFTPrice()
+getTasteNFTPrice()
 getEarnablePrice()
 getTasteYUMMYPrice()
 
@@ -79,14 +79,14 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
     },
   }
 
-  // const tastenft = {
-  //   '0xdb238123939637d65a03e4b2b485650b4f9d91cb': {
-  //     name: 'TasteNFT',
-  //     symbol: 'TASTE',
-  //     price: tastenft_price,
-  //     price_BNB: tastenft_price,
-  //   },
-  // }
+  const tastenft = {
+    '0xdb238123939637d65a03e4b2b485650b4f9d91cb': {
+      name: 'TasteNFT',
+      symbol: 'TASTE',
+      price: tastenft_price,
+      price_BNB: tastenft_price,
+    },
+  }
 
   const yummy = {
     '0xB003C68917BaB76812797d1b8056822f48E2e4fe': {
@@ -97,10 +97,10 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
     },
   }
 
-  console.log('yummy', yummy_price)
+  // console.log('yummy', yummy_price)
 
   Object.assign(data.data, earn)
-  // Object.assign(data.data, tastenft)
+  Object.assign(data.data, tastenft)
   Object.assign(data.data, yummy)
 
   // console.log(data.data)
