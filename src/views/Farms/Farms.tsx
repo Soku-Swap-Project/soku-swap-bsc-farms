@@ -34,30 +34,6 @@ import { DesktopColumnSchema, ViewMode } from './components/types'
 import './index.css'
 import Web3 from 'web3'
 
-// const rp = require('request-promise')
-// const requestOptions = {
-//   method: 'GET',
-//   uri: 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest',
-//   qs: {
-//     start: '1',
-//     limit: '5000',
-//     convert: 'USD',
-//   },
-//   headers: {
-//     CMC_PRO_API_KEY: '47a1f2fd-4600-44d1-89ee-a5006779ba7f',
-//   },
-//   json: true,
-//   gzip: true,
-// }
-
-// rp(requestOptions)
-//   .then((response) => {
-//     console.log('API call response:', response)
-//   })
-//   .catch((err) => {
-//     console.log('API call error:', err.message)
-//   })
-
 const ControlContainer = styled.div`
   display: flex;
   width: 100%;

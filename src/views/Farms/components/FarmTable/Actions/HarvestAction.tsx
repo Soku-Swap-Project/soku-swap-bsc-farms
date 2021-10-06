@@ -59,7 +59,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
           <ActionContent>
             <div>
               <Earned>{displayBalance}</Earned>
-              {/* {countUp > 0 && <Staked>~{countUp}USD</Staked>} */}
+              {countUp > 0 && <Staked>~ ${countUp} USD</Staked>}
             </div>
             <Button
               style={{ background: '#04bbfb' }}

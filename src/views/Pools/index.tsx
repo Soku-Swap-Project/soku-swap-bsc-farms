@@ -62,23 +62,23 @@ const Pools: React.FC = () => {
   }, [observerIsSet])
 
   return (
-    <>
+    <div style={{ paddingTop: '2.5rem' }} className="farm_heading">
       <PageHeader>
         <Flex justifyContent="space-between" flexDirection={['column', null, 'row']}>
           <Flex flexDirection="column" mr={['8px', 0]}>
-            <Heading as="h1" scale="xxl" color="secondary" mb="24px">
-              {t('Staking Pools')}
+            <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '10px' }}>
+              {t('Soku Staking Pools')}
             </Heading>
-            <Heading scale="md" color="text">
+            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem' }}>
               {t('Just stake some tokens to earn.')}
             </Heading>
-            <Heading scale="md" color="text">
+            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem' }}>
               {t('High APR, low risk.')}
             </Heading>
           </Flex>
-          <Flex height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>
+          {/* <Flex height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>
             <BountyCard />
-          </Flex>
+          </Flex> */}
         </Flex>
       </PageHeader>
       <Page>
@@ -111,16 +111,16 @@ const Pools: React.FC = () => {
           </Route>
         </FlexLayout>
         <div ref={loadMoreRef} />
-        <Image
+        {/* <Image
           mx="auto"
           mt="12px"
           src="/images/3d-syrup-bunnies.png"
           alt="Pancake illustration"
           width={192}
           height={184.5}
-        />
+        /> */}
       </Page>
-    </>
+    </div>
   )
 }
 

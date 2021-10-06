@@ -71,11 +71,13 @@ export const getIfoV2Contract = (address: string, web3?: Web3) => {
 }
 export const getSouschefContract = (id: number, web3?: Web3) => {
   const config = poolsConfig.find((pool) => pool.sousId === id)
-  const abi = config.poolCategory === PoolCategory.BINANCE ? sousChefBnb : sousChef
+  // const abi = config.poolCategory === PoolCategory.BINANCE ? sousChefBnb : sousChef
+  const abi = sousChef
   return getContract(abi, getAddress(config.contractAddress), web3)
 }
 export const getSouschefV2Contract = (id: number, web3?: Web3) => {
   const config = poolsConfig.find((pool) => pool.sousId === id)
+  console.log('v2 config', config)
   return getContract(sousChefV2, getAddress(config.contractAddress), web3)
 }
 export const getPointCenterIfoContract = (web3?: Web3) => {

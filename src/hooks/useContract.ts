@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { useMemo } from 'react'
 import useWeb3 from 'hooks/useWeb3'
 import {

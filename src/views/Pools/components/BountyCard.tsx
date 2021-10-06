@@ -36,7 +36,6 @@ const BountyCard = () => {
   } = useCakeVault()
   const cakePriceBusd = usePriceCakeBusd()
   const cakePriceBusdAsNumber = cakePriceBusd.toString()
-  console.log(cakePriceBusdAsNumber)
 
   const estimatedDollarBountyReward = useMemo(() => {
     return new BigNumber(estimatedCakeBountyReward).multipliedBy(cakePriceBusdAsNumber)
