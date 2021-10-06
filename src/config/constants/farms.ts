@@ -59,7 +59,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 4,
-    lpSymbol: 'SOKU-TASTE LP (DO NOT STAKE. YOU WILL LOSE YOUR LP)',
+    lpSymbol: 'SOKU-TASTE LP',
     lpAddresses: {
       97: '',
       56: '0x17229D744683142C688e4dA11227F6134dA49cFD',
