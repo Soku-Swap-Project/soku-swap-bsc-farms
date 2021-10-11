@@ -52,6 +52,7 @@ const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false
           disabled={requestedApproval}
           onClick={handleApprove}
           width="100%"
+          style={{ background: '#04bbfb' }}
         >
           {t('Enable')}
         </Button>

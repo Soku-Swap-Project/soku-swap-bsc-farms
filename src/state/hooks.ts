@@ -1,4 +1,5 @@
-import { useEffect, useMemo } from 'react'
+/* eslint-disable */
+import { useEffect, useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { useSelector } from 'react-redux'
@@ -135,9 +136,70 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   return BIG_ZERO
 }
 
-export const useBusdPriceFromToken = (tokenSymbol: string) => {
-  const tokenFarmForPriceCalc = useFarmFromTokenSymbol(tokenSymbol)
-  const tokenPrice = useBusdPriceFromPid(tokenFarmForPriceCalc?.pid)
+export const useTokenData = (token_symbol) => {
+  let token
+  let res
+  const getCoinData = async () => {
+    await require('axios')
+      .get(
+        `https://api.coingecko.com/api/v3/coins/${token_symbol}?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`,
+      )
+      .then((response) => {
+        if (response) {
+          token = response
+          console.log('coingecko response', response)
+        }
+      })
+
+    const token_price = token.data.market_data.current_price['usd']
+    res = token_price
+  }
+  getCoinData()
+
+  return res
+}
+
+const CoinGecko = require('coingecko-api')
+
+//2. Initiate the CoinGecko API Client
+const CoinGeckoClient = new CoinGecko()
+
+let price
+
+//3. Make calls
+
+export const useTokenPrice = (token: string) => {
+  const [tokenPrice, setTokenPrice] = useState(0)
+  useEffect(() => {
+    const getTokenPrice = async (token_symbol) => {
+      const res = await CoinGeckoClient.coins.fetch(token_symbol)
+      // console.log(res)
+      const data = await res.data
+      // const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
+      const price = data?.market_data?.current_price['usd']
+      // console.log('price', price)
+      // console.log(earn_price)
+      // const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
+      //   minimumSignificantDigits: 3,
+      // })
+
+      setTokenPrice(price)
+    }
+    getTokenPrice(token)
+  }, [])
+
+  // console.log('new token price', tokenPrice)
+  return tokenPrice
+}
+
+// useTokenData('sokuswap')
+
+export const useBusdPriceFromToken = () => {
+  // const tokenFarmForPriceCalc = useFarmFromTokenSymbol(tokenSymbol)
+  // const tokenPrice = useTokenData('sokuswap')
+  const tokenPrice = 0.000000000000124
+
+  // console.log('token price', tokenPrice)
 
   return tokenPrice
 }
