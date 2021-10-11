@@ -60,7 +60,7 @@ const getTasteYUMMYPrice = async () => {
   yummy_price = formatted_price
 }
 
-// getTasteNFTPrice()
+getTasteNFTPrice()
 getEarnablePrice()
 getTasteYUMMYPrice()
 
