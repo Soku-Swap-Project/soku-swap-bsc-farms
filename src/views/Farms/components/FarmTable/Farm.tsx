@@ -60,7 +60,7 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
       <div>
         {handleRenderFarming()}
         <Text bold style={{ textTransform: 'uppercase' }}>
-          {image === 'soku-earn' ? 'soku-earn (Ends Oct. 12, 4 P.M. EST)' : image}
+          {image === 'soku-earn' ? 'soku-earn (Remove LP Before Oct. 12th 4PM EST)' : image}
           {/* {image} */}
         </Text>
       </div>
