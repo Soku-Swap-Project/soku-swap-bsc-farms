@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { Token } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, getBalanceNumber, formatNumber } from 'utils/formatBalance'
-import { useBusdPriceFromToken } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice } from 'state/hooks'
 import Balance from 'components/Balance'
 import CollectModal from '../Modals/CollectModal'
 
@@ -27,7 +27,9 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const earningTokenBalance = getBalanceNumber(earnings, earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
 
-  const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
+  // const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
+  const earningTokenPrice = useTokenPrice('binance-usd')
+
   const earningTokenPriceAsNumber = earningTokenPrice
   const earningTokenDollarBalance = getBalanceNumber(
     earnings.multipliedBy(earningTokenPriceAsNumber),
@@ -71,7 +73,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
                     <Balance
                       display="inline"
                       fontSize="12px"
-                      color="textSubtle"
+                      color="rgb(4, 187, 251)"
                       decimals={2}
                       value={earningTokenDollarBalance}
                       unit=" USD"
@@ -85,8 +87,8 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           )}
         </Flex>
         <Flex>
-          <Button disabled={!hasEarnings} onClick={onPresentCollect}>
-            {isCompoundPool ? t('Collect') : t('Harvest')}
+          <Button style={{ background: 'rgb(4, 187, 251)' }} disabled={!hasEarnings} onClick={onPresentCollect}>
+            {isCompoundPool ? t('Collect') : t('Claim')}
           </Button>
         </Flex>
       </Flex>

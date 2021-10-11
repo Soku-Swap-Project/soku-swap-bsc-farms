@@ -2,20 +2,20 @@ import tokens from './tokens'
 import { PoolConfig, PoolCategory } from './types'
 
 const pools: PoolConfig[] = [
-  {
-    sousId: 0,
-    stakingToken: tokens.soku,
-    earningToken: tokens.soku,
-    contractAddress: {
-      97: '0x186B09041249bf6438543e67580824F6647323B1',
-      56: '0x800522017eA0f36a358cda3Be52C7Aa4F157838B',
-    },
-    poolCategory: PoolCategory.CORE,
-    harvest: true,
-    tokenPerBlock: '0.1',
-    sortOrder: 1,
-    isFinished: false,
-  },
+  // {
+  //   sousId: 0,
+  //   stakingToken: tokens.soku,
+  //   earningToken: tokens.soku,
+  //   contractAddress: {
+  //     97: '0x186B09041249bf6438543e67580824F6647323B1',
+  //     56: '0x800522017eA0f36a358cda3Be52C7Aa4F157838B',
+  //   },
+  //   poolCategory: PoolCategory.CORE,
+  //   harvest: true,
+  //   tokenPerBlock: '0.1',
+  //   sortOrder: 1,
+  //   isFinished: false,
+  // },
   {
     sousId: 3,
     stakingToken: tokens.soku,
@@ -26,7 +26,7 @@ const pools: PoolConfig[] = [
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,
-    tokenPerBlock: '5',
+    tokenPerBlock: '1',
     sortOrder: 999,
     isFinished: false,
   },

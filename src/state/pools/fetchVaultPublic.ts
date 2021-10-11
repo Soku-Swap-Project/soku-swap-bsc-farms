@@ -5,7 +5,7 @@ import makeBatchRequest from 'utils/makeBatchRequest'
 
 const cakeVaultContract = getCakeVaultContract()
 
-console.log('vault', cakeVaultContract)
+// console.log('vault', cakeVaultContract)
 
 export const fetchPublicVaultData = async () => {
   try {

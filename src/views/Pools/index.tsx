@@ -90,7 +90,7 @@ const Pools: React.FC = () => {
         <FlexLayout>
           <Route exact path={`${path}`}>
             <>
-              <CakeVaultCard pool={cakePoolData} showStakedOnly={stakedOnly} />
+              {/* <CakeVaultCard pool={cakePoolData} showStakedOnly={stakedOnly} /> */}
               {stakedOnly
                 ? orderBy(stakedOnlyOpenPools, ['sortOrder'])
                     .slice(0, numberOfPoolsVisible)
