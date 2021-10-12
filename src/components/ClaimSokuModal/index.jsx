@@ -59,9 +59,7 @@ export default function ClaimSokuModal() {
           </p> */}
           <h2 id="simple-modal-title">Rewards:</h2>
           <br />
-          <p id="simple-modal-description">
-            No rewards at this time. Please check back on June 1st to convert your SSOKU to SOKU.
-          </p>
+          <p id="simple-modal-description">No rewards at this time.</p>
         </div>
       ) : (
         <div className="claimSoku__noRewards">
@@ -75,9 +73,7 @@ export default function ClaimSokuModal() {
           <a href="#">Get Rewards</a> */}
           <h2 id="simple-modal-title">Rewards:</h2>
           <br />
-          <p id="simple-modal-description">
-            No rewards at this time. Please check back on June 1st to convert your SSOKU to SOKU.
-          </p>
+          <p id="simple-modal-description">Please connect your wallet to view your rewards.</p>
         </div>
       )}
     </div>
@@ -85,14 +81,14 @@ export default function ClaimSokuModal() {
 
   return (
     <div className="claimSoku__wrapper">
-      {/* <button type="button" className="claimSoku__navButton" onClick={handleOpen}>
+      <button type="button" className="claimSoku__navButton" onClick={handleOpen}>
         Claim Soku
-      </button> */}
-      <a href="https://tokensale.sokuswap.finance/token-exchange/#/" target="_blank">
+      </button>
+      {/* <a href="https://tokensale.sokuswap.finance/token-exchange/#/" target="_blank">
         <button type="button" className="claimSoku__navButton">
           Claim Soku
         </button>
-      </a>
+      </a> */}
       <Modal
         open={open}
         onClose={handleClose}

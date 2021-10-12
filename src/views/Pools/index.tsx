@@ -66,7 +66,12 @@ const Pools: React.FC = () => {
       <PageHeader>
         <Flex justifyContent="space-between" flexDirection={['column', null, 'row']}>
           <Flex flexDirection="column" mr={['8px', 0]}>
-            <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '15px' }}>
+            <Heading
+              as="h1"
+              color="white"
+              mb="20px"
+              style={{ fontSize: '3.25rem', marginBottom: '15px', textAlign: 'center' }}
+            >
               {t('Staking Pools')}
             </Heading>
             <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center' }}>
