@@ -162,6 +162,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         onUserInput={handleStakeInputChange}
         currencyValue={stakingTokenPrice !== 0 && `~${usdValueStaked || 0} USD`}
         isWarning={hasReachedStakeLimit}
+        style={{ background: 'rgb(216, 216, 216)', border: 'none' }}
       />
       {hasReachedStakeLimit && (
         <Text color="failure" fontSize="12px" style={{ textAlign: 'right' }} mt="4px">

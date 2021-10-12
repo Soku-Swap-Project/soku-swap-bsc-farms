@@ -47,7 +47,7 @@ const App: React.FC = () => {
   useFetchProfile()
   useFetchPriceList()
 
-  const account = useWeb3React()
+  const { account } = useWeb3React()
   const { login, logout } = useAuth()
 
   const { onPresentConnectModal } = useWalletModal(login, logout)

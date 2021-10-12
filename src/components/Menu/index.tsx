@@ -57,19 +57,10 @@ const Menu = (props) => {
               <a className="nav_link" href="https://www.binance.org/en/bridge">
                 <li>Bridge</li>
               </a>
-              {/* <a className="nav_link" href={`${origin}/bsc/farms`}>
-                <li>Farms</li>
-              </a> */}
-              {/* <NavLink className="nav_link" to="/soku" activeClassName="active">
-            <li>SOKU</li>
-          </NavLink> */}
             </div>
           </ul>
           <ul className="connectWallet__options__DESKTOP">
             {account ? (
-              // <li className="account" onClick={onPresentConnectModal}>
-              //   Account: {truncatedAddress}
-              // </li>
               <AccountModal />
             ) : (
               <li className="connectWallet__nav">
