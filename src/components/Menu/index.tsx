@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React from 'react'
-import { Menu as UikitMenu, useWalletModal } from '@pancakeswap/uikit'
+import { Menu as UikitMenu, useWalletModal } from '@pancakeswap-libs/uikit'
 import { NavLink } from 'react-router-dom'
 
 import { useWeb3React } from '@web3-react/core'
