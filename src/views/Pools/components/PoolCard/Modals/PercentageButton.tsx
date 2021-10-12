@@ -8,6 +8,8 @@ interface PercentageButtonProps {
 
 const StyledButton = styled(Button)`
   flex-grow: 1;
+  background: #04bbfb;
+  color: #fff;
 `
 
 const PercentageButton: React.FC<PercentageButtonProps> = ({ children, onClick }) => {

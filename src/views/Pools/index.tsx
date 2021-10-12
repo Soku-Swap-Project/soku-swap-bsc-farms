@@ -66,13 +66,17 @@ const Pools: React.FC = () => {
       <PageHeader>
         <Flex justifyContent="space-between" flexDirection={['column', null, 'row']}>
           <Flex flexDirection="column" mr={['8px', 0]}>
-            <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '10px' }}>
-              {t('Soku Staking Pools')}
+            <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '15px' }}>
+              {t('Staking Pools')}
             </Heading>
-            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem' }}>
+            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center' }}>
               {t('Just stake some tokens to earn.')}
             </Heading>
-            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem' }}>
+            <Heading
+              scale="lg"
+              color="white"
+              style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center', marginBottom: '15px' }}
+            >
               {t('High APR, low risk.')}
             </Heading>
           </Flex>

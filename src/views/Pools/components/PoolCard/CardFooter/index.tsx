@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
-import { Flex, CardFooter, ExpandableLabel, HelpIcon, useTooltip } from '@pancakeswap/uikit'
+import { Flex, CardFooter, ExpandableLabel, HelpIcon, useTooltip, Text } from '@pancakeswap/uikit'
 import { Pool } from 'state/types'
 import { CompoundingPoolTag, ManualPoolTag } from 'components/Tags'
 import ExpandedFooter from './ExpandedFooter'
@@ -26,9 +26,9 @@ const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) =
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(false)
 
-  const manualTooltipText = t('You must harvest and compound your earnings from this pool manually.')
+  const manualTooltipText = t('You must claim and compound your earnings from this pool manually.')
   const autoTooltipText = t(
-    'Any funds you stake in this pool will be automagically harvested and restaked (compounded) for you.',
+    'Any funds you stake in this pool will be automagically claimed and restaked (compounded) for you.',
   )
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(isAutoVault ? autoTooltipText : manualTooltipText, {
@@ -46,7 +46,7 @@ const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) =
           </Flex>
         </Flex>
         <ExpandableLabel expanded={isExpanded} onClick={() => setIsExpanded(!isExpanded)}>
-          {isExpanded ? t('Hide') : t('Details')}
+          {isExpanded ? <Text>Hide</Text> : <Text>Details</Text>}
         </ExpandableLabel>
       </ExpandableButtonWrapper>
       {isExpanded && <ExpandedFooter pool={pool} account={account} isAutoVault={isAutoVault} />}

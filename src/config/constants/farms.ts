@@ -47,25 +47,15 @@ const farms: FarmConfig[] = [
     token: tokens.soku,
     quoteToken: tokens.busd,
   },
-  {
-    pid: 3,
-    lpSymbol: 'SOKU-EARN LP',
-    lpAddresses: {
-      97: '',
-      56: '0x3B611daa2F3f851D60E505823419a39A82361f39',
-    },
-    token: tokens.soku,
-    quoteToken: tokens.earnable,
-  },
   // {
-  //   pid: 4,
-  //   lpSymbol: 'SOKU-TASTE LP',
+  //   pid: 3,
+  //   lpSymbol: 'SOKU-EARN LP',
   //   lpAddresses: {
   //     97: '',
-  //     56: '0x17229D744683142C688e4dA11227F6134dA49cFD',
+  //     56: '0x3B611daa2F3f851D60E505823419a39A82361f39',
   //   },
   //   token: tokens.soku,
-  //   quoteToken: tokens.taste,
+  //   quoteToken: tokens.earnable,
   // },
   {
     pid: 5,
