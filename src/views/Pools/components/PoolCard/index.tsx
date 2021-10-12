@@ -20,7 +20,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
   return (
     <StyledCard
       isFinished={isFinished && sousId !== 0}
-      ribbon={isFinished && <CardRibbon variantColor="textDisabled" text={t('Finished')} />}
+      ribbon={isFinished && <CardRibbon variantColor="textDisabled" text={t('Finished')} className="finished_ribbon" />}
     >
       <StyledCardInner>
         <StyledCardHeader

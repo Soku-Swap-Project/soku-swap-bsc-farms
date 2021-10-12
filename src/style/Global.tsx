@@ -92,6 +92,25 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
     stroke: #04bbfb;
   }
 
+  .finished_ribbon {
+    background: #05489c;
+    color: #fff;
+  }
+
+  .finished_ribbon::before, .finished_ribbon::after {
+    background: #05489c;
+
+  }
+
+  .MuiChip-label.MuiChip-labelMedium.css-6od3lo-MuiChip-label {
+    color: #05195a;
+  }
+
+  a[variant="primary"] {
+    background: #04bbfb;
+    color: #fff !important;
+  }
+
   a[color="primary"] {
     color: #05195a
   }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { Modal, Text, Flex, Image, Button, Slider, BalanceInput, AutoRenewIcon, Link } from '@pancakeswap/uikit'
+import { Modal, Text, Flex, Image, Button, BalanceInput, AutoRenewIcon, Link } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { BASE_EXCHANGE_URL } from 'config'
 import { useSousStake } from 'hooks/useStake'
@@ -10,6 +10,8 @@ import useToast from 'hooks/useToast'
 import BigNumber from 'bignumber.js'
 import { getFullDisplayBalance, formatNumber, getDecimalAmount } from 'utils/formatBalance'
 import { Pool } from 'state/types'
+import Slider from 'components/Slider'
+
 import PercentageButton from './PercentageButton'
 
 interface StakeModalProps {
@@ -96,7 +98,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         await onUnstake(stakeAmount, stakingToken.decimals)
         toastSuccess(
           `${t('Unstaked')}!`,
-          t('Your %symbol% earnings have also been harvested to your wallet!', {
+          t('Your %symbol% earnings have been automatically sent to your wallet!', {
             symbol: earningToken.symbol,
           }),
         )
@@ -142,7 +144,14 @@ const StakeModal: React.FC<StakeModalProps> = ({
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>{isRemovingStake ? t('Unstake') : t('Stake')}:</Text>
         <Flex alignItems="center" minWidth="70px">
-          <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} />
+          {/* <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} /> */}
+          <Image
+            src="https://bscscan.com/token/images/sokuswap_32.png"
+            width={24}
+            height={24}
+            alt={stakingToken.symbol}
+          />
+
           <Text ml="4px" bold>
             {stakingToken.symbol}
           </Text>
@@ -171,7 +180,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         min={0}
         max={100}
         value={percent}
-        onValueChanged={handleChangePercent}
+        onChange={handleChangePercent}
         name="stake"
         valueLabel={`${percent}%`}
         step={1}
@@ -183,6 +192,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         <PercentageButton onClick={() => handleChangePercent(100)}>MAX</PercentageButton>
       </Flex>
       <Button
+        style={{ background: '#04bbfb' }}
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         onClick={handleConfirmClick}
@@ -193,8 +203,11 @@ const StakeModal: React.FC<StakeModalProps> = ({
       </Button>
       {!isRemovingStake && (
         <StyledLink external href={BASE_EXCHANGE_URL}>
-          <Button width="100%" mt="8px" variant="secondary">
-            {t('Get %symbol%', { symbol: stakingToken.symbol })}
+          <Button style={{ border: '2px solid #05195a' }} width="100%" mt="8px" variant="secondary">
+            <Text color="#05195a" fontWeight="bolder">
+              {' '}
+              {t('Get %symbol%', { symbol: stakingToken.symbol })}
+            </Text>
           </Button>
         </StyledLink>
       )}

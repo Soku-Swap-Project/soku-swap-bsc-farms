@@ -1,4 +1,5 @@
 import React from 'react'
+import Chip from '@mui/material/Chip'
 import { Tag, VerifiedIcon, CommunityIcon, BinanceIcon, RefreshIcon, AutoRenewIcon } from '@pancakeswap/uikit'
 
 const CoreTag = (props) => (
@@ -26,9 +27,9 @@ const DualTag = (props) => (
 )
 
 const ManualPoolTag = (props) => (
-  <Tag variant="secondary" outline startIcon={<RefreshIcon width="18px" color="secondary" mr="4px" />} {...props}>
+  <Chip label="Manual" variant="outlined" icon={<RefreshIcon width="18px" color="#04bbfb" mr="4px" />} {...props}>
     Manual
-  </Tag>
+  </Chip>
 )
 
 const CompoundingPoolTag = (props) => (

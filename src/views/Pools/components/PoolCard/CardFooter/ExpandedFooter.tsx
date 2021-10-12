@@ -147,7 +147,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
             height="auto"
             onClick={() => registerToken(tokenAddress, earningToken.symbol, earningToken.decimals, imageSrc)}
           >
-            <Text color="primary" fontSize="14px">
+            <Text color="#04bbfb" fontSize="14px">
               {t('Add to Metamask')}
             </Text>
             <MetamaskIcon ml="4px" />
