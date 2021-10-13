@@ -72,9 +72,9 @@ const App: React.FC = () => {
           <Route path="/bsc/farms">
             <Farms />
           </Route>
-          {/* <Route path="/bsc/staking">
+          <Route path="/bsc/staking">
             <StakingPools />
-          </Route> */}
+          </Route>
           {/* 404 */}
           <Route component={NotFound} />
         </Switch>

@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 
 const Wrapper = styled(CardHeader)<{ isFinished?: boolean; background?: string; isPromotedPool?: boolean }>`
-  background: ${({ isFinished, background, theme }) =>
-    isFinished ? theme.colors.backgroundDisabled : theme.colors.gradients[background]};
+  background: ${({ isFinished, background, theme }) => (isFinished ? theme.colors.backgroundDisabled : '#f9f9fa')};
   border-radius: ${({ theme, isPromotedPool }) =>
     isPromotedPool ? '31px 31px 0 0' : `${theme.radii.card} ${theme.radii.card} 0 0`};
 `
@@ -56,13 +55,18 @@ const StyledCardHeader: React.FC<{
   }
 
   return (
-    <Wrapper isPromotedPool={isPromotedPool} isFinished={isFinished} background={background}>
+    <Wrapper
+      isPromotedPool={isPromotedPool}
+      isFinished={isFinished}
+      background={background}
+      style={{ borderBottom: '1px solid #d8d8d8' }}
+    >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
-          <Heading color={isFinished ? 'textDisabled' : 'body'} scale="lg">
+          <Heading color={isFinished ? 'textDisabled' : '#05195a'} scale="lg">
             {`${getHeadingPrefix()} ${earningTokenSymbol}`}
           </Heading>
-          <Text color={isFinished ? 'textDisabled' : 'textSubtle'}>{getSubHeading()}</Text>
+          <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{getSubHeading()}</Text>
         </Flex>
         <Image src={`/images/pools/${poolImageSrc}`} alt={earningTokenSymbol} width={64} height={64} />
       </Flex>

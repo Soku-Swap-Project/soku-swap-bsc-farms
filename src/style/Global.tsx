@@ -106,6 +106,15 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
     color: #05195a;
   }
 
+  div[data-popper-placement='top'] {
+    background: #fff;
+    color: #04bbfb;
+  }
+
+   div[data-popper-placement='top']::before, div[data-popper-placement='top']::after {
+     background: red !important;
+   }
+ 
   a[variant="primary"] {
     background: #04bbfb;
     color: #fff !important;
