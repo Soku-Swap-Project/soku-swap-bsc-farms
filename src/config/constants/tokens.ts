@@ -13,6 +13,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  suteku: {
+    symbol: 'Suteku',
+    name: 'Suteku Token',
+    address: {
+      56: '0x3b9D3B4B3F9eb154f5D3D397Aef7299370D32C9E',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   earnable: {
     symbol: 'EARN',
     name: 'earnable',

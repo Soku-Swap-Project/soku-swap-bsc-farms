@@ -15,7 +15,7 @@ interface CardHeaderProps {
 const getBackgroundColor = (theme: DefaultTheme, status: Status) => {
   switch (status) {
     case 'calculating':
-      return theme.colors.gradients.cardHeader
+      return '#f9f9fa'
     case 'live':
       return 'transparent'
     case 'canceled':

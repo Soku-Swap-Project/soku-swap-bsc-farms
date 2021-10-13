@@ -80,7 +80,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     return apr
   }
 
-  const apyModalLink = stakingToken.address && `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[97]}`
+  const apyModalLink = stakingToken.address && `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[56]}`
 
   // console.log('apr', apr)
 

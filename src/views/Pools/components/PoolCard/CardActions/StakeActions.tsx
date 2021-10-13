@@ -88,22 +88,23 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           </>
         </Flex>
         <Flex>
-          <IconButton variant="secondary" onClick={onPresentUnstake} mr="6px">
-            <MinusIcon color="primary" width="24px" />
+          <IconButton style={{ border: '2px solid #05195a' }} variant="secondary" onClick={onPresentUnstake} mr="6px">
+            <MinusIcon color="#05195a" width="14px" />
           </IconButton>
           {reachStakingLimit ? (
             <span ref={targetRef}>
-              <IconButton variant="secondary" disabled>
-                <AddIcon color="textDisabled" width="24px" height="24px" />
+              <IconButton style={{ border: '2px solid #05195a' }} variant="secondary" disabled>
+                <AddIcon color="#05195a" width="14px" height="24px" />
               </IconButton>
             </span>
           ) : (
             <IconButton
               variant="secondary"
+              style={{ border: '1px solid rgb(210, 210, 210' }}
               onClick={stakingTokenBalance.gt(0) ? onPresentStake : onPresentTokenRequired}
               disabled={isFinished}
             >
-              <AddIcon color="primary" width="24px" height="24px" />
+              <AddIcon color="#E9EAEB" width="24px" height="24px" />
             </IconButton>
           )}
         </Flex>
