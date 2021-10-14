@@ -75,7 +75,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
       try {
         await onReward()
         toastSuccess(
-          `${t('Harvested')}!`,
+          `${t('Claimed')}!`,
           t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningToken.symbol }),
         )
         setPendingTx(false)
@@ -123,13 +123,14 @@ const CollectModal: React.FC<CollectModalProps> = ({
 
       <Button
         mt="8px"
+        style={{ backgroundColor: '#04bbfb' }}
         onClick={handleHarvestConfirm}
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
       >
         {pendingTx ? t('Confirming') : t('Confirm')}
       </Button>
-      <Button variant="text" onClick={onDismiss} pb="0px">
+      <Button variant="text" style={{ color: '#04bbfb' }} onClick={onDismiss} pb="0px">
         {t('Close Window')}
       </Button>
     </Modal>

@@ -69,7 +69,7 @@ const tokens = {
       97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
     },
     decimals: 18,
-    projectLink: 'https://pancakeswap.finance/',
+    projectLink: 'https://sokuswap.finance/',
   },
   wbnb: {
     symbol: 'wBNB',
@@ -78,7 +78,7 @@ const tokens = {
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
     },
     decimals: 18,
-    projectLink: 'https://pancakeswap.finance/',
+    projectLink: 'https://sokuswap.finance/',
   },
   // syrup: {
   //   symbol: 'SYRUP',

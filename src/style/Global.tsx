@@ -106,13 +106,13 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
     color: #05195a;
   }
 
-  div[data-popper-placement='top'] {
+  div[data-popper-reference-hidden="false"] {
     background: #fff;
     color: #04bbfb;
   }
 
-   div[data-popper-placement='top']::before, div[data-popper-placement='top']::after {
-     background: red !important;
+   div[data-popper-reference-hidden="false"] div::before {
+     background: #fff;
    }
  
   a[variant="primary"] {

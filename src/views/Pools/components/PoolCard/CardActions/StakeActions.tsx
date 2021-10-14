@@ -100,11 +100,11 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           ) : (
             <IconButton
               variant="secondary"
-              style={{ border: '1px solid rgb(210, 210, 210' }}
+              style={{ border: '2px solid #05195a' }}
               onClick={stakingTokenBalance.gt(0) ? onPresentStake : onPresentTokenRequired}
               disabled={isFinished}
             >
-              <AddIcon color="#E9EAEB" width="24px" height="24px" />
+              <AddIcon color="#05195a" width="24px" height="24px" />
             </IconButton>
           )}
         </Flex>

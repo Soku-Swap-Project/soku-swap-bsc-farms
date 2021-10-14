@@ -103,7 +103,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
             ) : (
               <Skeleton width="54px" height="21px" />
             )}
-            <Text ml="4px" color="primary" small textTransform="lowercase">
+            <Text ml="4px" color="primary" style={{ color: '#04bbfb' }} small textTransform="lowercase">
               {t('Blocks')}
             </Text>
             <TimerIcon ml="4px" color="primary" />

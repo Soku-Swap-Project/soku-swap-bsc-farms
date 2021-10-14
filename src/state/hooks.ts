@@ -64,6 +64,7 @@ export const useFarms = (): FarmsState => {
 
 export const useFarmFromPid = (pid): Farm => {
   const farm = useSelector((state: State) => state.farms.data.find((f) => f.pid === pid))
+  // console.log('farm', farm)
   return farm
 }
 
@@ -135,64 +136,6 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   // Catch in case token does not have immediate or once-removed BUSD/wBNB quoteToken
   return BIG_ZERO
 }
-
-export const useTokenData = (token_symbol) => {
-  let token
-  let res
-  const getCoinData = async () => {
-    await require('axios')
-      .get(
-        `https://api.coingecko.com/api/v3/coins/${token_symbol}?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`,
-      )
-      .then((response) => {
-        if (response) {
-          token = response
-          console.log('coingecko response', response)
-        }
-      })
-
-    const token_price = token.data.market_data.current_price['usd']
-    res = token_price
-  }
-  getCoinData()
-
-  return res
-}
-
-const CoinGecko = require('coingecko-api')
-
-//2. Initiate the CoinGecko API Client
-const CoinGeckoClient = new CoinGecko()
-
-let price
-
-//3. Make calls
-
-export const useTokenPrice = (token: string) => {
-  const [tokenPrice, setTokenPrice] = useState(0)
-  useEffect(() => {
-    const getTokenPrice = async (token_symbol) => {
-      const res = await CoinGeckoClient.coins.fetch(token_symbol)
-      // console.log(res)
-      const data = await res.data
-      // const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
-      const price = data?.market_data?.current_price['usd']
-      // console.log('price', price)
-      // console.log(earn_price)
-      // const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
-      //   minimumSignificantDigits: 3,
-      // })
-
-      setTokenPrice(price)
-    }
-    getTokenPrice(token)
-  }, [])
-
-  // console.log('new token price', tokenPrice)
-  return tokenPrice
-}
-
-// useTokenData('sokuswap')
 
 export const useBusdPriceFromToken = () => {
   // const tokenFarmForPriceCalc = useFarmFromTokenSymbol(tokenSymbol)
@@ -386,6 +329,64 @@ export const useAchievements = () => {
 }
 
 // Prices
+
+export const useTokenData = (token_symbol) => {
+  let token
+  let res
+  const getCoinData = async () => {
+    await require('axios')
+      .get(
+        `https://api.coingecko.com/api/v3/coins/${token_symbol}?localization=true&tickers=true&market_data=true&community_data=false&developer_data=false&sparkline=false`,
+      )
+      .then((response) => {
+        if (response) {
+          token = response
+          console.log('coingecko response', response)
+        }
+      })
+
+    const token_price = token.data.market_data.current_price['usd']
+    res = token_price
+  }
+  getCoinData()
+
+  return res
+}
+
+const CoinGecko = require('coingecko-api')
+
+//2. Initiate the CoinGecko API Client
+const CoinGeckoClient = new CoinGecko()
+
+let price
+
+//3. Make calls
+
+export const useTokenPrice = (token: string) => {
+  const [tokenPrice, setTokenPrice] = useState(0)
+  useEffect(() => {
+    const getTokenPrice = async (token_symbol) => {
+      const res = await CoinGeckoClient.coins.fetch(token_symbol)
+      // console.log(res)
+      const data = await res.data
+      // const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
+      const price = data?.market_data?.current_price['usd']
+      // console.log('price', price)
+      // console.log(earn_price)
+      // const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
+      //   minimumSignificantDigits: 3,
+      // })
+
+      setTokenPrice(price)
+    }
+    getTokenPrice(token)
+  }, [])
+
+  // console.log('new token price', tokenPrice)
+  return tokenPrice
+}
+
+// useTokenData('sokuswap')
 export const useFetchPriceList = () => {
   const { slowRefresh } = useRefresh()
   const dispatch = useAppDispatch()
@@ -420,12 +421,29 @@ export const usePriceBnbBusd = (): BigNumber => {
 export const usePriceCakeBusd = (): BigNumber => {
   const cakeBnbFarm = useFarmFromPid(2)
   const bnbBusdPrice = usePriceBnbBusd()
+  console.log(cakeBnbFarm)
 
   // const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : BIG_ZERO
 
   const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? cakeBnbFarm.tokenPriceVsQuote : BIG_ZERO
 
   return cakeBusdPrice
+}
+
+export const usePriceBnbSuteku = (): BigNumber => {
+  const sutekuBnbFarm = useFarmFromPid(6)
+  const bnbBusdPrice = usePriceBnbBusd()
+
+  // console.log('suteku', sutekuBnbFarm)
+  const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
+
+  // console.log('suteku', new BigNumber(sutekuPrice))
+  const price = new BigNumber(sutekuPrice).div(100)
+
+  // console.log('suteku', price.toString())
+  // const suteku = price.toNumber()
+
+  return price
 }
 
 // Block
