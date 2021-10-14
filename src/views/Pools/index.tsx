@@ -21,6 +21,7 @@ const NUMBER_OF_POOLS_VISIBLE = 12
 const Pools: React.FC = () => {
   useFetchCakeVault()
   const { path } = useRouteMatch()
+  console.log('staking path', path)
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const pools = usePools(account)
@@ -97,7 +98,7 @@ const Pools: React.FC = () => {
           hasStakeInFinishedPools={hasStakeInFinishedPools}
         />
         <FlexLayout>
-          <Route exact path={`${path}`}>
+          <Route exact path="/bsc/staking">
             <>
               {/* <CakeVaultCard pool={cakePoolData} showStakedOnly={stakedOnly} /> */}
               {stakedOnly
@@ -109,7 +110,7 @@ const Pools: React.FC = () => {
                     .map((pool) => <PoolCard key={pool.sousId} pool={pool} account={account} />)}
             </>
           </Route>
-          <Route path={`${path}/history`}>
+          <Route path="/bsc/staking/history">
             {stakedOnly
               ? orderBy(stakedOnlyFinishedPools, ['sortOrder'])
                   .slice(0, numberOfPoolsVisible)
