@@ -37,12 +37,12 @@ export const useSousApprove = (lpContract: Contract, sousId) => {
   const handleApprove = useCallback(async () => {
     try {
       const tx = await approve(lpContract, sousChefContract, account)
-      dispatch(updateUserAllowance(sousId, account))
+      // dispatch(updateUserAllowance(sousId, account))
       return tx
     } catch (e) {
       return false
     }
-  }, [account, dispatch, lpContract, sousChefContract, sousId])
+  }, [account, lpContract, sousChefContract])
 
   return { onApprove: handleApprove }
 }
