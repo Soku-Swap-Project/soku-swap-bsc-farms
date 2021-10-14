@@ -367,15 +367,8 @@ export const useTokenPrice = (token: string) => {
   useEffect(() => {
     const getTokenPrice = async (token_symbol) => {
       const res = await CoinGeckoClient.coins.fetch(token_symbol)
-      // console.log(res)
       const data = await res.data
-      // const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
       const price = data?.market_data?.current_price['usd']
-      // console.log('price', price)
-      // console.log(earn_price)
-      // const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
-      //   minimumSignificantDigits: 3,
-      // })
 
       setTokenPrice(price)
     }
@@ -434,15 +427,9 @@ export const usePriceBnbSuteku = (): BigNumber => {
   const sutekuBnbFarm = useFarmFromPid(6)
   const bnbBusdPrice = usePriceBnbBusd()
 
-  // console.log('suteku', sutekuBnbFarm)
   const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
 
-  // console.log('suteku', new BigNumber(sutekuPrice))
   const price = new BigNumber(sutekuPrice).div(100)
-
-  // console.log('suteku', price.toString())
-  // const suteku = price.toNumber()
-
   return price
 }
 
