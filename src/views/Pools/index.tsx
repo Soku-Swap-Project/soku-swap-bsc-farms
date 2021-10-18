@@ -21,7 +21,7 @@ const NUMBER_OF_POOLS_VISIBLE = 12
 const Pools: React.FC = () => {
   useFetchCakeVault()
   const { path } = useRouteMatch()
-  console.log('staking path', path)
+  // console.log('staking path', path)
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const pools = usePools(account)
