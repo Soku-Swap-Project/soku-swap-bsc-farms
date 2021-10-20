@@ -39,6 +39,8 @@ const Menu = (props) => {
     }
   }
 
+  const isMobile = window.innerWidth <= 500
+
   return (
     <>
       <div className="sokuswap__navbar">
@@ -51,12 +53,24 @@ const Menu = (props) => {
               <a className="nav_link" href="/bsc/#/swap">
                 <li>Swap</li>
               </a>
+              {isMobile ? (
+                <a className="nav_link" href="/bsc/#/limit-order">
+                  <li>Limit</li>
+                </a>
+              ) : (
+                <a className="nav_link" href="/bsc/#/limit-order">
+                  <li>Limit Orders</li>
+                </a>
+              )}
               <a className="nav_link" href="/bsc/#/pool">
                 <li>Pool</li>
               </a>
               <a className="nav_link" href="https://www.binance.org/en/bridge">
                 <li>Bridge</li>
               </a>
+              <NavLink className="nav_link" activeClassName="active" to="/bsc/farms">
+                <li>Farms</li>
+              </NavLink>
             </div>
           </ul>
           <ul className="connectWallet__options__DESKTOP">
