@@ -69,8 +69,8 @@ const App: React.FC = () => {
       <Menu />
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-          <Route exact path="/bsc/farms" component={Farms} />
           <Route exact path="/bsc/staking" component={StakingPools} />
+          <Route exact path="/bsc/farms" component={Farms} />
           {/* 404 */}
           <Route component={NotFound} />
         </Switch>
