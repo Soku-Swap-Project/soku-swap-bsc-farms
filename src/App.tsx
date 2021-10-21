@@ -33,7 +33,6 @@ const Team = lazy(() => import('./views/Teams/Team'))
 const Profile = lazy(() => import('./views/Profile'))
 const TradingCompetition = lazy(() => import('./views/TradingCompetition'))
 const Predictions = lazy(() => import('./views/Predictions'))
-const StakingPools = lazy(() => import('./views/Pools'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -69,8 +68,9 @@ const App: React.FC = () => {
       <Menu />
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-          <Route exact path="/bsc/staking" component={StakingPools} />
           <Route exact path="/bsc/farms" component={Farms} />
+          <Route strict path="/bsc/staking" component={Pools} />
+
           {/* 404 */}
           <Route component={NotFound} />
         </Switch>
