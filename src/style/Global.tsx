@@ -106,6 +106,15 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
     color: #05195a;
   }
 
+  div[data-popper-reference-hidden="false"] {
+    background: #fff;
+    color: #04bbfb;
+  }
+
+   div[data-popper-reference-hidden="false"] div::before {
+     background: #fff;
+   }
+ 
   a[variant="primary"] {
     background: #04bbfb;
     color: #fff !important;
@@ -186,12 +195,16 @@ button[id='wallet-connect-binance chain wallet'] div,
   fill: #04bbfb !important;
 }
 
+a[href='https://docs.pancakeswap.finance/help/faq#how-do-i-connect-my-wallet-to-pancakeswap'] {
+  display: none !important;
+}
+
 /* button[id='wallet-connect-trustwallet'],
 button[id='wallet-connect-mathwallet'],
 button[id='wallet-connect-tokenpocket'],
 button[id='wallet-connect-walletconnect'],
 button[id='wallet-connect-binance chain wallet'],
-button[id='wallet-connect-safepal wallet'] {
+button[id='wallet-connect-safepal wallet'],
   display: none;
 } */
 

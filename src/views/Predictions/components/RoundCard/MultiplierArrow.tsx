@@ -6,6 +6,7 @@ import { BetPosition } from 'state/types'
 import { RoundMultiplierDownArrow, RoundMultiplierUpArrow } from '../../RoundMultiplierArrows'
 import EnteredTag from './EnteredTag'
 
+/* eslint-disable react/require-default-props */
 interface MultiplierArrowProps {
   betAmount?: number
   multiplier?: number

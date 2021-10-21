@@ -7,6 +7,7 @@ import { PodiumBase } from '../../../svgs'
 import { TeamLeaderboardProps } from '../../../types'
 import { localiseTradingVolume } from '../../../helpers'
 
+/* eslint-disable react/require-default-props */
 interface PodiumProps {
   teamsSortedByVolume?: Array<TeamLeaderboardProps>
 }

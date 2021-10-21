@@ -18,6 +18,7 @@ import { useSousStake } from 'hooks/useStake'
 import useToast from 'hooks/useToast'
 import { Token } from 'config/constants/types'
 
+/* eslint-disable react/require-default-props */
 interface CollectModalProps {
   formattedBalance: string
   fullBalance: string
@@ -75,7 +76,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
       try {
         await onReward()
         toastSuccess(
-          `${t('Harvested')}!`,
+          `${t('Claimed')}!`,
           t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningToken.symbol }),
         )
         setPendingTx(false)
@@ -89,9 +90,9 @@ const CollectModal: React.FC<CollectModalProps> = ({
 
   return (
     <Modal
-      title={`${earningToken.symbol} ${isCompoundPool ? t('Collect') : t('Harvest')}`}
+      title={`${earningToken.symbol} ${isCompoundPool ? t('Collect') : t('Claim')}`}
       onDismiss={onDismiss}
-      headerBackground={theme.colors.gradients.cardHeader}
+      headerBackground="#f9f9fa"
     >
       {isCompoundPool && (
         <Flex justifyContent="center" alignItems="center" mb="24px">
@@ -123,13 +124,14 @@ const CollectModal: React.FC<CollectModalProps> = ({
 
       <Button
         mt="8px"
+        style={{ backgroundColor: '#04bbfb' }}
         onClick={handleHarvestConfirm}
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
       >
         {pendingTx ? t('Confirming') : t('Confirm')}
       </Button>
-      <Button variant="text" onClick={onDismiss} pb="0px">
+      <Button variant="text" style={{ color: '#04bbfb' }} onClick={onDismiss} pb="0px">
         {t('Close Window')}
       </Button>
     </Modal>

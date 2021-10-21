@@ -6,6 +6,7 @@ import ModalInput from 'components/ModalInput'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 
+/* eslint-disable react/require-default-props */
 interface WithdrawModalProps {
   max: BigNumber
   onConfirm: (amount: string) => void

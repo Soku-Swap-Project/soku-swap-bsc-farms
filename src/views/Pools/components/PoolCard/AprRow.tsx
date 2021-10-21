@@ -4,13 +4,14 @@ import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getPoolApr } from 'utils/apr'
 import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
-import { useBusdPriceFromToken, useTokenData, useTokenPrice } from 'state/hooks'
+import { useBusdPriceFromToken, usePriceBnbSuteku, useTokenPrice } from 'state/hooks'
 import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
 import { Pool } from 'state/types'
 import { BASE_EXCHANGE_URL } from 'config'
 import BigNumber from 'bignumber.js'
 
+/* eslint-disable react/require-default-props */
 interface AprRowProps {
   pool: Pool
   isAutoVault?: boolean
@@ -28,34 +29,22 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
 
-  const earningTokenPrice = useTokenPrice('binance-usd')
+  const earningTokenPrice = usePriceBnbSuteku()
 
-  // console.log('earning token price', earningTokenPrice?.toString())
-  // console.log('earning token', earningToken)
-
-  // const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
-  const earningTokenPriceAsNumber = earningTokenPrice
+  const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
+  // const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 
   const stakingTokenPrice = useTokenPrice('sokuswap')
-  // console.log('staking token price', stakingTokenPrice.toFormat())
-  // console.log('staking token', stakingToken)
 
   // const stakingTokenPriceAsNumber = stakingTokenPrice && stakingTokenPrice.toNumber()
   const stakingTokenPriceAsNumber = stakingTokenPrice
 
   const apr = getPoolApr(
     stakingTokenPrice,
-    earningTokenPrice,
+    earningTokenPriceAsNumber,
     getBalanceNumber(totalStaked, stakingToken.decimals),
     parseFloat(tokenPerBlock),
   )
-
-  // console.log('stakingTokenPrice', stakingTokenPrice)
-  // console.log('earningTokenPrice', earningTokenPrice)
-  // console.log('totalStaked', totalStaked)
-  // console.log('tokenPerBlock', tokenPerBlock)
-
-  // console.log('apr', apr)
 
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
   const isHighValueToken = Math.round(earningTokenPriceAsNumber / 1000) > 0
@@ -80,9 +69,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     return apr
   }
 
-  const apyModalLink = stakingToken.address && `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[97]}`
-
-  // console.log('apr', apr)
+  const apyModalLink = stakingToken.address && `${BASE_EXCHANGE_URL}/#/swap?outputCurrency=${stakingToken.address[56]}`
 
   const [onPresentApyModal] = useModal(
     <ApyCalculatorModal

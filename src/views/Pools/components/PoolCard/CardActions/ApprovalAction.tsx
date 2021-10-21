@@ -7,6 +7,7 @@ import useToast from 'hooks/useToast'
 import { getAddress } from 'utils/addressHelpers'
 import { Pool } from 'state/types'
 
+/* eslint-disable react/require-default-props */
 interface ApprovalActionProps {
   pool: Pool
   isLoading?: boolean
@@ -37,7 +38,7 @@ const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false
       }
     } catch (e) {
       console.error(e)
-      toastError(t('Error'), e?.message)
+      toastError(t('Error'))
     }
   }, [onApprove, setRequestedApproval, toastSuccess, toastError, t, earningToken])
 

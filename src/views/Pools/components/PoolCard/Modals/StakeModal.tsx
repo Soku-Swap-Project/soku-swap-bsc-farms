@@ -14,6 +14,7 @@ import Slider from 'components/Slider'
 
 import PercentageButton from './PercentageButton'
 
+/* eslint-disable react/require-default-props */
 interface StakeModalProps {
   isBnbPool: boolean
   pool: Pool
@@ -128,13 +129,9 @@ const StakeModal: React.FC<StakeModalProps> = ({
   }
 
   return (
-    <Modal
-      title={isRemovingStake ? t('Unstake') : t('Stake in Pool')}
-      onDismiss={onDismiss}
-      headerBackground={theme.colors.gradients.cardHeader}
-    >
+    <Modal title={isRemovingStake ? t('Unstake') : t('Stake in Pool')} onDismiss={onDismiss} headerBackground="#f9f9fa">
       {stakingLimit.gt(0) && !isRemovingStake && (
-        <Text color="secondary" bold mb="24px" style={{ textAlign: 'center' }} fontSize="16px">
+        <Text color="#04bbfb" bold mb="24px" style={{ textAlign: 'center' }} fontSize="16px">
           {t('Max stake for this pool: %amount% %token%', {
             amount: getFullDisplayBalance(stakingLimit, stakingToken.decimals, 0),
             token: stakingToken.symbol,
@@ -144,13 +141,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>{isRemovingStake ? t('Unstake') : t('Stake')}:</Text>
         <Flex alignItems="center" minWidth="70px">
-          {/* <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} /> */}
-          <Image
+          <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} />
+          {/* <Image
             src="https://bscscan.com/token/images/sokuswap_32.png"
             width={24}
             height={24}
             alt={stakingToken.symbol}
-          />
+          /> */}
 
           <Text ml="4px" bold>
             {stakingToken.symbol}
@@ -162,7 +159,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         onUserInput={handleStakeInputChange}
         currencyValue={stakingTokenPrice !== 0 && `~${usdValueStaked || 0} USD`}
         isWarning={hasReachedStakeLimit}
-        style={{ background: 'rgb(216, 216, 216)', border: 'none' }}
+        style={{ background: 'rgb(239 238 238 / 79%)', border: 'none' }}
       />
       {hasReachedStakeLimit && (
         <Text color="failure" fontSize="12px" style={{ textAlign: 'right' }} mt="4px">
@@ -193,7 +190,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         <PercentageButton onClick={() => handleChangePercent(100)}>MAX</PercentageButton>
       </Flex>
       <Button
-        style={{ background: '#04bbfb' }}
+        style={{ background: '#05195a' }}
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         onClick={handleConfirmClick}
@@ -204,8 +201,8 @@ const StakeModal: React.FC<StakeModalProps> = ({
       </Button>
       {!isRemovingStake && (
         <StyledLink external href={BASE_EXCHANGE_URL}>
-          <Button style={{ border: '2px solid #05195a' }} width="100%" mt="8px" variant="secondary">
-            <Text color="#05195a" fontWeight="bolder">
+          <Button style={{ background: '#05195a' }} width="100%" mt="8px" variant="primary">
+            <Text color="#fff" fontWeight="bolder">
               {' '}
               {t('Get %symbol%', { symbol: stakingToken.symbol })}
             </Text>

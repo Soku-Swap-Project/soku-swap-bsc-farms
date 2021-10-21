@@ -6,6 +6,8 @@ import ModalInput from 'components/ModalInput'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance } from 'utils/formatBalance'
 
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/require-default-props */
 interface DepositModalProps {
   max: BigNumber
   onConfirm: (amount: string) => void

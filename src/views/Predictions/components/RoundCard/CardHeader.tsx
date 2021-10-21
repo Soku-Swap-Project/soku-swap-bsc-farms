@@ -4,6 +4,8 @@ import styled, { DefaultTheme } from 'styled-components'
 
 type Status = 'expired' | 'live' | 'next' | 'soon' | 'canceled' | 'calculating'
 
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 interface CardHeaderProps {
   status: Status
   title: string
@@ -15,7 +17,7 @@ interface CardHeaderProps {
 const getBackgroundColor = (theme: DefaultTheme, status: Status) => {
   switch (status) {
     case 'calculating':
-      return theme.colors.gradients.cardHeader
+      return '#f9f9fa'
     case 'live':
       return 'transparent'
     case 'canceled':

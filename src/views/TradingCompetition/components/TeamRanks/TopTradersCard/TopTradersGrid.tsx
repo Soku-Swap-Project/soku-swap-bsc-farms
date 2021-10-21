@@ -36,6 +36,7 @@ const ExpandedWrapper = styled.div`
   }
 `
 
+/* eslint-disable react/require-default-props */
 const TopTradersGrid: React.FC<{ data?: LeaderboardDataItem[]; isExpanded: boolean }> = ({ data, isExpanded }) => {
   const topFive = data && data.slice(0, 5)
   const nextTwenty = data && data.slice(5, 20)

@@ -33,6 +33,10 @@
   .navbar__items li {
     font-size: 14px;
   }
+
+  .navbar__options {
+    padding-left: 0px;
+  }
 }
 
 .navbar__items li:hover,

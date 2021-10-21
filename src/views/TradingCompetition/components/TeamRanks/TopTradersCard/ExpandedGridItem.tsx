@@ -79,7 +79,7 @@ const TeamImageWrapper = styled(Flex)`
     bottom: 0;
   }
 `
-
+/* eslint-disable react/require-default-props */
 const GridItem: React.FC<{ traderData?: LeaderboardDataItem; teamImages: React.ReactNode[] }> = ({
   traderData = { address: '', volume: 0, teamId: 0, rank: 0 },
   teamImages,

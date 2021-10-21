@@ -72,6 +72,7 @@ const TeamImageWrapper = styled(Flex)`
   }
 `
 
+/* eslint-disable react/require-default-props */
 const GridItem: React.FC<{
   traderData?: LeaderboardDataItem
   teamImages: React.ReactNode[]

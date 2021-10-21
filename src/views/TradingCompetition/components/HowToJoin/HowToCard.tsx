@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Heading, Card, CardBody } from '@pancakeswap/uikit'
 
+/* eslint-disable react/require-default-props */
 interface HowToCardProps {
   number?: number
   title?: string

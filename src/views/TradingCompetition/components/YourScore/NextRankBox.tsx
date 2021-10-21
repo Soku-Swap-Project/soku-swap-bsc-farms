@@ -2,6 +2,7 @@ import React, { ReactElement } from 'react'
 import styled from 'styled-components'
 import { Flex, Text, FlexProps, ArrowForwardIcon } from '@pancakeswap/uikit'
 
+/* eslint-disable react/require-default-props */
 interface NextRankProps extends FlexProps {
   title?: string
   footer?: string

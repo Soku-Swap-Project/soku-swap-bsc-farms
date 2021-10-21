@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import { Flex, Text, FlexProps } from '@pancakeswap/uikit'
 
+/* eslint-disable react/require-default-props */
 interface UserRankProps extends FlexProps {
   title?: string
   footer?: string

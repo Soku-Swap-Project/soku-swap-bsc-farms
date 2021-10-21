@@ -12,6 +12,7 @@ import AchievementTitle from '../AchievementTitle'
 import AchievementAvatar from '../AchievementAvatar'
 import AchievementDescription from '../AchievementDescription'
 
+/* eslint-disable react/require-default-props */
 interface AchievementRowProps {
   achievement: Achievement
   onCollectSuccess?: (achievement: Achievement) => void

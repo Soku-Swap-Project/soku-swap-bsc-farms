@@ -21,6 +21,7 @@ import { getAddress, getCakeVaultAddress } from 'utils/addressHelpers'
 import { registerToken } from 'utils/wallet'
 import Balance from 'components/Balance'
 
+/* eslint-disable react/require-default-props */
 interface ExpandedFooterProps {
   pool: Pool
   account: string
@@ -103,7 +104,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
             ) : (
               <Skeleton width="54px" height="21px" />
             )}
-            <Text ml="4px" color="primary" small textTransform="lowercase">
+            <Text ml="4px" color="primary" style={{ color: '#04bbfb' }} small textTransform="lowercase">
               {t('Blocks')}
             </Text>
             <TimerIcon ml="4px" color="primary" />

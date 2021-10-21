@@ -16,6 +16,7 @@ import Card from './Card'
 import CardHeader from './CardHeader'
 import SetPositionCard from './SetPositionCard'
 
+/* eslint-disable react/require-default-props */
 interface OpenRoundCardProps {
   round: Round
   betAmount?: number

@@ -2,6 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 import { Card, Radio } from '@pancakeswap/uikit'
 
+/* eslint-disable react/require-default-props */
+
 interface SelectionCardProps {
   name: string
   value: string | number

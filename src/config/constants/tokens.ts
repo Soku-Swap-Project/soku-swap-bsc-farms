@@ -13,6 +13,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  suteku: {
+    symbol: 'Suteku',
+    name: 'Suteku Token',
+    address: {
+      56: '0x3b9D3B4B3F9eb154f5D3D397Aef7299370D32C9E',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   earnable: {
     symbol: 'EARN',
     name: 'earnable',
@@ -59,7 +69,7 @@ const tokens = {
       97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
     },
     decimals: 18,
-    projectLink: 'https://pancakeswap.finance/',
+    projectLink: 'https://sokuswap.finance/',
   },
   wbnb: {
     symbol: 'wBNB',
@@ -68,7 +78,7 @@ const tokens = {
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
     },
     decimals: 18,
-    projectLink: 'https://pancakeswap.finance/',
+    projectLink: 'https://sokuswap.finance/',
   },
   // syrup: {
   //   symbol: 'SYRUP',

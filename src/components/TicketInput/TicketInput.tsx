@@ -15,6 +15,10 @@ interface TokenInputProps extends InputProps {
 const TicketInput: React.FC<TokenInputProps> = ({ max, symbol, availableSymbol, onChange, onSelectMax, value }) => {
   const { t } = useTranslation()
 
+  TicketInput.defaultProps = {
+    onSelectMax,
+  }
+
   return (
     <>
       <Flex alignItems="center">

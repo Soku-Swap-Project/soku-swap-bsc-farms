@@ -4,10 +4,11 @@ import BigNumber from 'bignumber.js'
 import { Token } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, getBalanceNumber, formatNumber } from 'utils/formatBalance'
-import { useBusdPriceFromToken, useTokenPrice } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/hooks'
 import Balance from 'components/Balance'
 import CollectModal from '../Modals/CollectModal'
 
+/* eslint-disable react/require-default-props */
 interface HarvestActionsProps {
   earnings: BigNumber
   earningToken: Token
@@ -28,9 +29,8 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
 
   // const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
-  const earningTokenPrice = useTokenPrice('binance-usd')
-
-  const earningTokenPriceAsNumber = earningTokenPrice
+  const earningTokenPrice = usePriceBnbSuteku()
+  const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
   const earningTokenDollarBalance = getBalanceNumber(
     earnings.multipliedBy(earningTokenPriceAsNumber),
     earningToken.decimals,

@@ -22,4 +22,8 @@ const PageHeader: React.FC<{ background?: string }> = ({ background, children, .
   </Outer>
 )
 
+PageHeader.defaultProps = {
+  background: 'red',
+}
+
 export default PageHeader

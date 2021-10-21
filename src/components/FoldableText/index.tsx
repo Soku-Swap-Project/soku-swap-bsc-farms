@@ -29,6 +29,10 @@ const FoldableText: React.FC<FoldableTextProps> = ({ title, children, ...props }
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(false)
 
+  FoldableText.defaultProps = {
+    title: 'Foldable Text',
+  }
+
   return (
     <Wrapper {...props} flexDirection="column" onClick={() => setIsExpanded(!isExpanded)}>
       <Flex justifyContent="space-between" alignItems="center" pb="16px">
