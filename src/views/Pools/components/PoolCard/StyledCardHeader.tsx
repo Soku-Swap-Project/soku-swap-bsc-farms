@@ -28,7 +28,7 @@ const StyledCardHeader: React.FC<{
   const { t } = useTranslation()
   const poolImageSrc = isAutoVault
     ? `cake-cakevault.svg`
-    : `https://i.ibb.co/sm60Zb7/Soku-Logo-400x400.png`.toLocaleLowerCase()
+    : `${earningTokenSymbol}-${stakingTokenSymbol}.svg`.toLocaleLowerCase()
   const isSokuPool = earningTokenSymbol === 'SOKU' && stakingTokenSymbol === 'SOKU'
   const background = isStaking ? 'bubblegum' : 'cardHeader'
 
@@ -69,7 +69,7 @@ const StyledCardHeader: React.FC<{
           </Heading>
           <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{getSubHeading()}</Text>
         </Flex>
-        <Image src={`/images/pools/${poolImageSrc}`} alt={earningTokenSymbol} width={64} height={64} />
+        <Image src="https://i.ibb.co/sm60Zb7/Soku-Logo-400x400.png" alt={earningTokenSymbol} width={64} height={64} />
       </Flex>
     </Wrapper>
   )
