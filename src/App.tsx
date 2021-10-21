@@ -17,6 +17,7 @@ import Pools from './views/Pools'
 import history from './routerHistory'
 import AccountModal from './components/AccountModal'
 import ClaimSokuModal from './components/ClaimSokuModal'
+import SlideOutMenu from './components/SlideOutMenu/SlideOutMenu'
 
 import './MobileFooter.css'
 
@@ -61,11 +62,13 @@ const App: React.FC = () => {
     }
   }
 
+  const isMobile = window.innerWidth <= 500
+
   return (
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      <Menu />
+      {isMobile ? <SlideOutMenu /> : <Menu />}
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
           <Route exact path="/bsc/farms" component={Farms} />

@@ -62,13 +62,12 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           ) : (
             <>
               {hasEarnings ? (
-                <Balance bold fontSize="20px" decimals={5} value={earningTokenBalance} />
+                <Balance bold fontSize="20px" decimals={3} value={earningTokenBalance} />
               ) : (
                 <Heading color="textDisabled">0</Heading>
               )}
               {earningTokenPriceAsNumber && (
                 <Text fontSize="12px" color={hasEarnings ? 'textSubtle' : 'textDisabled'}>
-                  ~
                   {hasEarnings ? (
                     <Balance
                       display="inline"
