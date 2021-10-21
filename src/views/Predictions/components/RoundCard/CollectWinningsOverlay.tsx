@@ -6,6 +6,7 @@ import { useBetCanClaim } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import CollectWinningsButton from '../CollectWinningsButton'
 
+/* eslint-disable react/require-default-props */
 interface CollectWinningsOverlayProps {
   roundId: string
   epoch: number

@@ -15,6 +15,7 @@ import CardHeader from './CardHeader'
 import CanceledRoundCard from './CanceledRoundCard'
 import CalculatingCard from './CalculatingCard'
 
+/* eslint-disable react/require-default-props */
 interface LiveRoundCardProps {
   round: Round
   betAmount?: number

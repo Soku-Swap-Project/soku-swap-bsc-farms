@@ -11,6 +11,7 @@ import { Pool } from 'state/types'
 import { BASE_EXCHANGE_URL } from 'config'
 import BigNumber from 'bignumber.js'
 
+/* eslint-disable react/require-default-props */
 interface AprRowProps {
   pool: Pool
   isAutoVault?: boolean

@@ -9,6 +9,7 @@ const Wrapper = styled(CardHeader)<{ isFinished?: boolean; background?: string; 
     isPromotedPool ? '31px 31px 0 0' : `${theme.radii.card} ${theme.radii.card} 0 0`};
 `
 
+/* eslint-disable react/require-default-props */
 const StyledCardHeader: React.FC<{
   earningTokenSymbol: string
   stakingTokenSymbol: string

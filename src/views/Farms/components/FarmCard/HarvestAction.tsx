@@ -8,6 +8,7 @@ import { useWeb3React } from '@web3-react/core'
 import { usePriceCakeBusd } from 'state/hooks'
 import CardBusdValue from '../../../Home/components/CardBusdValue'
 
+/* eslint-disable react/require-default-props */
 interface FarmCardActionsProps {
   earnings?: BigNumber
   pid?: number

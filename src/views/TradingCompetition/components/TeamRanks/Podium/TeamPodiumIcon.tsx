@@ -27,6 +27,7 @@ const Wrapper = styled(Flex)<{ imageSize?: number }>`
   }
 `
 
+/* eslint-disable react/require-default-props */
 interface PodiumIconProps {
   teamId?: number
   teamPosition?: number

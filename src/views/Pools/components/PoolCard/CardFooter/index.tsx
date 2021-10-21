@@ -7,6 +7,9 @@ import { Pool } from 'state/types'
 import { CompoundingPoolTag, ManualPoolTag } from 'components/Tags'
 import ExpandedFooter from './ExpandedFooter'
 
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
+
 interface FooterProps {
   pool: Pool
   account: string

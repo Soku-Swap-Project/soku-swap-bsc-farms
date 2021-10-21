@@ -69,6 +69,8 @@ const ExpandingWrapper = styled.div<{ expanded: boolean }>`
   overflow: hidden;
 `
 
+/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/require-default-props */
 interface FarmCardProps {
   farm: FarmWithStakedValue
   removed: boolean
@@ -103,6 +105,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
   const addLiquidityUrl = `${BASE_ADD_LIQUIDITY_URL}/${liquidityUrlPathParts}`
   const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
   const isPromotedFarm = farm.token.symbol === 'SOKU'
+  const provider = ''
 
   return (
     <FCard isPromotedFarm={isPromotedFarm}>
@@ -133,7 +136,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
         <Text>{t('Earn')}:</Text>
         <Text bold>{earnLabel}</Text>
       </Flex> */}
-      <CardActionsContainer farm={farm} account={account} addLiquidityUrl={addLiquidityUrl} />
+      <CardActionsContainer farm={farm} account={account} addLiquidityUrl={addLiquidityUrl} provider={provider} />
       <Divider />
       <ExpandableSectionButton
         onClick={() => setShowExpandableSection(!showExpandableSection)}

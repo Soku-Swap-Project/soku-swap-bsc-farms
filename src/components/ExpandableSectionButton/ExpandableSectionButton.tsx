@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { ChevronDownIcon, ChevronUpIcon, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 
+/* eslint-disable react/default-props-match-prop-types */
 export interface ExpandableSectionButtonProps {
   onClick?: () => void
   expanded?: boolean
@@ -21,6 +22,10 @@ const Wrapper = styled.div`
 
 const ExpandableSectionButton: React.FC<ExpandableSectionButtonProps> = ({ onClick, expanded }) => {
   const { t } = useTranslation()
+
+  ExpandableSectionButton.defaultProps = {
+    expanded: true,
+  }
 
   return (
     <Wrapper aria-label={t('Hide or show expandable content')} role="button" onClick={() => onClick()}>

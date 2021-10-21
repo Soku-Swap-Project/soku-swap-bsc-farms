@@ -13,6 +13,7 @@ const ContentContainer = styled.div`
   align-items: center;
 `
 
+/* eslint-disable react/require-default-props */
 interface CellLayoutProps {
   label?: string
 }

@@ -11,6 +11,8 @@ import { REGISTER_COST } from '../ProfileCreation/config'
 import ApproveConfirmButtons from './ApproveConfirmButtons'
 import { State } from '../ProfileCreation/contexts/types'
 
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 interface Props {
   userName: string
   selectedNft: State['selectedNft']

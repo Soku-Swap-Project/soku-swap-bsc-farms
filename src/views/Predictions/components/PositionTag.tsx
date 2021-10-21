@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { ArrowUpIcon, ArrowDownIcon, Flex, FlexProps, Text } from '@pancakeswap/uikit'
 import { BetPosition } from 'state/types'
 
+/* eslint-disable react/require-default-props */
 interface TagProps extends FlexProps {
   bg?: string
   startIcon?: ReactNode

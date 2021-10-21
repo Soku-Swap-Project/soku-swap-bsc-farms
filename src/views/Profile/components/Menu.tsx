@@ -3,6 +3,7 @@ import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import { ChevronLeftIcon, Flex, Text, ButtonMenu, ButtonMenuItem } from '@pancakeswap/uikit'
 
+/* eslint-disable react/require-default-props */
 interface MenuProps {
   activeIndex?: number
 }

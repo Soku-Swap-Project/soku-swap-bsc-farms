@@ -4,6 +4,7 @@ import { CheckmarkCircleIcon, Tag, useTooltip } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { formatBnb } from '../../helpers'
 
+/* eslint-disable react/require-default-props */
 interface EnteredTagProps {
   amount?: number
 }

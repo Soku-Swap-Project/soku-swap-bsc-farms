@@ -13,6 +13,7 @@ import CardHeader from './CardHeader'
 import CollectWinningsOverlay from './CollectWinningsOverlay'
 import CanceledRoundCard from './CanceledRoundCard'
 
+/* eslint-disable react/require-default-props */
 interface ExpiredRoundCardProps {
   round: Round
   betAmount?: number

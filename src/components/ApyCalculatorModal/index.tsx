@@ -74,6 +74,14 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
     performanceFee,
   })
 
+  ApyCalculatorModal.defaultProps = {
+    onDismiss,
+    earningTokenSymbol: 'SOKU',
+    roundingDecimals: 2,
+    compoundFrequency: 1,
+    performanceFee: 0,
+  }
+
   return (
     <Modal title={t('ROI')} onDismiss={onDismiss}>
       <Grid>

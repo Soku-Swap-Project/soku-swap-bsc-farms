@@ -4,6 +4,8 @@ import styled, { DefaultTheme } from 'styled-components'
 
 type Status = 'expired' | 'live' | 'next' | 'soon' | 'canceled' | 'calculating'
 
+/* eslint-disable react/require-default-props */
+/* eslint-disable react/no-unused-prop-types */
 interface CardHeaderProps {
   status: Status
   title: string

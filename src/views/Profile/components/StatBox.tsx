@@ -2,6 +2,7 @@ import React, { ElementType, ReactNode } from 'react'
 import { Flex, Heading, Text, TextProps } from '@pancakeswap/uikit'
 import SecondaryCard from './SecondaryCard'
 
+/* eslint-disable react/require-default-props */
 interface StatBoxProps extends TextProps {
   icon: ElementType
   title: ReactNode

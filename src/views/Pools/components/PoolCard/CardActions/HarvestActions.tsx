@@ -8,6 +8,7 @@ import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/h
 import Balance from 'components/Balance'
 import CollectModal from '../Modals/CollectModal'
 
+/* eslint-disable react/require-default-props */
 interface HarvestActionsProps {
   earnings: BigNumber
   earningToken: Token

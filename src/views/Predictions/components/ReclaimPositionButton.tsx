@@ -5,6 +5,7 @@ import { useTranslation } from 'contexts/Localization'
 import { usePredictionsContract } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
 
+/* eslint-disable react/require-default-props */
 interface ReclaimPositionButtonProps extends ButtonProps {
   epoch: number
   onSuccess?: () => Promise<void>

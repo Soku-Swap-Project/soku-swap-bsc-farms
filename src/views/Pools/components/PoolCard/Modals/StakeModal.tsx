@@ -14,6 +14,7 @@ import Slider from 'components/Slider'
 
 import PercentageButton from './PercentageButton'
 
+/* eslint-disable react/require-default-props */
 interface StakeModalProps {
   isBnbPool: boolean
   pool: Pool

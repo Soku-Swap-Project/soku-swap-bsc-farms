@@ -5,6 +5,7 @@ import { Modal, Text, Button, OpenNewIcon, Link } from '@pancakeswap/uikit'
 import { BASE_EXCHANGE_URL } from 'config'
 import useTheme from 'hooks/useTheme'
 
+/* eslint-disable react/require-default-props */
 interface NotEnoughTokensModalProps {
   tokenSymbol: string
   onDismiss?: () => void

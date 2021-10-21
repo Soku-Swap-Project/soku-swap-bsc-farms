@@ -18,6 +18,7 @@ import { useSousStake } from 'hooks/useStake'
 import useToast from 'hooks/useToast'
 import { Token } from 'config/constants/types'
 
+/* eslint-disable react/require-default-props */
 interface CollectModalProps {
   formattedBalance: string
   fullBalance: string

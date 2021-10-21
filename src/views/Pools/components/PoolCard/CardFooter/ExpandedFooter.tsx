@@ -21,6 +21,7 @@ import { getAddress, getCakeVaultAddress } from 'utils/addressHelpers'
 import { registerToken } from 'utils/wallet'
 import Balance from 'components/Balance'
 
+/* eslint-disable react/require-default-props */
 interface ExpandedFooterProps {
   pool: Pool
   account: string

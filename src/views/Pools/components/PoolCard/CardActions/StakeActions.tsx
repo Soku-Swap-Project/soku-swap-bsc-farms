@@ -9,6 +9,7 @@ import Balance from 'components/Balance'
 import NotEnoughTokensModal from '../Modals/NotEnoughTokensModal'
 import StakeModal from '../Modals/StakeModal'
 
+/* eslint-disable react/require-default-props */
 interface StakeActionsProps {
   pool: Pool
   stakingTokenBalance: BigNumber

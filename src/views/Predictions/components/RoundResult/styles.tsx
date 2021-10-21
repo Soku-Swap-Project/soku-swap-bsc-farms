@@ -6,6 +6,7 @@ import { useTranslation } from 'contexts/Localization'
 import { BetPosition, Round } from 'state/types'
 
 // PrizePoolRow
+/* eslint-disable react/require-default-props */
 interface PrizePoolRowProps extends FlexProps {
   totalAmount: Round['totalAmount']
 }

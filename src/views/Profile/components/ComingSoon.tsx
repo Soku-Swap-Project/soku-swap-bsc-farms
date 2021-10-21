@@ -2,6 +2,7 @@ import React from 'react'
 import { BunnyPlaceholderIcon, Flex, Heading } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 
+/* eslint-disable react/require-default-props */
 interface ComingSoonProps {
   children?: React.ReactNode
 }

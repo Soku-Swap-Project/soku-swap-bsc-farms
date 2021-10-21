@@ -25,6 +25,7 @@ import useToast from 'hooks/useToast'
 import { usePredictionsContract } from 'hooks/useContract'
 import { formatBnb } from '../helpers'
 
+/* eslint-disable react/require-default-props */
 interface CollectRoundWinningsModalProps extends InjectedModalProps {
   payout: number
   roundId: string

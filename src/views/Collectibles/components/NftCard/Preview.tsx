@@ -35,6 +35,10 @@ const Preview: React.FC<PreviewProps> = ({ nft, isOwned = false }) => {
   const { images, name, video } = nft
   const previewImageSrc = `/images/nfts/${images.lg}`
 
+  Preview.defaultProps = {
+    isOwned: false,
+  }
+
   if (video) {
     const videoComponent = (
       <StyledVideo autoPlay controls={false} loop muted poster={previewImageSrc}>
