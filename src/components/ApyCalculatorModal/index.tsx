@@ -4,6 +4,7 @@ import { Modal, Text, LinkExternal, Flex, Box } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
 
+/* eslint-disable react/require-default-props */
 interface ApyCalculatorModalProps {
   onDismiss?: () => void
   tokenPrice: number
@@ -33,7 +34,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   apr,
   linkLabel,
   linkHref,
-  earningTokenSymbol = 'CAKE',
+  earningTokenSymbol = 'SOKU',
   roundingDecimals = 2,
   compoundFrequency = 1,
   performanceFee = 0,
@@ -73,14 +74,6 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
     compoundFrequency,
     performanceFee,
   })
-
-  ApyCalculatorModal.defaultProps = {
-    onDismiss,
-    earningTokenSymbol: 'SOKU',
-    roundingDecimals: 2,
-    compoundFrequency: 1,
-    performanceFee: 0,
-  }
 
   return (
     <Modal title={t('ROI')} onDismiss={onDismiss}>

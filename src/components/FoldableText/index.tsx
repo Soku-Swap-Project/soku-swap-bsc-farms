@@ -3,6 +3,8 @@ import styled from 'styled-components'
 import { ExpandableLabel, Flex, FlexProps, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 
+/* eslint-disable react/require-default-props */
+
 interface FoldableTextProps extends FlexProps {
   title?: string
 }
@@ -28,10 +30,6 @@ const StyledChildrenFlex = styled(Flex)<{ isExpanded?: boolean }>`
 const FoldableText: React.FC<FoldableTextProps> = ({ title, children, ...props }) => {
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(false)
-
-  FoldableText.defaultProps = {
-    title: 'Foldable Text',
-  }
 
   return (
     <Wrapper {...props} flexDirection="column" onClick={() => setIsExpanded(!isExpanded)}>

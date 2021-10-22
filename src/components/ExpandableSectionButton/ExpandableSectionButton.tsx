@@ -4,6 +4,8 @@ import { ChevronDownIcon, ChevronUpIcon, Text } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 
 /* eslint-disable react/default-props-match-prop-types */
+/* eslint-disable react/require-default-props */
+
 export interface ExpandableSectionButtonProps {
   onClick?: () => void
   expanded?: boolean
@@ -23,10 +25,6 @@ const Wrapper = styled.div`
 const ExpandableSectionButton: React.FC<ExpandableSectionButtonProps> = ({ onClick, expanded }) => {
   const { t } = useTranslation()
 
-  ExpandableSectionButton.defaultProps = {
-    expanded: true,
-  }
-
   return (
     <Wrapper aria-label={t('Hide or show expandable content')} role="button" onClick={() => onClick()}>
       <Text color="primary" bold>
@@ -35,10 +33,6 @@ const ExpandableSectionButton: React.FC<ExpandableSectionButtonProps> = ({ onCli
       {expanded ? <ChevronUpIcon /> : <ChevronDownIcon />}
     </Wrapper>
   )
-}
-
-ExpandableSectionButton.defaultProps = {
-  expanded: false,
 }
 
 export default ExpandableSectionButton
