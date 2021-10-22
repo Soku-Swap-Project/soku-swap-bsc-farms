@@ -45,12 +45,12 @@ const pools: PoolConfig[] = [
     isFinished: false,
   },
   {
-    sousId: 6,
+    sousId: 7,
     stakingToken: tokens.soku,
     earningToken: tokens.tmu2,
     contractAddress: {
       97: '',
-      56: '0xe60A14182C3121Dd1D12fa54733B7EB75d2A0ff8',
+      56: '0x4B6022D70724cc5542C171B6F77BD4C0AE019F23',
     },
     poolCategory: PoolCategory.CORE,
     harvest: true,

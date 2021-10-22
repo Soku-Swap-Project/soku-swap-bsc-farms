@@ -64,6 +64,11 @@ getTasteNFTPrice()
 getEarnablePrice()
 getTasteYUMMYPrice()
 
+export const bnbPrice = () => {
+  const price = useTokenPrice('binance-coin')
+  return price
+}
+
 // Thunks
 export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async () => {
   const response = await fetch('https://api.pancakeswap.info/api/v2/tokens')

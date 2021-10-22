@@ -25,7 +25,7 @@ import { State, Farm, Pool, ProfileState, TeamsState, AchievementState, PriceSta
 import { fetchProfile } from './profile'
 import { fetchTeam, fetchTeams } from './teams'
 import { fetchAchievements } from './achievements'
-import { fetchPrices } from './prices'
+import { fetchPrices, bnbPrice } from './prices'
 import { fetchWalletNfts } from './collectibles'
 import { getCanClaim } from './predictions/helpers'
 import { transformPool } from './pools/helpers'
@@ -114,6 +114,7 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
 
   if (farm.quoteToken.symbol === 'wBNB') {
     // console.log('farm', farm.tokenPriceVsQuote)
+    // console.log('price', bnbPriceBusd.times(farm.tokenPriceVsQuote))
     return bnbPriceBusd.gt(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
@@ -137,13 +138,9 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   return BIG_ZERO
 }
 
-export const useBusdPriceFromToken = () => {
-  // const tokenFarmForPriceCalc = useFarmFromTokenSymbol(tokenSymbol)
-  // const tokenPrice = useTokenData('sokuswap')
-  const tokenPrice = 0.000000000000124
-
-  // console.log('token price', tokenPrice)
-
+export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
+  const tokenFarm = useFarmFromTokenSymbol(tokenSymbol)
+  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid)
   return tokenPrice
 }
 
@@ -379,7 +376,6 @@ export const useTokenPrice = (token: string) => {
   return tokenPrice
 }
 
-// useTokenData('sokuswap')
 export const useFetchPriceList = () => {
   const { slowRefresh } = useRefresh()
   const dispatch = useAppDispatch()
@@ -430,6 +426,18 @@ export const usePriceBnbSuteku = (): BigNumber => {
   const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
 
   const price = new BigNumber(sutekuPrice).div(100)
+  return price
+}
+
+export const usePriceBnbTMU2 = (): BigNumber => {
+  const tmuFarm = useFarmFromPid(7)
+  const bnbBusdFarm = useFarmFromPid(1)
+  const bnbPrice = useTokenPrice('wbnb')
+
+  const tmuPrice = tmuFarm.tokenPriceVsQuote ? tmuFarm?.tokenPriceVsQuote : BIG_ZERO
+
+  const price = new BigNumber(tmuPrice)
+  // console.log(tmuFarm, 'tmu2')
   return price
 }
 

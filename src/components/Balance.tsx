@@ -30,7 +30,7 @@ const Balance: React.FC<BalanceProps> = ({
   const showPrefix = Boolean(value && prefix)
   const showUnit = Boolean(value && unit)
 
-  console.log(unit)
+  // console.log(unit)
 
   return (
     <Text style={{ color: '#05195a' }} color={isDisabled ? 'textDisabled' : '#05195a'} {...props}>

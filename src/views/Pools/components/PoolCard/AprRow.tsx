@@ -4,7 +4,7 @@ import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getPoolApr } from 'utils/apr'
 import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
-import { useBusdPriceFromToken, usePriceBnbSuteku, useTokenPrice } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku, usePriceBnbTMU2 } from 'state/hooks'
 import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
 import { Pool } from 'state/types'
@@ -28,8 +28,8 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     : t('This pool’s rewards aren’t compounded automatically, so we show APR')
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
-
-  const earningTokenPrice = usePriceBnbSuteku()
+  const bnbPrice = useTokenPrice('wbnb')
+  const earningTokenPrice = usePriceBnbTMU2().multipliedBy(bnbPrice)
 
   const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
   // const earningTokenPriceAsNumber = earningTokenPrice.toNumber()

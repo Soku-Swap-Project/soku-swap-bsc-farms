@@ -73,8 +73,6 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
     return getBalanceNumber(totalStaked, stakingToken.decimals)
   }
 
-  console.log('balance', getTotalStakedBalance())
-
   return (
     <ExpandedWrapper flexDirection="column">
       <Flex mb="2px" justifyContent="space-between" alignItems="center">
