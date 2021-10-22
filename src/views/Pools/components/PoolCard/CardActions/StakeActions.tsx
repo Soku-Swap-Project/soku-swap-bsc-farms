@@ -81,7 +81,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
                   color="textSubtle"
                   decimals={2}
                   value={stakedTokenDollarBalance}
-                  prefix="~"
+                  // prefix="~"
                   unit=" USD"
                 />
               </Text>

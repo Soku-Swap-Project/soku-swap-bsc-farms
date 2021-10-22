@@ -16,14 +16,12 @@ const Inner = styled(Container)`
   justify-content: center;
 `
 
+/* eslint-disable react/require-default-props */
+
 const PageHeader: React.FC<{ background?: string }> = ({ background, children, ...props }) => (
   <Outer background={background} {...props}>
     <Inner>{children}</Inner>
   </Outer>
 )
-
-PageHeader.defaultProps = {
-  background: 'red',
-}
 
 export default PageHeader

@@ -69,7 +69,7 @@ const StyledCardHeader: React.FC<{
           </Heading>
           <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{getSubHeading()}</Text>
         </Flex>
-        <Image src={`/images/pools/${poolImageSrc}`} alt={earningTokenSymbol} width={64} height={64} />
+        <Image src="https://i.ibb.co/sm60Zb7/Soku-Logo-400x400.png" alt={earningTokenSymbol} width={64} height={64} />
       </Flex>
     </Wrapper>
   )

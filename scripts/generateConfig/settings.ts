@@ -1,6 +1,6 @@
 import { SettingsObject, SettingsType } from './types'
 
-const BASE_URL = 'https://pancake-config-api-chefkai.pancakeswap.vercel.app'
+const BASE_URL = 'farms.dev.sokuswap.finance'
 const settings: SettingsObject[] = [
   {
     name: 'ifos',
@@ -9,7 +9,7 @@ const settings: SettingsObject[] = [
   },
   {
     name: 'pools',
-    url: `${BASE_URL}/pools`,
+    url: `${BASE_URL}/staking`,
     type: SettingsType.POOL,
   },
   {

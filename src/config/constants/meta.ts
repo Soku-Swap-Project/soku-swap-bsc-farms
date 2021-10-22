@@ -7,9 +7,14 @@ export const DEFAULT_META: PageMeta = {
 
 export const getCustomMeta = (path: string, t: ContextApi['t']): PageMeta => {
   switch (path) {
-    case '/':
+    case '/farms':
       return {
         title: `${t('SokuSwap')} | ${t('BSC')} | Farms`,
+      }
+
+    case '/staking':
+      return {
+        title: `${t('SokuSwap')} | ${t('BSC')} | Pools`,
       }
     // case '/competition':
     //   return {

@@ -14,6 +14,7 @@ const GlobalStyle = createGlobalStyle`
 
   body {
     min-height: 100vh;
+    padding-bottom: 100px;    
     background: linear-gradient(250deg, #05195a 20%, #040f31);
 
 
@@ -62,9 +63,6 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
   color: rgb(5, 72, 156);
 }
 
- {
-    border: 1px solid red;
-  }
 
   #import-pool-link {
     color: #04bbfb;

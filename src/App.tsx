@@ -17,6 +17,7 @@ import Pools from './views/Pools'
 import history from './routerHistory'
 import AccountModal from './components/AccountModal'
 import ClaimSokuModal from './components/ClaimSokuModal'
+import SlideOutMenu from './components/SlideOutMenu/SlideOutMenu'
 
 import './MobileFooter.css'
 
@@ -33,7 +34,6 @@ const Team = lazy(() => import('./views/Teams/Team'))
 const Profile = lazy(() => import('./views/Profile'))
 const TradingCompetition = lazy(() => import('./views/TradingCompetition'))
 const Predictions = lazy(() => import('./views/Predictions'))
-const StakingPools = lazy(() => import('./views/Pools'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -62,15 +62,19 @@ const App: React.FC = () => {
     }
   }
 
+  const isMobile = window.innerWidth <= 500
+
   return (
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
+      {/* {isMobile ? <SlideOutMenu /> : <Menu />} */}
       <Menu />
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-          <Route exact path="/bsc/staking" component={StakingPools} />
           <Route exact path="/bsc/farms" component={Farms} />
+          <Route strict path="/bsc/staking" component={Pools} />
+
           {/* 404 */}
           <Route component={NotFound} />
         </Switch>

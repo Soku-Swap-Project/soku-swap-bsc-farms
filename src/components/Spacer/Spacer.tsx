@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import styled, { ThemeContext } from 'styled-components'
+/* eslint-disable react/require-default-props */
 
 interface SpacerProps {
   size?: 'sm' | 'md' | 'lg'
@@ -7,10 +8,6 @@ interface SpacerProps {
 
 const Spacer: React.FC<SpacerProps> = ({ size = 'md' }) => {
   const { spacing } = useContext(ThemeContext)
-
-  Spacer.defaultProps = {
-    size: 'sm',
-  }
 
   let s: number
   switch (size) {
@@ -36,9 +33,5 @@ const StyledSpacer = styled.div<StyledSpacerProps>`
   height: ${(props) => props.size}px;
   width: ${(props) => props.size}px;
 `
-
-StyledSpacer.defaultProps = {
-  size: 10,
-}
 
 export default Spacer

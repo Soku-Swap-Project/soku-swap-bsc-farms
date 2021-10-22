@@ -23,6 +23,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  tmu2: {
+    symbol: 'TMU2',
+    name: 'TestMoonU2',
+    address: {
+      56: '0x08dC1C3e9726AC449bab6Be63A62EdD77587C96a',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   earnable: {
     symbol: 'EARN',
     name: 'earnable',

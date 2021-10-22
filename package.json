@@ -29,6 +29,7 @@
   "dependencies": {
     "@ant-design/icons": "^4.6.2",
     "@binance-chain/bsc-connector": "^1.0.0",
+    "@emotion/css": "^11.5.0",
     "@emotion/react": "^11.4.1",
     "@emotion/styled": "^11.3.0",
     "@ethersproject/abi": "^5.1.2",
@@ -53,6 +54,7 @@
     "coingecko-api": "^1.0.10",
     "coingecko-api-v3": "0.0.12",
     "date-fns": "^2.21.3",
+    "emotion": "^11.0.0",
     "ethers": "^5.1.4",
     "graphql": "^15.5.0",
     "graphql-request": "^3.4.0",

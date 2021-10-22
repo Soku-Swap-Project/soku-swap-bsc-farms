@@ -4,6 +4,8 @@ import { Text, Button, Input, InputProps, Flex, Link } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
 
 /* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/require-default-props */
+
 interface ModalInputProps {
   max: string
   symbol: string
@@ -79,13 +81,6 @@ const ModalInput: React.FC<ModalInputProps> = ({
       return balanceNumber.toLocaleString(undefined, { maximumFractionDigits: 20 })
     }
     return balanceNumber.toLocaleString()
-  }
-
-  ModalInput.defaultProps = {
-    onSelectMax,
-    placeholder: 'Modal Input',
-    addLiquidityUrl: '',
-    inputTitle: '',
   }
 
   return (
