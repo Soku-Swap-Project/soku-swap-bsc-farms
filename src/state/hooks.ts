@@ -419,24 +419,25 @@ export const usePriceCakeBusd = (): BigNumber => {
   return cakeBusdPrice
 }
 
+// export const usePriceBnbSuteku = (): BigNumber => {
+//   const sutekuBnbFarm = useFarmFromPid(8)
+//   const bnbBusdPrice = usePriceBnbBusd()
+//   console.log('farm', sutekuBnbFarm)
+
+//   const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
+
+//   const price = new BigNumber(sutekuPrice).div(100)
+//   return price
+// }
+
 export const usePriceBnbSuteku = (): BigNumber => {
-  const sutekuBnbFarm = useFarmFromPid(6)
-  const bnbBusdPrice = usePriceBnbBusd()
+  const sutekuFarm = useFarmFromPid(8)
 
-  const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
+  // console.log('farm', sutekuFarm)
 
-  const price = new BigNumber(sutekuPrice).div(100)
-  return price
-}
+  const sutekuPrice = sutekuFarm.tokenPriceVsQuote ? sutekuFarm?.tokenPriceVsQuote : BIG_ZERO
 
-export const usePriceBnbTMU2 = (): BigNumber => {
-  const tmuFarm = useFarmFromPid(7)
-  const bnbBusdFarm = useFarmFromPid(1)
-  const bnbPrice = useTokenPrice('wbnb')
-
-  const tmuPrice = tmuFarm.tokenPriceVsQuote ? tmuFarm?.tokenPriceVsQuote : BIG_ZERO
-
-  const price = new BigNumber(tmuPrice)
+  const price = new BigNumber(sutekuPrice)
   // console.log(tmuFarm, 'tmu2')
   return price
 }

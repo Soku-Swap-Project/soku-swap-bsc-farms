@@ -67,24 +67,34 @@ const farms: FarmConfig[] = [
     token: tokens.soku,
     quoteToken: tokens.yummy,
   },
+  // {
+  //   pid: 6,
+  //   lpSymbol: 'SOKU-SUTEKU LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0x7a8b8b426c666a2fe3aa7e96F8De552EE6a0C176',
+  //   },
+  //   token: tokens.suteku,
+  //   quoteToken: tokens.soku,
+  // },
+  // {
+  //   pid: 7,
+  //   lpSymbol: 'TMU2-WBNB LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0x06b0e25d6a6578821cD2F471f55fa008f5Dc6591',
+  //   },
+  //   token: tokens.tmu2,
+  //   quoteToken: tokens.wbnb,
+  // },
   {
-    pid: 6,
-    lpSymbol: 'SOKU-SUTEKU LP',
+    pid: 8,
+    lpSymbol: 'SUTEKU-BNB LP',
     lpAddresses: {
       97: '',
-      56: '0x7a8b8b426c666a2fe3aa7e96F8De552EE6a0C176',
+      56: '0xd1545614312979bbeDfE5042166c86DD09b12cCd',
     },
     token: tokens.suteku,
-    quoteToken: tokens.soku,
-  },
-  {
-    pid: 7,
-    lpSymbol: 'TMU2-WBNB LP',
-    lpAddresses: {
-      97: '',
-      56: '0x06b0e25d6a6578821cD2F471f55fa008f5Dc6591',
-    },
-    token: tokens.tmu2,
     quoteToken: tokens.wbnb,
   },
   /**

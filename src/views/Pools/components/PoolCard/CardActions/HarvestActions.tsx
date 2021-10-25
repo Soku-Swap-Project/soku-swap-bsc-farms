@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { Token } from 'config/constants/types'
 import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, getBalanceNumber, formatNumber } from 'utils/formatBalance'
-import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku, usePriceBnbTMU2 } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/hooks'
 import Balance from 'components/Balance'
 import CollectModal from '../Modals/CollectModal'
 
@@ -31,7 +31,8 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   // const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
   const bnbPrice = useTokenPrice('wbnb')
   const bnbPriceBig = new BigNumber(bnbPrice)
-  const earningTokenPrice = usePriceBnbTMU2().multipliedBy(bnbPrice)
+  const earningTokenPrice = usePriceBnbSuteku().multipliedBy(bnbPrice)
+  console.log('price', earningTokenPrice)
   const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
   const earningTokenDollarBalance = getBalanceNumber(
     earnings.multipliedBy(earningTokenPriceAsNumber),
