@@ -79,7 +79,7 @@ const farms: FarmConfig[] = [
   },
   {
     pid: 7,
-    lpSymbol: 'WBNB-TMU2 LP',
+    lpSymbol: 'TMU2-WBNB LP',
     lpAddresses: {
       97: '',
       56: '0x06b0e25d6a6578821cD2F471f55fa008f5Dc6591',

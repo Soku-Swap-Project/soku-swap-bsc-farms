@@ -10,12 +10,16 @@ declare module 'styled-components' {
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Poppins', sans-serif;
+
   }
 
   body {
     min-height: 100vh;
     padding-bottom: 100px;    
     background: linear-gradient(250deg, #05195a 20%, #040f31);
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+
+
 
 
     img {
