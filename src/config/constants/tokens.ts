@@ -14,13 +14,13 @@ const tokens = {
     projectLink: 'https://sokuswap.finance/',
   },
   suteku: {
-    symbol: 'Suteku',
-    name: 'Suteku Token',
+    symbol: 'SUTEKU',
+    name: 'Suteku Rewards Token',
     address: {
-      56: '0x3b9D3B4B3F9eb154f5D3D397Aef7299370D32C9E',
+      56: '0x5d392Da8Bf151DBAC854ebF5149d3488b360bCf3',
       97: '',
     },
-    decimals: 18,
+    decimals: 9,
     projectLink: 'https://sokuswap.finance/',
   },
   tmu2: {

@@ -71,9 +71,9 @@ const Menu = (props) => {
               <NavLink className="nav_link" activeClassName="active" to="/bsc/farms">
                 <li>Farms</li>
               </NavLink>
-              {/* <NavLink className="nav_link" activeClassName="active" to="/bsc/staking">
+              <NavLink className="nav_link" activeClassName="active" to="/bsc/staking">
                 <li>Staking</li>
-              </NavLink> */}
+              </NavLink>
             </div>
           </ul>
           <ul className="connectWallet__options__DESKTOP">

@@ -10,8 +10,10 @@ declare module 'styled-components' {
 const GlobalStyle = createGlobalStyle`
   * {
     font-family: 'Poppins', sans-serif;
+
   }
 
+ 
   body {
     min-height: 100vh;
     padding-bottom: 100px;    
@@ -23,6 +25,7 @@ const GlobalStyle = createGlobalStyle`
       max-width: 100%;
     }
   }
+
 
   svg[color="primary"] {
     color: #04bbfb;

@@ -25,7 +25,7 @@ import { State, Farm, Pool, ProfileState, TeamsState, AchievementState, PriceSta
 import { fetchProfile } from './profile'
 import { fetchTeam, fetchTeams } from './teams'
 import { fetchAchievements } from './achievements'
-import { fetchPrices } from './prices'
+import { fetchPrices, bnbPrice } from './prices'
 import { fetchWalletNfts } from './collectibles'
 import { getCanClaim } from './predictions/helpers'
 import { transformPool } from './pools/helpers'
@@ -114,6 +114,7 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
 
   if (farm.quoteToken.symbol === 'wBNB') {
     // console.log('farm', farm.tokenPriceVsQuote)
+    // console.log('price', bnbPriceBusd.times(farm.tokenPriceVsQuote))
     return bnbPriceBusd.gt(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
@@ -137,13 +138,9 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   return BIG_ZERO
 }
 
-export const useBusdPriceFromToken = () => {
-  // const tokenFarmForPriceCalc = useFarmFromTokenSymbol(tokenSymbol)
-  // const tokenPrice = useTokenData('sokuswap')
-  const tokenPrice = 0.000000000000124
-
-  // console.log('token price', tokenPrice)
-
+export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
+  const tokenFarm = useFarmFromTokenSymbol(tokenSymbol)
+  const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid)
   return tokenPrice
 }
 
@@ -379,7 +376,6 @@ export const useTokenPrice = (token: string) => {
   return tokenPrice
 }
 
-// useTokenData('sokuswap')
 export const useFetchPriceList = () => {
   const { slowRefresh } = useRefresh()
   const dispatch = useAppDispatch()
@@ -414,6 +410,7 @@ export const usePriceBnbBusd = (): BigNumber => {
 export const usePriceCakeBusd = (): BigNumber => {
   const cakeBnbFarm = useFarmFromPid(2)
   const bnbBusdPrice = usePriceBnbBusd()
+
   // console.log(cakeBnbFarm)
 
   // const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : BIG_ZERO
@@ -423,13 +420,26 @@ export const usePriceCakeBusd = (): BigNumber => {
   return cakeBusdPrice
 }
 
+// export const usePriceBnbSuteku = (): BigNumber => {
+//   const sutekuBnbFarm = useFarmFromPid(8)
+//   const bnbBusdPrice = usePriceBnbBusd()
+//   console.log('farm', sutekuBnbFarm)
+
+//   const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
+
+//   const price = new BigNumber(sutekuPrice).div(100)
+//   return price
+// }
+
 export const usePriceBnbSuteku = (): BigNumber => {
-  const sutekuBnbFarm = useFarmFromPid(6)
-  const bnbBusdPrice = usePriceBnbBusd()
+  const sutekuFarm = useFarmFromPid(8)
 
-  const sutekuPrice = sutekuBnbFarm.tokenPriceVsQuote ? sutekuBnbFarm?.tokenPriceVsQuote : BIG_ZERO
+  // console.log('farm', sutekuFarm)
 
-  const price = new BigNumber(sutekuPrice).div(100)
+  const sutekuPrice = sutekuFarm.tokenPriceVsQuote ? sutekuFarm?.tokenPriceVsQuote : BIG_ZERO
+
+  const price = new BigNumber(sutekuPrice)
+  // console.log(tmuFarm, 'tmu2')
   return price
 }
 

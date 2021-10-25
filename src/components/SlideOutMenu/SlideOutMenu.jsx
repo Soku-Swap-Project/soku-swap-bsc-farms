@@ -73,7 +73,7 @@ const menuOverlay = css`
   }
 
   @media (max-width: 800px) {
-    width: 70vw;
+    width: 55vw;
   }
 `
 

@@ -4,7 +4,7 @@ import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getPoolApr } from 'utils/apr'
 import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
-import { useBusdPriceFromToken, usePriceBnbSuteku, useTokenPrice } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/hooks'
 import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
 import { Pool } from 'state/types'
@@ -28,9 +28,8 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     : t('This pool’s rewards aren’t compounded automatically, so we show APR')
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
-
-  const earningTokenPrice = usePriceBnbSuteku()
-
+  const bnbPrice = useTokenPrice('wbnb')
+  const earningTokenPrice = usePriceBnbSuteku().multipliedBy(bnbPrice)
   const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
   // const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 
@@ -39,12 +38,13 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   // const stakingTokenPriceAsNumber = stakingTokenPrice && stakingTokenPrice.toNumber()
   const stakingTokenPriceAsNumber = stakingTokenPrice
 
-  const apr = getPoolApr(
-    stakingTokenPrice,
-    earningTokenPriceAsNumber,
-    getBalanceNumber(totalStaked, stakingToken.decimals),
-    parseFloat(tokenPerBlock),
-  )
+  const apr =
+    getPoolApr(
+      stakingTokenPrice,
+      earningTokenPriceAsNumber,
+      getBalanceNumber(totalStaked, stakingToken.decimals),
+      parseFloat(tokenPerBlock),
+    ) * 0.75
 
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
   const isHighValueToken = Math.round(earningTokenPriceAsNumber / 1000) > 0

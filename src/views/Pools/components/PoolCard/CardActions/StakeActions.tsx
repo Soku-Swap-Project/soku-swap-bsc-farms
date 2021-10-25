@@ -32,6 +32,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
   const stakingTokenPrice = useTokenPrice('sokuswap')
+  // console.log(stakingTokenPrice)
 
   // const stakingTokenPriceAsNumber = stakingTokenPrice ? stakingTokenPrice.toNumber() : 0
   const stakingTokenPriceAsNumber = stakingTokenPrice
