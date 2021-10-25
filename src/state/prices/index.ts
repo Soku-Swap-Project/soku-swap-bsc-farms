@@ -17,7 +17,7 @@ const CoinGecko = require('coingecko-api')
 const CoinGeckoClient = new CoinGecko()
 
 let earnable_price
-let tastenft_price
+let soku_price
 let yummy_price
 
 //3. Make calls
@@ -34,19 +34,6 @@ const getEarnablePrice = async () => {
   earnable_price = formatted_price
 }
 
-const getTasteNFTPrice = async () => {
-  const res = await CoinGeckoClient.coins.fetch('tastenft')
-  // console.log(res)
-  const data = await res.data
-  const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
-  // console.log(earn_price)
-  const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
-    minimumSignificantDigits: 3,
-  })
-
-  tastenft_price = formatted_price
-}
-
 const getTasteYUMMYPrice = async () => {
   const res = await CoinGeckoClient.coins.fetch('yummy')
   // console.log(res)
@@ -60,9 +47,23 @@ const getTasteYUMMYPrice = async () => {
   yummy_price = formatted_price
 }
 
-getTasteNFTPrice()
+const getSokuPrice = async () => {
+  const res = await CoinGeckoClient.coins.fetch('sokuswap')
+  // console.log(res)
+  const data = await res.data
+  const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
+  // console.log(earn_price)
+  const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
+    minimumSignificantDigits: 3,
+  })
+
+  soku_price = formatted_price
+}
+
+// getTasteNFTPrice()
 getEarnablePrice()
 getTasteYUMMYPrice()
+getSokuPrice()
 
 export const bnbPrice = () => {
   const price = useTokenPrice('binance-coin')
@@ -82,6 +83,15 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
       symbol: 'EARN',
       price: earnable_price,
       price_BNB: earnable_price,
+    },
+  }
+
+  const soku = {
+    '0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53': {
+      name: 'Soku',
+      symbol: 'SOKU',
+      price: soku_price,
+      price_BNB: soku_price,
     },
   }
 
@@ -106,7 +116,7 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
   // console.log('yummy', yummy_price)
 
   Object.assign(data.data, earn)
-  // Object.assign(data.data, tastenft)
+  Object.assign(data.data, soku)
   Object.assign(data.data, yummy)
 
   // console.log(data.data)

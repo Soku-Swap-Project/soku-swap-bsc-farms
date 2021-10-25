@@ -30,7 +30,6 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
   const bnbPrice = useTokenPrice('wbnb')
   const earningTokenPrice = usePriceBnbSuteku().multipliedBy(bnbPrice)
-
   const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
   // const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 
@@ -39,12 +38,13 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   // const stakingTokenPriceAsNumber = stakingTokenPrice && stakingTokenPrice.toNumber()
   const stakingTokenPriceAsNumber = stakingTokenPrice
 
-  const apr = getPoolApr(
-    stakingTokenPrice,
-    earningTokenPriceAsNumber,
-    getBalanceNumber(totalStaked, stakingToken.decimals),
-    parseFloat(tokenPerBlock),
-  )
+  const apr =
+    getPoolApr(
+      stakingTokenPrice,
+      earningTokenPriceAsNumber,
+      getBalanceNumber(totalStaked, stakingToken.decimals),
+      parseFloat(tokenPerBlock),
+    ) * 0.75
 
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
   const isHighValueToken = Math.round(earningTokenPriceAsNumber / 1000) > 0
