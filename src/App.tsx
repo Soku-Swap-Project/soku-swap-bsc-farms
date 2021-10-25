@@ -68,8 +68,8 @@ const App: React.FC = () => {
     <Router history={history}>
       <ResetCSS />
       <GlobalStyle />
-      {/* {isMobile ? <SlideOutMenu /> : <Menu />} */}
-      <Menu />
+      {isMobile ? <SlideOutMenu /> : <Menu />}
+      {/* <Menu /> */}
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
           <Route exact path="/bsc/farms" component={Farms} />
