@@ -13,11 +13,19 @@ const GlobalStyle = createGlobalStyle`
 
   }
 
+  html {
+      overflow: scroll;
+      overflow-x: hidden;
+  }
+  ::-webkit-scrollbar {
+      width: 0;  /* Remove scrollbar space */
+      background: transparent;  /* Optional: just make scrollbar invisible */
+  }
+
   body {
     min-height: 100vh;
     padding-bottom: 100px;    
     background: linear-gradient(250deg, #05195a 20%, #040f31);
-    overflow-x: hidden; /* Hide horizontal scrollbar */
 
 
 
