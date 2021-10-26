@@ -31,10 +31,11 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   // const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
   const bnbPrice = useTokenPrice('wbnb')
   const bnbPriceBig = new BigNumber(bnbPrice)
-  const earningTokenPrice = usePriceBnbSuteku().multipliedBy(bnbPrice)
+  const earningTokenPrice = usePriceBnbSuteku()
   // const earningTokenPrice = new BigNumber(1)
 
   const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
+  // console.log(earningTokenPriceAsNumber)
 
   const earningTokenDollarBalance = getBalanceNumber(
     earnings.multipliedBy(earningTokenPriceAsNumber),

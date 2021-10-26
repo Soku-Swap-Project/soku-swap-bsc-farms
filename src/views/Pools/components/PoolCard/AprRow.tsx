@@ -29,7 +29,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
   const bnbPrice = useTokenPrice('wbnb')
-  const earningTokenPrice = usePriceBnbSuteku().multipliedBy(bnbPrice)
+  const earningTokenPrice = usePriceBnbSuteku()
   const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
   // const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 

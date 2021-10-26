@@ -433,13 +433,14 @@ export const usePriceCakeBusd = (): BigNumber => {
 // }
 
 export const usePriceBnbSuteku = (): BigNumber => {
-  const sutekuFarm = useFarmFromPid(8)
+  const sutekuFarm = useFarmFromPid(11)
+  const soku_price = usePriceCakeBusd()
 
   // console.log('farm', sutekuFarm)
 
-  const sutekuPrice = sutekuFarm.tokenPriceVsQuote ? sutekuFarm?.tokenPriceVsQuote : BIG_ZERO
+  const sutekuPrice = sutekuFarm.tokenPriceVsQuote ? sutekuFarm.tokenPriceVsQuote : BIG_ZERO
 
-  const price = new BigNumber(sutekuPrice)
+  const price = new BigNumber(sutekuPrice).multipliedBy(soku_price)
   // console.log(tmuFarm, 'tmu2')
   return price
 }
