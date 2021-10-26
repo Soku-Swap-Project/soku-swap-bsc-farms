@@ -17,20 +17,20 @@ const tokens = {
     symbol: 'SUTEKU',
     name: 'Suteku Rewards Token',
     address: {
+      56: '0x198800aF50914004A9E9D19cA18C0b24587a50cf',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  suteku1: {
+    symbol: 'SUTEKU',
+    name: 'Suteku Rewards Token',
+    address: {
       56: '0x5d392Da8Bf151DBAC854ebF5149d3488b360bCf3',
       97: '',
     },
     decimals: 9,
-    projectLink: 'https://sokuswap.finance/',
-  },
-  tmu2: {
-    symbol: 'TMU2',
-    name: 'TestMoonU2',
-    address: {
-      56: '0x08dC1C3e9726AC449bab6Be63A62EdD77587C96a',
-      97: '',
-    },
-    decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
   earnable: {

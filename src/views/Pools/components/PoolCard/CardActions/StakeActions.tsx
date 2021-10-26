@@ -74,7 +74,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
       <Flex justifyContent="space-between" alignItems="center">
         <Flex flexDirection="column">
           <>
-            <Balance bold fontSize="20px" decimals={3} value={stakedTokenBalance} />
+            <Balance bold fontSize="20px" decimals={4} value={stakedTokenBalance} />
             {stakingTokenPriceAsNumber !== 0 && (
               <Text fontSize="12px" color="textSubtle">
                 <Balance
