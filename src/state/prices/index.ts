@@ -60,13 +60,18 @@ const getSokuPrice = async () => {
   soku_price = formatted_price
 }
 
-// getTasteNFTPrice()
 getEarnablePrice()
 getTasteYUMMYPrice()
 getSokuPrice()
 
 export const bnbPrice = () => {
   const price = useTokenPrice('binance-coin')
+  return price
+}
+
+export const sokuPrice = () => {
+  const price = useTokenPrice('binance-coin')
+  console.log('price', price)
   return price
 }
 

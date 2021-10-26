@@ -109,6 +109,7 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
 
   if (farm.quoteToken.symbol === 'SOKU') {
     // console.log('farm', farm.tokenPriceVsQuote)
+
     return bnbPriceBusd.gt(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
