@@ -72,7 +72,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'SOKU-SUTEKU LP',
     lpAddresses: {
       97: '',
-      56: '0x1BcD5AA4EeCbfc6D048D553E8F385683D9DF6E15',
+      56: '0x9Cd57015Bc8656a5B80e802335A5Ce464a6569B0',
     },
     token: tokens.suteku,
     quoteToken: tokens.soku,
@@ -82,7 +82,7 @@ const farms: FarmConfig[] = [
     lpSymbol: 'SUTEKU-BNB LP',
     lpAddresses: {
       97: '',
-      56: '0x9Cd57015Bc8656a5B80e802335A5Ce464a6569B0',
+      56: '0x1BcD5AA4EeCbfc6D048D553E8F385683D9DF6E15',
     },
     token: tokens.suteku,
     quoteToken: tokens.wbnb,
