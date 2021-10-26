@@ -433,7 +433,7 @@ export const usePriceCakeBusd = (): BigNumber => {
 // }
 
 export const usePriceBnbSuteku = (): BigNumber => {
-  const sutekuFarm = useFarmFromPid(11)
+  const sutekuFarm = useFarmFromPid(8)
 
   // console.log('farm', sutekuFarm)
 
