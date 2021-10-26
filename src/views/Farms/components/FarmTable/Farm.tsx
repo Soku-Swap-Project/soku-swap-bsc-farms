@@ -12,12 +12,12 @@ export interface FarmProps {
 }
 
 const IconImage = styled(Image)`
-  width: 24px;
-  height: 24px;
+  width: 36px;
+  height: 36px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
-    width: 40px;
-    height: 40px;
+    width: 50px;
+    height: 50px;
   }
 `
 
@@ -55,12 +55,11 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
   return (
     <Container>
       <IconImage src={`/images/farms/${image}.png`} alt="icon" width={40} height={40} mr="8px" />
-
-      {/* /images/farms/${image}.svg */}
       <div>
         {handleRenderFarming()}
         <Text bold style={{ textTransform: 'uppercase' }}>
-          {image === 'soku-earn' ? 'soku-earn (Remove LP Before Oct. 12th 4PM EST)' : image}
+          {pid === 8 || pid === 9 ? `${image} (V1)` : image}
+
           {/* {image} */}
         </Text>
       </div>

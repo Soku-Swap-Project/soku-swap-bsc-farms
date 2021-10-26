@@ -70,7 +70,7 @@ export const bnbPrice = () => {
 }
 
 export const sokuPrice = () => {
-  const price = useTokenPrice('binance-coin')
+  const price = useTokenPrice('sokuswap')
   console.log('price', price)
   return price
 }

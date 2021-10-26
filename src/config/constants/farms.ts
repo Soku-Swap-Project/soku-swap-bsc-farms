@@ -68,23 +68,43 @@ const farms: FarmConfig[] = [
     quoteToken: tokens.yummy,
   },
   {
-    pid: 9,
+    pid: 11,
     lpSymbol: 'SOKU-SUTEKU LP',
     lpAddresses: {
       97: '',
-      56: '0x85820b2c92A6B70d6F0faED542c559A7e5a81D3D',
+      56: '0x1BcD5AA4EeCbfc6D048D553E8F385683D9DF6E15',
     },
     token: tokens.suteku,
     quoteToken: tokens.soku,
   },
   {
-    pid: 8,
+    pid: 10,
     lpSymbol: 'SUTEKU-BNB LP',
+    lpAddresses: {
+      97: '',
+      56: '0x9Cd57015Bc8656a5B80e802335A5Ce464a6569B0',
+    },
+    token: tokens.suteku,
+    quoteToken: tokens.wbnb,
+  },
+  {
+    pid: 9,
+    lpSymbol: 'SOKU-SUTEKU LP V1',
+    lpAddresses: {
+      97: '',
+      56: '0x85820b2c92A6B70d6F0faED542c559A7e5a81D3D',
+    },
+    token: tokens.suteku1,
+    quoteToken: tokens.soku,
+  },
+  {
+    pid: 8,
+    lpSymbol: 'SUTEKU-BNB LP V1',
     lpAddresses: {
       97: '',
       56: '0xd1545614312979bbeDfE5042166c86DD09b12cCd',
     },
-    token: tokens.suteku,
+    token: tokens.suteku1,
     quoteToken: tokens.wbnb,
   },
 

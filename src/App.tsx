@@ -1,6 +1,6 @@
 import React, { lazy } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Router, Redirect, Route, Switch } from 'react-router-dom'
+import { Router, Redirect, Route, Switch, useHistory } from 'react-router-dom'
 import { ResetCSS, useWalletModal } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
@@ -73,7 +73,7 @@ const App: React.FC = () => {
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
           <Route exact path="/bsc/farms" component={Farms} />
-          <Route strict path="/bsc/staking/" component={Pools} />
+          <Route strict path="/bsc/staking" component={Pools} />
 
           {/* 404 */}
           <Route component={NotFound} />
