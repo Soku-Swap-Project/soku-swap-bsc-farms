@@ -78,6 +78,12 @@ export const sokuPrice = () => {
 // Thunks
 export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async () => {
   const response = await fetch('https://api.pancakeswap.info/api/v2/tokens')
+  const coingecko = await fetch(
+    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&sparkline=false',
+  )
+
+  // console.log('coingecko', await coingecko.json())
+
   const data = (await response.json()) as PriceApiResponse
 
   // console.log(earnable_price)
