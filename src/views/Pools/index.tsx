@@ -98,7 +98,7 @@ const Pools: React.FC = () => {
           hasStakeInFinishedPools={hasStakeInFinishedPools}
         />
         <FlexLayout>
-          <Route exact path={`${path}/`}>
+          <Route path={`${path}/`}>
             <>
               {/* <CakeVaultCard pool={cakePoolData} showStakedOnly={stakedOnly} /> */}
               {stakedOnly
