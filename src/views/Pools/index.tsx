@@ -98,7 +98,7 @@ const Pools: React.FC = () => {
           hasStakeInFinishedPools={hasStakeInFinishedPools}
         />
         <FlexLayout>
-          <Route exact path={`${path}`}>
+          <Route exact path={`${path}/`}>
             <>
               {/* <CakeVaultCard pool={cakePoolData} showStakedOnly={stakedOnly} /> */}
               {stakedOnly
@@ -110,7 +110,7 @@ const Pools: React.FC = () => {
                     .map((pool) => <PoolCard key={pool.sousId} pool={pool} account={account} />)}
             </>
           </Route>
-          <Route path={`${path}/history`}>
+          <Route exact strict path={`${path}/history`}>
             {stakedOnly
               ? orderBy(stakedOnlyFinishedPools, ['sortOrder'])
                   .slice(0, numberOfPoolsVisible)

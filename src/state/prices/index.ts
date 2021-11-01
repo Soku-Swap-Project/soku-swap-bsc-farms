@@ -75,16 +75,17 @@ export const sokuPrice = () => {
   return price
 }
 
+export const getPrices = async () => {
+  const res = await CoinGeckoClient.coins.markets({ ids: ['bitcoin', 'sokuswap', 'binancecoin', 'tether'] })
+  const resArray = JSON.stringify(res.data)
+  console.log('test', resArray)
+}
+
 // Thunks
 export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async () => {
   const response = await fetch('https://api.pancakeswap.info/api/v2/tokens')
-  const coingecko = await fetch(
-    'https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=250&sparkline=false',
-  )
-
-  // console.log('coingecko', await coingecko.json())
-
   const data = (await response.json()) as PriceApiResponse
+  console.log('data', data.data)
 
   // console.log(earnable_price)
 
@@ -105,15 +106,6 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
       price_BNB: soku_price,
     },
   }
-
-  // const tastenft = {
-  //   '0xdb238123939637d65a03e4b2b485650b4f9d91cb': {
-  //     name: 'TasteNFT',
-  //     symbol: 'TASTE',
-  //     price: tastenft_price,
-  //     price_BNB: tastenft_price,
-  //   },
-  // }
 
   const yummy = {
     '0xB003C68917BaB76812797d1b8056822f48E2e4fe': {
