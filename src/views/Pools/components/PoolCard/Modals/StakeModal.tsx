@@ -143,14 +143,21 @@ const StakeModal: React.FC<StakeModalProps> = ({
         <Flex alignItems="center" minWidth="70px">
           {/* <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} /> */}
           {stakingToken.symbol === 'SOKU' ? (
-            <Image
+            <img
               src="https://i.ibb.co/sm60Zb7/Soku-Logo-400x400.png"
               width={24}
               height={24}
               alt={stakingToken.symbol}
+              style={{ objectFit: 'contain' }}
             />
           ) : (
-            <Image src="https://i.ibb.co/ZfBZpjN/Suteku-Logo.png" width={24} height={24} alt={stakingToken.symbol} />
+            <img
+              src="https://i.ibb.co/ZfBZpjN/Suteku-Logo.png"
+              width={24}
+              height={24}
+              alt={stakingToken.symbol}
+              style={{ objectFit: 'contain' }}
+            />
           )}
 
           <Text ml="4px" bold>
