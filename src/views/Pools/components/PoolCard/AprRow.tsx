@@ -28,19 +28,17 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     : t('This pool’s rewards aren’t compounded automatically, so we show APR')
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
-  const bnbPrice = useTokenPrice('wbnb')
-  const earningTokenPrice = usePriceBnbSuteku()
-  const earningTokenPriceAsNumber = earningTokenPrice && earningTokenPrice.toNumber()
-  // const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
+  const sokuPrice = useTokenPrice('sokuswap')
+  const sutekuPrice = usePriceBnbSuteku()
+  const earningTokenPrice = earningToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
+  const earningTokenPriceAsNumber = earningTokenPrice
 
-  const stakingTokenPrice = useTokenPrice('sokuswap')
-
-  // const stakingTokenPriceAsNumber = stakingTokenPrice && stakingTokenPrice.toNumber()
+  const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
   const stakingTokenPriceAsNumber = stakingTokenPrice
 
   const apr =
     getPoolApr(
-      stakingTokenPrice,
+      stakingTokenPriceAsNumber,
       earningTokenPriceAsNumber,
       getBalanceNumber(totalStaked, stakingToken.decimals),
       parseFloat(tokenPerBlock),

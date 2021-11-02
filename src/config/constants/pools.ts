@@ -58,6 +58,34 @@ const pools: PoolConfig[] = [
     sortOrder: 999,
     isFinished: false,
   },
+  // {
+  //   sousId: 21,
+  //   stakingToken: tokens.soku,
+  //   earningToken: tokens.suteku,
+  //   contractAddress: {
+  //     97: '',
+  //     56: '',
+  //   },
+  //   poolCategory: PoolCategory.CORE,
+  //   harvest: true,
+  //   tokenPerBlock: '0.2',
+  //   sortOrder: 999,
+  //   isFinished: false,
+  // },
+  // {
+  //   sousId: 20,
+  //   stakingToken: tokens.suteku,
+  //   earningToken: tokens.soku,
+  //   contractAddress: {
+  //     97: '',
+  //     56: '',
+  //   },
+  //   poolCategory: PoolCategory.CORE,
+  //   harvest: true,
+  //   tokenPerBlock: '4',
+  //   sortOrder: 999,
+  //   isFinished: false,
+  // },
   {
     sousId: 19,
     stakingToken: tokens.suteku,
@@ -72,6 +100,7 @@ const pools: PoolConfig[] = [
     sortOrder: 999,
     isFinished: false,
   },
+
   {
     sousId: 11,
     stakingToken: tokens.soku,
