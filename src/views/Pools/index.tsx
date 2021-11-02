@@ -110,7 +110,7 @@ const Pools: React.FC = () => {
                     .map((pool) => <PoolCard key={pool.sousId} pool={pool} account={account} />)}
             </>
           </Route>
-          <Route path={`${path}/history`}>
+          <Route strict exact path={`${path}/history`}>
             {stakedOnly
               ? orderBy(stakedOnlyFinishedPools, ['sortOrder'])
                   .slice(0, numberOfPoolsVisible)

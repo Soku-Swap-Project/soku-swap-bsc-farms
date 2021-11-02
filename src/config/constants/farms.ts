@@ -87,26 +87,6 @@ const farms: FarmConfig[] = [
     token: tokens.suteku,
     quoteToken: tokens.wbnb,
   },
-  {
-    pid: 9,
-    lpSymbol: 'SOKU-SUTEKU LP V1',
-    lpAddresses: {
-      97: '',
-      56: '0x85820b2c92A6B70d6F0faED542c559A7e5a81D3D',
-    },
-    token: tokens.suteku1,
-    quoteToken: tokens.soku,
-  },
-  {
-    pid: 8,
-    lpSymbol: 'SUTEKU-BNB LP V1',
-    lpAddresses: {
-      97: '',
-      56: '0xd1545614312979bbeDfE5042166c86DD09b12cCd',
-    },
-    token: tokens.suteku1,
-    quoteToken: tokens.wbnb,
-  },
 
   /**
    * V3 by order of release (some may be out of PID order due to multiplier boost)

@@ -69,7 +69,11 @@ const StyledCardHeader: React.FC<{
           </Heading>
           <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{getSubHeading()}</Text>
         </Flex>
-        <img src="https://i.ibb.co/qp3JZv7/SOKU-SUTEKU.png" alt={earningTokenSymbol} width={75} height={75} />
+        {earningTokenSymbol === 'SUTEKU' ? (
+          <img src="https://i.ibb.co/qp3JZv7/SOKU-SUTEKU.png" alt={earningTokenSymbol} width={75} height={75} />
+        ) : (
+          <img src="https://i.ibb.co/pLMpbtZ/suteku-soku.png" alt={earningTokenSymbol} width={75} height={75} />
+        )}
       </Flex>
     </Wrapper>
   )

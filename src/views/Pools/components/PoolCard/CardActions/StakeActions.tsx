@@ -4,7 +4,7 @@ import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { Pool } from 'state/types'
-import { useBusdPriceFromToken, useTokenPrice } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/hooks'
 import Balance from 'components/Balance'
 import NotEnoughTokensModal from '../Modals/NotEnoughTokensModal'
 import StakeModal from '../Modals/StakeModal'
@@ -31,9 +31,16 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const { t } = useTranslation()
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
-  const stakingTokenPrice = useTokenPrice('sokuswap')
-  // console.log(stakingTokenPrice)
+  const sokuPrice = useTokenPrice('sokuswap')
+  const sutekuPrice = usePriceBnbSuteku()
 
+  // if (earningToken.symbol === 'SOKU') {
+  //   const earningTokenPrice =
+  // }
+  const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
+  // const earningTokenPrice = new BigNumber(1)
+
+  // console.log(earningTokenPrice)
   // const stakingTokenPriceAsNumber = stakingTokenPrice ? stakingTokenPrice.toNumber() : 0
   const stakingTokenPriceAsNumber = stakingTokenPrice
   const stakedTokenDollarBalance = getBalanceNumber(

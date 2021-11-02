@@ -27,14 +27,23 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const { t } = useTranslation()
   const earningTokenBalance = getBalanceNumber(earnings, earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
+  // let earningTokenPrice;
 
   // const earningTokenPrice = useBusdPriceFromToken(earningToken.symbol)
   const bnbPrice = useTokenPrice('wbnb')
   const bnbPriceBig = new BigNumber(bnbPrice)
-  const earningTokenPrice = usePriceBnbSuteku()
+  const sokuPrice = useTokenPrice('sokuswap')
+  const sutekuPrice = usePriceBnbSuteku()
+
+  // if (earningToken.symbol === 'SOKU') {
+  //   const earningTokenPrice =
+  // }
+  const earningTokenPrice = earningToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
   // const earningTokenPrice = new BigNumber(1)
 
-  const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
+  // console.log(earningTokenPrice)
+
+  const earningTokenPriceAsNumber = earningTokenPrice
   // console.log(earningTokenPriceAsNumber)
 
   const earningTokenDollarBalance = getBalanceNumber(
