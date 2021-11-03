@@ -34,11 +34,18 @@ const PoolTabButtons = ({ stakedOnly, setStakedOnly, hasStakeInFinishedPools }) 
   const { url, isExact } = useRouteMatch()
   const { t } = useTranslation()
 
+  const pathname = window.location.pathname
+  const newUrl = pathname.replace(/\/?$/, '/')
+
+  console.log(pathname)
+
+  console.log(newUrl === pathname)
+
   return (
     <Flex alignItems="center" justifyContent="center" mb="32px">
       <Flex alignItems="center" flexDirection={['column', null, 'row', null]}>
-        <ButtonMenu activeIndex={isExact ? 0 : 1} scale="sm" variant="primary">
-          <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to={`${url}`}>
+        <ButtonMenu activeIndex={pathname === newUrl ? 0 : 1} scale="sm" variant="primary">
+          <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to={`${url}/`}>
             {t('Live')}
           </ButtonMenuItem>
           <NotificationDot show={hasStakeInFinishedPools}>
