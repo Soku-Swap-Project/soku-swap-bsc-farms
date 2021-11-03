@@ -40,7 +40,7 @@ const PoolTabButtons = ({ stakedOnly, setStakedOnly, hasStakeInFinishedPools }) 
   return (
     <Flex alignItems="center" justifyContent="center" mb="32px">
       <Flex alignItems="center" flexDirection={['column', null, 'row', null]}>
-        <ButtonMenu activeIndex={url === newUrl || url === pathname ? 0 : 1} scale="sm" variant="primary">
+        <ButtonMenu activeIndex={url === newUrl ? 0 : 1} scale="sm" variant="primary">
           <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to={`${url}`}>
             {t('Live')}
           </ButtonMenuItem>
