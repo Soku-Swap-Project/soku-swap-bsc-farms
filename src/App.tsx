@@ -75,7 +75,7 @@ const App: React.FC = () => {
           <Route path="/bsc/farms">
             <Farms />
           </Route>
-          <Route strict path="/bsc/staking">
+          <Route path="/bsc/staking/">
             <Pools />
           </Route>
 
