@@ -45,11 +45,11 @@ const PoolTabButtons = ({ stakedOnly, setStakedOnly, hasStakeInFinishedPools }) 
     <Flex alignItems="center" justifyContent="center" mb="32px">
       <Flex alignItems="center" flexDirection={['column', null, 'row', null]}>
         <ButtonMenu activeIndex={pathname === newUrl ? 0 : 1} scale="sm" variant="primary">
-          <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to={`${url}/`}>
+          <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to="/bsc/staking/">
             {t('Live')}
           </ButtonMenuItem>
           <NotificationDot show={hasStakeInFinishedPools}>
-            <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to={`${url}/history`}>
+            <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to="/bsc/staking/history">
               {t('Finished')}
             </ButtonMenuItem>
           </NotificationDot>
