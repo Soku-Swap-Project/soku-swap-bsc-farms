@@ -84,8 +84,8 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
     '0x11ba78277d800502c84c5aed1374ff0a91f19f7e': {
       name: 'Earnable',
       symbol: 'EARN',
-      price: earnable_price || NaN,
-      price_BNB: earnable_price || NaN,
+      price: earnable_price || 0,
+      price_BNB: earnable_price || 0,
     },
   }
 
@@ -93,8 +93,8 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
     '0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53': {
       name: 'Soku',
       symbol: 'SOKU',
-      price: soku_price || NaN,
-      price_BNB: soku_price || NaN,
+      price: soku_price || 0,
+      price_BNB: soku_price || 0,
     },
   }
 
@@ -102,8 +102,8 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
     '0xB003C68917BaB76812797d1b8056822f48E2e4fe': {
       name: 'YUMMY',
       symbol: 'YUMMY',
-      price: yummy_price || NaN,
-      price_BNB: yummy_price || NaN,
+      price: yummy_price || 0,
+      price_BNB: yummy_price || 0,
     },
   }
 
