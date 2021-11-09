@@ -8,7 +8,9 @@ const ThemeContext = React.createContext({ isDark: null, toggleTheme: () => null
 
 const ThemeContextProvider = ({ children }) => {
   const [isDark, setIsDark] = useState(() => {
-    const isDarkUserSetting = localStorage.getItem(CACHE_KEY)
+    // const isDarkUserSetting = localStorage.getItem(CACHE_KEY)
+    const isDarkUserSetting = false
+
     return isDarkUserSetting ? JSON.parse(isDarkUserSetting) : false
   })
 

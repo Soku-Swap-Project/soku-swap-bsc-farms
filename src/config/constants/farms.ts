@@ -1,8 +1,6 @@
 import tokens from './tokens'
 import { FarmConfig } from './types'
 
-// console.log(tokens.earnable)
-
 const farms: FarmConfig[] = [
   /**
    * These 3 farms (PID 0, 251, 252) should always be at the top of the file.
