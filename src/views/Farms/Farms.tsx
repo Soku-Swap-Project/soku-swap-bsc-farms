@@ -4,7 +4,7 @@ import { Route, useRouteMatch, useLocation } from 'react-router-dom'
 import { useAppDispatch } from 'state'
 import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { Image, Heading, RowType, Toggle, Text } from '@pancakeswap/uikit'
+import { Image, Heading, RowType, Text } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
@@ -30,6 +30,8 @@ import SearchInput from './components/SearchInput'
 import { RowProps } from './components/FarmTable/Row'
 import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
+
+// import Toggle from 'views/Farms/components/Toggle'
 
 import './index.css'
 import Web3 from 'web3'
@@ -384,7 +386,9 @@ const Farms: React.FC = () => {
           {t('Stake Liquidity Pool (LP) tokens to earn SOKU!')}
         </Heading>
       </PageHeader>
+
       <Page>
+        {/* <Toggle /> */}
         <ControlContainer>
           <FilterContainer>
             <LabelWrapper>

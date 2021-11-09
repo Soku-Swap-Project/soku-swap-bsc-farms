@@ -8,12 +8,29 @@ import {
   updateUserPendingReward,
 } from 'state/actions'
 import { unstake, sousUnstake, sousEmergencyUnstake } from 'utils/callHelpers'
-import { useMasterchef, useSousChef } from './useContract'
+import { useMasterchef, useSousChef, useMasterchefV2 } from './useContract'
 
 const useUnstake = (pid: number) => {
   const dispatch = useAppDispatch()
   const { account } = useWeb3React()
   const masterChefContract = useMasterchef()
+
+  const handleUnstake = useCallback(
+    async (amount: string) => {
+      const txHash = await unstake(masterChefContract, pid, amount, account)
+      dispatch(fetchFarmUserDataAsync(account))
+      console.info(txHash)
+    },
+    [account, dispatch, masterChefContract, pid],
+  )
+
+  return { onUnstake: handleUnstake }
+}
+
+export const useUnstakeV2 = (pid: number) => {
+  const dispatch = useAppDispatch()
+  const { account } = useWeb3React()
+  const masterChefContract = useMasterchefV2()
 
   const handleUnstake = useCallback(
     async (amount: string) => {

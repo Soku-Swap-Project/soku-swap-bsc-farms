@@ -27,6 +27,23 @@ export interface Farm extends FarmConfig {
   }
 }
 
+export interface FarmV2 extends FarmConfig {
+  tokenAmountMc?: BigNumber
+  quoteTokenAmountMc?: BigNumber
+  tokenAmountTotal?: BigNumber
+  quoteTokenAmountTotal?: BigNumber
+  lpTotalInQuoteToken?: BigNumber
+  lpTotalSupply?: BigNumber
+  tokenPriceVsQuote?: BigNumber
+  poolWeight?: BigNumber
+  userData?: {
+    allowance: string
+    tokenBalance: string
+    stakedBalance: string
+    earnings: string
+  }
+}
+
 export interface Pool extends PoolConfig {
   totalStaked?: BigNumber
   stakingLimit?: BigNumber
@@ -57,6 +74,12 @@ export interface Profile {
 
 export interface FarmsState {
   data: Farm[]
+  loadArchivedFarmsData: boolean
+  userDataLoaded: boolean
+}
+
+export interface FarmsStateV2 {
+  data: FarmV2[]
   loadArchivedFarmsData: boolean
   userDataLoaded: boolean
 }
@@ -284,6 +307,7 @@ export interface State {
   achievements: AchievementState
   block: BlockState
   farms: FarmsState
+  farmsV2: FarmsStateV2
   prices: PriceState
   pools: PoolsState
   predictions: PredictionsState

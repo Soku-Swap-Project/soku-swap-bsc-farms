@@ -25,6 +25,8 @@ import './MobileFooter.css'
 // Only pool is included in the main bundle because of it's the most visited page
 const Home = lazy(() => import('./views/Home'))
 const Farms = lazy(() => import('./views/Farms'))
+const FarmsV2 = lazy(() => import('./views/FarmsV2'))
+
 // const Lottery = lazy(() => import('./views/Lottery'))
 // const Ifos = lazy(() => import('./views/Ifos'))
 const NotFound = lazy(() => import('./views/NotFound'))
@@ -72,9 +74,12 @@ const App: React.FC = () => {
       {/* <Menu /> */}
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-          <Route path="/bsc/farms">
+          <Route exact path="/bsc/farms">
             <Farms />
           </Route>
+          {/* <Route exact strict path="/bsc/farms/v2">
+            <FarmsV2 />
+          </Route> */}
           <Route path="/bsc/staking/">
             <Pools />
           </Route>

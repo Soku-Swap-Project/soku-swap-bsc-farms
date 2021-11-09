@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { BLOCKS_PER_YEAR, SOKU_PER_BLOCK } from 'config'
+import { BLOCKS_PER_YEAR, SOKU_PER_BLOCK, SUTEKU_PER_BLOCK } from 'config'
 
 /**
  * Get the APR value in %
@@ -42,4 +42,9 @@ export const getFarmApr = (poolWeight: BigNumber, cakePriceUsd: BigNumber, poolL
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
+export const getV2FarmApr = (poolWeight: BigNumber, sutekuPrice: BigNumber, poolLiquidityUsd: BigNumber): number => {
+  const yearlyCakeRewardAllocation = SUTEKU_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
+  const apr = yearlyCakeRewardAllocation.times(sutekuPrice).div(poolLiquidityUsd).times(100)
+  return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
+}
 export default null

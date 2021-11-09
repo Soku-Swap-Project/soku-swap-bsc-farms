@@ -13,6 +13,7 @@ import {
   getLotteryContract,
   getLotteryTicketContract,
   getMasterchefContract,
+  getMasterchefV2Contract,
   getPointCenterIfoContract,
   getSouschefContract,
   getClaimRefundContract,
@@ -85,6 +86,11 @@ export const useLotteryTicket = () => {
 export const useMasterchef = () => {
   const web3 = useWeb3()
   return useMemo(() => getMasterchefContract(web3), [web3])
+}
+
+export const useMasterchefV2 = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getMasterchefV2Contract(web3), [web3])
 }
 
 export const useSousChef = (id) => {
