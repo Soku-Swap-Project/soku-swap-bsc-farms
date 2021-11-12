@@ -11,8 +11,6 @@ const origin = window.location.origin
 
 const Toggle = () => {
   let history = useHistory();
-  // If checked, add active class to either ETH or BSC
-
   const checkbox = document.getElementById('checkbox')
   const v1Farm = document.querySelector('.v1Toggle')
   const v2Farm = document.querySelector('.v2Toggle')
@@ -23,6 +21,7 @@ const Toggle = () => {
 
   checkbox?.addEventListener('change', function () {
     if (this.checked) {
+      // History instance allows us to navigate to either V1 Farms or V2     
       history.push("/bsc/farms/v2");
       for (let i = 0; i < v2Farm?.classList.length; i++) {
         if (v2Farm.classList[i] == 'toggleActive') {
