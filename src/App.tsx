@@ -6,8 +6,8 @@ import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import {
   useFetchPriceList,
-  // useFetchProfile, 
-  useFetchPublicData
+  // useFetchProfile,
+  useFetchPublicData,
 } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 
