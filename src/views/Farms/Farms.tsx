@@ -22,16 +22,13 @@ import isArchivedPid from 'utils/farmHelpers'
 import { latinise } from 'utils/latinise'
 import PageHeader from 'components/PageHeader'
 import { fetchFarmsPublicDataAsync, setLoadArchivedFarmsData } from 'state/farms'
-import Select, { OptionProps } from 'components/Select/Select'
+import { OptionProps } from 'components/Select/Select'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import Table from './components/FarmTable/FarmTable'
-import FarmTabButtons from './components/FarmTabButtons'
 import SearchInput from './components/SearchInput'
 import { RowProps } from './components/FarmTable/Row'
-import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
-
-// import Toggle from 'views/Farms/components/Toggle'
+import ToggleNew from 'views/Farms/components/ToggleNew'
 
 import './index.css'
 import Web3 from 'web3'
@@ -113,7 +110,6 @@ const NUMBER_OF_FARMS_VISIBLE = 12
 
 const Farms: React.FC = () => {
   const { path } = useRouteMatch()
-  // console.log('farm path', path)
   const { pathname } = useLocation()
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarms()
@@ -388,7 +384,7 @@ const Farms: React.FC = () => {
       </PageHeader>
 
       <Page>
-        {/* <Toggle /> */}
+        <ToggleNew />
         <ControlContainer>
           <FilterContainer>
             <LabelWrapper>

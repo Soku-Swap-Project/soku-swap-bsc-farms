@@ -4,7 +4,7 @@ import { Button, useModal, IconButton, AddIcon, MinusIcon, Skeleton } from '@pan
 import { useLocation } from 'react-router-dom'
 import UnlockButton from 'components/UnlockButton'
 import { useWeb3React } from '@web3-react/core'
-import { useFarmUser } from 'state/hooks'
+import { useFarmUserV2 } from 'state/hooks'
 import { FarmWithStakedValue } from 'views/FarmsV2/components/FarmCard/FarmCard'
 import { useTranslation } from 'contexts/Localization'
 import { useApproveV2 } from 'hooks/useApprove'
@@ -38,7 +38,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
-  const { allowance, tokenBalance, stakedBalance } = useFarmUser(pid)
+  const { allowance, tokenBalance, stakedBalance } = useFarmUserV2(pid)
   const { onStake } = useStakeV2(pid)
   const { onUnstake } = useUnstakeV2(pid)
   const web3 = useWeb3()

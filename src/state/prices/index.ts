@@ -3,7 +3,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { PriceApiResponse, PriceApiThunk, PriceState } from 'state/types'
 import BigNumber from 'bignumber.js'
-import React, { useEffect, useCallback, useState, useMemo, useRef } from 'react'
 import { useTokenPrice } from '../hooks'
 import axios from 'axios'
 
@@ -40,7 +39,6 @@ const getTasteYUMMYPrice = async () => {
     )
     yummy_price = data.data.price
   } catch (error) {
-    console.log('kevin getYummyPice error ==>', error)
   }
 }
 
@@ -51,7 +49,6 @@ const getSokuPrice = async () => {
     )
     soku_price = data.data.price
   } catch (error) {
-    console.log('kevin getYummyPice error ==>', error)
   }
 }
 
@@ -117,7 +114,7 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
   return {
     updated_at: data.updated_at,
     data: Object.keys(data.data).reduce((accum, token) => {
-      // console.log(token)
+    
       return {
         ...accum,
         [token.toLowerCase()]: parseFloat(data.data[token].price),

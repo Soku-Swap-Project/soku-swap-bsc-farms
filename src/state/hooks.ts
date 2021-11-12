@@ -52,6 +52,7 @@ export const useFetchPublicData = () => {
       dispatch(fetchPoolsPublicDataAsync(blockNumber))
     }
     dispatch(fetchFarmsPublicDataAsync())
+    dispatch(fetchFarmsPublicDataAsyncV2())
     fetchPoolsPublicData()
     dispatch(fetchPoolsStakingLimitsAsync())
   }, [dispatch, slowRefresh, web3])
@@ -90,8 +91,6 @@ export const useFetchPublicDataV2 = () => {
   }, [dispatch, web3])
 }
 
-// Farms
-
 export const useFarms = (): FarmsState => {
   const farms = useSelector((state: State) => state.farms)
   return farms
@@ -99,19 +98,16 @@ export const useFarms = (): FarmsState => {
 
 export const useFarmsV2 = (): FarmsStateV2 => {
   const farms = useSelector((state: State) => state.farmsV2)
-  // console.log('farms', farms)
   return farms
 }
 
 export const useFarmFromPid = (pid): Farm => {
   const farm = useSelector((state: State) => state.farms.data.find((f) => f.pid === pid))
-  // console.log('farm', farm)
   return farm
 }
 
 export const useFarmFromPidV2 = (pid): Farm => {
   const farm = useSelector((state: State) => state.farmsV2.data.find((f) => f.pid === pid))
-  // console.log('farm', farm)
   return farm
 }
 
@@ -183,8 +179,6 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   }
 
   if (farm.quoteToken.symbol === 'wBNB') {
-    // console.log('farm', farm.tokenPriceVsQuote)
-    // console.log('price', bnbPriceBusd.times(farm.tokenPriceVsQuote))
     return bnbPriceBusd.gt(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
   }
 
@@ -339,14 +333,14 @@ export const useCakeVault = () => {
 
 // Profile
 
-export const useFetchProfile = () => {
-  const { account } = useWeb3React()
-  const dispatch = useAppDispatch()
+// export const useFetchProfile = () => {
+//   const { account } = useWeb3React()
+//   const dispatch = useAppDispatch()
 
-  useEffect(() => {
-    dispatch(fetchProfile(account))
-  }, [account, dispatch])
-}
+//   useEffect(() => {
+//     dispatch(fetchProfile(account))
+//   }, [account, dispatch])
+// }
 
 export const useProfile = () => {
   const { isInitialized, isLoading, data, hasRegistered }: ProfileState = useSelector((state: State) => state.profile)
