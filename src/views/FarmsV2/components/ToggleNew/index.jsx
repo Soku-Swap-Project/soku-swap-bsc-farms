@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useRouteMatch, Link } from "react-router-dom";
+import { useRouteMatch, Link } from 'react-router-dom'
 import { ButtonMenu, ButtonMenuItem } from '@pancakeswap/uikit'
 
 /* eslint-disable */
@@ -11,10 +11,10 @@ const ToggleNew = () => {
   return (
     <Wrapper>
       <ButtonMenu activeIndex={isExact ? 1 : 0} scale="sm" variant="primary">
-        <ButtonMenuItem as={Link} to={`${'/bsc/farms'}`}>
+        <ButtonMenuItem style={{ color: '#05195a' }} as={Link} to={`${'/bsc/farms'}`}>
           Farm V1
         </ButtonMenuItem>
-        <ButtonMenuItem as={Link} to={`/bsc/farms/v2`}>
+        <ButtonMenuItem style={{ color: '#05195a' }} as={Link} to={`/bsc/farms/v2`}>
           Farm V2
         </ButtonMenuItem>
       </ButtonMenu>

@@ -58,9 +58,7 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
       <div>
         {handleRenderFarming()}
         <Text bold style={{ textTransform: 'uppercase' }}>
-          {pid === 8 || pid === 9 ? `${image} (V1)` : image}
-
-          {/* {image} */}
+          {image}
         </Text>
       </div>
     </Container>
