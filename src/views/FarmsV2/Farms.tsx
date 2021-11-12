@@ -8,11 +8,11 @@ import { Image, Heading, RowType, Text } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
-import { useFarms, usePriceCakeBusd, useGetApiPrices, usePriceBnbSuteku, useFarmsV2 } from 'state/hooks'
+import { useGetApiPrices, usePriceBnbSuteku, useFarmsV2 } from 'state/hooks'
 import useRefresh from 'hooks/useRefresh'
 import { fetchFarmUserDataAsyncV2 } from 'state/actions'
 import usePersistState from 'hooks/usePersistState'
-import { Farm } from 'state/types'
+import { FarmV2 } from 'state/types'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getV2FarmApr } from 'utils/apr'
@@ -22,16 +22,13 @@ import isArchivedPid from 'utils/farmHelpers'
 import { latinise } from 'utils/latinise'
 import PageHeader from 'components/PageHeader'
 import { fetchFarmsPublicDataAsyncV2, setLoadArchivedFarmsDataV2 } from 'state/farmsV2'
-import Select, { OptionProps } from 'components/Select/Select'
+import { OptionProps } from 'components/Select/Select'
 import FarmCard, { FarmWithStakedValue } from './components/FarmCard/FarmCard'
 import Table from './components/FarmTable/FarmTable'
-import FarmTabButtons from './components/FarmTabButtons'
 import SearchInput from './components/SearchInput'
 import { RowProps } from './components/FarmTable/Row'
-import ToggleView from './components/ToggleView/ToggleView'
 import { DesktopColumnSchema, ViewMode } from './components/types'
-
-import Toggle from 'views/FarmsV2/components/Toggle'
+import ToggleNew from 'views/FarmsV2/components/ToggleNew'
 
 import './index.css'
 import Web3 from 'web3'
@@ -118,6 +115,7 @@ const Farms: React.FC = () => {
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarmsV2()
   const cakePrice = usePriceBnbSuteku()
+
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, 'pancake_farm_view')
   const { account } = useWeb3React()
@@ -152,6 +150,7 @@ const Farms: React.FC = () => {
 
     // Immediately request data for archived farms so users don't have to wait
     // 60 seconds for public data and 10 seconds for user data
+
     if (isArchived) {
       dispatch(fetchFarmsPublicDataAsyncV2())
       if (account) {
@@ -163,7 +162,6 @@ const Farms: React.FC = () => {
   const activeFarms = farmsLP.filter((farm) => farm.pid !== 0 && farm.multiplier !== '0X' && !isArchivedPid(farm.pid))
   const inactiveFarms = farmsLP.filter((farm) => farm.pid !== 0 && farm.multiplier === '0X' && !isArchivedPid(farm.pid))
   const archivedFarms = farmsLP.filter((farm) => isArchivedPid(farm.pid))
-
   const stakedOnlyFarms = activeFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
@@ -177,7 +175,7 @@ const Farms: React.FC = () => {
   )
 
   const farmsList = useCallback(
-    (farmsToDisplay: Farm[]): FarmWithStakedValue[] => {
+    (farmsToDisplay: FarmV2[]): FarmWithStakedValue[] => {
       let farmsToDisplayWithAPR: FarmWithStakedValue[] = farmsToDisplay.map((farm) => {
         if (!farm.lpTotalInQuoteToken || !prices) {
           return farm
@@ -384,12 +382,12 @@ const Farms: React.FC = () => {
           {t('Farms V2')}
         </Heading>
         <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center' }}>
-          {t('Stake Liquidity Pool (LP) tokens to earn SOKU!')}
+          {t('Stake Liquidity Pool (LP) tokens to earn SUTEKU!')}
         </Heading>
       </PageHeader>
 
       <Page>
-        <Toggle />
+        <ToggleNew />
         <ControlContainer>
           <FilterContainer>
             <LabelWrapper>

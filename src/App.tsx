@@ -1,10 +1,14 @@
 import React, { lazy } from 'react'
 import { useWeb3React } from '@web3-react/core'
-import { Router, Redirect, Route, Switch, useHistory } from 'react-router-dom'
+import { Router, Route, Switch } from 'react-router-dom'
 import { ResetCSS, useWalletModal } from '@pancakeswap/uikit'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
-import { useFetchPriceList, useFetchProfile, useFetchPublicData } from 'state/hooks'
+import {
+  useFetchPriceList,
+  // useFetchProfile, 
+  useFetchPublicData
+} from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 
 import GlobalStyle from './style/Global'
@@ -23,19 +27,18 @@ import './MobileFooter.css'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
-const Home = lazy(() => import('./views/Home'))
-const Farms = lazy(() => import('./views/Farms'))
-const FarmsV2 = lazy(() => import('./views/FarmsV2'))
-
+// const Home = lazy(() => import('./views/Home'))
 // const Lottery = lazy(() => import('./views/Lottery'))
 // const Ifos = lazy(() => import('./views/Ifos'))
+// const Collectibles = lazy(() => import('./views/Collectibles'))
+// const Teams = lazy(() => import('./views/Teams'))
+// const Team = lazy(() => import('./views/Teams/Team'))
+// const Profile = lazy(() => import('./views/Profile'))
+// const TradingCompetition = lazy(() => import('./views/TradingCompetition'))
+// const Predictions = lazy(() => import('./views/Predictions'))
+const Farms = lazy(() => import('./views/Farms'))
+const FarmsV2 = lazy(() => import('./views/FarmsV2'))
 const NotFound = lazy(() => import('./views/NotFound'))
-const Collectibles = lazy(() => import('./views/Collectibles'))
-const Teams = lazy(() => import('./views/Teams'))
-const Team = lazy(() => import('./views/Teams/Team'))
-const Profile = lazy(() => import('./views/Profile'))
-const TradingCompetition = lazy(() => import('./views/TradingCompetition'))
-const Predictions = lazy(() => import('./views/Predictions'))
 
 // This config is required for number formatting
 BigNumber.config({
@@ -46,7 +49,7 @@ BigNumber.config({
 const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
-  useFetchProfile()
+  // useFetchProfile()
   useFetchPriceList()
 
   const { account } = useWeb3React()
@@ -56,7 +59,6 @@ const App: React.FC = () => {
 
   const openHiddenLinks = () => {
     const hiddenLinks = document.getElementsByClassName('hidden_navLinksMobile')
-    // console.log(hiddenLinks)
     if (hiddenLinks[0]?.id === 'hidden_navLinks') {
       hiddenLinks[0].id = 'open'
     } else if (hiddenLinks[0]?.id === 'open') {
@@ -77,14 +79,12 @@ const App: React.FC = () => {
           <Route exact path="/bsc/farms">
             <Farms />
           </Route>
-          {/* <Route exact strict path="/bsc/farms/v2">
+          <Route exact strict path="/bsc/farms/v2">
             <FarmsV2 />
-          </Route> */}
+          </Route>
           <Route path="/bsc/staking/">
             <Pools />
           </Route>
-
-          {/* 404 */}
           <Route component={NotFound} />
         </Switch>
         <div className="connectWallet__options__MOBILE">

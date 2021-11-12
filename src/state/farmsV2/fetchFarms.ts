@@ -7,6 +7,7 @@ import { getAddress, getMasterChefV2Address } from 'utils/addressHelpers'
 import { FarmConfig } from 'config/constants/types'
 
 const fetchFarms = async (farmsToFetch: FarmConfig[]) => {
+  console.log('keivn farmsToFetch==>', farmsToFetch)
   const data = await Promise.all(
     farmsToFetch.map(async (farmConfig) => {
       const lpAddress = getAddress(farmConfig.lpAddresses)
@@ -59,7 +60,6 @@ const fetchFarms = async (farmsToFetch: FarmConfig[]) => {
       // Amount of token in the LP that are staked in the MC (i.e amount of token * lp ratio)
       const tokenAmountMc = tokenAmountTotal.times(lpTokenRatio)
       const quoteTokenAmountMc = quoteTokenAmountTotal.times(lpTokenRatio)
-
       // Total staked in LP, in quote token value
       const lpTotalInQuoteToken = quoteTokenAmountMc.times(new BigNumber(2))
 
