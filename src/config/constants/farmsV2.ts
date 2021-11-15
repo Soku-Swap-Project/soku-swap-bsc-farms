@@ -62,6 +62,16 @@ const farmsV2: FarmConfig[] = [
     token: tokens.suteku,
     quoteToken: tokens.wbnb,
   },
+  {
+    pid: 6,
+    lpSymbol: 'SUTEKU-BUSD LP',
+    lpAddresses: {
+      97: '',
+      56: '0x8568eb12B54128070AdA50b0909d990FecbBc03f',
+    },
+    token: tokens.suteku,
+    quoteToken: tokens.busd,
+  },
 ]
 
 export default farmsV2
