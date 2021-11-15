@@ -5,7 +5,7 @@ import { FarmWithStakedValue } from 'views/FarmsV2/components/FarmCard/FarmCard'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { useHarvestV2 } from 'hooks/useHarvest'
 import { useTranslation } from 'contexts/Localization'
-import { usePriceCakeBusd } from 'state/hooks'
+import { usePriceBnbSuteku } from 'state/hooks'
 import { useCountUp } from 'react-countup'
 import { useWeb3React } from '@web3-react/core'
 
@@ -17,8 +17,8 @@ interface HarvestActionProps extends FarmWithStakedValue {
 
 const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userData, userDataReady }) => {
   const earningsBigNumber = new BigNumber(userData.earnings)
-  const cakePrice = usePriceCakeBusd()
-  // console.log('Cake Price', cakePrice.toString())
+  const sutekuPrice = usePriceBnbSuteku()
+  // console.log('Cake Price', sutekuPrice.toString())
   let earnings = 0
   let earningsBusd = 0
   let displayBalance = userDataReady ? earnings.toLocaleString() : <Skeleton width={60} />
@@ -27,7 +27,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
   // If user didn't connect wallet default balance will be 0
   if (!earningsBigNumber.isZero()) {
     earnings = getBalanceNumber(earningsBigNumber)
-    earningsBusd = new BigNumber(earnings).multipliedBy(cakePrice).toNumber()
+    earningsBusd = new BigNumber(earnings).multipliedBy(sutekuPrice).toNumber()
     displayBalance = earnings.toLocaleString()
   }
 

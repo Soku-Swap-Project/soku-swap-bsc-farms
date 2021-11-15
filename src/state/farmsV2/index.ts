@@ -9,7 +9,7 @@ import {
   fetchFarmUserTokenBalances,
   fetchFarmUserStakedBalances,
 } from './fetchFarmUser'
-import { FarmsState, Farm, FarmV2, FarmsStateV2 } from '../types'
+import { FarmV2, FarmsStateV2 } from '../types'
 
 const nonArchivedFarms = farmsConfig.filter(({ pid }) => !isArchivedPid(pid))
 
@@ -52,10 +52,8 @@ export const farmsSliceV2 = createSlice({
   },
 })
 
-// Actions
 export const { setFarmsPublicDataV2, setFarmUserDataV2, setLoadArchivedFarmsDataV2 } = farmsSliceV2.actions
 
-// Thunks
 export const fetchFarmsPublicDataAsyncV2 = () => async (dispatch, getState) => {
   const fetchArchived = getState().farms.loadArchivedFarmsData
   const farmsToFetch = fetchArchived ? farmsConfig : nonArchivedFarms
@@ -63,6 +61,7 @@ export const fetchFarmsPublicDataAsyncV2 = () => async (dispatch, getState) => {
   dispatch(setFarmsPublicDataV2(farms))
 }
 export const fetchFarmUserDataAsyncV2 = (account: string) => async (dispatch, getState) => {
+
   const fetchArchived = getState().farms.loadArchivedFarmsData
   const farmsToFetch = fetchArchived ? farmsConfig : nonArchivedFarms
   const userFarmAllowances = await fetchFarmUserAllowances(account, farmsToFetch)
