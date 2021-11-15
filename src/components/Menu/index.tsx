@@ -68,7 +68,7 @@ const Menu = (props) => {
               <a className="nav_link" href="https://www.binance.org/en/bridge">
                 <li>Bridge</li>
               </a>
-              <NavLink className="nav_link" activeClassName="active" to="/bsc/farms">
+              <NavLink className="nav_link" activeClassName="active" to="/bsc/farms/v2">
                 <li>Farms</li>
               </NavLink>
               <NavLink className="nav_link" activeClassName="active" to="/bsc/staking/">
