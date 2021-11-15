@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useFarmUser } from 'state/hooks'
+import { useFarmUserV2 } from 'state/hooks'
 import { useTranslation } from 'contexts/Localization'
 import { Text, Image } from '@pancakeswap/uikit'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -36,7 +36,7 @@ const Container = styled.div`
 `
 
 const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
-  const { stakedBalance } = useFarmUser(pid)
+  const { stakedBalance } = useFarmUserV2(pid)
   const { t } = useTranslation()
   const rawStakedBalance = getBalanceNumber(stakedBalance)
 
