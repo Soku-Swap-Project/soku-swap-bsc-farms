@@ -16,7 +16,7 @@ export const BSC_BLOCK_TIME = 3
 // CAKE_PER_BLOCK in config/index.ts = 40 as we only change the amount sent to the burn pool which is effectively a farm.
 // CAKE/Block in src/views/Home/components/CakeStats.tsx = 20 (40 - Amount sent to burn pool)
 
-export const SOKU_PER_BLOCK = new BigNumber(0.5)
+export const SOKU_PER_BLOCK = new BigNumber(0.2)
 export const SUTEKU_PER_BLOCK = new BigNumber(0.39)
 
 // console.log(CAKE_PER_BLOCK.toString())
