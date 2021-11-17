@@ -33,6 +33,16 @@ const tokens = {
     decimals: 9,
     projectLink: 'https://sokuswap.finance/',
   },
+  moonlight: {
+    symbol: 'MOONLIGHT',
+    name: 'Moonlight Token',
+    address: {
+      56: '0xb1ced2e320e3f4c8e3511b1dc59203303493f382',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://sokuswap.finance/',
+  },
   fcf: {
     symbol: 'French Connection Finance',
     name: 'FCF',

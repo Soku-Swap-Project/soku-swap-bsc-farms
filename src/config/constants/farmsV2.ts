@@ -93,6 +93,16 @@ const farmsV2: FarmConfig[] = [
     quoteToken: tokens.soku,
   },
   {
+    pid: 10,
+    lpSymbol: 'SOKU-MOONLIGHT LP',
+    lpAddresses: {
+      97: '',
+      56: '0xF1300278975B91DB794F5E950679f29f236269BE',
+    },
+    token: tokens.moonlight,
+    quoteToken: tokens.soku,
+  },
+  {
     pid: 9,
     lpSymbol: 'SUTEKU-EARN LP',
     lpAddresses: {
