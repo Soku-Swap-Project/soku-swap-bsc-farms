@@ -1,16 +1,16 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import { useHistory } from "react-router-dom";
+import { useHistory } from 'react-router-dom'
 
 import './Toggle.css'
 
 /* eslint-disable */
 
-console.log(window.location)
+// console.log(window.location)
 const origin = window.location.origin
 
 const Toggle = () => {
-  let history = useHistory();
+  let history = useHistory()
   const checkbox = document.getElementById('checkbox')
   const v1Farm = document.querySelector('.v1Toggle')
   const v2Farm = document.querySelector('.v2Toggle')
@@ -21,8 +21,8 @@ const Toggle = () => {
 
   checkbox?.addEventListener('change', function () {
     if (this.checked) {
-      // History instance allows us to navigate to either V1 Farms or V2     
-      history.push("/bsc/farms/v2");
+      // History instance allows us to navigate to either V1 Farms or V2
+      history.push('/bsc/farms/v2')
       for (let i = 0; i < v2Farm?.classList.length; i++) {
         if (v2Farm.classList[i] == 'toggleActive') {
           return
@@ -34,7 +34,7 @@ const Toggle = () => {
         }
       }
     } else if (!this.checked) {
-      history.push("/farms");
+      history.push('/farms')
       for (let i = 0; i < v1Farm?.classList.length; i++) {
         if (v1Farm.classList[i] == 'toggleActive') {
           return

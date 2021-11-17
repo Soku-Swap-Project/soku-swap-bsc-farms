@@ -33,16 +33,6 @@ const farmsV2: FarmConfig[] = [
     quoteToken: tokens.busd,
   },
   {
-    pid: 4,
-    lpSymbol: 'SOKU-YUMMY LP',
-    lpAddresses: {
-      97: '',
-      56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
-    },
-    token: tokens.soku,
-    quoteToken: tokens.yummy,
-  },
-  {
     pid: 1,
     lpSymbol: 'SOKU-SUTEKU LP',
     lpAddresses: {
@@ -71,6 +61,46 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.suteku,
     quoteToken: tokens.busd,
+  },
+  {
+    pid: 4,
+    lpSymbol: 'SOKU-YUMMY LP',
+    lpAddresses: {
+      97: '',
+      56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
+    },
+    token: tokens.yummy,
+    quoteToken: tokens.soku,
+  },
+  {
+    pid: 7,
+    lpSymbol: 'SOKU-HODL LP',
+    lpAddresses: {
+      97: '',
+      56: '0xdeb9A4F69774a55f36ff448927CAd0355a93b86c',
+    },
+    token: tokens.hodl,
+    quoteToken: tokens.soku,
+  },
+  {
+    pid: 8,
+    lpSymbol: 'SOKU-FCF LP',
+    lpAddresses: {
+      97: '',
+      56: '0xf91BD6136D0e6Da3D09e128B2DaE7576540e1072',
+    },
+    token: tokens.fcf,
+    quoteToken: tokens.soku,
+  },
+  {
+    pid: 9,
+    lpSymbol: 'SUTEKU-EARN LP',
+    lpAddresses: {
+      97: '',
+      56: '0xC3711E723904886e66996a7A6C71C927446Da758',
+    },
+    token: tokens.earnable,
+    quoteToken: tokens.suteku,
   },
 ]
 
