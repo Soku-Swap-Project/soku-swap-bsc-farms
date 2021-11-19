@@ -128,6 +128,26 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://www.paxos.com/busd/',
   },
+  eth: {
+    symbol: 'ETH',
+    name: 'Binance-Peg Ethereum Token',
+    address: {
+      56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  usdt: {
+    symbol: 'USDT',
+    name: 'Tether',
+    address: {
+      56: '0x55d398326f99059ff775485246999027b3197955',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
 }
 
 export default tokens

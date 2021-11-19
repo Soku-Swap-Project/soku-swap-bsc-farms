@@ -33,6 +33,46 @@ const farmsV2: FarmConfig[] = [
     quoteToken: tokens.busd,
   },
   {
+    pid: 11,
+    lpSymbol: 'BNB-BUSD LP',
+    lpAddresses: {
+      97: '',
+      56: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+    },
+    token: tokens.wbnb,
+    quoteToken: tokens.busd,
+  },
+  {
+    pid: 12,
+    lpSymbol: 'BNB-ETH LP',
+    lpAddresses: {
+      97: '',
+      56: '0x74E4716E431f45807DCF19f284c7aA99F18a4fbc',
+    },
+    token: tokens.wbnb,
+    quoteToken: tokens.eth,
+  },
+  {
+    pid: 14,
+    lpSymbol: 'SOKU-ETH LP',
+    lpAddresses: {
+      97: '',
+      56: '0x526262914184Ca4fa32CaE4e4Bc5FFF7AeAD3CEe',
+    },
+    token: tokens.soku,
+    quoteToken: tokens.eth,
+  },
+  {
+    pid: 13,
+    lpSymbol: 'BNB-USDT LP',
+    lpAddresses: {
+      97: '',
+      56: '0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE',
+    },
+    token: tokens.wbnb,
+    quoteToken: tokens.usdt,
+  },
+  {
     pid: 1,
     lpSymbol: 'SOKU-SUTEKU LP',
     lpAddresses: {
