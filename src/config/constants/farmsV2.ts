@@ -122,16 +122,16 @@ const farmsV2: FarmConfig[] = [
     token: tokens.hodl,
     quoteToken: tokens.soku,
   },
-  {
-    pid: 8,
-    lpSymbol: 'SOKU-FCF LP',
-    lpAddresses: {
-      97: '',
-      56: '0xf91BD6136D0e6Da3D09e128B2DaE7576540e1072',
-    },
-    token: tokens.fcf,
-    quoteToken: tokens.soku,
-  },
+  // {
+  //   pid: 8,
+  //   lpSymbol: 'SOKU-FCF LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0xf91BD6136D0e6Da3D09e128B2DaE7576540e1072',
+  //   },
+  //   token: tokens.fcf,
+  //   quoteToken: tokens.soku,
+  // },
   {
     pid: 10,
     lpSymbol: 'SOKU-MOONLIGHT LP',
