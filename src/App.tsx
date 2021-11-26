@@ -22,6 +22,7 @@ import history from './routerHistory'
 import AccountModal from './components/AccountModal'
 import ClaimSokuModal from './components/ClaimSokuModal'
 import SlideOutMenu from './components/SlideOutMenu/SlideOutMenu'
+import ComingSoon from './views/ComingSoon'
 
 import './MobileFooter.css'
 
@@ -84,6 +85,9 @@ const App: React.FC = () => {
           </Route>
           <Route path="/bsc/staking/">
             <Pools />
+          </Route>
+          <Route path="/bsc/bridge/">
+            <ComingSoon />
           </Route>
           <Route component={NotFound} />
         </Switch>
