@@ -23,6 +23,36 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  hodl: {
+    symbol: 'HODL',
+    name: 'HODL',
+    address: {
+      56: '0x0e9766df73973abcfedde700497c57110ee5c301',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  moonlight: {
+    symbol: 'MOONLIGHT',
+    name: 'Moonlight Token',
+    address: {
+      56: '0xb1ced2e320e3f4c8e3511b1dc59203303493f382',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  fcf: {
+    symbol: 'French Connection Finance',
+    name: 'FCF',
+    address: {
+      56: '0x4673f018cc6d401aad0402bdbf2abcbf43dd69f3',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   suteku1: {
     symbol: 'SUTEKU',
     name: 'Suteku Rewards Token',
@@ -37,21 +67,11 @@ const tokens = {
     symbol: 'EARN',
     name: 'earnable',
     address: {
-      56: '0x11ba78277d800502c84c5aed1374ff0a91f19f7e',
+      56: '0x839153689469fe23236d1e0671430c8d7fee0337',
       97: '',
     },
     decimals: 18,
     projectLink: 'https://earnable.one/',
-  },
-  taste: {
-    symbol: 'TASTE',
-    name: 'tastenft',
-    address: {
-      56: '0xdb238123939637d65a03e4b2b485650b4f9d91cb',
-      97: '',
-    },
-    decimals: 18,
-    projectLink: 'https://www.tastenfts.com',
   },
   yummy: {
     symbol: 'YUMMY',
@@ -107,6 +127,26 @@ const tokens = {
     },
     decimals: 18,
     projectLink: 'https://www.paxos.com/busd/',
+  },
+  eth: {
+    symbol: 'ETH',
+    name: 'Binance-Peg Ethereum Token',
+    address: {
+      56: '0x2170ed0880ac9a755fd29b2688956bd959f933f8',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  usdt: {
+    symbol: 'USDT',
+    name: 'Tether',
+    address: {
+      56: '0x55d398326f99059ff775485246999027b3197955',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
   },
 }
 

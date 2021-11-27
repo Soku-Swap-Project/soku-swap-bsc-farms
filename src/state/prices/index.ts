@@ -17,29 +17,37 @@ const CoinGecko = require('coingecko-api')
 //2. Initiate the CoinGecko API Client
 const CoinGeckoClient = new CoinGecko()
 
-let earnable_price
+let suteku_price
 let soku_price
 let yummy_price
+let hodl_price
 
 //3. Make calls
-const getEarnablePrice = async () => {
-  const res = await CoinGeckoClient.coins.fetch('earnable')
-  const data = await res.data
-  const unformatted_price = new BigNumber(data.market_data.current_price.usd).toString()
-  const formatted_price = parseFloat(unformatted_price).toLocaleString(undefined, {
-    minimumSignificantDigits: 3,
-  })
-  earnable_price = formatted_price
+const getSUKTEUPrice = async () => {
+  try {
+    const { data } = await axios.get(
+      `https://api.pancakeswap.info/api/v2/tokens/0x198800aF50914004A9E9D19cA18C0b24587a50cf`,
+    )
+    suteku_price = data.data.price
+  } catch (error) {}
 }
 
-const getTasteYUMMYPrice = async () => {
+const getYummyPrice = async () => {
   try {
     const { data } = await axios.get(
       `https://api.pancakeswap.info/api/v2/tokens/0xB003C68917BaB76812797d1b8056822f48E2e4fe`,
     )
     yummy_price = data.data.price
-  } catch (error) {
-  }
+  } catch (error) {}
+}
+
+const getHODLPrice = async () => {
+  try {
+    const { data } = await axios.get(
+      `https://api.pancakeswap.info/api/v2/tokens/0x0e9766df73973abcfedde700497c57110ee5c301`,
+    )
+    hodl_price = data.data.price
+  } catch (error) {}
 }
 
 const getSokuPrice = async () => {
@@ -48,13 +56,13 @@ const getSokuPrice = async () => {
       `https://api.pancakeswap.info/api/v2/tokens/0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53`,
     )
     soku_price = data.data.price
-  } catch (error) {
-  }
+  } catch (error) {}
 }
 
-getEarnablePrice()
-getTasteYUMMYPrice()
+getSUKTEUPrice()
+getYummyPrice()
 getSokuPrice()
+getHODLPrice()
 
 export const bnbPrice = () => {
   const price = useTokenPrice('binance-coin')
@@ -69,7 +77,7 @@ export const sokuPrice = () => {
 export const getPrices = async () => {
   const res = await CoinGeckoClient.coins.markets({ ids: ['bitcoin', 'sokuswap', 'binancecoin', 'tether'] })
   const resArray = JSON.stringify(res.data)
-  console.log('test', resArray)
+  // console.log('test', resArray)
 }
 
 // Thunks
@@ -77,12 +85,12 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
   const response = await fetch('https://api.pancakeswap.info/api/v2/tokens')
   const data = (await response.json()) as PriceApiResponse
 
-  const earn = {
-    '0x11ba78277d800502c84c5aed1374ff0a91f19f7e': {
-      name: 'Earnable',
-      symbol: 'EARN',
-      price: earnable_price || 0,
-      price_BNB: earnable_price || 0,
+  const suteku = {
+    '0x198800aF50914004A9E9D19cA18C0b24587a50cf': {
+      name: 'SUTEKU Soku Rewards Token',
+      symbol: 'SUTEKU',
+      price: suteku_price || 0,
+      price_BNB: suteku_price || 0,
     },
   }
 
@@ -103,10 +111,19 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
       price_BNB: yummy_price || 0,
     },
   }
+  const hodl = {
+    '0x0e9766df73973abcfedde700497c57110ee5c301': {
+      name: 'HODL',
+      symbol: 'HODL',
+      price: hodl_price || 0,
+      price_BNB: hodl_price || 0,
+    },
+  }
 
-  Object.assign(data.data, earn)
+  Object.assign(data.data, suteku)
   Object.assign(data.data, soku)
   Object.assign(data.data, yummy)
+  Object.assign(data.data, hodl)
 
   // console.log(data.data)
 
@@ -114,7 +131,6 @@ export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async
   return {
     updated_at: data.updated_at,
     data: Object.keys(data.data).reduce((accum, token) => {
-    
       return {
         ...accum,
         [token.toLowerCase()]: parseFloat(data.data[token].price),

@@ -6,8 +6,8 @@ import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import {
   useFetchPriceList,
-  // useFetchProfile, 
-  useFetchPublicData
+  // useFetchProfile,
+  useFetchPublicData,
 } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 
@@ -80,7 +80,7 @@ const App: React.FC = () => {
           <Route exact path="/bsc/farms">
             <Farms />
           </Route>
-          <Route exact strict path="/bsc/farms/v2">
+          <Route path="/bsc/farms/v2">
             <FarmsV2 />
           </Route>
           <Route path="/bsc/staking/">

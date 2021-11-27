@@ -68,7 +68,7 @@ const Menu = (props) => {
               <NavLink className="nav_link" activeClassName="active" to="/bsc/Bridge">
                 <li>Bridge</li>
               </NavLink>
-              <NavLink className="nav_link" activeClassName="active" to="/bsc/farms">
+              <NavLink className="nav_link" activeClassName="active" to="/bsc/farms/v2">
                 <li>Farms</li>
               </NavLink>
               <NavLink className="nav_link" activeClassName="active" to="/bsc/staking/">
