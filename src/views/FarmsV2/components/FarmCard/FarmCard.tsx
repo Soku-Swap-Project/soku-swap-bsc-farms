@@ -94,6 +94,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, account }
   const earnLabel = farm.dual ? farm.dual.earnLabel : 'SOKU'
 
   const farmAPR = farm.apr && farm.apr.toLocaleString('en-US', { maximumFractionDigits: 2 })
+  // console.log(farm)
   // console.log(farmAPR)
 
   const liquidityUrlPathParts = getLiquidityUrlPathParts({
