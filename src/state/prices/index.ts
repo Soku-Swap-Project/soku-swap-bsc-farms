@@ -26,7 +26,7 @@ let hodl_price
 const getSUKTEUPrice = async () => {
   try {
     const { data } = await axios.get(
-      `https://api.pancakeswap.info/api/v2/tokens/0x198800aF50914004A9E9D19cA18C0b24587a50cf`,
+      `https://soku-api.herokuapp.com/https://api.pancakeswap.info/api/v2/tokens/0x198800aF50914004A9E9D19cA18C0b24587a50cf`,
     )
     suteku_price = data.data.price
   } catch (error) {}
@@ -35,7 +35,7 @@ const getSUKTEUPrice = async () => {
 const getYummyPrice = async () => {
   try {
     const { data } = await axios.get(
-      `https://api.pancakeswap.info/api/v2/tokens/0xB003C68917BaB76812797d1b8056822f48E2e4fe`,
+      `https://soku-api.herokuapp.com/https://api.pancakeswap.info/api/v2/tokens/0xB003C68917BaB76812797d1b8056822f48E2e4fe`,
     )
     yummy_price = data.data.price
   } catch (error) {}
@@ -44,7 +44,7 @@ const getYummyPrice = async () => {
 const getHODLPrice = async () => {
   try {
     const { data } = await axios.get(
-      `https://api.pancakeswap.info/api/v2/tokens/0x0e9766df73973abcfedde700497c57110ee5c301`,
+      `https://soku-api.herokuapp.com/https://api.pancakeswap.info/api/v2/tokens/0x0e9766df73973abcfedde700497c57110ee5c301`,
     )
     hodl_price = data.data.price
   } catch (error) {}
@@ -53,8 +53,10 @@ const getHODLPrice = async () => {
 const getSokuPrice = async () => {
   try {
     const { data } = await axios.get(
-      `https://api.pancakeswap.info/api/v2/tokens/0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53`,
+      `https://soku-api.herokuapp.com/https://api.pancakeswap.info/api/v2/tokens/0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53`,
     )
+
+    console.log(data, 'data')
     soku_price = data.data.price
   } catch (error) {}
 }
@@ -77,12 +79,12 @@ export const sokuPrice = () => {
 export const getPrices = async () => {
   const res = await CoinGeckoClient.coins.markets({ ids: ['bitcoin', 'sokuswap', 'binancecoin', 'tether'] })
   const resArray = JSON.stringify(res.data)
-  // console.log('test', resArray)
+  console.log('test', resArray)
 }
 
 // Thunks
 export const fetchPrices = createAsyncThunk<PriceApiThunk>('prices/fetch', async () => {
-  const response = await fetch('https://api.pancakeswap.info/api/v2/tokens')
+  const response = await fetch('https://soku-api.herokuapp.com/https://api.pancakeswap.info/api/v2/tokens')
   const data = (await response.json()) as PriceApiResponse
 
   const suteku = {
