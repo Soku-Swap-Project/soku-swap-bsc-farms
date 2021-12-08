@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, useEffect } from 'react'
 import { useWeb3React } from '@web3-react/core'
 import { Router, Route, Switch } from 'react-router-dom'
 import { ResetCSS, useWalletModal } from '@pancakeswap/uikit'
@@ -10,7 +10,7 @@ import {
   useFetchPublicData,
 } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
-
+import detectEthereumProvider from '@metamask/detect-provider'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
@@ -47,11 +47,36 @@ BigNumber.config({
   DECIMAL_PLACES: 80,
 })
 
+const loadNetwork = async () => {
+  const detectProvider = await detectEthereumProvider()
+  const provider = window.ethereum as any
+  await provider.request({
+    method: 'wallet_addEthereumChain',
+    params: [
+      {
+        chainId: '0x38',
+        chainName: 'Binance Smart Chain',
+        rpcUrls: ['https://bsc-dataseed.binance.org/'],
+        nativeCurrency: {
+          name: 'BNB',
+          symbol: 'BNB',
+          decimals: 18,
+        },
+        blockExplorerUrls: ['https://bscscan.com'],
+      },
+    ],
+  })
+}
+
 const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
   // useFetchProfile()
   useFetchPriceList()
+
+  useEffect(() => {
+    loadNetwork()
+  }, [])
 
   const { account } = useWeb3React()
   const { login, logout } = useAuth()
