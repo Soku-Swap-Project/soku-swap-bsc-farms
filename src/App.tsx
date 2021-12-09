@@ -41,6 +41,10 @@ const Farms = lazy(() => import('./views/Farms'))
 const FarmsV2 = lazy(() => import('./views/FarmsV2'))
 const NotFound = lazy(() => import('./views/NotFound'))
 
+interface Error {
+  code?: any
+}
+
 // This config is required for number formatting
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -50,22 +54,36 @@ BigNumber.config({
 const loadNetwork = async () => {
   const detectProvider = (await detectEthereumProvider()) as any
   const provider = window.ethereum as any
-  await detectProvider.request({
-    method: 'wallet_addEthereumChain',
-    params: [
-      {
-        chainId: '0x38',
-        chainName: 'Binance Smart Chain',
-        rpcUrls: ['https://bsc-dataseed.binance.org/'],
-        nativeCurrency: {
-          name: 'BNB',
-          symbol: 'BNB',
-          decimals: 18,
+  try {
+    await detectProvider.request({
+      method: 'wallet_switchEthereumChain',
+      params: [
+        {
+          chainId: '0x38',
         },
-        blockExplorerUrls: ['https://bscscan.com'],
-      },
-    ],
-  })
+      ],
+    })
+  } catch (error) {
+    /* eslint-disable dot-notation */
+    if (error['code'] === 4902 || error['data']['originalError'].code === 4902) {
+      await detectProvider.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          {
+            chainId: '0x38',
+            chainName: 'Binance Smart Chain',
+            rpcUrls: ['https://bsc-dataseed.binance.org/'],
+            nativeCurrency: {
+              name: 'BNB',
+              symbol: 'BNB',
+              decimals: 18,
+            },
+            blockExplorerUrls: ['https://bscscan.com'],
+          },
+        ],
+      })
+    }
+  }
 }
 
 const App: React.FC = () => {
