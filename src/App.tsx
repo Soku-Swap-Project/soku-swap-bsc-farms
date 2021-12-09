@@ -48,9 +48,9 @@ BigNumber.config({
 })
 
 const loadNetwork = async () => {
-  const detectProvider = await detectEthereumProvider()
+  const detectProvider = (await detectEthereumProvider()) as any
   const provider = window.ethereum as any
-  await provider.request({
+  await detectProvider.request({
     method: 'wallet_addEthereumChain',
     params: [
       {
