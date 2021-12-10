@@ -129,7 +129,7 @@ const App: React.FC = () => {
           <Route path="/bsc/staking/">
             <Pools />
           </Route>
-          <Route path="/bsc/bridge/">
+          <Route path="/bsc/bridge">
             <ComingSoon />
           </Route>
           <Route component={NotFound} />

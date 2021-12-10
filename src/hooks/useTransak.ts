@@ -8,7 +8,7 @@ function useTransak() {
       apiKey: '7d615e11-b4cb-4545-b3c7-ec52963b3d24', // Your API Key
       environment: 'PRODUCTION', // STAGING/PRODUCTION
       defaultNetwork: 'bsc',
-      cryptoCurrencyList: 'bnb,busd,sushi,twt',
+      cryptoCurrencyList: 'bnb,busd,sushi,twt,eth,usdt,dai,usdc,uni,link,aave,mana,ctsi,dao,swap,yld',
       networks: 'bsc',
       walletAddress: '', // Your customer's wallet address
       themeColor: '05195a', // App theme color
