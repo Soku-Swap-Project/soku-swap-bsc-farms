@@ -9,7 +9,7 @@ function useTransak() {
       environment: 'PRODUCTION', // STAGING/PRODUCTION
       defaultNetwork: 'bsc',
       cryptoCurrencyList: 'bnb,busd,sushi,twt,eth,usdt,dai,usdc,uni,link,aave,mana,ctsi,dao,swap,yld',
-      networks: 'bsc',
+      networks: 'bsc,ethereum',
       walletAddress: '', // Your customer's wallet address
       themeColor: '05195a', // App theme color
       fiatCurrency: '', // INR/GBP
