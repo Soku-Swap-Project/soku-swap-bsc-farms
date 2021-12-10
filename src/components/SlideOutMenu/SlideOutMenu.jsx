@@ -2,6 +2,7 @@
 import React from 'react'
 import { css } from '@emotion/css'
 import { NavLink } from 'react-router-dom'
+import useTransak from 'hooks/useTransak'
 
 import '../Menu/Menu.css'
 
@@ -86,10 +87,14 @@ class SlideOutMenu extends React.Component {
 
   render() {
     const { isMenuOpen } = this.state
+    const { launchTransak } = useTransak()
+
     return (
       <nav className="mobile_navbar">
         <div className="mobile_menu_logo">
-          <img src="https://i.ibb.co/Qfm7690/Soku-Swap-Web-Logo-White.png" alt="SokuSwap Logo" srcset="" />
+          <a href="/bsc/#/swap">
+            <img src="https://i.ibb.co/Qfm7690/Soku-Swap-Web-Logo-White.png" alt="SokuSwap Logo" srcset="" />
+          </a>
         </div>
 
         <div className={`${menuBtn} ${isMenuOpen ? 'closer' : null}`} onClick={this.toggleMenu}>
@@ -123,6 +128,15 @@ class SlideOutMenu extends React.Component {
                 <NavLink className="nav_link" onClick={this.toggleMenu} activeClassName="active" to="/bsc/staking/">
                   <li>Staking</li>
                 </NavLink>
+                <a
+                  className="nav_link"
+                  onClick={() => {
+                    this.toggleMenu()
+                    launchTransak()
+                  }}
+                >
+                  <li>Deposit</li>
+                </a>
               </div>
             </ul>
           </div>
