@@ -8,6 +8,7 @@ import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
 import useAuth from 'hooks/useAuth'
+import useTransak from 'hooks/useTransak'
 import { usePriceCakeBusd, useProfile } from 'state/hooks'
 import config from './config'
 import ClaimSokuModal from 'components/ClaimSokuModal'
@@ -18,9 +19,8 @@ import './Menu.css'
 const Menu = (props) => {
   const { account } = useWeb3React()
   const { login, logout } = useAuth()
-  const { isDark, toggleTheme } = useTheme()
-  const cakePriceUsd = usePriceCakeBusd()
-  const { profile } = useProfile()
+  const { launchTransak } = useTransak()
+
   const { currentLanguage, setLanguage, t } = useTranslation()
 
   const { onPresentConnectModal } = useWalletModal(login, logout)
@@ -74,6 +74,9 @@ const Menu = (props) => {
               <NavLink className="nav_link" activeClassName="active" to="/bsc/staking/">
                 <li>Staking</li>
               </NavLink>
+              <a className="nav_link" onClick={() => launchTransak()}>
+                <li>Deposit</li>
+              </a>
             </div>
           </ul>
           <ul className="connectWallet__options__DESKTOP">

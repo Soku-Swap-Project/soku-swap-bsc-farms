@@ -26,6 +26,9 @@ const GlobalStyle = createGlobalStyle`
     }
   }
 
+  .transak_modal {
+    width: 95% !important;
+  }
 
   svg[color="primary"] {
     color: #04bbfb;
