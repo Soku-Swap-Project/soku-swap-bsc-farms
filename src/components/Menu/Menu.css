@@ -28,7 +28,7 @@
 .mobile_menu_logo img {
   object-fit: contain;
   height: 10vw;
-  margin-left: 10px;
+  /* margin-left: 10px; */
 }
 
 .mobile_menu_list {
@@ -135,7 +135,7 @@ nav {
     justify-content: space-evenly !important;
     border-bottom: 1px solid rgba(255, 255, 255, 0.125);
     height: 12vh !important;
-    padding: 10px !important;
+    padding: 20px !important;
   }
 }
 
