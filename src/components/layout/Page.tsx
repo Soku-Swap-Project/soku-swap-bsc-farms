@@ -9,7 +9,7 @@ import Container from './Container'
 
 const StyledPage = styled(Container)`
   min-height: calc(100vh - 64px);
-  padding-top: 8px;
+  // padding-top: 8px;
   padding-bottom: 16px;
 
   ${({ theme }) => theme.mediaQueries.sm} {
