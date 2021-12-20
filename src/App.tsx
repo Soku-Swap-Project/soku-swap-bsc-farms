@@ -120,10 +120,10 @@ const App: React.FC = () => {
       {/* <Menu /> */}
       <SuspenseWithChunkError fallback={<PageLoader />}>
         <Switch>
-          <Route exact path="/bsc/farms">
+          {/* <Route exact path="/bsc/farms">
             <Farms />
-          </Route>
-          <Route path="/bsc/farms/v2">
+          </Route> */}
+          <Route path="/bsc/farms">
             <FarmsV2 />
           </Route>
           <Route path="/bsc/staking/">
