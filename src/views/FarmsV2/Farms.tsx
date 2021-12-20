@@ -381,13 +381,17 @@ const Farms: React.FC = () => {
         <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '10px' }}>
           {t('Farms V2')}
         </Heading>
-        <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center' }}>
+        <Heading
+          scale="lg"
+          color="white"
+          style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center', padding: '8px 0px' }}
+        >
           {t('Stake Liquidity Pool (LP) tokens to earn SUTEKU!')}
         </Heading>
       </PageHeader>
 
       <Page>
-        <ToggleNew />
+        {/* <ToggleNew /> */}
         <ControlContainer>
           <FilterContainer>
             <LabelWrapper>
