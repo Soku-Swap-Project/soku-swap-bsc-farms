@@ -379,7 +379,7 @@ const Farms: React.FC = () => {
     <div style={{ paddingTop: '2.5rem' }} className="farm_heading">
       <PageHeader>
         <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '10px' }}>
-          {t('Farms V2')}
+          {t('Farms')}
         </Heading>
         <Heading
           scale="lg"

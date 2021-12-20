@@ -436,7 +436,6 @@ export const useTokenPrice = (token: string) => {
     getTokenPrice(token)
   }, [])
 
-  // console.log('new token price', tokenPrice)
   return tokenPrice
 }
 
