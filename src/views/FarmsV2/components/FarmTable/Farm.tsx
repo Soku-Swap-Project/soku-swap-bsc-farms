@@ -56,6 +56,8 @@ const Farm: React.FunctionComponent<FarmProps> = ({ image, label, pid }) => {
     <Container>
       <IconImage src={`/images/farms/${image}.png`} alt="icon" width={40} height={40} mr="8px" />
       <div>
+        {' '}
+        {pid === 4 ? <p style={{ fontSize: '12px', color: '#05195a' }}>(Ends Dec. 29th)</p> : <></>}
         {handleRenderFarming()}
         <Text bold style={{ textTransform: 'uppercase' }}>
           {image}
