@@ -102,16 +102,16 @@ const farmsV2: FarmConfig[] = [
     token: tokens.suteku,
     quoteToken: tokens.busd,
   },
-  {
-    pid: 4,
-    lpSymbol: 'SOKU-YUMMY LP',
-    lpAddresses: {
-      97: '',
-      56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
-    },
-    token: tokens.yummy,
-    quoteToken: tokens.soku,
-  },
+  // {
+  //   pid: 4,
+  //   lpSymbol: 'SOKU-YUMMY LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
+  //   },
+  //   token: tokens.yummy,
+  //   quoteToken: tokens.soku,
+  // },
   {
     pid: 7,
     lpSymbol: 'SOKU-HODL LP',
