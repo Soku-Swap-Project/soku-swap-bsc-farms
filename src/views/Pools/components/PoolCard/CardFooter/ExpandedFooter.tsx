@@ -43,7 +43,29 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
     fees: { performanceFee },
   } = useCakeVault()
 
-  const { stakingToken, earningToken, totalStaked, startBlock, endBlock, isFinished, contractAddress, sousId } = pool
+  const {
+    stakingToken,
+    earningToken,
+    totalStaked,
+    startBlock,
+    endBlock,
+    isFinished,
+    contractAddress,
+    sousId,
+    lockTime,
+  } = pool
+  console.log(
+    stakingToken,
+    earningToken,
+    totalStaked,
+    startBlock,
+    endBlock,
+    isFinished,
+    contractAddress,
+    sousId,
+    lockTime,
+    'pool',
+  )
 
   const tokenAddress = earningToken.address ? getAddress(earningToken.address) : ''
   const poolContractAddress = getAddress(contractAddress)
@@ -51,10 +73,15 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
   const imageSrc = `${BASE_URL}/images/tokens/${earningToken.symbol.toLowerCase()}.png`
   const isMetaMaskInScope = !!(window as WindowChain).ethereum?.isMetaMask
   const isManualCakePool = sousId === 0
-
   const shouldShowBlockCountdown = Boolean(!isFinished && startBlock && endBlock)
   const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
   const blocksRemaining = Math.max(endBlock - currentBlock, 0)
+  const lockRemaining = Math.max(lockTime - currentBlock, 0)
+
+  if (pool.poolCategory === 'Lock') {
+    console.log('lockTime', lockTime)
+  }
+
   const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
@@ -91,26 +118,73 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
         </Flex>
       </Flex>
       {shouldShowBlockCountdown && (
-        <Flex mb="2px" justifyContent="space-between" alignItems="center">
-          <Text small>{hasPoolStarted ? t('End') : t('Start')}:</Text>
-          <Flex alignItems="center">
-            {blocksRemaining || blocksUntilStart ? (
-              <Balance
-                color="primary"
-                fontSize="14px"
-                value={hasPoolStarted ? blocksRemaining : blocksUntilStart}
-                decimals={0}
-              />
-            ) : (
-              <Skeleton width="54px" height="21px" />
-            )}
-            <Text ml="4px" color="primary" style={{ color: '#04bbfb' }} small textTransform="lowercase">
-              {t('Blocks')}
-            </Text>
-            <TimerIcon ml="4px" color="primary" />
+        <>
+          <Flex mb="2px" justifyContent="space-between" alignItems="center">
+            <Text small>{hasPoolStarted ? t('End') : t('Start')}:</Text>
+            <Flex alignItems="center">
+              {blocksRemaining || blocksUntilStart ? (
+                <Balance
+                  color="primary"
+                  fontSize="14px"
+                  value={hasPoolStarted ? blocksRemaining : blocksUntilStart}
+                  decimals={0}
+                />
+              ) : (
+                <Skeleton width="54px" height="21px" />
+              )}
+              {hasPoolStarted ? (
+                <a
+                  color="primary"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://bscscan.com/block/countdown/${endBlock}`}
+                  style={{ color: '#04bbfb', marginLeft: '4px', textTransform: 'lowercase' }}
+                  className="start_and_endBlocks"
+                >
+                  {t('Blocks')}
+                </a>
+              ) : (
+                <a
+                  color="primary"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://bscscan.com/block/countdown/${startBlock}`}
+                  style={{ color: '#04bbfb', marginLeft: '4px', textTransform: 'lowercase' }}
+                  className="start_and_endBlocks"
+                >
+                  {t('Blocks')}
+                </a>
+              )}
+
+              <LinkExternal ml="4px" color="primary" />
+            </Flex>
           </Flex>
-        </Flex>
+        </>
       )}
+      {/* {pool.poolCategory === 'Lock' && (
+        <>
+          <Flex mb="2px" justifyContent="space-between" alignItems="center">
+            <Text small>Lock Remaining:</Text>
+            <Flex alignItems="center">
+              {blocksRemaining || blocksUntilStart ? (
+                <Balance
+                  color="primary"
+                  fontSize="14px"
+                  value={hasPoolStarted ? blocksRemaining : blocksUntilStart}
+                  decimals={0}
+                />
+              ) : (
+                <Skeleton width="54px" height="21px" />
+              )}
+              <Text ml="4px" color="primary" style={{ color: '#04bbfb' }} small textTransform="lowercase">
+                {t('Blocks')}
+              </Text>
+              <TimerIcon ml="4px" color="primary" />
+            </Flex>
+          </Flex>
+        </>
+      )} */}
+
       {isAutoVault && (
         <Flex mb="2px" justifyContent="space-between" alignItems="center">
           {tooltipVisible && tooltip}
