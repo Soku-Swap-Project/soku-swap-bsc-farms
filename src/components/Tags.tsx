@@ -1,6 +1,7 @@
 import React from 'react'
 import Chip from '@mui/material/Chip'
 import { Tag, VerifiedIcon, CommunityIcon, BinanceIcon, RefreshIcon, AutoRenewIcon } from '@pancakeswap/uikit'
+import LockIcon from '@mui/icons-material/Lock'
 
 const CoreTag = (props) => (
   <Tag variant="secondary" outline startIcon={<VerifiedIcon width="18px" color="secondary" mr="4px" />} {...props}>
@@ -18,6 +19,12 @@ const BinanceTag = (props) => (
   <Tag variant="binance" outline startIcon={<BinanceIcon width="18px" color="secondary" mr="4px" />} {...props}>
     Binance
   </Tag>
+)
+
+const LockedTag = (props) => (
+  <Chip label="Locked" variant="outlined" icon={<LockIcon style={{ width: '18px' }} />} {...props}>
+    Locked
+  </Chip>
 )
 
 const DualTag = (props) => (
@@ -38,4 +45,4 @@ const CompoundingPoolTag = (props) => (
   </Tag>
 )
 
-export { CoreTag, CommunityTag, BinanceTag, DualTag, ManualPoolTag, CompoundingPoolTag }
+export { CoreTag, CommunityTag, BinanceTag, DualTag, ManualPoolTag, CompoundingPoolTag, LockedTag }

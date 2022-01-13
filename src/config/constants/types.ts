@@ -46,6 +46,7 @@ export interface Ifo {
 export enum PoolCategory {
   'COMMUNITY' = 'Community',
   'CORE' = 'Core',
+  'LOCKED' = 'Lock', // Locked Staking Pool
   'BINANCE' = 'Binance', // Pools using native BNB behave differently than pools using a token
   'AUTO' = 'Auto',
 }

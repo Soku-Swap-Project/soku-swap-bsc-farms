@@ -13,6 +13,11 @@ const GlobalStyle = createGlobalStyle`
 
   }
 
+  .start_and_endBlocks:hover {
+    opacity: 0.7;
+  }
+
+
  
   body {
     min-height: 100vh;
