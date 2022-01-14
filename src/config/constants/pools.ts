@@ -341,20 +341,20 @@ const pools: PoolConfig[] = [
 
   // New Locked Staking Pools
 
-  // {
-  //   sousId: 1,
-  //   stakingToken: tokens.suteku,
-  //   earningToken: tokens.soku,
-  //   contractAddress: {
-  //     97: '',
-  //     56: '0x6C2BbD77f0498DbFA6f7ce92d5e4045548E86c09',
-  //   },
-  //   poolCategory: PoolCategory.LOCKED,
-  //   harvest: true,
-  //   tokenPerBlock: '1',
-  //   sortOrder: 999,
-  //   isFinished: false,
-  // },
+  {
+    sousId: 1,
+    stakingToken: tokens.suteku,
+    earningToken: tokens.soku,
+    contractAddress: {
+      97: '',
+      56: '0xFc810EAe05eCdfAC3E77d49b97bAA689e8a38486',
+    },
+    poolCategory: PoolCategory.LOCKED,
+    harvest: true,
+    tokenPerBlock: '0.00001',
+    sortOrder: 999,
+    isFinished: false,
+  },
   {
     sousId: 11,
     stakingToken: tokens.soku,

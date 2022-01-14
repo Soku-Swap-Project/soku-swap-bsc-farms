@@ -1,10 +1,12 @@
 import React from 'react'
 import { Flex, Text, Button, IconButton, AddIcon, MinusIcon, useModal, Skeleton, useTooltip } from '@pancakeswap/uikit'
+import { useWeb3React } from '@web3-react/core'
 import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { Pool } from 'state/types'
-import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/hooks'
+import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku, getNewLockTime } from 'state/hooks'
+
 import Balance from 'components/Balance'
 import NotEnoughTokensModal from '../Modals/NotEnoughTokensModal'
 import StakeModal from '../Modals/StakeModal'
@@ -27,12 +29,15 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   isStaked,
   isLoading = false,
 }) => {
-  const { stakingToken, stakingLimit, isFinished, userData } = pool
+  const { stakingToken, stakingLimit, isFinished, userData, contractAddress } = pool
+  const { account } = useWeb3React()
   const { t } = useTranslation()
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
   const sokuPrice = useTokenPrice('sokuswap')
   const sutekuPrice = usePriceBnbSuteku()
+
+  console.log(getNewLockTime(account, pool), 'testing')
 
   // if (earningToken.symbol === 'SOKU') {
   //   const earningTokenPrice =
