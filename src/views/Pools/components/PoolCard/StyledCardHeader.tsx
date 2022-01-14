@@ -64,6 +64,7 @@ const StyledCardHeader: React.FC<{
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
+          <h4 style={{ color: 'red', paddingBottom: '10px' }}>TESTING DO NOT STAKE</h4>
           <Heading color={isFinished ? 'textDisabled' : '#05195a'} scale="lg">
             {`${getHeadingPrefix()} ${earningTokenSymbol}`}
           </Heading>
