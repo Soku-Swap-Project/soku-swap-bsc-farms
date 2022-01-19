@@ -28,6 +28,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
           earningTokenSymbol={earningToken.symbol}
           stakingTokenSymbol={stakingToken.symbol}
           isFinished={isFinished && sousId !== 0}
+          pool={pool}
         />
         <CardBody>
           <AprRow pool={pool} />

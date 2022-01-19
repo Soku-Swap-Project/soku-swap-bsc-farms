@@ -271,6 +271,8 @@ img[alt="icon"] {
   
   .pancake-button--disabled {
     background: #d8d8d8 !important;
+    fill: gray !important;
+    // border: 2px solid lightgray !important
   }
 `
 

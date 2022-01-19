@@ -18,7 +18,7 @@ const StyledCardHeader: React.FC<{
   isFinished?: boolean
   isStaking?: boolean
   isPromotedPool?: boolean
-  pool?: Pool
+  pool: Pool
 }> = ({
   earningTokenSymbol,
   stakingTokenSymbol,
@@ -69,6 +69,9 @@ const StyledCardHeader: React.FC<{
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
+          {pool.poolCategory === 'Lock' && (
+            <h1 style={{ color: 'red', paddingBottom: '10px' }}>TESTING (DO NOT STAKE)</h1>
+          )}
           <Heading color={isFinished ? 'textDisabled' : '#05195a'} scale="lg">
             {`${getHeadingPrefix()} ${earningTokenSymbol}`}
           </Heading>

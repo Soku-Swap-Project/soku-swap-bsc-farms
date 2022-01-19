@@ -59,6 +59,15 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           { indexed: true, internalType: 'address', name: 'user', type: 'address' },
           { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
         ],
+        name: 'ClaimRewards',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+          { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+        ],
         name: 'Deposit',
         type: 'event',
       },
@@ -151,6 +160,15 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         stateMutability: 'view',
         type: 'function',
       },
+      { inputs: [], name: 'claimRewards', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+      {
+        inputs: [{ internalType: 'uint256', name: '_no', type: 'uint256' }],
+        name: 'claimRewardsByAdmin',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      { inputs: [], name: 'confirmUpdateRewardPerBlock', outputs: [], stateMutability: 'nonpayable', type: 'function' },
       {
         inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
         name: 'deposit',
@@ -177,6 +195,13 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
         name: 'getRemainingLockTime',
         outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'hasRewardPerBlockUpdated',
+        outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
         stateMutability: 'view',
         type: 'function',
       },
@@ -220,6 +245,13 @@ const StakeAction: React.FC<StakeActionsProps> = ({
       {
         inputs: [],
         name: 'lockTime',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'numberOfClaim',
         outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
         stateMutability: 'view',
         type: 'function',
@@ -320,6 +352,13 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         type: 'function',
       },
       {
+        inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        name: 'userArr',
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
         inputs: [{ internalType: 'address', name: '', type: 'address' }],
         name: 'userInfo',
         outputs: [
@@ -337,7 +376,6 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         type: 'function',
       },
     ]
-
     if (pool.poolCategory === 'Lock') {
       const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(contractAddress))
       const remainingTime = await contract.methods.getRemainingLockTime(address).call()
@@ -408,15 +446,10 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           </>
         </Flex>
         <Flex>
-          {pool.poolCategory === 'Lock' && lockTime === 0 ? (
-            <IconButton
-              style={{ border: '2px solid #05195a' }}
-              variant="secondary"
-              disabled={!false}
-              onClick={onPresentUnstake}
-              mr="6px"
-            >
-              <MinusIcon color="#05195a" width="14px" />
+          {/* Disable withdraw/unstake if there is still lock time */}
+          {pool.poolCategory === 'Lock' && lockTime !== '0' ? (
+            <IconButton variant="secondary" disabled={!false} onClick={onPresentUnstake} mr="6px">
+              <MinusIcon color="gray" width="14px" />
             </IconButton>
           ) : (
             <IconButton style={{ border: '2px solid #05195a' }} variant="secondary" onClick={onPresentUnstake} mr="6px">
@@ -433,11 +466,11 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           ) : (
             <IconButton
               variant="secondary"
-              style={{ border: '2px solid #05195a' }}
+              style={isFinished ? { border: '0' } : { border: '2px solid #05195a' }}
               onClick={stakingTokenBalance.gt(0) ? onPresentStake : onPresentTokenRequired}
               disabled={isFinished}
             >
-              <AddIcon color="#05195a" width="24px" height="24px" />
+              <AddIcon color={isFinished ? 'gray' : '#05195a'} width="24px" height="24px" />
             </IconButton>
           )}
         </Flex>
