@@ -472,7 +472,7 @@ const pools: PoolConfig[] = [
     earningToken: tokens.soku,
     contractAddress: {
       97: '',
-      56: '0x49dF40B34A6a2b03dCD43362cEeC0D6Eda42caF7',
+      56: '0x8e36B4834F3Fc94b45c65851ca30D62C57417179',
     },
     poolCategory: PoolCategory.LOCKED,
     harvest: true,
