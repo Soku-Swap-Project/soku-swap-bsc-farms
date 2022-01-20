@@ -17,7 +17,10 @@ const GlobalStyle = createGlobalStyle`
     opacity: 0.7;
   }
 
-
+  .start_and_endBlocks {
+    font-size: 14px;
+    margin-right: -2px;
+  }
  
   body {
     min-height: 100vh;
@@ -268,6 +271,8 @@ img[alt="icon"] {
   
   .pancake-button--disabled {
     background: #d8d8d8 !important;
+    fill: gray !important;
+    // border: 2px solid lightgray !important
   }
 `
 

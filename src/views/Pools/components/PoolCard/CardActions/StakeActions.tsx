@@ -1,5 +1,9 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Flex, Text, Button, IconButton, AddIcon, MinusIcon, useModal, Skeleton, useTooltip } from '@pancakeswap/uikit'
+import { useWeb3React } from '@web3-react/core'
+import { AbiItem } from 'web3-utils'
+import { getAddress } from 'utils/addressHelpers'
+import { getWeb3NoAccount } from 'utils/web3'
 import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -27,21 +31,366 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   isStaked,
   isLoading = false,
 }) => {
-  const { stakingToken, stakingLimit, isFinished, userData } = pool
+  const { stakingToken, stakingLimit, isFinished, userData, contractAddress } = pool
+  const [lockTime, setLockTime] = useState()
+  const { account } = useWeb3React()
   const { t } = useTranslation()
+  const web3 = getWeb3NoAccount()
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
   const sokuPrice = useTokenPrice('sokuswap')
   const sutekuPrice = usePriceBnbSuteku()
 
-  // if (earningToken.symbol === 'SOKU') {
-  //   const earningTokenPrice =
-  // }
-  const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
-  // const earningTokenPrice = new BigNumber(1)
+  const getLockTime = async (address) => {
+    const abi = [
+      { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: false, internalType: 'address', name: 'tokenRecovered', type: 'address' },
+          { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+        ],
+        name: 'AdminTokenRecovery',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+          { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+        ],
+        name: 'ClaimRewards',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+          { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+        ],
+        name: 'Deposit',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+          { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+        ],
+        name: 'EmergencyWithdraw',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [{ indexed: false, internalType: 'uint256', name: 'poolLimitPerUser', type: 'uint256' }],
+        name: 'NewPoolLimit',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [{ indexed: false, internalType: 'uint256', name: 'rewardPerBlock', type: 'uint256' }],
+        name: 'NewRewardPerBlock',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: false, internalType: 'uint256', name: 'startBlock', type: 'uint256' },
+          { indexed: false, internalType: 'uint256', name: 'endBlock', type: 'uint256' },
+        ],
+        name: 'NewStartAndEndBlocks',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, internalType: 'address', name: 'previousOwner', type: 'address' },
+          { indexed: true, internalType: 'address', name: 'newOwner', type: 'address' },
+        ],
+        name: 'OwnershipTransferred',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [{ indexed: false, internalType: 'uint256', name: 'blockNumber', type: 'uint256' }],
+        name: 'RewardsStop',
+        type: 'event',
+      },
+      {
+        anonymous: false,
+        inputs: [
+          { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+          { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+        ],
+        name: 'Withdraw',
+        type: 'event',
+      },
+      {
+        inputs: [],
+        name: 'PRECISION_FACTOR',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'SMART_CHEF_FACTORY',
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'accTokenPerShare',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'address', name: '', type: 'address' }],
+        name: 'addressEndLockTime',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'bonusEndBlock',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      { inputs: [], name: 'claimRewards', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+      {
+        inputs: [{ internalType: 'uint256', name: '_no', type: 'uint256' }],
+        name: 'claimRewardsByAdmin',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      { inputs: [], name: 'confirmUpdateRewardPerBlock', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+      {
+        inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+        name: 'deposit',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+        name: 'emergencyRewardWithdraw',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      { inputs: [], name: 'emergencyWithdraw', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+      {
+        inputs: [],
+        name: 'endLockTime',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
+        name: 'getRemainingLockTime',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'hasRewardPerBlockUpdated',
+        outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'hasUserLimit',
+        outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [
+          { internalType: 'contract IBEP20', name: '_stakedToken', type: 'address' },
+          { internalType: 'contract IBEP20', name: '_rewardToken', type: 'address' },
+          { internalType: 'uint256', name: '_rewardPerBlock', type: 'uint256' },
+          { internalType: 'uint256', name: '_startBlock', type: 'uint256' },
+          { internalType: 'uint256', name: '_bonusEndBlock', type: 'uint256' },
+          { internalType: 'uint256', name: '_lockTime', type: 'uint256' },
+          { internalType: 'uint256', name: '_poolLimitPerUser', type: 'uint256' },
+          { internalType: 'address', name: '_admin', type: 'address' },
+        ],
+        name: 'initialize',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'isInitialized',
+        outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'lastRewardBlock',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'lockTime',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'numberOfClaim',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'owner',
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
+        name: 'pendingReward',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'poolLimitPerUser',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [
+          { internalType: 'address', name: '_tokenAddress', type: 'address' },
+          { internalType: 'uint256', name: '_tokenAmount', type: 'uint256' },
+        ],
+        name: 'recoverWrongTokens',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      { inputs: [], name: 'renounceOwnership', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+      {
+        inputs: [],
+        name: 'rewardPerBlock',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'rewardToken',
+        outputs: [{ internalType: 'contract IBEP20', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'stakedToken',
+        outputs: [{ internalType: 'contract IBEP20', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'startBlock',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      { inputs: [], name: 'stopReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+      {
+        inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
+        name: 'transferOwnership',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [
+          { internalType: 'bool', name: '_hasUserLimit', type: 'bool' },
+          { internalType: 'uint256', name: '_poolLimitPerUser', type: 'uint256' },
+        ],
+        name: 'updatePoolLimitPerUser',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'uint256', name: '_rewardPerBlock', type: 'uint256' }],
+        name: 'updateRewardPerBlock',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [
+          { internalType: 'uint256', name: '_startBlock', type: 'uint256' },
+          { internalType: 'uint256', name: '_bonusEndBlock', type: 'uint256' },
+        ],
+        name: 'updateStartAndEndBlocks',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        name: 'userArr',
+        outputs: [{ internalType: 'address', name: '', type: 'address' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'address', name: '', type: 'address' }],
+        name: 'userInfo',
+        outputs: [
+          { internalType: 'uint256', name: 'amount', type: 'uint256' },
+          { internalType: 'uint256', name: 'rewardDebt', type: 'uint256' },
+        ],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
+        name: 'withdraw',
+        outputs: [],
+        stateMutability: 'nonpayable',
+        type: 'function',
+      },
+    ]
+    if (pool.poolCategory === 'Lock') {
+      const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(contractAddress))
+      const remainingTime = await contract.methods.getRemainingLockTime(address).call()
+      setLockTime(remainingTime)
+    }
+  }
 
-  // console.log(earningTokenPrice)
-  // const stakingTokenPriceAsNumber = stakingTokenPrice ? stakingTokenPrice.toNumber() : 0
+  useEffect(() => {
+    getLockTime(account)
+  })
+
+  console.log(lockTime, 'lock time')
+
+  const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
+
   const stakingTokenPriceAsNumber = stakingTokenPrice
   const stakedTokenDollarBalance = getBalanceNumber(
     stakedBalance.multipliedBy(stakingTokenPriceAsNumber),
@@ -97,9 +446,17 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           </>
         </Flex>
         <Flex>
-          <IconButton style={{ border: '2px solid #05195a' }} variant="secondary" onClick={onPresentUnstake} mr="6px">
-            <MinusIcon color="#05195a" width="14px" />
-          </IconButton>
+          {/* Disable withdraw/unstake if there is still lock time */}
+          {pool.poolCategory === 'Lock' && lockTime !== '0' ? (
+            <IconButton variant="secondary" disabled={!false} onClick={onPresentUnstake} mr="6px">
+              <MinusIcon color="gray" width="14px" />
+            </IconButton>
+          ) : (
+            <IconButton style={{ border: '2px solid #05195a' }} variant="secondary" onClick={onPresentUnstake} mr="6px">
+              <MinusIcon color="#05195a" width="14px" />
+            </IconButton>
+          )}
+
           {reachStakingLimit ? (
             <span ref={targetRef}>
               <IconButton style={{ border: '2px solid #05195a' }} variant="secondary" disabled>
@@ -109,11 +466,11 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           ) : (
             <IconButton
               variant="secondary"
-              style={{ border: '2px solid #05195a' }}
+              style={isFinished ? { border: '0' } : { border: '2px solid #05195a' }}
               onClick={stakingTokenBalance.gt(0) ? onPresentStake : onPresentTokenRequired}
               disabled={isFinished}
             >
-              <AddIcon color="#05195a" width="24px" height="24px" />
+              <AddIcon color={isFinished ? 'gray' : '#05195a'} width="24px" height="24px" />
             </IconButton>
           )}
         </Flex>

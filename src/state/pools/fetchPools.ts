@@ -14,12 +14,7 @@ import Web3 from 'web3'
 
 export const fetchPoolsBlockLimits = async () => {
   const poolsWithEnd = poolsConfig.filter((p) => p.sousId !== 0)
-  const poolsWithLock = poolsConfig.filter((p) => p.sousId === 1)
-  const web3 = new Web3(new Web3.providers.HttpProvider('http://localhost:8545'))
-  console.log('lock', poolsWithLock)
 
-  console.log(poolsWithEnd, 'pools')
-  // let lock
   const callsStartBlock = poolsWithEnd.map((poolConfig) => {
     return {
       address: getAddress(poolConfig.contractAddress),
@@ -33,14 +28,7 @@ export const fetchPoolsBlockLimits = async () => {
     }
   })
 
-  const callsLockTime = poolsWithLock.map((poolConfig) => {
-    return {
-      address: getAddress(poolConfig.contractAddress),
-      name: 'lockTime',
-    }
-  })
-
-  const test = [
+  const abi = [
     { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
     {
       anonymous: false,
@@ -136,6 +124,13 @@ export const fetchPoolsBlockLimits = async () => {
       type: 'function',
     },
     {
+      inputs: [{ internalType: 'address', name: '', type: 'address' }],
+      name: 'addressEndLockTime',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
       inputs: [],
       name: 'bonusEndBlock',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
@@ -160,6 +155,13 @@ export const fetchPoolsBlockLimits = async () => {
     {
       inputs: [],
       name: 'endLockTime',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
+      name: 'getRemainingLockTime',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
       stateMutability: 'view',
       type: 'function',
@@ -322,27 +324,17 @@ export const fetchPoolsBlockLimits = async () => {
     },
   ]
 
-  const contract = new web3.eth.Contract(
-    SmartChefInitializeable as AbiItem[],
-    '0x6C2BbD77f0498DbFA6f7ce92d5e4045548E86c09',
-  )
-  console.log(contract.methods.endLockTime().call(), 'lock time')
-
-  console.log('callsLockTime', callsLockTime)
-
-  const starts = await multicall(test, callsStartBlock)
-  const ends = await multicall(test, callsEndBlock)
-  const lock = await multicall(test, callsLockTime)
+  const starts = await multicall(abi, callsStartBlock)
+  const ends = await multicall(abi, callsEndBlock)
 
   return poolsWithEnd.map((cakePoolConfig, index) => {
     const startBlock = starts[index]
     const endBlock = ends[index]
-    const lockTime = lock[index]
+
     return {
       sousId: cakePoolConfig.sousId,
       startBlock: new BigNumber(startBlock).toJSON(),
       endBlock: new BigNumber(endBlock).toJSON(),
-      lockTime: new BigNumber(lockTime).toJSON(),
     }
   })
 }

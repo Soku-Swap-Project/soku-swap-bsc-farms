@@ -31,7 +31,7 @@ const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) =
 
   const manualTooltipText = t('You must claim and compound your earnings from this pool manually.')
   const lockedVaultToolTip = t(
-    'Higher payouts than manual staking pools, however your earnings will be locked for a period of time.',
+    'Higher payouts than Manual staking pools, however your tokens will be locked for a period of time.',
   )
   const autoTooltipText = t(
     'Any funds you stake in this pool will be automagically claimed and restaked (compounded) for you.',

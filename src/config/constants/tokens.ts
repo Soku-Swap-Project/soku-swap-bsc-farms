@@ -23,6 +23,26 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  test_soku: {
+    symbol: 'SOKU',
+    name: 'SOKU',
+    address: {
+      56: '',
+      97: '0xC7c135124AFEddfdC7868bEa9A7Df728D2B6CAC0',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
+  test_suteku: {
+    symbol: 'SUTEKU',
+    name: 'Suteku Rewards Token',
+    address: {
+      56: '',
+      97: '0x837b7c4C3EdE1514b820Ce35B2926aeeD471879e',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.finance/',
+  },
   hodl: {
     symbol: 'HODL',
     name: 'HODL',

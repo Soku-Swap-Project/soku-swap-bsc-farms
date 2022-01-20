@@ -59,6 +59,7 @@ export const fetchUserStakeBalances = async (account) => {
     name: 'userInfo',
     params: [account],
   }))
+
   const userInfo = await multicall(sousChefABI, calls)
   const stakedBalances = nonMasterPools.reduce(
     (acc, pool, index) => ({
@@ -89,8 +90,9 @@ export const fetchUserPendingRewards = async (account) => {
     {},
   )
 
-  // Cake / Cake pool
+  // Soku / Soku pool
   const pendingReward = await masterChefContract.methods.pendingSOKU('0', account).call()
+  console.log(await masterChefContract)
 
   return { ...pendingRewards, 0: new BigNumber(pendingReward).toJSON() }
 }

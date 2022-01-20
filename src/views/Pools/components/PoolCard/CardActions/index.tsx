@@ -50,6 +50,7 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
               sousId={sousId}
               isBnbPool={isBnbPool}
               isLoading={isLoading}
+              pool={pool}
             />
           </>
         )}

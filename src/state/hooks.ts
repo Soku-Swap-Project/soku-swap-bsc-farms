@@ -42,6 +42,8 @@ import { getCanClaim } from './predictions/helpers'
 import { transformPool } from './pools/helpers'
 import { fetchPoolsStakingLimitsAsync } from './pools'
 
+const web3 = getWeb3NoAccount()
+
 export const useFetchPublicData = () => {
   const dispatch = useAppDispatch()
   const { slowRefresh } = useRefresh()
