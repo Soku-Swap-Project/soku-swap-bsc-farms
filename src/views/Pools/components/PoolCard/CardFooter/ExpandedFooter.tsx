@@ -369,12 +369,12 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
   const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
   const blocksRemaining = Math.max(endBlock - currentBlock, 0)
   // const lockRemaining = Math.max(getLockTime(account), 0)
+  // console.log('lockTime', lockTime)
 
-  // console.log(lockRemaining)
+  const remainingLock = currentBlock - lockTime
+  console.log(remainingLock, 'lock time left')
 
-  // if (pool.poolCategory === 'Lock') {
-  //   console.log('lockTime', lockTime)
-  // }
+  // console.log(currentBlock)
 
   const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
 
@@ -465,9 +465,29 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
               ) : (
                 <Skeleton width="54px" height="21px" />
               )}
-              <Text ml="4px" color="primary" style={{ color: '#04bbfb' }} small textTransform="lowercase">
-                {t('Blocks')}
-              </Text>
+              {lockTime > 0 ? (
+                <a
+                  color="primary"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://bscscan.com/block/countdown/${remainingLock}`}
+                  style={{ color: '#04bbfb', marginLeft: '4px', textTransform: 'lowercase' }}
+                  className="start_and_endBlocks"
+                >
+                  {t('Blocks')}
+                </a>
+              ) : (
+                <a
+                  color="primary"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`https://bscscan.com/block/countdown/${currentBlock}`}
+                  style={{ color: '#04bbfb', marginLeft: '4px', textTransform: 'lowercase' }}
+                  className="start_and_endBlocks"
+                >
+                  {t('Blocks')}
+                </a>
+              )}
               <LockClockIcon style={{ marginLeft: '4px', color: '#04bbfb' }} />
             </Flex>
           </Flex>

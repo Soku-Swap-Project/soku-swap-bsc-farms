@@ -35,7 +35,7 @@ const StyledCardHeader: React.FC<{
   const isSokuPool = earningTokenSymbol === 'SOKU' && stakingTokenSymbol === 'SOKU'
   const background = isStaking ? 'bubblegum' : 'cardHeader'
 
-  console.log(pool, 'pool')
+  // console.log(pool, 'pool')
 
   const getHeadingPrefix = () => {
     if (isAutoVault) {
@@ -69,9 +69,9 @@ const StyledCardHeader: React.FC<{
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
-          {pool.poolCategory === 'Lock' && (
+          {/* {pool.poolCategory === 'Lock' && (
             <h1 style={{ color: 'red', paddingBottom: '10px' }}>TESTING (DO NOT STAKE)</h1>
-          )}
+          )} */}
           <Heading color={isFinished ? 'textDisabled' : '#05195a'} scale="lg">
             {`${getHeadingPrefix()} ${earningTokenSymbol}`}
           </Heading>

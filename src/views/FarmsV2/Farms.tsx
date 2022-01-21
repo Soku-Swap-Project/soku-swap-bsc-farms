@@ -350,7 +350,7 @@ const Farms: React.FC = () => {
     return (
       <div>
         <FlexLayout>
-          {console.log(path)}
+          {/* {console.log(path)} */}
           <Route exact path={`${path}/v2`}>
             {farmsStakedMemoized.map((farm) => (
               <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed={false} />

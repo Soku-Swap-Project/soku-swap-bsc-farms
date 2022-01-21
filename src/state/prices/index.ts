@@ -56,7 +56,7 @@ const getSokuPrice = async () => {
       `https://soku-api.herokuapp.com/https://api.pancakeswap.info/api/v2/tokens/0x0e4b5ea0259eb3d66e6fcb7cc8785817f8490a53`,
     )
 
-    console.log(data, 'data')
+    // console.log(data, 'data')
     soku_price = data.data.price
   } catch (error) {}
 }
@@ -79,7 +79,7 @@ export const sokuPrice = () => {
 export const getPrices = async () => {
   const res = await CoinGeckoClient.coins.markets({ ids: ['bitcoin', 'sokuswap', 'binancecoin', 'tether'] })
   const resArray = JSON.stringify(res.data)
-  console.log('test', resArray)
+  // console.log('test', resArray)
 }
 
 // Thunks
