@@ -59,7 +59,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
   const [userInfo, setUserInfo] = useState()
   const web3 = useWeb3()
 
-  console.log('pool', pool)
+  // console.log('pool', pool)
 
   const claimRewards = async () => {
     const abi = [
@@ -397,7 +397,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
       },
     ]
     const contract = new web3.eth.Contract(abi as unknown as AbiItem, pool.contractAddress[56])
-    console.log('contract', contract)
+    // console.log('contract', contract)
     const claimTx = await contract.methods
       .claimReward()
       .send({ from: account })
