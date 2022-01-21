@@ -64,7 +64,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           { indexed: true, internalType: 'address', name: 'user', type: 'address' },
           { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
         ],
-        name: 'ClaimRewards',
+        name: 'ClaimReward',
         type: 'event',
       },
       {
@@ -117,12 +117,6 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
       },
       {
         anonymous: false,
-        inputs: [{ indexed: false, internalType: 'uint256', name: 'blockNumber', type: 'uint256' }],
-        name: 'RewardsStop',
-        type: 'event',
-      },
-      {
-        anonymous: false,
         inputs: [
           { indexed: true, internalType: 'address', name: 'user', type: 'address' },
           { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
@@ -165,21 +159,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         stateMutability: 'view',
         type: 'function',
       },
-      { inputs: [], name: 'claimRewards', outputs: [], stateMutability: 'nonpayable', type: 'function' },
-      {
-        inputs: [{ internalType: 'uint256', name: '_no', type: 'uint256' }],
-        name: 'claimRewardsByAdmin',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
-      },
-      {
-        inputs: [],
-        name: 'confirmUpdateRewardPerBlock',
-        outputs: [],
-        stateMutability: 'nonpayable',
-        type: 'function',
-      },
+      { inputs: [], name: 'claimReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
       {
         inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
         name: 'deposit',
@@ -211,7 +191,14 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
       },
       {
         inputs: [],
-        name: 'hasRewardPerBlockUpdated',
+        name: 'hasAllRewardDistributedByAdmin',
+        outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'hasSavedPendingRewardUpdatedByAdmin',
         outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
         stateMutability: 'view',
         type: 'function',
@@ -262,7 +249,14 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
       },
       {
         inputs: [],
-        name: 'numberOfClaim',
+        name: 'numberOfClaimCurrentAndTotalPendingReward',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
+        inputs: [],
+        name: 'numberOfClaimSavedPendingReward',
         outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
         stateMutability: 'view',
         type: 'function',
@@ -329,6 +323,13 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
       },
       { inputs: [], name: 'stopReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
       {
+        inputs: [{ internalType: 'address', name: '', type: 'address' }],
+        name: 'temporaryPendingReward',
+        outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+        stateMutability: 'view',
+        type: 'function',
+      },
+      {
         inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
         name: 'transferOwnership',
         outputs: [],
@@ -360,13 +361,6 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         name: 'updateStartAndEndBlocks',
         outputs: [],
         stateMutability: 'nonpayable',
-        type: 'function',
-      },
-      {
-        inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
-        name: 'userArr',
-        outputs: [{ internalType: 'address', name: '', type: 'address' }],
-        stateMutability: 'view',
         type: 'function',
       },
       {
@@ -436,6 +430,15 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
             { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
           ],
           name: 'AdminTokenRecovery',
+          type: 'event',
+        },
+        {
+          anonymous: false,
+          inputs: [
+            { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+            { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+          ],
+          name: 'ClaimReward',
           type: 'event',
         },
         {
@@ -536,6 +539,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           stateMutability: 'view',
           type: 'function',
         },
+        { inputs: [], name: 'claimReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
         {
           inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
           name: 'deposit',
@@ -567,6 +571,20 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         },
         {
           inputs: [],
+          name: 'hasAllRewardDistributedByAdmin',
+          outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
+          inputs: [],
+          name: 'hasSavedPendingRewardUpdatedByAdmin',
+          outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
+          inputs: [],
           name: 'hasUserLimit',
           outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
           stateMutability: 'view',
@@ -590,6 +608,13 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         },
         {
           inputs: [],
+          name: 'isContractNotPaused',
+          outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
+          inputs: [],
           name: 'isInitialized',
           outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
           stateMutability: 'view',
@@ -605,6 +630,20 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         {
           inputs: [],
           name: 'lockTime',
+          outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
+          inputs: [],
+          name: 'numberOfClaimCurrentAndTotalPendingReward',
+          outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
+          inputs: [],
+          name: 'numberOfClaimSavedPendingReward',
           outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
           stateMutability: 'view',
           type: 'function',
@@ -671,8 +710,22 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         },
         { inputs: [], name: 'stopReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
         {
+          inputs: [{ internalType: 'address', name: '', type: 'address' }],
+          name: 'temporaryPendingReward',
+          outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
           inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
           name: 'transferOwnership',
+          outputs: [],
+          stateMutability: 'nonpayable',
+          type: 'function',
+        },
+        {
+          inputs: [{ internalType: 'uint256', name: '_num', type: 'uint256' }],
+          name: 'updateCurrentAndTotalPendingReward',
           outputs: [],
           stateMutability: 'nonpayable',
           type: 'function',
@@ -695,6 +748,13 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           type: 'function',
         },
         {
+          inputs: [{ internalType: 'uint256', name: '_num', type: 'uint256' }],
+          name: 'updateSavedPendingReward',
+          outputs: [],
+          stateMutability: 'nonpayable',
+          type: 'function',
+        },
+        {
           inputs: [
             { internalType: 'uint256', name: '_startBlock', type: 'uint256' },
             { internalType: 'uint256', name: '_bonusEndBlock', type: 'uint256' },
@@ -705,11 +765,21 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           type: 'function',
         },
         {
+          inputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+          name: 'userArr',
+          outputs: [{ internalType: 'address', name: '', type: 'address' }],
+          stateMutability: 'view',
+          type: 'function',
+        },
+        {
           inputs: [{ internalType: 'address', name: '', type: 'address' }],
           name: 'userInfo',
           outputs: [
             { internalType: 'uint256', name: 'amount', type: 'uint256' },
             { internalType: 'uint256', name: 'rewardDebt', type: 'uint256' },
+            { internalType: 'uint256', name: 'savedPendingReward', type: 'uint256' },
+            { internalType: 'uint256', name: 'totalPendingReward', type: 'uint256' },
+            { internalType: 'uint256', name: 'currentPendingReward', type: 'uint256' },
           ],
           stateMutability: 'view',
           type: 'function',

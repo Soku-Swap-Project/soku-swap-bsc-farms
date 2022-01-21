@@ -45,6 +45,15 @@ export const fetchPoolsBlockLimits = async () => {
         { indexed: true, internalType: 'address', name: 'user', type: 'address' },
         { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
       ],
+      name: 'ClaimReward',
+      type: 'event',
+    },
+    {
+      anonymous: false,
+      inputs: [
+        { indexed: true, internalType: 'address', name: 'user', type: 'address' },
+        { indexed: false, internalType: 'uint256', name: 'amount', type: 'uint256' },
+      ],
       name: 'Deposit',
       type: 'event',
     },
@@ -85,12 +94,6 @@ export const fetchPoolsBlockLimits = async () => {
         { indexed: true, internalType: 'address', name: 'newOwner', type: 'address' },
       ],
       name: 'OwnershipTransferred',
-      type: 'event',
-    },
-    {
-      anonymous: false,
-      inputs: [{ indexed: false, internalType: 'uint256', name: 'blockNumber', type: 'uint256' }],
-      name: 'RewardsStop',
       type: 'event',
     },
     {
@@ -137,6 +140,7 @@ export const fetchPoolsBlockLimits = async () => {
       stateMutability: 'view',
       type: 'function',
     },
+    { inputs: [], name: 'claimReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
     {
       inputs: [{ internalType: 'uint256', name: '_amount', type: 'uint256' }],
       name: 'deposit',
@@ -163,6 +167,20 @@ export const fetchPoolsBlockLimits = async () => {
       inputs: [{ internalType: 'address', name: '_user', type: 'address' }],
       name: 'getRemainingLockTime',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'hasAllRewardDistributedByAdmin',
+      outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'hasSavedPendingRewardUpdatedByAdmin',
+      outputs: [{ internalType: 'bool', name: '', type: 'bool' }],
       stateMutability: 'view',
       type: 'function',
     },
@@ -206,6 +224,20 @@ export const fetchPoolsBlockLimits = async () => {
     {
       inputs: [],
       name: 'lockTime',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'numberOfClaimCurrentAndTotalPendingReward',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
+    {
+      inputs: [],
+      name: 'numberOfClaimSavedPendingReward',
       outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
       stateMutability: 'view',
       type: 'function',
@@ -271,6 +303,13 @@ export const fetchPoolsBlockLimits = async () => {
       type: 'function',
     },
     { inputs: [], name: 'stopReward', outputs: [], stateMutability: 'nonpayable', type: 'function' },
+    {
+      inputs: [{ internalType: 'address', name: '', type: 'address' }],
+      name: 'temporaryPendingReward',
+      outputs: [{ internalType: 'uint256', name: '', type: 'uint256' }],
+      stateMutability: 'view',
+      type: 'function',
+    },
     {
       inputs: [{ internalType: 'address', name: 'newOwner', type: 'address' }],
       name: 'transferOwnership',
