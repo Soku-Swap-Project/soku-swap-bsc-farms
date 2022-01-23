@@ -2,7 +2,9 @@
 import React from 'react'
 import { Menu as UikitMenu, useWalletModal } from '@pancakeswap/uikit'
 import { NavLink } from 'react-router-dom'
-
+import TelegramIcon from '@mui/icons-material/Telegram'
+import TwitterIcon from '@mui/icons-material/Twitter'
+import GitHubIcon from '@mui/icons-material/GitHub'
 import { useWeb3React } from '@web3-react/core'
 import { languageList } from 'config/localization/languages'
 import { useTranslation } from 'contexts/Localization'
@@ -100,33 +102,45 @@ const Menu = (props) => {
             </li>
           </ul>
           <ul className="hidden_navLinks" id="hidden_navLinks">
-            <li className="hidden_navLink">
-              <a href="https://www.sokuswap.finance/" rel="noreferrer noopener" target="_blank">
-                <span className="material-icons">info</span>
-                <p>About</p>
+            <li>
+              <a href="/" rel="noreferrer noopener" className="disabled_link" target="_blank">
+                <span className="material-icons">analytics</span>
+                <p>Analytics</p>
               </a>
             </li>
+
             <li className="hidden_navLink">
-              <a href="https://github.com/Soku-Swap-Project" rel="noreferrer noopener" target="_blank">
-                <span className="material-icons">code</span>
-                <p>Code</p>
-              </a>
-            </li>
-            <li className="hidden_navLink">
-              <a
-                href="https://sokuswap-1.gitbook.io/sokuswap-whitepaper/"
-                rel="noreferrer noopener"
-                className="disabled_link"
-                target="_blank"
-              >
+              <a href="https://sokuswap-2.gitbook.io/sokuswap-gitbook/" rel="noreferrer noopener" target="_blank">
                 <span className="material-icons">school</span>
                 <p>Docs</p>
               </a>
             </li>
             <li className="hidden_navLink">
-              <a href="/" rel="noreferrer noopener" className="disabled_link" target="_blank">
-                <span className="material-icons">analytics</span>
-                <p>Analytics</p>
+              <a href="https://github.com/Soku-Swap-Project" rel="noreferrer noopener" target="_blank">
+                <GitHubIcon />
+                <p>GitHub</p>
+              </a>
+            </li>
+            <div
+              className="social_icon_header"
+              style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', paddingTop: '18px' }}
+            >
+              <p style={{ fontSize: '14px', marginLeft: '-5px' }} className="hidden_navLink">
+                Social Links
+              </p>
+            </div>
+            <hr style={{ width: '65%', marginTop: '10px', paddingTop: '0' }} className="disabled_link" />
+
+            <li className="hidden_navLink" style={{ paddingTop: '16px' }}>
+              <a href="https://t.me/SokuSwap" rel="noreferrer noopener" target="_blank">
+                <TelegramIcon />
+                <p>Telegram</p>
+              </a>
+            </li>
+            <li className="hidden_navLink">
+              <a href="https://twitter.com/sokuswap" rel="noreferrer noopener" target="_blank">
+                <TwitterIcon />
+                <p>Twitter</p>
               </a>
             </li>
           </ul>
