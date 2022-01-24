@@ -387,7 +387,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
     getLockTime(account)
   })
 
-  console.log(lockTime, 'lock time')
+  // console.log(lockTime, 'lock time')
 
   const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
 

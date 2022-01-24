@@ -16,6 +16,36 @@ const pools: PoolConfig[] = [
   //   sortOrder: 1,
   //   isFinished: false,
   // },
+  // New Locked Staking Pools
+
+  {
+    sousId: 45,
+    stakingToken: tokens.suteku,
+    earningToken: tokens.soku,
+    contractAddress: {
+      97: '',
+      56: '0xbfe94Eb2a108e77cdb2aEcA60D9906dddCA1C56E',
+    },
+    poolCategory: PoolCategory.LOCKED,
+    harvest: true,
+    tokenPerBlock: '3',
+    sortOrder: 999,
+    isFinished: false,
+  },
+  {
+    sousId: 46,
+    stakingToken: tokens.soku,
+    earningToken: tokens.suteku,
+    contractAddress: {
+      97: '',
+      56: '0xF994a9E728838680098D0ee7f5323E024C63557D',
+    },
+    poolCategory: PoolCategory.LOCKED,
+    harvest: true,
+    tokenPerBlock: '6.75',
+    sortOrder: 999,
+    isFinished: false,
+  },
   {
     sousId: 18,
     stakingToken: tokens.soku,
@@ -363,37 +393,6 @@ const pools: PoolConfig[] = [
     poolCategory: PoolCategory.CORE,
     harvest: true,
     tokenPerBlock: '0.3',
-    sortOrder: 999,
-    isFinished: false,
-  },
-
-  // New Locked Staking Pools
-
-  {
-    sousId: 45,
-    stakingToken: tokens.suteku,
-    earningToken: tokens.soku,
-    contractAddress: {
-      97: '',
-      56: '0xbfe94Eb2a108e77cdb2aEcA60D9906dddCA1C56E',
-    },
-    poolCategory: PoolCategory.LOCKED,
-    harvest: true,
-    tokenPerBlock: '3',
-    sortOrder: 999,
-    isFinished: false,
-  },
-  {
-    sousId: 46,
-    stakingToken: tokens.soku,
-    earningToken: tokens.suteku,
-    contractAddress: {
-      97: '',
-      56: '0xF994a9E728838680098D0ee7f5323E024C63557D',
-    },
-    poolCategory: PoolCategory.LOCKED,
-    harvest: true,
-    tokenPerBlock: '6.75',
     sortOrder: 999,
     isFinished: false,
   },
