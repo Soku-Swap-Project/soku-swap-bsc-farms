@@ -384,6 +384,20 @@ const pools: PoolConfig[] = [
     isFinished: false,
   },
   {
+    sousId: 46,
+    stakingToken: tokens.soku,
+    earningToken: tokens.suteku,
+    contractAddress: {
+      97: '',
+      56: '0xF994a9E728838680098D0ee7f5323E024C63557D',
+    },
+    poolCategory: PoolCategory.LOCKED,
+    harvest: true,
+    tokenPerBlock: '6.75',
+    sortOrder: 999,
+    isFinished: false,
+  },
+  {
     sousId: 11,
     stakingToken: tokens.soku,
     earningToken: tokens.suteku1,
