@@ -8,6 +8,7 @@ import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compound
 import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku } from 'state/hooks'
 import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
+import AprCalculatorModal from 'components/AprCalculatorModal'
 import { Pool } from 'state/types'
 import { BASE_EXCHANGE_URL } from 'config'
 import BigNumber from 'bignumber.js'
@@ -363,13 +364,11 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
         type: 'function',
       },
     ]
-    if (pool.poolCategory === 'Lock') {
-      const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(pool.contractAddress))
-      // console.log('reward contract', contract)
+    const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(pool.contractAddress))
+    // console.log('reward contract', contract)
 
-      const rpb = await contract.methods.rewardPerBlock().call()
-      setRewardPerBlock(web3.utils.fromWei(rpb))
-    }
+    const rpb = await contract.methods.rewardPerBlock().call()
+    setRewardPerBlock(web3.utils.fromWei(rpb))
   }
 
   useEffect(() => {
@@ -394,7 +393,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
       stakingTokenPriceAsNumber,
       earningTokenPriceAsNumber,
       getBalanceNumber(totalStaked, stakingToken.decimals),
-      parseFloat(pool.poolCategory === 'Lock' ? rewardPerBlock : tokenPerBlock),
+      parseFloat(rewardPerBlock),
     ) * 0.75
 
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
@@ -435,6 +434,18 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
     />,
   )
 
+  const [onPresentAprModal] = useModal(
+    <AprCalculatorModal
+      tokenPrice={earningTokenPriceAsNumber}
+      apr={apr}
+      linkLabel={t('Get %symbol%', { symbol: stakingToken.symbol })}
+      linkHref={apyModalLink || BASE_EXCHANGE_URL}
+      earningTokenSymbol={earningToken.symbol}
+      roundingDecimals={isHighValueToken ? 4 : 2}
+      performanceFee={performanceFee}
+    />,
+  )
+
   return (
     <Flex alignItems="center" justifyContent="space-between">
       {tooltipVisible && tooltip}
@@ -451,7 +462,11 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
             unit="%"
             bold
           />
-          <IconButton onClick={onPresentApyModal} variant="text" scale="sm">
+          <IconButton
+            onClick={pool.poolCategory === 'Lock' ? onPresentAprModal : onPresentApyModal}
+            variant="text"
+            scale="sm"
+          >
             <CalculateIcon color="textSubtle" width="18px" />
           </IconButton>
         </Flex>

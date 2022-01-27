@@ -274,6 +274,11 @@ img[alt="icon"] {
     fill: gray !important;
     // border: 2px solid lightgray !important
   }
+
+  // .enter-done svg {
+  //   fill: #04bbfb;
+  // }
+
 `
 
 export default GlobalStyle
