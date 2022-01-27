@@ -46,6 +46,36 @@ const pools: PoolConfig[] = [
     sortOrder: 999,
     isFinished: false,
   },
+
+  // Non Locked Vaults
+  {
+    sousId: 47,
+    stakingToken: tokens.suteku,
+    earningToken: tokens.soku,
+    contractAddress: {
+      97: '',
+      56: '0x72166716770d056A5fa06a8A17329CdBD2115ce1',
+    },
+    poolCategory: PoolCategory.CORE,
+    harvest: true,
+    tokenPerBlock: '0.3',
+    sortOrder: 999,
+    isFinished: false,
+  },
+  {
+    sousId: 48,
+    stakingToken: tokens.soku,
+    earningToken: tokens.suteku,
+    contractAddress: {
+      97: '',
+      56: '0x4186Ff52F8AD2fD75934B3026908CEAE2043BadF',
+    },
+    poolCategory: PoolCategory.CORE,
+    harvest: true,
+    tokenPerBlock: '0.25',
+    sortOrder: 999,
+    isFinished: false,
+  },
   {
     sousId: 18,
     stakingToken: tokens.soku,

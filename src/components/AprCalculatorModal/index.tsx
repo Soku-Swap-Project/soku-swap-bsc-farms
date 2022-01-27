@@ -2,10 +2,11 @@ import React from 'react'
 import styled from 'styled-components'
 import { Modal, Text, LinkExternal, Flex, Box } from '@pancakeswap/uikit'
 import { useTranslation } from 'contexts/Localization'
-import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
+// import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
+import { tokenEarnedPerThousandDollarsNonCompounding, getRoi } from 'utils/compoundAprHelpers'
 
 /* eslint-disable react/require-default-props */
-interface ApyCalculatorModalProps {
+interface AprCalculatorModalProps {
   onDismiss?: () => void
   tokenPrice: number
   apr: number
@@ -13,7 +14,6 @@ interface ApyCalculatorModalProps {
   linkHref: string
   earningTokenSymbol?: string
   roundingDecimals?: number
-  compoundFrequency?: number
   performanceFee?: number
 }
 
@@ -28,7 +28,7 @@ const GridItem = styled.div`
   margin-bottom: '10px';
 `
 
-const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
+const AprCalculatorModal: React.FC<AprCalculatorModalProps> = ({
   onDismiss,
   tokenPrice,
   apr,
@@ -36,44 +36,41 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   linkHref,
   earningTokenSymbol,
   roundingDecimals = 2,
-  compoundFrequency = 1,
   performanceFee = 0,
 }) => {
   const { t } = useTranslation()
   const oneThousandDollarsWorthOfToken = 1000 / tokenPrice
 
-  const tokenEarnedPerThousand1D = tokenEarnedPerThousandDollarsCompounding({
+  const tokenEarnedPerThousand1D = tokenEarnedPerThousandDollarsNonCompounding({
     numberOfDays: 1,
     farmApr: apr,
     tokenPrice,
     roundingDecimals,
-    compoundFrequency,
     performanceFee,
   })
-  const tokenEarnedPerThousand7D = tokenEarnedPerThousandDollarsCompounding({
+  const tokenEarnedPerThousand7D = tokenEarnedPerThousandDollarsNonCompounding({
     numberOfDays: 7,
     farmApr: apr,
     tokenPrice,
     roundingDecimals,
-    compoundFrequency,
     performanceFee,
   })
-  const tokenEarnedPerThousand30D = tokenEarnedPerThousandDollarsCompounding({
+  const tokenEarnedPerThousand30D = tokenEarnedPerThousandDollarsNonCompounding({
     numberOfDays: 30,
     farmApr: apr,
     tokenPrice,
     roundingDecimals,
-    compoundFrequency,
     performanceFee,
   })
-  const tokenEarnedPerThousand365D = tokenEarnedPerThousandDollarsCompounding({
+  const tokenEarnedPerThousand365D = tokenEarnedPerThousandDollarsNonCompounding({
     numberOfDays: 365,
     farmApr: apr,
     tokenPrice,
     roundingDecimals,
-    compoundFrequency,
     performanceFee,
   })
+
+  console.log(tokenEarnedPerThousand365D, '365')
 
   return (
     <Modal title={t('ROI')} onDismiss={onDismiss}>
@@ -114,9 +111,10 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         <GridItem>
           <Text>
-            {getRoi({ amountEarned: tokenEarnedPerThousand7D, amountInvested: oneThousandDollarsWorthOfToken }).toFixed(
-              roundingDecimals,
-            )}
+            {getRoi({
+              amountEarned: tokenEarnedPerThousand7D,
+              amountInvested: oneThousandDollarsWorthOfToken,
+            }).toFixed(roundingDecimals)}
             %
           </Text>
         </GridItem>
@@ -141,7 +139,7 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
         </GridItem>
         {/* 365 day / APY row */}
         <GridItem>
-          <Text>{t('365d(APY)')}</Text>
+          <Text>{t('%num%d', { num: 365 })}</Text>
         </GridItem>
         <GridItem>
           <Text>
@@ -159,8 +157,8 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
       <Box mb="28px" maxWidth="280px">
         <Text fontSize="12px" color="textSubtle">
           {t(
-            'Calculated based on current rates. Compounding %freq%x daily. Rates are estimates provided for your convenience only, and by no means represent guaranteed returns.',
-            { freq: compoundFrequency.toLocaleString() },
+            'Calculated based on current rates. Rates are estimates provided for your convenience only, and by no means represent guaranteed returns. Calculations are estimates only.',
+            // { freq: compoundFrequency.toLocaleString() },
           )}
         </Text>
         {performanceFee > 0 && (
@@ -176,4 +174,4 @@ const ApyCalculatorModal: React.FC<ApyCalculatorModalProps> = ({
   )
 }
 
-export default ApyCalculatorModal
+export default AprCalculatorModal
