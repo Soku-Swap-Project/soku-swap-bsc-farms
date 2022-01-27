@@ -28,7 +28,7 @@ const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false
       if (txHash) {
         toastSuccess(
           t('Contract Enabled'),
-          t('You can now stake in the %symbol% pool!', { symbol: earningToken.symbol }),
+          t('You can now stake in the %symbol% pool!', { symbol: stakingToken.symbol }),
         )
         setRequestedApproval(false)
       } else {
@@ -40,7 +40,7 @@ const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false
       console.error(e)
       toastError(t('Error'))
     }
-  }, [onApprove, setRequestedApproval, toastSuccess, toastError, t, earningToken])
+  }, [onApprove, setRequestedApproval, toastSuccess, toastError, t, stakingToken])
 
   return (
     <>

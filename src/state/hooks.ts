@@ -429,11 +429,15 @@ export const useTokenPrice = (token: string) => {
   const [tokenPrice, setTokenPrice] = useState(0)
   useEffect(() => {
     const getTokenPrice = async (token_symbol) => {
-      const res = await CoinGeckoClient.coins.fetch(token_symbol)
-      const data = await res.data
-      const price = data?.market_data?.current_price['usd']
+      try {
+        const res = await CoinGeckoClient.coins.fetch(token_symbol)
+        const data = await res.data
+        const price = data?.market_data?.current_price['usd']
 
-      setTokenPrice(price)
+        setTokenPrice(price)
+      } catch (e) {
+        console.log(e)
+      }
     }
     getTokenPrice(token)
   }, [])
