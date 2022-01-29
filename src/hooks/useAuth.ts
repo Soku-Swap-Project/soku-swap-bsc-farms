@@ -1,4 +1,7 @@
 import { useCallback } from 'react'
+import { ToastContainer, toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline'
 import { useWeb3React, UnsupportedChainIdError } from '@web3-react/core'
 import { NoBscProviderError } from '@binance-chain/bsc-connector'
 import {
@@ -17,6 +20,7 @@ import { useAppDispatch } from 'state'
 
 const useAuth = () => {
   const { activate, deactivate } = useWeb3React()
+
   const { toastError } = useToast()
   const dispatch = useAppDispatch()
 
@@ -26,14 +30,27 @@ const useAuth = () => {
       activate(connector, async (error: Error) => {
         window.localStorage.removeItem(connectorLocalStorageKey)
         if (error instanceof UnsupportedChainIdError) {
-          toastError(
-            'Unsupported Chain Id',
-            'Unsupported Chain Id Error. Please make sure you are connected to the correct network.',
-          )
+          toast.error('Unsupported Chain Id Error. Please make sure you are connected to the correct network', {
+            position: 'top-right',
+            autoClose: false,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          })
         } else if (error instanceof NoEthereumProviderError || error instanceof NoBscProviderError) {
-          toastError(
-            'Provider Error',
+          toast.error(
             'No provider was found. If on mobile, please connect to your specified wallet through WalletConnect.',
+            {
+              position: 'top-right',
+              autoClose: 5000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+            },
           )
         } else if (
           error instanceof UserRejectedRequestErrorInjected ||

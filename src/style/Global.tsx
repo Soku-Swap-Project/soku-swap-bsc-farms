@@ -268,6 +268,24 @@ img[alt="icon"] {
     stroke: #05195a;
     border: none;
   }
+
+  .Toastify__toast-container--top-right {
+    top: 5.25em;
+    width: 425px;
+  }
+
+  @media only screen and (max-width: 480px) {
+  .Toastify__toast-container--top-right {
+    display: flex;
+    justify-content: center;
+  }
+
+  .Toastify__toast {
+    width: 350px;
+  }
+
+  }
+
   
   .pancake-button--disabled {
     background: #d8d8d8 !important;

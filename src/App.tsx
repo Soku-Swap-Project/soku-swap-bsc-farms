@@ -1,4 +1,5 @@
 import React, { lazy, useEffect } from 'react'
+import { ToastContainer } from 'react-toastify'
 import { useWeb3React } from '@web3-react/core'
 import { Router, Route, Switch } from 'react-router-dom'
 import { ResetCSS, useWalletModal } from '@pancakeswap/uikit'
@@ -202,6 +203,7 @@ const App: React.FC = () => {
         </div>
       </SuspenseWithChunkError>
       <EasterEgg iterations={2} />
+      <ToastContainer />
       <ToastListener />
     </Router>
   )

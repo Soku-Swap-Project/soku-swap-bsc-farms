@@ -70,7 +70,7 @@ const AprCalculatorModal: React.FC<AprCalculatorModalProps> = ({
     performanceFee,
   })
 
-  console.log(tokenEarnedPerThousand365D, '365')
+  // console.log(tokenEarnedPerThousand365D, '365')
 
   return (
     <Modal title={t('ROI')} onDismiss={onDismiss}>
