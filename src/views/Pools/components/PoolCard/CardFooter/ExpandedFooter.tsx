@@ -372,7 +372,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
   // console.log('lockTime', lockTime)
 
   const remainingLock = currentBlock - lockTime
-  console.log(remainingLock, 'lock time left')
+  // console.log(remainingLock, 'lock time left')
 
   // console.log(currentBlock)
 

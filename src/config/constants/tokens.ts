@@ -11,7 +11,7 @@ const tokens = {
       97: '0xa35062141Fa33BCA92Ce69FeD37D0E8908868AAe',
     },
     decimals: 18,
-    projectLink: 'https://sokuswap.finance/',
+    projectLink: 'https://sokuswap.org/',
   },
   suteku: {
     symbol: 'SUTEKU',
@@ -21,7 +21,7 @@ const tokens = {
       97: '',
     },
     decimals: 18,
-    projectLink: 'https://sokuswap.finance/',
+    projectLink: 'https://sokuswap.org/',
   },
   test_soku: {
     symbol: 'SOKU',
