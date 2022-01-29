@@ -371,9 +371,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
   // const lockRemaining = Math.max(getLockTime(account), 0)
   // console.log('lockTime', lockTime)
 
-  const remainingLock = currentBlock - lockTime
-  // console.log(remainingLock, 'lock time left')
-
+  const remainingLock = parseInt(currentBlock.toString()) + parseInt(lockTime.toString())
   // console.log(currentBlock)
 
   const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
