@@ -73,6 +73,7 @@ const HarvestAction: React.FunctionComponent<HarvestActionProps> = ({ pid, userD
             >
               {t('Claim')}
             </Button>
+            <h1>Test</h1>
           </ActionContent>
         </ActionContainer>
       ) : (

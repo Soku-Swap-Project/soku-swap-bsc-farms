@@ -283,6 +283,8 @@ export const useCakeVault = () => {
     },
   } = useSelector((state: State) => state.pools.cakeVault)
 
+  // console.log(pricePerFullShareAsString, 'pricePerFullShare')
+
   const estimatedCakeBountyReward = useMemo(() => {
     return new BigNumber(estimatedCakeBountyRewardAsString)
   }, [estimatedCakeBountyRewardAsString])

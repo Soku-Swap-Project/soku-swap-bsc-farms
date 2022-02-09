@@ -3,13 +3,14 @@ import { Button, AutoRenewIcon, Skeleton } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import { ethers } from 'ethers'
 import { useTranslation } from 'contexts/Localization'
-import { useCake, useCakeVaultContract } from 'hooks/useContract'
+import { useCake, useCakeVaultContract, useSoku, useSuteku } from 'hooks/useContract'
 import useToast from 'hooks/useToast'
 import { Pool } from 'state/types'
 
 interface ApprovalActionProps {
   pool: Pool
   setLastUpdated: () => void
+  // eslint-disable-next-line react/require-default-props
   isLoading?: boolean
 }
 
@@ -17,13 +18,15 @@ const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false
   const { account } = useWeb3React()
   const { stakingToken } = pool
   const cakeVaultContract = useCakeVaultContract()
-  const cakeContract = useCake()
+  // const cakeContract = useCake()
+  const sokuContract = useSoku()
+  const sutekuContract = useSuteku()
   const { t } = useTranslation()
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { toastSuccess, toastError } = useToast()
 
   const handleApprove = () => {
-    cakeContract.methods
+    sutekuContract.methods
       .approve(cakeVaultContract.options.address, ethers.constants.MaxUint256)
       .send({ from: account })
       .on('sending', () => {

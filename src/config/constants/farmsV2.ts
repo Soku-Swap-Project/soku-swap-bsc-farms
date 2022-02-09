@@ -152,6 +152,16 @@ const farmsV2: FarmConfig[] = [
     token: tokens.earnable,
     quoteToken: tokens.suteku,
   },
+  {
+    pid: 15,
+    lpSymbol: 'SOKU-BODA LP',
+    lpAddresses: {
+      97: '',
+      56: '0x2633E5B3A48f67A082C52b5E294783bC3cb1c834',
+    },
+    token: tokens.boda,
+    quoteToken: tokens.soku,
+  },
 ]
 
 export default farmsV2

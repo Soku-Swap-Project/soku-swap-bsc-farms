@@ -284,7 +284,16 @@ img[alt="icon"] {
     width: 350px;
   }
 
+  .how_to_remove_liquidity {
+    padding-top: 16px !important;
+    padding-bottom: 0px;
   }
+}
+
+.how_to_remove_liquidity {
+  padding-top: 0px;
+  padding-bottom: 16px;
+}
 
   
   .pancake-button--disabled {

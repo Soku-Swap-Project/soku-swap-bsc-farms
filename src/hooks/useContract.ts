@@ -4,6 +4,8 @@ import useWeb3 from 'hooks/useWeb3'
 import {
   getBep20Contract,
   getCakeContract,
+  getSokuContract,
+  getSutekuContract,
   getBunnyFactoryContract,
   getBunnySpecialContract,
   getPancakeRabbitContract,
@@ -54,6 +56,16 @@ export const useERC721 = (address: string) => {
 }
 
 export const useCake = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getCakeContract(web3), [web3])
+}
+
+export const useSoku = () => {
+  const web3 = useWeb3()
+  return useMemo(() => getCakeContract(web3), [web3])
+}
+
+export const useSuteku = () => {
   const web3 = useWeb3()
   return useMemo(() => getCakeContract(web3), [web3])
 }
