@@ -153,7 +153,7 @@ const farmsV2: FarmConfig[] = [
     quoteToken: tokens.suteku,
   },
   {
-    pid: 15,
+    pid: 16,
     lpSymbol: 'SOKU-BODA LP',
     lpAddresses: {
       97: '',
