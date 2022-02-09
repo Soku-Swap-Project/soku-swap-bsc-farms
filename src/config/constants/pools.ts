@@ -4,11 +4,11 @@ import { PoolConfig, PoolCategory } from './types'
 const pools: PoolConfig[] = [
   // {
   //   sousId: 0,
-  //   stakingToken: tokens.soku,
-  //   earningToken: tokens.soku,
+  //   stakingToken: tokens.suteku,
+  //   earningToken: tokens.suteku,
   //   contractAddress: {
   //     97: '0x186B09041249bf6438543e67580824F6647323B1',
-  //     56: '0x800522017eA0f36a358cda3Be52C7Aa4F157838B',
+  //     56: '0x2A62a4F578011c5C978F8c111338CD7Be740CFEF',
   //   },
   //   poolCategory: PoolCategory.CORE,
   //   harvest: true,

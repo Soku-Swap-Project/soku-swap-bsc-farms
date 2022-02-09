@@ -35,6 +35,23 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
 }) => {
   const [reward, setReward] = useState(1)
   const [formattedReward, setFormattedReward] = useState('')
+  const { t } = useTranslation()
+  const [lockTime, setLockTime] = useState()
+  const earningTokenBalance = getBalanceNumber(new BigNumber(reward), earningToken.decimals)
+  const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
+  const { toastSuccess, toastError } = useToast()
+  const web3 = getWeb3NoAccount()
+  const { account } = useWeb3React()
+
+  // console.log(account, 'account')
+  // console.log(reward, 'reward')
+
+  const bnbPrice = useTokenPrice('wbnb')
+  const bnbPriceBig = new BigNumber(bnbPrice)
+  const sokuPrice = useTokenPrice('sokuswap')
+  const sutekuPrice = usePriceBnbSuteku()
+  const [userRewardDebt, setUserRewardDebt] = useState('')
+
   const getPendingReward = async (address) => {
     if (pool.poolCategory === 'Lock') {
       const abi = [
@@ -654,23 +671,8 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
 
   useEffect(() => {
     getPendingReward(account)
-  })
-  const { t } = useTranslation()
-  const [lockTime, setLockTime] = useState()
-  const earningTokenBalance = getBalanceNumber(new BigNumber(reward), earningToken.decimals)
-  const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
-  const { toastSuccess, toastError } = useToast()
-  const web3 = getWeb3NoAccount()
-  const { account } = useWeb3React()
-
-  // console.log(account, 'account')
-  // console.log(reward, 'reward')
-
-  const bnbPrice = useTokenPrice('wbnb')
-  const bnbPriceBig = new BigNumber(bnbPrice)
-  const sokuPrice = useTokenPrice('sokuswap')
-  const sutekuPrice = usePriceBnbSuteku()
-  const [userRewardDebt, setUserRewardDebt] = useState('')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [account])
 
   const getLockTime = async (address) => {
     const abi = [

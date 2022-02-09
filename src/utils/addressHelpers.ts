@@ -11,6 +11,15 @@ export const getAddress = (address: Address): string => {
 export const getCakeAddress = () => {
   return getAddress(tokens.cake.address)
 }
+
+export const getSutekuAddress = () => {
+  return getAddress(tokens.suteku.address)
+}
+
+export const getSokuAddress = () => {
+  return getAddress(tokens.soku.address)
+}
+
 export const getMasterChefAddress = () => {
   return getAddress(addresses.masterChef)
 }

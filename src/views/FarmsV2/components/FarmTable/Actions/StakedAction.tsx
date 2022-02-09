@@ -39,6 +39,8 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
   const { account } = useWeb3React()
   const [requestedApproval, setRequestedApproval] = useState(false)
   const { allowance, tokenBalance, stakedBalance } = useFarmUserV2(pid)
+  // modal video
+  const [isOpen, setOpen] = useState(false)
   const { onStake } = useStakeV2(pid)
   const { onUnstake } = useUnstakeV2(pid)
   const web3 = useWeb3()
@@ -122,6 +124,23 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
               </IconButton>
             </IconButtonWrapper>
           </ActionContent>
+          {/* <div
+            className="how_to_remove_liquidity"
+            style={{
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'center',
+              paddingBottom: '16px',
+              fontWeight: 'bolder',
+            }}
+          >
+            <p
+              style={{ color: '#04bbfb', fontSize: '14px', cursor: 'pointer', paddingBottom: '20px' }}
+              onClick={() => setOpen(true)}
+            >
+              How to remove liquidity?
+            </p>
+          </div>{' '} */}
         </ActionContainer>
       )
     }

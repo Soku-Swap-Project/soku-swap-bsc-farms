@@ -43,6 +43,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.finance/',
   },
+  boda: {
+    symbol: 'BODAV2',
+    name: 'BODAV2',
+    address: {
+      56: '0xdc847755343c3a2b94d6afc0aae57651e1b14064',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://www.bodatoken.org/ ',
+  },
   hodl: {
     symbol: 'HODL',
     name: 'HODL',
