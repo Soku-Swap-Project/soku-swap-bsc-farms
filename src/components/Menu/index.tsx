@@ -76,7 +76,10 @@ const Menu = (props) => {
               <NavLink className="nav_link" activeClassName="active" to="/bsc/staking/">
                 <li>Staking</li>
               </NavLink>
-              <a className="nav_link" href="/bsc/#/deposit">
+              {/* <a className="nav_link" href="/bsc/#/deposit">
+                <li>Deposit</li>
+              </a> */}
+              <a className="nav_link" onClick={() => launchTransak()}>
                 <li>Deposit</li>
               </a>
             </div>
