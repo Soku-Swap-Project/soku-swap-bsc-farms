@@ -142,16 +142,16 @@ const farmsV2: FarmConfig[] = [
     token: tokens.moonlight,
     quoteToken: tokens.soku,
   },
-  {
-    pid: 9,
-    lpSymbol: 'SUTEKU-EARN LP',
-    lpAddresses: {
-      97: '',
-      56: '0xC3711E723904886e66996a7A6C71C927446Da758',
-    },
-    token: tokens.earnable,
-    quoteToken: tokens.suteku,
-  },
+  // {
+  //   pid: 9,
+  //   lpSymbol: 'SUTEKU-EARN LP',
+  //   lpAddresses: {
+  //     97: '',
+  //     56: '0xC3711E723904886e66996a7A6C71C927446Da758',
+  //   },
+  //   token: tokens.earnable,
+  //   quoteToken: tokens.suteku,
+  // },
   {
     pid: 16,
     lpSymbol: 'SOKU-BODA LP',
