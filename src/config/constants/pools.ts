@@ -16,7 +16,42 @@ const pools: PoolConfig[] = [
   //   sortOrder: 1,
   //   isFinished: false,
   // },
-  // New Locked Staking Pools
+
+  // 90 Day Locked Staking Pools
+
+  {
+    sousId: 50,
+    stakingToken: tokens.soku,
+    earningToken: tokens.suteku,
+    contractAddress: {
+      97: '',
+      56: '0x86e317877A3428932B20A5316bAC5E13ab2197bc',
+    },
+    poolCategory: PoolCategory['90DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '12',
+    sortOrder: 999,
+    isFinished: false,
+  },
+
+  // 60 Day Locked Staking Pools
+
+  {
+    sousId: 49,
+    stakingToken: tokens.soku,
+    earningToken: tokens.suteku,
+    contractAddress: {
+      97: '',
+      56: '0xE18DD9A684B2BdA3B83db4449D8Fcb1A7be39957',
+    },
+    poolCategory: PoolCategory['60DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '6',
+    sortOrder: 999,
+    isFinished: false,
+  },
+
+  // 30 Day Locked Staking Pools
 
   {
     sousId: 45,
@@ -26,7 +61,7 @@ const pools: PoolConfig[] = [
       97: '',
       56: '0xbfe94Eb2a108e77cdb2aEcA60D9906dddCA1C56E',
     },
-    poolCategory: PoolCategory.LOCKED,
+    poolCategory: PoolCategory['30DAYLOCK'],
     harvest: true,
     tokenPerBlock: '3',
     sortOrder: 999,
@@ -40,7 +75,7 @@ const pools: PoolConfig[] = [
       97: '',
       56: '0xF994a9E728838680098D0ee7f5323E024C63557D',
     },
-    poolCategory: PoolCategory.LOCKED,
+    poolCategory: PoolCategory['30DAYLOCK'],
     harvest: true,
     tokenPerBlock: '6.75',
     sortOrder: 999,
@@ -88,7 +123,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.2',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 21,
@@ -102,7 +137,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '4',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 22,
@@ -116,7 +151,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.2',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 23,
@@ -130,7 +165,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.3',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 24,
@@ -144,7 +179,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 25,
@@ -158,7 +193,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.3',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 26,
@@ -172,7 +207,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 27,
@@ -186,7 +221,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.25',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 28,
@@ -200,7 +235,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 29,
@@ -214,7 +249,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.35',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 30,
@@ -228,7 +263,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 31,
@@ -242,7 +277,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.5',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 32,
@@ -256,7 +291,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 33,
@@ -270,7 +305,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.5',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 34,
@@ -284,7 +319,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 35,
@@ -298,7 +333,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 36,
@@ -312,7 +347,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 37,
@@ -326,7 +361,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1.5',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 38,
@@ -340,7 +375,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 39,
@@ -354,7 +389,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1.5',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 40,
@@ -368,7 +403,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 41,
@@ -382,7 +417,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1.5',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 42,
@@ -396,7 +431,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 43,
@@ -410,7 +445,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.75',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 44,
@@ -424,7 +459,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '0.3',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 11,
@@ -438,7 +473,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
 ]
 

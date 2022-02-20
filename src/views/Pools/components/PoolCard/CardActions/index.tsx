@@ -1,5 +1,7 @@
 import BigNumber from 'bignumber.js'
 import React, { useState, useEffect } from 'react'
+import Web3 from 'web3'
+
 import styled from 'styled-components'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { Flex, Text, Box } from '@pancakeswap/uikit'
@@ -28,9 +30,11 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
 
   // console.log(pool, 'pool')
   const [reward, setReward] = useState(new BigNumber(0))
-  const [balance, setBalance] = useState(new BigNumber(1))
+  const [balance, setBalance] = useState(new BigNumber(0))
+  const [useInfo, setUserInfo] = useState()
   const [isApproved, setIsVaultApproved] = useState(false)
   const web3 = getWeb3NoAccount()
+  // const newWeb3 = new Web3(Web3.givenProvider)
   const { account } = useWeb3React()
   const [staked, setStaked] = useState(1)
   // Pools using native BNB behave differently than pools using a token
@@ -42,10 +46,6 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
   const needsApproval = !isApproved && !isBnbPool && !(staked > 0)
   const isStaked = staked > 0
   const isLoading = !userData
-
-  // console.log(stakedBalance, 'stakedBalance')
-
-  // console.log(stakingToken.address[56], 'staking Token')
 
   useEffect(() => {
     const checkApprovalStatus = async () => {
@@ -462,7 +462,7 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
         }
       } catch (error) {
         setIsVaultApproved(false)
-        console.log(error, 'approval')
+        // console.log(error, 'approval')
       }
     }
 
@@ -1072,14 +1072,14 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
 
       getBalance(account)
     } catch (error) {
-      console.log(error, 'getBalance')
+      // console.log(error, 'getBalance')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   })
 
   const getStakingBalance = async (address) => {
     try {
-      if (pool.poolCategory === 'Lock') {
+      if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
         const abi = [
           { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
           {
@@ -1697,20 +1697,20 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
         setStaked(parsedBal)
       }
     } catch (error) {
-      console.log(error, 'get staking bal')
+      // console.log(error, 'get staking bal')
     }
   }
 
   useEffect(() => {
     getStakingBalance(account)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account])
+  })
 
   // console.log(balance, 'balance')
 
   const getPendingReward = async (address) => {
     try {
-      if (pool.poolCategory === 'Lock') {
+      if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
         const abi = [
           { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
           {
@@ -2320,7 +2320,7 @@ const CardActions: React.FC<CardActionsProps> = ({ pool, stakedBalance }) => {
         setReward(penReward)
       }
     } catch (error) {
-      console.log(error, 'getPendingReward')
+      // console.log(error, 'getPendingReward')
     }
   }
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Flex, TooltipText, IconButton, useModal, CalculateIcon, Skeleton, useTooltip } from '@pancakeswap/uikit'
+import Web3 from 'web3'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { getPoolApr } from 'utils/apr'
@@ -27,6 +28,8 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   const { t } = useTranslation()
   const { stakingToken, earningToken, totalStaked, isFinished, tokenPerBlock } = pool
   const web3 = getWeb3NoAccount()
+  // const newWeb3 = new Web3(Web3.givenProvider)
+
   const [rewardPerBlock, setRewardPerBlock] = useState('')
 
   const getRewardPerBlock = async () => {
@@ -463,7 +466,13 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
             bold
           />
           <IconButton
-            onClick={pool.poolCategory === 'Lock' ? onPresentAprModal : onPresentApyModal}
+            onClick={
+              pool.poolCategory === '30DayLock' ||
+              pool.poolCategory === '60DayLock' ||
+              pool.poolCategory === '90DayLock'
+                ? onPresentAprModal
+                : onPresentApyModal
+            }
             variant="text"
             scale="sm"
           >

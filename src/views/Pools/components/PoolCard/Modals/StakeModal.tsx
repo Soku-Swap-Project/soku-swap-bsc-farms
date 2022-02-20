@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Modal, Text, Flex, Image, Button, BalanceInput, AutoRenewIcon, Link } from '@pancakeswap/uikit'
+import Web3 from 'web3'
 import { useTranslation } from 'contexts/Localization'
 import { BASE_EXCHANGE_URL } from 'config'
 import { useSousStake } from 'hooks/useStake'
@@ -47,6 +48,8 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const [staked, setStaked] = useState(0)
   const { account } = useWeb3React()
   const web3 = getWeb3NoAccount()
+  // const newWeb3 = new Web3(Web3.givenProvider)
+
   const { onStake } = useSousStake(sousId, isBnbPool)
   const { onUnstake } = useSousUnstake(sousId, pool.enableEmergencyWithdraw)
   const { toastSuccess, toastError } = useToast()
@@ -56,7 +59,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const [percent, setPercent] = useState(0)
 
   const getStakingBalance = async (address) => {
-    if (pool.poolCategory === 'Lock') {
+    if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
       const abi = [
         { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
         {
@@ -678,7 +681,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   useEffect(() => {
     getStakingBalance(account)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account])
+  })
 
   const getCalculatedStakingLimit = () => {
     if (isRemovingStake) {
@@ -694,9 +697,9 @@ const StakeModal: React.FC<StakeModalProps> = ({
   useEffect(() => {
     if (stakingLimit.gt(0) && !isRemovingStake) {
       const fullDecimalStakeAmount = getDecimalAmount(new BigNumber(stakeAmount), stakingToken.decimals)
-      setHasReachedStakedLimit(fullDecimalStakeAmount.plus(userData.stakedBalance).gt(stakingLimit))
+      setHasReachedStakedLimit(fullDecimalStakeAmount.plus(staked).gt(stakingLimit))
     }
-  }, [stakeAmount, stakingLimit, userData, stakingToken, isRemovingStake, setHasReachedStakedLimit])
+  }, [stakeAmount, stakingLimit, staked, stakingToken, isRemovingStake, setHasReachedStakedLimit])
 
   const handleStakeInputChange = (input: string) => {
     if (input) {

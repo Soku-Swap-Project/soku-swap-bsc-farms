@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Flex, Text, Button, Heading, useModal, Skeleton } from '@pancakeswap/uikit'
+import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import { Token } from 'config/constants/types'
 import { Pool } from 'state/types'
@@ -33,19 +34,17 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   pool,
   isLoading = false,
 }) => {
-  const [reward, setReward] = useState(1)
+  const [reward, setReward] = useState(0)
   const [formattedReward, setFormattedReward] = useState('')
   const { t } = useTranslation()
   const [lockTime, setLockTime] = useState()
+  const [loading, setLoading] = useState(false)
   const earningTokenBalance = getBalanceNumber(new BigNumber(reward), earningToken.decimals)
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const { toastSuccess, toastError } = useToast()
   const web3 = getWeb3NoAccount()
+  const newWeb3 = new Web3(Web3.givenProvider)
   const { account } = useWeb3React()
-
-  // console.log(account, 'account')
-  // console.log(reward, 'reward')
-
   const bnbPrice = useTokenPrice('wbnb')
   const bnbPriceBig = new BigNumber(bnbPrice)
   const sokuPrice = useTokenPrice('sokuswap')
@@ -53,7 +52,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const [userRewardDebt, setUserRewardDebt] = useState('')
 
   const getPendingReward = async (address) => {
-    if (pool.poolCategory === 'Lock') {
+    if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
       const abi = [
         { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
         {
@@ -1009,7 +1008,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         type: 'function',
       },
     ]
-    if (pool.poolCategory === 'Lock') {
+    if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
       const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(pool.contractAddress))
       const remainingTime = await contract.methods.getRemainingLockTime(address).call()
       setLockTime(remainingTime)
@@ -1089,7 +1088,11 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
             style={{ background: 'rgb(4, 187, 251)' }}
             disabled={!hasEarnings}
             onClick={() => {
-              if (pool.poolCategory === 'Lock' && lockTime !== '0') {
+              if (
+                (pool.poolCategory === '30DayLock' && lockTime !== '0') ||
+                (pool.poolCategory === '60DayLock' && lockTime !== '0') ||
+                (pool.poolCategory === '90DayLock' && lockTime !== '0')
+              ) {
                 toastError(
                   t('Canceled'),
                   t(

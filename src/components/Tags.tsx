@@ -21,9 +21,21 @@ const BinanceTag = (props) => (
   </Tag>
 )
 
-const LockedTag = (props) => (
-  <Chip label="Locked" variant="outlined" icon={<LockIcon style={{ width: '18px' }} />} {...props}>
-    Locked
+const ThirtyDayLockedTag = (props) => (
+  <Chip label="30 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} {...props}>
+    30 Day
+  </Chip>
+)
+
+const SixtyDayLockedTag = (props) => (
+  <Chip label="60 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} {...props}>
+    60 Day
+  </Chip>
+)
+
+const NinetyDayLockedTag = (props) => (
+  <Chip label="90 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} {...props}>
+    90 Day
   </Chip>
 )
 
@@ -45,4 +57,14 @@ const CompoundingPoolTag = (props) => (
   </Tag>
 )
 
-export { CoreTag, CommunityTag, BinanceTag, DualTag, ManualPoolTag, CompoundingPoolTag, LockedTag }
+export {
+  CoreTag,
+  CommunityTag,
+  BinanceTag,
+  DualTag,
+  ManualPoolTag,
+  CompoundingPoolTag,
+  ThirtyDayLockedTag,
+  SixtyDayLockedTag,
+  NinetyDayLockedTag,
+}

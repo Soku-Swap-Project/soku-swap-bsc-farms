@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Flex, Text, Button, IconButton, AddIcon, MinusIcon, useModal, Skeleton, useTooltip } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
+import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import { getAddress } from 'utils/addressHelpers'
 import { getWeb3NoAccount } from 'utils/web3'
@@ -38,6 +39,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const web3 = getWeb3NoAccount()
+  // const newWeb3 = new Web3(Web3.givenProvider)
   const stakedTokenBalance = getBalanceNumber(new BigNumber(staked), stakingToken.decimals)
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
   const sokuPrice = useTokenPrice('sokuswap')
@@ -45,7 +47,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
 
   const getStakingBalance = async (address) => {
     try {
-      if (pool.poolCategory === 'Lock') {
+      if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
         const abi = [
           { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
           {
@@ -1005,7 +1007,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         type: 'function',
       },
     ]
-    if (pool.poolCategory === 'Lock') {
+    if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
       const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(contractAddress))
       const remainingTime = await contract.methods.getRemainingLockTime(address).call()
       setLockTime(remainingTime)
@@ -1075,7 +1077,9 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         </Flex>
         <Flex>
           {/* Disable withdraw/unstake if there is still lock time */}
-          {pool.poolCategory === 'Lock' && lockTime !== '0' ? (
+          {(pool.poolCategory === '30DayLock' && lockTime !== '0') ||
+          (pool.poolCategory === '60DayLock' && lockTime !== '0') ||
+          (pool.poolCategory === '90DayLock' && lockTime !== '0') ? (
             <IconButton variant="secondary" disabled={!false} onClick={onPresentUnstake} mr="6px">
               <MinusIcon color="gray" width="14px" />
             </IconButton>
