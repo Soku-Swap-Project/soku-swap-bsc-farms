@@ -60,7 +60,6 @@ const Pools: React.FC = () => {
             pool.poolCategory === '60DayLock' ||
             pool.poolCategory === '90DayLock'
           ) {
-            console.log('yes')
             const abi = [
               { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
               {
@@ -402,7 +401,6 @@ const Pools: React.FC = () => {
 
             setStaked(parsedBal)
           } else if (pool.poolCategory === 'Core') {
-            console.log('no')
             const abi = [
               { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
               {
