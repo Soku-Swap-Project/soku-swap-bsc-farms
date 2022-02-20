@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
 import { getBalanceNumber } from 'utils/formatBalance'
@@ -41,6 +42,8 @@ const ExpandedWrapper = styled(Flex)`
 const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVault = false }) => {
   const { t } = useTranslation()
   const web3 = getWeb3NoAccount()
+  // const newWeb3 = new Web3(Web3.givenProvider)
+
   const [lockTime, setLockTime] = useState(0)
 
   const { currentBlock } = useBlock()
@@ -348,7 +351,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
       },
     ]
 
-    if (pool.poolCategory === 'Lock') {
+    if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
       const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(contractAddress))
       const remainingTime = await contract.methods.getRemainingLockTime(address).call()
       setLockTime(remainingTime)
@@ -453,7 +456,9 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
           </Flex>
         </>
       )}
-      {pool.poolCategory === 'Lock' && (
+      {(pool.poolCategory === '30DayLock' ||
+        pool.poolCategory === '60DayLock' ||
+        pool.poolCategory === '90DayLock') && (
         <>
           <Flex mb="2px" justifyContent="space-between" alignItems="center">
             <Text small>Lock Time:</Text>

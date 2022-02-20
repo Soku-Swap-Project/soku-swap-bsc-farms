@@ -41,7 +41,7 @@ const CakeVaultCard: React.FC<CakeVaultProps> = ({ pool, showStakedOnly }) => {
 
   const getUserInfo = async (address) => {
     try {
-      if (pool.poolCategory === 'Lock') {
+      if (pool.poolCategory === '30DayLock' || pool.poolCategory === '60DayLock' || pool.poolCategory === '90DayLock') {
         const abi = [
           { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
           {

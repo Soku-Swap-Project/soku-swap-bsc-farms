@@ -435,7 +435,11 @@ const CollectModal: React.FC<CollectModalProps> = ({
     } else {
       // harvesting
       try {
-        if (pool.poolCategory === 'Lock') {
+        if (
+          pool.poolCategory === '30DayLock' ||
+          pool.poolCategory === '60DayLock' ||
+          pool.poolCategory === '90DayLock'
+        ) {
           await claimRewards()
         } else {
           await onReward()

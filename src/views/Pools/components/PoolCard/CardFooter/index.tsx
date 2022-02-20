@@ -4,7 +4,13 @@ import styled from 'styled-components'
 import { useTranslation } from 'contexts/Localization'
 import { Flex, CardFooter, ExpandableLabel, HelpIcon, useTooltip, Text } from '@pancakeswap/uikit'
 import { Pool } from 'state/types'
-import { CompoundingPoolTag, ManualPoolTag, LockedTag } from 'components/Tags'
+import {
+  CompoundingPoolTag,
+  ManualPoolTag,
+  ThirtyDayLockedTag,
+  SixtyDayLockedTag,
+  NinetyDayLockedTag,
+} from 'components/Tags'
 import ExpandedFooter from './ExpandedFooter'
 
 /* eslint-disable react/require-default-props */
@@ -31,11 +37,25 @@ const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) =
 
   const manualTooltipText = t('You must claim and compound your earnings from this pool manually.')
   const lockedVaultToolTip = t(
-    'Higher payouts than Manual staking pools, however your tokens will be locked for 30 days from the time they were staked.',
+    'Higher payouts than Manual staking pools, however your tokens will be locked for a certain amount of days from the time they were staked.',
   )
   const autoTooltipText = t(
     'Any funds you stake in this pool will be automagically claimed and restaked (compounded) for you.',
   )
+
+  const poolTags = () => {
+    let tag
+    if (pool.poolCategory === '30DayLock') {
+      tag = <ThirtyDayLockedTag />
+    } else if (pool.poolCategory === '60DayLock') {
+      tag = <SixtyDayLockedTag />
+    } else if (pool.poolCategory === '90DayLock') {
+      tag = <NinetyDayLockedTag />
+    } else {
+      tag = <ManualPoolTag />
+    }
+    return tag
+  }
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(
     pool.poolCategory === 'Core' ? manualTooltipText : lockedVaultToolTip,
@@ -48,7 +68,7 @@ const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) =
     <CardFooter>
       <ExpandableButtonWrapper>
         <Flex alignItems="center">
-          {pool.poolCategory === 'Core' ? <ManualPoolTag /> : <LockedTag />}
+          {poolTags()}
           {/* {isAutoVault ? <CompoundingPoolTag /> : <ManualPoolTag />} */}
           {tooltipVisible && tooltip}
           <Flex ref={targetRef}>
