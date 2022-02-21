@@ -57,7 +57,7 @@ export default function AccountModal() {
     <div className={`account__modal ${classes.paper}`}>
       <div className="account__modal_header">
         <h1>Account Details</h1>
-        <span onClick={handleClose} class="material-icons">
+        <span onClick={handleClose} className="material-icons">
           close
         </span>
       </div>

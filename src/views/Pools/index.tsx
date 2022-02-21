@@ -5,7 +5,7 @@ import { Route, useRouteMatch } from 'react-router-dom'
 
 // import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
-import { Heading, Flex, Image } from '@pancakeswap/uikit'
+import { Heading, Flex } from '@pancakeswap/uikit'
 import { getAddress } from 'utils/addressHelpers'
 import { AbiItem } from 'web3-utils'
 import { getWeb3NoAccount } from 'utils/web3'
@@ -20,6 +20,7 @@ import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
 import PageHeader from 'components/PageHeader'
 import PoolCard from './components/PoolCard'
+import { fetchPoolsUserDataAsync } from '../../state/pools'
 // import CakeVaultCard from './components/CakeVaultCard'
 import PoolTabButtons from './components/PoolTabButtons'
 // import BountyCard from './components/BountyCard'
@@ -51,9 +52,16 @@ const Pools: React.FC = () => {
 
   const [finishedPools, openPools] = useMemo(() => partition(pools, (pool) => pool.isFinished), [pools])
 
+  const getUserData = async () => {
+    const test = fetchPoolsUserDataAsync(account)
+    console.log(test, ' test')
+  }
+
+  getUserData()
+
   const getStakingBalance = async (address) => {
     pools.map(async (pool) => {
-      if (!pool.isFinished) {
+      if (!pool.isFinished && account && pool) {
         try {
           if (
             pool.poolCategory === '30DayLock' ||
@@ -683,6 +691,9 @@ const Pools: React.FC = () => {
 
   useEffect(() => {
     getStakingBalance(account)
+    return () => {
+      setStaked(0)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [account])
 

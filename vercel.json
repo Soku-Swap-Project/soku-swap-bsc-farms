@@ -28,7 +28,7 @@
         { "key": "Access-Control-Allow-Credentials", "value": "true" },
         {
           "key": "Access-Control-Allow-Origin",
-          "value": "https://bsc-dataseed.binance.org"
+          "value": "https://bsc-dataseed1.ninicoin.io/"
         },
         {
           "key": "Access-Control-Allow-Methods",

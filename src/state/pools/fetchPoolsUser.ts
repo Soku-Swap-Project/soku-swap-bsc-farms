@@ -61,6 +61,7 @@ export const fetchUserStakeBalances = async (account) => {
   }))
 
   const userInfo = await multicall(sousChefABI, calls)
+  // console.log(new BigNumber(userInfo[3].amount._hex).toJSON(), 'userinfo')
   const stakedBalances = nonMasterPools.reduce(
     (acc, pool, index) => ({
       ...acc,

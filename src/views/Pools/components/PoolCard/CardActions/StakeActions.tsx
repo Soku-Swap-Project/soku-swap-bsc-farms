@@ -46,7 +46,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const sutekuPrice = usePriceBnbSuteku()
 
   const getStakingBalance = async (address) => {
-    if (!pool.isFinished) {
+    if (!pool.isFinished && account && pool) {
       try {
         if (
           pool.poolCategory === '30DayLock' ||
@@ -424,7 +424,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
           const parsedBal = parseFloat(userStaked)
 
           setStaked(parsedBal)
-        } else {
+        } else if (pool.poolCategory === 'Core') {
           const abi = [
             { inputs: [], stateMutability: 'nonpayable', type: 'constructor' },
             {
@@ -732,7 +732,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   useEffect(() => {
     getStakingBalance(account)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account])
+  }, [])
 
   const getLockTime = async (address) => {
     const abi = [
@@ -1078,7 +1078,8 @@ const StakeAction: React.FC<StakeActionsProps> = ({
 
   useEffect(() => {
     getLockTime(account)
-  })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
 
