@@ -21,22 +21,16 @@ const BinanceTag = (props) => (
   </Tag>
 )
 
-const ThirtyDayLockedTag = (props) => (
-  <Chip label="30 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} {...props}>
-    30 Day
-  </Chip>
+const ThirtyDayLockedTag = () => (
+  <Chip label="30 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} />
 )
 
-const SixtyDayLockedTag = (props) => (
-  <Chip label="60 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} {...props}>
-    60 Day
-  </Chip>
+const SixtyDayLockedTag = () => (
+  <Chip label="60 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} />
 )
 
-const NinetyDayLockedTag = (props) => (
-  <Chip label="90 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} {...props}>
-    90 Day
-  </Chip>
+const NinetyDayLockedTag = () => (
+  <Chip label="90 Day" variant="outlined" icon={<LockIcon style={{ width: '18px', fill: '#04bbfb' }} />} />
 )
 
 const DualTag = (props) => (
@@ -45,10 +39,8 @@ const DualTag = (props) => (
   </Tag>
 )
 
-const ManualPoolTag = (props) => (
-  <Chip label="Manual" variant="outlined" icon={<RefreshIcon width="18px" color="#04bbfb" mr="4px" />} {...props}>
-    Manual
-  </Chip>
+const ManualPoolTag = () => (
+  <Chip label="Manual" variant="outlined" icon={<RefreshIcon width="18px" color="#04bbfb" mr="4px" />} />
 )
 
 const CompoundingPoolTag = (props) => (

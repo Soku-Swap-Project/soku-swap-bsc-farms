@@ -44,7 +44,7 @@ export default function ClaimSokuModal() {
     <div className={`claimSoku__modal ${classes.paper}`}>
       <div className="claimSoku__modal_header">
         <h1>Claim Soku</h1>
-        <span onClick={handleClose} class="material-icons">
+        <span onClick={handleClose} className="material-icons">
           close
         </span>
       </div>

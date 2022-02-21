@@ -94,7 +94,10 @@ export const fetchPoolsUserDataAsync = (account) => async (dispatch) => {
     pendingReward: pendingRewards[pool.sousId],
   }))
 
+  console.log(userData, 'user')
+
   dispatch(setPoolsUserData(userData))
+  return { allowances, stakingTokenBalances, stakedBalances, pendingRewards }
 }
 
 export const updateUserAllowance = (sousId: number, account: string) => async (dispatch) => {
