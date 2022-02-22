@@ -137,8 +137,8 @@ const StakeModal: React.FC<StakeModalProps> = ({
     }
   }
 
-  console.log(stakeAmount, 'staking now')
-  console.log(web3.utils.fromWei(stakedBalance.toString()), 'staking balance')
+  // console.log(stakeAmount, 'staking now')
+  // console.log(web3.utils.fromWei(stakedBalance.toString()), 'staking balance')
 
   return (
     <Modal title={isRemovingStake ? t('Unstake') : t('Stake in Pool')} onDismiss={onDismiss} headerBackground="#f9f9fa">
@@ -204,7 +204,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
             {/* <PercentageButton onClick={() => handleChangePercent(25)}>25%</PercentageButton>
             <PercentageButton onClick={() => handleChangePercent(50)}>50%</PercentageButton>
             <PercentageButton onClick={() => handleChangePercent(75)}>75%</PercentageButton> */}
-            <PercentageButton onClick={() => handleChangePercent(isRemovingStake ? 100 : 99.99)}>MAX</PercentageButton>
+            <PercentageButton onClick={() => handleChangePercent(99.9999)}>MAX</PercentageButton>
           </Flex>{' '}
         </>
       ) : (
@@ -232,12 +232,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         onClick={handleConfirmClick}
-        disabled={
-          !stakeAmount ||
-          parseFloat(stakeAmount) === 0 ||
-          hasReachedStakeLimit ||
-          (pool.isFinished && stakeAmount !== web3.utils.fromWei(stakedBalance.toString()))
-        }
+        disabled={!stakeAmount || parseFloat(stakeAmount) === 0 || hasReachedStakeLimit}
         mt="24px"
       >
         {pendingTx ? t('Confirming') : t('Confirm')}
