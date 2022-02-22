@@ -121,10 +121,15 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         </Flex>
         <Flex>
           {/* Disable withdraw/unstake if there is still lock time */}
-          {(pool.poolCategory === '30DayLock' && lockTime !== '0') ||
-          (pool.poolCategory === '60DayLock' && lockTime !== '0') ||
-          (pool.poolCategory === '90DayLock' && lockTime !== '0') ? (
-            <IconButton variant="secondary" disabled={!false} onClick={onPresentUnstake} mr="6px">
+          {(pool.poolCategory === '30DayLock' && lockTime !== '0' && !pool.isFinished) ||
+          (pool.poolCategory === '60DayLock' && lockTime !== '0' && !pool.isFinished) ||
+          (pool.poolCategory === '90DayLock' && lockTime !== '0' && !pool.isFinished) ? (
+            <IconButton
+              variant="secondary"
+              disabled={pool.isFinished ? false : !false}
+              onClick={onPresentUnstake}
+              mr="6px"
+            >
               <MinusIcon color="gray" width="14px" />
             </IconButton>
           ) : (

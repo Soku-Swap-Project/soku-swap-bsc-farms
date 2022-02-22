@@ -11,6 +11,7 @@ import { AbiItem } from 'web3-utils'
 import { getWeb3NoAccount } from 'utils/web3'
 // import { Pool } from 'state/types'
 // import Web3 from 'web3'
+import { getUserPoolData } from 'state/pools'
 import orderBy from 'lodash/orderBy'
 import partition from 'lodash/partition'
 import { useTranslation } from 'contexts/Localization'
@@ -45,11 +46,24 @@ const Pools: React.FC = () => {
   const [stakedOnly, setStakedOnly] = usePersistState(false, 'pancake_pool_staked')
   const [staked, setStaked] = useState(0)
   const [userDetails, setUserDetails] = useState({})
+  const [userInfo, setUserInfo] = useState()
   const [numberOfPoolsVisible, setNumberOfPoolsVisible] = useState(NUMBER_OF_POOLS_VISIBLE)
   const [observerIsSet, setObserverIsSet] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement>(null)
 
   const [finishedPools, openPools] = useMemo(() => partition(pools, (pool) => pool.isFinished), [pools])
+
+  // useEffect(() => {
+  //   const fetchUserData = async () => {
+  //     try {
+  //       const test = await getUserPoolData(account)
+  //       setUserInfo(test)
+  //     } catch (err) {
+  //       console.log(err, 'err')
+  //     }
+  //   }
+  //   fetchUserData()
+  // }, [account])
 
   // console.log(openPools, 'open pools')
 

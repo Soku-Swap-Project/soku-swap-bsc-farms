@@ -61,7 +61,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '12',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
 
   // 60 Day Locked Staking Pools
@@ -93,7 +93,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '6',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
 
   // 30 Day Locked Staking Pools
@@ -140,7 +140,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '3',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
   {
     sousId: 46,
@@ -154,7 +154,7 @@ const pools: PoolConfig[] = [
     harvest: true,
     tokenPerBlock: '6.75',
     sortOrder: 999,
-    isFinished: false,
+    isFinished: true,
   },
 
   // Non Locked Vaults
