@@ -91,7 +91,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const handleChangePercent = (sliderPercent: number) => {
     if (sliderPercent > 0) {
       const percentageOfStakingMax = new BigNumber(getCalculatedStakingLimit()).div(100).multipliedBy(sliderPercent)
-      const amountToStake = getFullDisplayBalance(percentageOfStakingMax, stakingToken.decimals, stakingToken.decimals)
+      const amountToStake = getFullDisplayBalance(percentageOfStakingMax, stakingToken.decimals)
       setStakeAmount(amountToStake)
     } else {
       setStakeAmount('')
@@ -136,6 +136,9 @@ const StakeModal: React.FC<StakeModalProps> = ({
       }
     }
   }
+
+  console.log(stakeAmount, 'staking now')
+  console.log(web3.utils.fromWei(stakedBalance.toString()), 'staking balance')
 
   return (
     <Modal title={isRemovingStake ? t('Unstake') : t('Stake in Pool')} onDismiss={onDismiss} headerBackground="#f9f9fa">
@@ -194,27 +197,47 @@ const StakeModal: React.FC<StakeModalProps> = ({
           balance: getFullDisplayBalance(new BigNumber(getCalculatedStakingLimit()), stakingToken.decimals),
         })}
       </Text>
-      <Slider
-        min={0}
-        max={100}
-        value={percent}
-        onChange={handleChangePercent}
-        name="stake"
-        valueLabel={`${percent}%`}
-        step={1}
-      />
-      <Flex alignItems="center" justifyContent="space-between" mt="8px">
-        <PercentageButton onClick={() => handleChangePercent(25)}>25%</PercentageButton>
-        <PercentageButton onClick={() => handleChangePercent(50)}>50%</PercentageButton>
-        <PercentageButton onClick={() => handleChangePercent(75)}>75%</PercentageButton>
-        <PercentageButton onClick={() => handleChangePercent(isRemovingStake ? 100 : 99.99)}>MAX</PercentageButton>
-      </Flex>
+      {pool.isFinished ? (
+        <>
+          {' '}
+          <Flex alignItems="center" justifyContent="space-between" mt="8px">
+            {/* <PercentageButton onClick={() => handleChangePercent(25)}>25%</PercentageButton>
+            <PercentageButton onClick={() => handleChangePercent(50)}>50%</PercentageButton>
+            <PercentageButton onClick={() => handleChangePercent(75)}>75%</PercentageButton> */}
+            <PercentageButton onClick={() => handleChangePercent(isRemovingStake ? 100 : 99.99)}>MAX</PercentageButton>
+          </Flex>{' '}
+        </>
+      ) : (
+        <>
+          {' '}
+          <Slider
+            min={0}
+            max={100}
+            value={percent}
+            onChange={handleChangePercent}
+            name="stake"
+            valueLabel={`${percent}%`}
+            step={1}
+          />
+          <Flex alignItems="center" justifyContent="space-between" mt="8px">
+            <PercentageButton onClick={() => handleChangePercent(25)}>25%</PercentageButton>
+            <PercentageButton onClick={() => handleChangePercent(50)}>50%</PercentageButton>
+            <PercentageButton onClick={() => handleChangePercent(75)}>75%</PercentageButton>
+            <PercentageButton onClick={() => handleChangePercent(isRemovingStake ? 100 : 99.99)}>MAX</PercentageButton>
+          </Flex>{' '}
+        </>
+      )}
       <Button
         style={{ background: '#05195a' }}
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
         onClick={handleConfirmClick}
-        disabled={!stakeAmount || parseFloat(stakeAmount) === 0 || hasReachedStakeLimit}
+        disabled={
+          !stakeAmount ||
+          parseFloat(stakeAmount) === 0 ||
+          hasReachedStakeLimit ||
+          (pool.isFinished && stakeAmount !== web3.utils.fromWei(stakedBalance.toString()))
+        }
         mt="24px"
       >
         {pendingTx ? t('Confirming') : t('Confirm')}

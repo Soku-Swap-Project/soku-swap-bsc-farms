@@ -31,6 +31,7 @@ interface ExpandedFooterProps {
   account: string
   isAutoVault?: boolean
   lockTime?: any
+  stakedAmount?: number
 }
 
 const ExpandedWrapper = styled(Flex)`
@@ -40,7 +41,13 @@ const ExpandedWrapper = styled(Flex)`
   }
 `
 
-const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVault = false, lockTime }) => {
+const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
+  pool,
+  account,
+  isAutoVault = false,
+  lockTime,
+  stakedAmount,
+}) => {
   const { t } = useTranslation()
   const web3 = getWeb3NoAccount()
   // const newWeb3 = new Web3(Web3.givenProvider)
@@ -62,7 +69,14 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
   const blocksUntilStart = Math.max(startBlock - currentBlock, 0)
   const blocksRemaining = Math.max(endBlock - currentBlock, 0)
 
-  const remainingLock = parseInt(currentBlock.toString()) + parseInt(lockTime.toString())
+  const remainingLock = () => {
+    let remaining
+    if (lockTime) {
+      remaining = parseInt(currentBlock?.toString()) + parseInt(lockTime?.toString())
+    }
+
+    return remaining
+  }
   // console.log(currentBlock)
 
   const hasPoolStarted = blocksUntilStart === 0 && blocksRemaining > 0
@@ -152,16 +166,16 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({ pool, account, isAutoVa
             <Text small>Lock Time:</Text>
             <Flex alignItems="center">
               {blocksRemaining || blocksUntilStart ? (
-                <Balance color="primary" fontSize="14px" value={lockTime} decimals={0} />
+                <Balance color="primary" fontSize="14px" value={stakedAmount > 0 ? lockTime : 0} decimals={0} />
               ) : (
                 <Skeleton width="54px" height="21px" />
               )}
-              {lockTime > 0 ? (
+              {lockTime > 0 && stakedAmount > 0 ? (
                 <a
                   color="primary"
                   target="_blank"
                   rel="noreferrer"
-                  href={`https://bscscan.com/block/countdown/${remainingLock}`}
+                  href={`https://bscscan.com/block/countdown/${remainingLock()}`}
                   style={{ color: '#04bbfb', marginLeft: '4px', textTransform: 'lowercase' }}
                   className="start_and_endBlocks"
                 >

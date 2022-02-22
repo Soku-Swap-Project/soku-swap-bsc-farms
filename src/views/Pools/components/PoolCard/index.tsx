@@ -1053,7 +1053,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
 
         getBalance(account)
       } catch (error) {
-        console.log(error, 'getBalance')
+        // console.log(error, 'getBalance')
       }
     }
 
@@ -1680,7 +1680,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
         setStakedAmount(parsedBal)
       }
     } catch (error) {
-      console.log(error, 'get staking bal')
+      // console.log(error, 'get staking bal')
     }
   }
 
@@ -2298,7 +2298,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
         setReward(penReward)
       }
     } catch (error) {
-      console.log(error, 'getPendingReward')
+      // console.log(error, 'getPendingReward')
     }
   }
 
@@ -2644,7 +2644,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
         setLockTime(remainingTime)
       }
     } catch (error) {
-      console.log('lock time error', error)
+      // console.log('lock time error', error)
     }
   }
 
@@ -2693,7 +2693,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
             )}
           </Flex>
         </CardBody>
-        <CardFooter pool={pool} account={account} lockTime={lockTime} />
+        <CardFooter pool={pool} account={account} lockTime={lockTime} stakedAmount={stakedAmount} />
       </StyledCardInner>
     </StyledCard>
   )
