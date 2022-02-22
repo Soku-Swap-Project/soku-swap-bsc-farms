@@ -18,7 +18,7 @@ console.log(process.env, 'dotenv')
 
 const getNodeUrl = () => {
   const randomIndex = random(0, nodes.length - 1)
-  return nodes[randomIndex]
+  return 'https://bsc-dataseed4.ninicoin.io/'
 }
 
 export default getNodeUrl
