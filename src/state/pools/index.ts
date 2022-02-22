@@ -99,6 +99,33 @@ export const fetchPoolsUserDataAsync = (account) => async (dispatch) => {
   dispatch(setPoolsUserData(userData))
   return { allowances, stakingTokenBalances, stakedBalances, pendingRewards }
 }
+// eslint-disable consistent-return
+export const getUserPoolData = async (account) => {
+  let allowances
+  let stakingTokenBalances
+  let stakedBalances
+  let pendingRewards
+
+  try {
+    allowances = await fetchPoolsAllowance(account)
+    stakingTokenBalances = await fetchUserBalances(account)
+    stakedBalances = await fetchUserStakeBalances(account)
+    pendingRewards = await fetchUserPendingRewards(account)
+
+    const userData = poolsConfig.map((pool) => ({
+      sousId: pool.sousId,
+      allowance: allowances[pool.sousId],
+      stakingTokenBalance: stakingTokenBalances[pool.sousId],
+      stakedBalance: stakedBalances[pool.sousId],
+      pendingReward: pendingRewards[pool.sousId],
+    }))
+    console.log(userData, 'user')
+  } catch (error) {
+    // console.log(error)
+  }
+
+  return { allowances, stakingTokenBalances, stakedBalances, pendingRewards }
+}
 
 export const updateUserAllowance = (sousId: number, account: string) => async (dispatch) => {
   const allowances = await fetchPoolsAllowance(account)

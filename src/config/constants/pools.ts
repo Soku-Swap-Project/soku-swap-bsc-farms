@@ -17,6 +17,52 @@ const pools: PoolConfig[] = [
   //   isFinished: false,
   // },
 
+  {
+    sousId: 53,
+    stakingToken: tokens.suteku,
+    earningToken: tokens.soku,
+    contractAddress: {
+      97: '',
+      56: '0xdA2D731b12af76954dB42481052369dB0866980a',
+    },
+    poolCategory: PoolCategory['30DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '0.1',
+    sortOrder: 999,
+    isFinished: false,
+  },
+  // NEW TEST
+
+  {
+    sousId: 51,
+    stakingToken: tokens.suteku,
+    earningToken: tokens.soku,
+    contractAddress: {
+      97: '',
+      56: '0xA8eE5454a4E6CA7D0DdB5feBB28E20C9E0d601e8',
+    },
+    poolCategory: PoolCategory['30DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '0.1',
+    sortOrder: 999,
+    isFinished: false,
+  },
+
+  {
+    sousId: 52,
+    stakingToken: tokens.suteku,
+    earningToken: tokens.soku,
+    contractAddress: {
+      97: '',
+      56: '0x897f76042c28a8A1CBC97a80d5f36D70ee61F2b8',
+    },
+    poolCategory: PoolCategory['30DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '0.1',
+    sortOrder: 999,
+    isFinished: false,
+  },
+
   // 90 Day Locked Staking Pools
 
   {
