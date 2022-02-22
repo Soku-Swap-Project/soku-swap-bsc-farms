@@ -137,8 +137,8 @@ const StakeModal: React.FC<StakeModalProps> = ({
     }
   }
 
-  console.log(stakeAmount, 'staking now')
-  console.log(web3.utils.fromWei(stakedBalance.toString()), 'staking balance')
+  // console.log(stakeAmount, 'staking now')
+  // console.log(web3.utils.fromWei(stakedBalance.toString()), 'staking balance')
 
   return (
     <Modal title={isRemovingStake ? t('Unstake') : t('Stake in Pool')} onDismiss={onDismiss} headerBackground="#f9f9fa">
