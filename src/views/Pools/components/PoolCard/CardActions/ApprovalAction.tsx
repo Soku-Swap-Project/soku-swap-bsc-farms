@@ -11,9 +11,10 @@ import { Pool } from 'state/types'
 interface ApprovalActionProps {
   pool: Pool
   isLoading?: boolean
+  approved: boolean
 }
 
-const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false }) => {
+const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false, approved }) => {
   const { sousId, stakingToken, earningToken } = pool
   const { t } = useTranslation()
   const stakingTokenContract = useERC20(stakingToken.address ? getAddress(stakingToken.address) : '')

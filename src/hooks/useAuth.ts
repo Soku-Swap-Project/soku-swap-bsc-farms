@@ -14,7 +14,7 @@ import {
 } from '@web3-react/walletconnect-connector'
 import { connectorLocalStorageKey, ConnectorNames } from '@pancakeswap-libs/uikit'
 import useToast from 'hooks/useToast'
-import { connectorsByName } from 'connectors'
+import { connectorsByName } from 'utils/web3React'
 import { profileClear } from 'state/profile'
 import { useAppDispatch } from 'state'
 

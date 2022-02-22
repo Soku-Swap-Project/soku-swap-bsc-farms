@@ -33,7 +33,7 @@ const AprRow: React.FC<AprRowProps> = ({ pool, isAutoVault = false, compoundFreq
   const [rewardPerBlock, setRewardPerBlock] = useState('')
 
   const getRewardPerBlock = async () => {
-    if (!pool.isFinished && pool) {
+    if (pool) {
       try {
         if (
           pool.poolCategory === '30DayLock' ||

@@ -21,6 +21,8 @@ interface FooterProps {
   account: string
   isAutoVault?: boolean
   totalCakeInVault?: BigNumber
+  lockTime?: any
+  stakedAmount?: number
 }
 
 const ExpandableButtonWrapper = styled(Flex)`
@@ -31,7 +33,7 @@ const ExpandableButtonWrapper = styled(Flex)`
   }
 `
 
-const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) => {
+const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false, lockTime, stakedAmount }) => {
   const { t } = useTranslation()
   const [isExpanded, setIsExpanded] = useState(false)
 
@@ -79,7 +81,15 @@ const Footer: React.FC<FooterProps> = ({ pool, account, isAutoVault = false }) =
           {isExpanded ? <Text>Hide</Text> : <Text>Details</Text>}
         </ExpandableLabel>
       </ExpandableButtonWrapper>
-      {isExpanded && <ExpandedFooter pool={pool} account={account} isAutoVault={isAutoVault} />}
+      {isExpanded && (
+        <ExpandedFooter
+          pool={pool}
+          account={account}
+          isAutoVault={isAutoVault}
+          lockTime={lockTime}
+          stakedAmount={stakedAmount}
+        />
+      )}
     </CardFooter>
   )
 }
