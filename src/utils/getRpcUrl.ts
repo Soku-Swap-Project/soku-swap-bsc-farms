@@ -1,7 +1,20 @@
 import random from 'lodash/random'
 
 // Array of available nodes to connect to
-export const nodes = [process.env.REACT_APP_NODE_1, process.env.REACT_APP_NODE_2, process.env.REACT_APP_NODE_3]
+export const nodes = [
+  'https://bsc-dataseed2.defibit.io/',
+  'https://bsc-dataseed3.defibit.io/',
+  'https://bsc-dataseed4.defibit.io/',
+  'https://bsc-dataseed2.ninicoin.io/',
+  'https://bsc-dataseed3.ninicoin.io/',
+  'https://bsc-dataseed4.ninicoin.io/',
+  'https://bsc-dataseed1.binance.org/',
+  'https://bsc-dataseed2.binance.org/',
+  'https://bsc-dataseed3.binance.org/',
+  'https://bsc-dataseed4.binance.org/',
+]
+
+console.log(process.env, 'dotenv')
 
 const getNodeUrl = () => {
   const randomIndex = random(0, nodes.length - 1)
