@@ -117,7 +117,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         <Flex>
           <Button
             style={{ background: 'rgb(4, 187, 251)' }}
-            disabled={!hasEarnings}
+            disabled={!hasEarnings || pool.isFinished}
             onClick={() => {
               if (
                 (pool.poolCategory === '30DayLock' && lockTime !== '0') ||
