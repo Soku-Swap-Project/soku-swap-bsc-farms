@@ -42,13 +42,6 @@ export default function AccountModal() {
     setOpen(false)
   }
 
-  // const date = new Date()
-  // const month = date.getMonth() + 1
-  // const day = date.getDate() + 7
-  // const year = date.getFullYear()
-
-  // const earnedAmount = 50
-
   const logoutAccount = () => {
     return logout
   }

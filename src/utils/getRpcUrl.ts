@@ -14,7 +14,7 @@ export const nodes = [
   'https://bsc-dataseed4.binance.org/',
 ]
 
-console.log(process.env, 'dotenv')
+// console.log(process.env, 'dotenv')
 
 const getNodeUrl = () => {
   const randomIndex = random(0, nodes.length - 1)
