@@ -3,14 +3,11 @@ import ModalVideo from 'react-modal-video'
 
 import { Route, useRouteMatch } from 'react-router-dom'
 
-// import BigNumber from 'bignumber.js'
 import { useWeb3React } from '@web3-react/core'
 import { Heading, Flex } from '@pancakeswap/uikit'
 import { getAddress } from 'utils/addressHelpers'
 import { AbiItem } from 'web3-utils'
 import { getWeb3NoAccount } from 'utils/web3'
-// import { Pool } from 'state/types'
-// import Web3 from 'web3'
 import { getUserPoolData } from 'state/pools'
 import orderBy from 'lodash/orderBy'
 import partition from 'lodash/partition'
@@ -19,6 +16,7 @@ import usePersistState from 'hooks/usePersistState'
 import { usePools, useFetchCakeVault } from 'state/hooks'
 import FlexLayout from 'components/layout/Flex'
 import Page from 'components/layout/Page'
+import AlertDismissable from 'components/Alerts'
 import PageHeader from 'components/PageHeader'
 import PoolCard from './components/PoolCard'
 // import CakeVaultCard from './components/CakeVaultCard'
@@ -109,6 +107,7 @@ const Pools: React.FC = () => {
   return (
     <div style={{ paddingTop: '1.85rem' }} className="farm_heading">
       <PageHeader>
+        <AlertDismissable />
         <Flex justifyContent="space-between" flexDirection={['column', null, 'row']}>
           <Flex flexDirection="column" mr={['8px', 0]}>
             <Heading

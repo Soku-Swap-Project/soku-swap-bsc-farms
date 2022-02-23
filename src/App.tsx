@@ -25,6 +25,8 @@ import ClaimSokuModal from './components/ClaimSokuModal'
 import SlideOutMenu from './components/SlideOutMenu/SlideOutMenu'
 import ComingSoon from './views/ComingSoon'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 import './MobileFooter.css'
 
 // Route-based code splitting
