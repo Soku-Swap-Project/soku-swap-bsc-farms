@@ -6,13 +6,10 @@ import { ResetCSS, useWalletModal } from '@pancakeswap/uikit'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GitHubIcon from '@mui/icons-material/GitHub'
+// import { useMoralis } from 'react-moralis'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
-import {
-  useFetchPriceList,
-  // useFetchProfile,
-  useFetchPublicData,
-} from 'state/hooks'
+import { useFetchPriceList, useFetchPublicData } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 import detectEthereumProvider from '@metamask/detect-provider'
 import GlobalStyle from './style/Global'
@@ -32,15 +29,6 @@ import './MobileFooter.css'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
-// const Home = lazy(() => import('./views/Home'))
-// const Lottery = lazy(() => import('./views/Lottery'))
-// const Ifos = lazy(() => import('./views/Ifos'))
-// const Collectibles = lazy(() => import('./views/Collectibles'))
-// const Teams = lazy(() => import('./views/Teams'))
-// const Team = lazy(() => import('./views/Teams/Team'))
-// const Profile = lazy(() => import('./views/Profile'))
-// const TradingCompetition = lazy(() => import('./views/TradingCompetition'))
-// const Predictions = lazy(() => import('./views/Predictions'))
 const Farms = lazy(() => import('./views/Farms'))
 const FarmsV2 = lazy(() => import('./views/FarmsV2'))
 const NotFound = lazy(() => import('./views/NotFound'))
@@ -98,6 +86,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     loadNetwork()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const { account } = useWeb3React()

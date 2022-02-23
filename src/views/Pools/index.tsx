@@ -33,7 +33,6 @@ const NUMBER_OF_POOLS_VISIBLE = 12
 const Pools: React.FC = () => {
   useFetchCakeVault()
   const { path } = useRouteMatch()
-  // console.log('staking path', path)
   const { t } = useTranslation()
   const { account } = useWeb3React()
   const pools = usePools(account)
@@ -42,49 +41,47 @@ const Pools: React.FC = () => {
   const [isOpen, setOpen] = useState(false)
 
   const web3 = getWeb3NoAccount()
-  // const newWeb3 = new Web3(Web3.givenProvider)
   const [stakedOnly, setStakedOnly] = usePersistState(false, 'pancake_pool_staked')
   const [staked, setStaked] = useState(0)
   const [userDetails, setUserDetails] = useState({})
-  const [userInfo, setUserInfo] = useState()
+  const [userInfo, setUserInfo] = useState({})
   const [numberOfPoolsVisible, setNumberOfPoolsVisible] = useState(NUMBER_OF_POOLS_VISIBLE)
   const [observerIsSet, setObserverIsSet] = useState(false)
   const loadMoreRef = useRef<HTMLDivElement>(null)
 
   const [finishedPools, openPools] = useMemo(() => partition(pools, (pool) => pool.isFinished), [pools])
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const test = await getUserPoolData(account)
-  //       setUserInfo(test)
-  //     } catch (err) {
-  //       console.log(err, 'err')
-  //     }
-  //   }
-  //   fetchUserData()
-  // }, [account])
-
-  // console.log(openPools, 'open pools')
+  useEffect(() => {
+    if (account) {
+      const fetchUserData = async () => {
+        try {
+          const test = await getUserPoolData(account)
+          setUserInfo(test)
+        } catch (err) {
+          console.log(err, 'err')
+        }
+      }
+      fetchUserData()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  })
 
   const stakedOnlyFinishedPools = useMemo(
     () =>
-      finishedPools.filter((pool) => {
-        if (pool.isFinished) {
-          return userDetails && userDetails[0] === '0'
-        }
-        return userDetails && parseInt(userDetails[0]) > 0
-      }),
+      finishedPools.filter((pool) =>
+        // eslint-disable-next-line dot-notation
+        userInfo['stakedBalances'] ? userInfo['stakedBalances'][pool.sousId] !== '0' : null,
+      ),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [finishedPools],
   )
   const stakedOnlyOpenPools = useMemo(
-    () => openPools.filter((pool) => staked && staked > 0),
+    () =>
+      // eslint-disable-next-line dot-notation
+      openPools.filter((pool) => (userInfo['stakedBalances'] ? userInfo['stakedBalances'][pool.sousId] !== '0' : null)),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [openPools],
   )
-
-  // console.log(stakedOnlyFinishedPools, 'stakedOnlyFinishedPools')
 
   const hasStakeInFinishedPools = stakedOnlyFinishedPools.length > 0
 
