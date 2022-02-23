@@ -64,7 +64,7 @@ const Pools: React.FC = () => {
       fetchUserData()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [account])
+  })
 
   const stakedOnlyFinishedPools = useMemo(
     () =>
