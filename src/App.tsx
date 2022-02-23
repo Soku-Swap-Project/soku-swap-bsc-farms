@@ -6,7 +6,7 @@ import { ResetCSS, useWalletModal } from '@pancakeswap/uikit'
 import TelegramIcon from '@mui/icons-material/Telegram'
 import TwitterIcon from '@mui/icons-material/Twitter'
 import GitHubIcon from '@mui/icons-material/GitHub'
-import { useMoralis } from 'react-moralis'
+// import { useMoralis } from 'react-moralis'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
 import { useFetchPriceList, useFetchPublicData } from 'state/hooks'
@@ -83,8 +83,6 @@ const App: React.FC = () => {
   useFetchPublicData()
   // useFetchProfile()
   useFetchPriceList()
-
-  const { authenticate, isInitialized, web3, user, Moralis } = useMoralis()
 
   useEffect(() => {
     loadNetwork()
