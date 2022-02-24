@@ -1,16 +1,15 @@
 import React from 'react'
-import styled, { keyframes, css } from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { useHistory } from 'react-router-dom'
 import { useTranslation } from 'contexts/Localization'
 import { LinkExternal, Text } from '@pancakeswap/uikit'
 import { FarmWithStakedValue } from 'views/Farms/components/FarmCard/FarmCard'
 import getLiquidityUrlPathParts from 'utils/getLiquidityUrlPathParts'
-import { CommunityTag, CoreTag, DualTag } from 'components/Tags'
 
 import HarvestAction from './HarvestAction'
 import StakedAction from './StakedAction'
-import Apr, { AprProps } from '../Apr'
-import Multiplier, { MultiplierProps } from '../Multiplier'
+import { AprProps } from '../Apr'
+import { MultiplierProps } from '../Multiplier'
 import Liquidity, { LiquidityProps } from '../Liquidity'
 
 export interface ActionPanelProps {
@@ -21,24 +20,6 @@ export interface ActionPanelProps {
   userDataReady: boolean
   expanded: boolean
 }
-
-const expandAnimation = keyframes`
-  from {
-    max-height: 0px;
-  }
-  to {
-    max-height: 500px;
-  }
-`
-
-const collapseAnimation = keyframes`
-  from {
-    max-height: 500px;
-  }
-  to {
-    max-height: 0px;
-  }
-`
 
 const Button = styled.button`
   // border: 1px solid red;
@@ -62,42 +43,6 @@ const Container = styled.div<{ expanded }>`
   }
 `
 
-const StyledLinkExternal = styled(LinkExternal)`
-  font-weight: 400;
-`
-
-const StakeContainer = styled.div`
-  color: ${({ theme }) => theme.colors.text};
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    justify-content: flex-start;
-  }
-`
-
-const TagsContainer = styled.div`
-  display: flex;
-  align-items: center;
-  margin-top: 25px;
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    margin-top: 16px;
-  }
-
-  > div {
-    height: 24px;
-    padding: 0 6px;
-    font-size: 14px;
-    margin-right: 4px;
-
-    svg {
-      width: 14px;
-    }
-  }
-`
-
 const ActionContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -108,10 +53,6 @@ const ActionContainer = styled.div`
     flex-grow: 1;
     flex-basis: 0;
   }
-`
-
-const InfoContainer = styled.div`
-  min-width: 200px;
 `
 
 const ValueContainer = styled.div`
@@ -129,33 +70,19 @@ const ValueWrapper = styled.div`
   margin: 4px 0px;
 `
 
-const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
-  details,
-  apr,
-  multiplier,
-  liquidity,
-  userDataReady,
-  expanded,
-}) => {
+const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({ details, liquidity, userDataReady, expanded }) => {
   const farm = details
-  const history = useHistory()
   const { t } = useTranslation()
-  const isActive = farm.multiplier !== '0X'
   const { quoteToken, token, dual } = farm
-  const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
-  const liquidityUrlPathParts = getLiquidityUrlPathParts({
-    quoteTokenAddress: quoteToken.address,
-    tokenAddress: token.address,
-  })
+  // const lpLabel = farm.lpSymbol && farm.lpSymbol.toUpperCase().replace('PANCAKE', '')
+  // const liquidityUrlPathParts = getLiquidityUrlPathParts({
+  //   quoteTokenAddress: quoteToken.address,
+  //   tokenAddress: token.address,
+  // })
   const lpAddress = farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]
-  const bsc = `https://bscscan.com/address/${lpAddress}`
-  const info = `https://pancakeswap.info/pair/${lpAddress}`
+  // const bsc = `https://bscscan.com/address/${lpAddress}`
+  // const info = `https://pancakeswap.info/pair/${lpAddress}`
   const origin = window.location.origin
-
-  // console.log(quoteToken)
-  // console.log(token)
-
-  // console.log(window.location)
 
   return (
     <Container
