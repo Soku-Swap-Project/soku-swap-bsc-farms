@@ -50,19 +50,17 @@ const Pools: React.FC = () => {
   const [finishedPools, openPools] = useMemo(() => partition(pools, (pool) => pool.isFinished), [pools])
 
   useEffect(() => {
-    if (account) {
-      const fetchUserData = async () => {
-        try {
-          const test = await getUserPoolData(account)
-          setUserInfo(test)
-        } catch (err) {
-          console.log(err, 'err')
-        }
+    const fetchUserData = async () => {
+      try {
+        const test = await getUserPoolData(account)
+        setUserInfo(test)
+      } catch (err) {
+        console.log(err, 'err')
       }
-      fetchUserData()
     }
+    fetchUserData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  })
+  }, [account])
 
   const stakedOnlyFinishedPools = useMemo(
     () =>
