@@ -3343,7 +3343,7 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
   }
 
   useEffect(() => {
-    if (pool && account) {
+    if (pool) {
       getPendingReward(account)
       getLockTime(account)
       getStakingBalance(account)
