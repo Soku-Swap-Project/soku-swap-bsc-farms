@@ -53,6 +53,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://www.bodatoken.org/ ',
   },
+  adamant: {
+    symbol: 'ADMC',
+    name: 'Adamant',
+    address: {
+      56: '0xA55EF2fB2B7b6A60371FD3def9B806E74a48bE69',
+      97: '',
+    },
+    decimals: 9,
+    projectLink: 'https://adamantcoin.com/ ',
+  },
   hodl: {
     symbol: 'HODL',
     name: 'HODL',

@@ -116,7 +116,6 @@ const Farms: React.FC = () => {
   const { t } = useTranslation()
   const { data: farmsLP, userDataLoaded } = useFarmsV2()
   const cakePrice = usePriceBnbSuteku()
-
   const [query, setQuery] = useState('')
   const [viewMode, setViewMode] = usePersistState(ViewMode.TABLE, 'pancake_farm_view')
   const { account } = useWeb3React()
@@ -314,8 +313,6 @@ const Farms: React.FC = () => {
       },
       details: farm,
     }
-    console.log(row.farm.image)
-
     return row
   })
 
@@ -351,8 +348,7 @@ const Farms: React.FC = () => {
 
     return (
       <div>
-        <FlexLayout>
-          {/* {console.log(path)} */}
+        {/* <FlexLayout>
           <Route exact path={`${path}/v2`}>
             {farmsStakedMemoized.map((farm) => (
               <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed={false} />
@@ -360,7 +356,7 @@ const Farms: React.FC = () => {
           </Route>
           <Route exact path={`${path}/history`}>
             {farmsStakedMemoized.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed />
+              <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed={false} />
             ))}
           </Route>
           <Route exact path={`${path}/archived`}>
@@ -368,7 +364,7 @@ const Farms: React.FC = () => {
               <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed />
             ))}
           </Route>
-        </FlexLayout>
+        </FlexLayout> */}
       </div>
     )
   }
@@ -401,36 +397,6 @@ const Farms: React.FC = () => {
             </LabelWrapper>
           </FilterContainer>
         </ControlContainer>
-        <AlertDismissable>
-          The following farms will be shut down March 30th:
-          <ul
-            style={{
-              paddingTop: '10px',
-              display: 'flex',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              listStyle: 'none',
-            }}
-          >
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', paddingTop: '5px' }}>
-              <img src={`/images/farms/bnb-busd.png`} alt={'bnb-busd'} width={35} height={35} />
-              <li style={{ paddingLeft: '10px' }}>BNB/BUSD</li>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', paddingTop: '5px' }}>
-              <img src={`/images/farms/bnb-eth.png`} alt={'bnb-eth'} width={35} height={35} />
-              <li style={{ paddingLeft: '10px' }}>BNB/ETH</li>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', paddingTop: '5px' }}>
-              <img src={`/images/farms/bnb-usdt.png`} alt={'bnb-usdt'} width={35} height={35} />
-              <li style={{ paddingLeft: '10px' }}>BNB/USDT</li>
-            </div>
-            <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'row', paddingTop: '5px' }}>
-              <img src={`/images/farms/soku-moonlight.png`} alt={'soku-moonlight'} width={35} height={35} />
-              <li style={{ paddingLeft: '10px' }}>SOKU/MOONLIGHT</li>
-            </div>
-          </ul>
-        </AlertDismissable>
-
         {renderContent()}
         <div ref={loadMoreRef} />
       </Page>
