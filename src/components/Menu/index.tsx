@@ -67,9 +67,9 @@ const Menu = (props) => {
               <a className="nav_link" href="/bsc/#/pool">
                 <li>Pool</li>
               </a>
-              <NavLink className="nav_link" activeClassName="active" to="/bsc/bridge">
+              <a className="nav_link" href={`${origin}/bridge`}>
                 <li>Bridge</li>
-              </NavLink>
+              </a>
               <NavLink className="nav_link" activeClassName="active" to="/bsc/farms">
                 <li>Farms</li>
               </NavLink>
