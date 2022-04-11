@@ -33,6 +33,8 @@ import Toggle from 'components/Toggle'
 
 import './index.css'
 import Web3 from 'web3'
+import { ColumnProps, ColumnsType } from 'antd/lib/table'
+import FarmTabButtons from './components/FarmTabButtons'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -109,6 +111,14 @@ const StyledImage = styled(Image)`
 `
 const NUMBER_OF_FARMS_VISIBLE = 12
 
+interface Column {
+  id: number
+  name: string
+  label: string
+  sort?: (a: RowType<RowProps>, b: RowType<RowProps>) => number
+  sortable: boolean
+}
+
 const Farms: React.FC = () => {
   const { path } = useRouteMatch()
   // console.log('farm path', path)
@@ -170,6 +180,8 @@ const Farms: React.FC = () => {
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
 
+  const hasStakeInFinishedFarms = stakedInactiveFarms.length > 0
+
   const stakedArchivedFarms = archivedFarms.filter(
     (farm) => farm.userData && new BigNumber(farm.userData.stakedBalance).isGreaterThan(0),
   )
@@ -204,6 +216,7 @@ const Farms: React.FC = () => {
   }
 
   const loadMoreRef = useRef<HTMLDivElement>(null)
+  const isMobile = window.innerWidth <= 500
 
   const [numberOfFarmsVisible, setNumberOfFarmsVisible] = useState(NUMBER_OF_FARMS_VISIBLE)
   const [observerIsSet, setObserverIsSet] = useState(false)
@@ -316,55 +329,92 @@ const Farms: React.FC = () => {
     return row
   })
 
+  const rowDataInactive = inactiveFarms.map((farm) => {
+    const { token, quoteToken } = farm
+    const tokenAddress = token.address
+    const quoteTokenAddress = quoteToken.address
+    const lpLabel = farm.lpSymbol && farm.lpSymbol.split(' ')[0].toUpperCase().replace('SOKU', '')
+    const row: RowProps = {
+      apr: {
+        value: null,
+        multiplier: farm.multiplier,
+        lpLabel,
+        tokenAddress,
+        quoteTokenAddress,
+        cakePrice,
+        originalValue: null,
+      },
+      farm: {
+        image: farm.lpSymbol.split(' ')[0].toLocaleLowerCase(),
+        label: lpLabel,
+        pid: farm.pid,
+      },
+      earned: {
+        earnings: getBalanceNumber(new BigNumber(farm.userData.earnings)),
+        pid: farm.pid,
+      },
+      liquidity: {
+        liquidity: new BigNumber(0),
+      },
+      multiplier: {
+        multiplier: farm.multiplier,
+      },
+      details: farm,
+    }
+    return row
+  })
+
+  const columnSchema = DesktopColumnSchema
+
+  const columns = columnSchema.map((column) => ({
+    id: column.id,
+    name: column.name,
+    label: column.label,
+    sort: (a: RowType<RowProps>, b: RowType<RowProps>) => {
+      switch (column.name) {
+        case 'farm':
+          return b.id - a.id
+        case 'apr':
+          if (a.original.apr.value && b.original.apr.value) {
+            return Number(a.original.apr.value) - Number(b.original.apr.value)
+          }
+
+          return 0
+        case 'earned':
+          return a.original.earned.earnings - b.original.earned.earnings
+        default:
+          return 1
+      }
+    },
+    sortable: column.sortable,
+  }))
+
   const renderContent = (): JSX.Element => {
     if (viewMode === ViewMode.TABLE && rowData.length) {
-      const columnSchema = DesktopColumnSchema
-
-      const columns = columnSchema.map((column) => ({
-        id: column.id,
-        name: column.name,
-        label: column.label,
-        sort: (a: RowType<RowProps>, b: RowType<RowProps>) => {
-          switch (column.name) {
-            case 'farm':
-              return b.id - a.id
-            case 'apr':
-              if (a.original.apr.value && b.original.apr.value) {
-                return Number(a.original.apr.value) - Number(b.original.apr.value)
-              }
-
-              return 0
-            case 'earned':
-              return a.original.earned.earnings - b.original.earned.earnings
-            default:
-              return 1
-          }
-        },
-        sortable: column.sortable,
-      }))
-
       return <Table data={rowData} columns={columns} userDataReady={userDataReady} />
     }
 
     return (
       <div>
-        {/* <FlexLayout>
+        <FlexLayout>
           <Route exact path={`${path}/v2`}>
             {farmsStakedMemoized.map((farm) => (
               <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed={false} />
             ))}
           </Route>
           <Route exact path={`${path}/history`}>
-            {farmsStakedMemoized.map((farm) => (
-              <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed={false} />
-            ))}
+            <Page style={{ minWidth: '105%' }}>
+              {viewMode === ViewMode.TABLE && rowDataInactive.length && (
+                <Table data={rowDataInactive} columns={columns} userDataReady={userDataReady} />
+              )}
+            </Page>
           </Route>
           <Route exact path={`${path}/archived`}>
             {farmsStakedMemoized.map((farm) => (
               <FarmCard key={farm.pid} farm={farm} cakePrice={cakePrice} account={account} removed />
             ))}
           </Route>
-        </FlexLayout> */}
+        </FlexLayout>
       </div>
     )
   }
@@ -392,7 +442,15 @@ const Farms: React.FC = () => {
         <Toggle />
         <ControlContainer>
           <FilterContainer>
-            <LabelWrapper>
+            <LabelWrapper
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                flexDirection: `${isMobile ? 'column-reverse' : 'row'}`,
+                marginBottom: `${isMobile ? '-32px' : '-16px'}`,
+              }}
+            >
+              <FarmTabButtons hasStakeInFinishedFarms={hasStakeInFinishedFarms} />
               <SearchInput onChange={handleChangeQuery} />
             </LabelWrapper>
           </FilterContainer>

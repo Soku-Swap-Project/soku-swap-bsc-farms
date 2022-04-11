@@ -21,6 +21,7 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.soku,
     quoteToken: tokens.wbnb,
+    isFinished: false,
   },
   {
     pid: 3,
@@ -31,27 +32,28 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.soku,
     quoteToken: tokens.busd,
+    isFinished: false,
   },
-  // {
-  //   pid: 11,
-  //   lpSymbol: 'BNB-BUSD LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
-  //   },
-  //   token: tokens.wbnb,
-  //   quoteToken: tokens.busd,
-  // },
-  // {
-  //   pid: 12,
-  //   lpSymbol: 'BNB-ETH LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0x74E4716E431f45807DCF19f284c7aA99F18a4fbc',
-  //   },
-  //   token: tokens.wbnb,
-  //   quoteToken: tokens.eth,
-  // },
+  {
+    pid: 11,
+    lpSymbol: 'BNB-BUSD LP',
+    lpAddresses: {
+      97: '',
+      56: '0x58F876857a02D6762E0101bb5C46A8c1ED44Dc16',
+    },
+    token: tokens.wbnb,
+    quoteToken: tokens.busd,
+  },
+  {
+    pid: 12,
+    lpSymbol: 'BNB-ETH LP',
+    lpAddresses: {
+      97: '',
+      56: '0x74E4716E431f45807DCF19f284c7aA99F18a4fbc',
+    },
+    token: tokens.wbnb,
+    quoteToken: tokens.eth,
+  },
   {
     pid: 14,
     lpSymbol: 'SOKU-ETH LP',
@@ -61,17 +63,18 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.soku,
     quoteToken: tokens.eth,
+    isFinished: true,
   },
-  // {
-  //   pid: 13,
-  //   lpSymbol: 'BNB-USDT LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE',
-  //   },
-  //   token: tokens.wbnb,
-  //   quoteToken: tokens.usdt,
-  // },
+  {
+    pid: 13,
+    lpSymbol: 'BNB-USDT LP',
+    lpAddresses: {
+      97: '',
+      56: '0x16b9a82891338f9bA80E2D6970FddA79D1eb0daE',
+    },
+    token: tokens.wbnb,
+    quoteToken: tokens.usdt,
+  },
   {
     pid: 1,
     lpSymbol: 'SOKU-SUTEKU LP',
@@ -81,6 +84,7 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.suteku,
     quoteToken: tokens.soku,
+    isFinished: false,
   },
   {
     pid: 5,
@@ -91,6 +95,7 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.suteku,
     quoteToken: tokens.wbnb,
+    isFinished: false,
   },
   {
     pid: 6,
@@ -101,17 +106,18 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.suteku,
     quoteToken: tokens.busd,
+    isFinished: false,
   },
-  // {
-  //   pid: 4,
-  //   lpSymbol: 'SOKU-YUMMY LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
-  //   },
-  //   token: tokens.yummy,
-  //   quoteToken: tokens.soku,
-  // },
+  {
+    pid: 4,
+    lpSymbol: 'SOKU-YUMMY LP',
+    lpAddresses: {
+      97: '',
+      56: '0x860b771eC2D0e8ecf3e2315aAD7a24Ba3228D968',
+    },
+    token: tokens.yummy,
+    quoteToken: tokens.soku,
+  },
   {
     pid: 7,
     lpSymbol: 'SOKU-HODL LP',
@@ -121,38 +127,39 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.hodl,
     quoteToken: tokens.soku,
+    isFinished: false,
   },
-  // {
-  //   pid: 8,
-  //   lpSymbol: 'SOKU-FCF LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0xf91BD6136D0e6Da3D09e128B2DaE7576540e1072',
-  //   },
-  //   token: tokens.fcf,
-  //   quoteToken: tokens.soku,
-  // },
-  // {
-  //   pid: 10,
-  //   lpSymbol: 'SOKU-MOONLIGHT LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0xF1300278975B91DB794F5E950679f29f236269BE',
-  //   },
-  //   token: tokens.moonlight,
-  //   quoteToken: tokens.soku,
-  //   isFinished: true,
-  // },
-  // {
-  //   pid: 9,
-  //   lpSymbol: 'SUTEKU-EARN LP',
-  //   lpAddresses: {
-  //     97: '',
-  //     56: '0xC3711E723904886e66996a7A6C71C927446Da758',
-  //   },
-  //   token: tokens.earnable,
-  //   quoteToken: tokens.suteku,
-  // },
+  {
+    pid: 8,
+    lpSymbol: 'SOKU-FCF LP',
+    lpAddresses: {
+      97: '',
+      56: '0xf91BD6136D0e6Da3D09e128B2DaE7576540e1072',
+    },
+    token: tokens.fcf,
+    quoteToken: tokens.soku,
+  },
+  {
+    pid: 10,
+    lpSymbol: 'SOKU-MOONLIGHT LP',
+    lpAddresses: {
+      97: '',
+      56: '0xF1300278975B91DB794F5E950679f29f236269BE',
+    },
+    token: tokens.moonlight,
+    quoteToken: tokens.soku,
+    isFinished: true,
+  },
+  {
+    pid: 9,
+    lpSymbol: 'SUTEKU-EARN LP',
+    lpAddresses: {
+      97: '',
+      56: '0xC3711E723904886e66996a7A6C71C927446Da758',
+    },
+    token: tokens.earnable,
+    quoteToken: tokens.suteku,
+  },
   {
     pid: 16,
     lpSymbol: 'SOKU-BODA LP',
@@ -162,6 +169,7 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.boda,
     quoteToken: tokens.soku,
+    isFinished: false,
   },
   {
     pid: 17,
@@ -172,6 +180,7 @@ const farmsV2: FarmConfig[] = [
     },
     token: tokens.adamant,
     quoteToken: tokens.suteku,
+    isFinished: true,
   },
 ]
 
