@@ -5,7 +5,15 @@
       "destination": "/$1"
     },
     {
+      "source": "/bsc/farms/history/(.*)",
+      "destination": "/$1"
+    },
+    {
       "source": "/bsc/staking/(.*)",
+      "destination": "/$1"
+    },
+    {
+      "source": "/bsc/staking/history/(.*)",
       "destination": "/$1"
     },
     {
