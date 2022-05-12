@@ -190,7 +190,7 @@ export const getStaticPredictionsData = async () => {
   ])
 
   return {
-    status: isPaused ? PredictionStatus.PAUSED : PredictionStatus.LIVE,
+    status: isPaused ? PredictionStatus.LIVE : PredictionStatus.LIVE,
     currentEpoch: Number(currentEpoch),
     intervalBlocks: Number(intervalBlocks),
     bufferBlocks: Number(bufferBlocks),
