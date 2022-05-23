@@ -15,6 +15,7 @@ import { usePriceCakeBusd, useProfile } from 'state/hooks'
 import config from './config'
 import ClaimSokuModal from 'components/ClaimSokuModal'
 import AccountModal from 'components/AccountModal'
+import { sokuSwapVersion2Url } from 'config/constants'
 
 import './Menu.css'
 
@@ -48,11 +49,11 @@ const Menu = (props) => {
       <div className="sokuswap__navbar">
         <nav>
           <ul className="navbar__items">
-            <a className="nav_link" href="/bsc/#/swap">
+            <a className="nav_link" href="/bsc/#/pool">
               <img className="nav_logo" style={{ height: '50px' }} alt="Logo" src="images/Web-Corner-Logo.png" />
             </a>
             <div className="navbar__options">
-              <a className="nav_link" href="/bsc/#/swap">
+              <a className="nav_link" href={sokuSwapVersion2Url}>
                 <li>Swap</li>
               </a>
               {isMobile ? (
