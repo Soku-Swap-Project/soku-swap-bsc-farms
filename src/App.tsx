@@ -12,6 +12,7 @@ import useEagerConnect from 'hooks/useEagerConnect'
 import { useFetchPriceList, useFetchPublicData } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 import detectEthereumProvider from '@metamask/detect-provider'
+import NewVersionModal from 'components/NewVersionModal'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
@@ -192,6 +193,7 @@ const App: React.FC = () => {
             </li>
           </ul>
         </div>
+        <NewVersionModal />
       </SuspenseWithChunkError>
       <EasterEgg iterations={2} />
       <ToastContainer />
