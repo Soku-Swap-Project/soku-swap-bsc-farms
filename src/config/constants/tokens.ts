@@ -152,7 +152,7 @@ const tokens = {
     projectLink: 'https://sokuswap.finance/',
   },
   wbnb: {
-    symbol: 'wBNB',
+    symbol: 'WBNB',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',

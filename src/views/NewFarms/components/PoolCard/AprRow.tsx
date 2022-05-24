@@ -48,10 +48,10 @@ const AprRow: React.FC<AprRowProps> = ({
   const hobiSutekuFarm = useFarmFromPidV2(18)
   const hobiSutekuLPPrice = useLpTokenPriceV2(hobiSutekuFarm.lpSymbol)
 
+  console.log(totalStaked.multipliedBy(hobiSutekuLPPrice), 'Liquidity')
+
   const hobiBnbFarm = useFarmFromPidV2(19)
   const hobiBnbLPPrice = useLpTokenPriceV2(hobiBnbFarm.lpSymbol)
-
-  console.log(hobiBnbLPPrice.toString(), hobiSutekuLPPrice.toString())
 
   const earningTokenPrice = hobiPrice
   const earningTokenPriceAsNumber = earningTokenPrice.toNumber()

@@ -1,6 +1,6 @@
 const LpTokens = {
   hobi_wbnb: {
-    symbol: 'HOBI-wBNB',
+    symbol: 'HOBI-WBNB',
     name: 'Pancake LPs',
     address: {
       56: '0x1586fd1298ca598d098e57533aff2927dc920704',

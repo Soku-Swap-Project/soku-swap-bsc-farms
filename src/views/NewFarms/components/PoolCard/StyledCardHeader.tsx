@@ -56,7 +56,7 @@ const StyledCardHeader: React.FC<{
     if (isSokuPool) {
       return t('Earn SOKU, stake SOKU')
     }
-    return t('Stake %symbol% LP', { symbol: stakingTokenSymbol })
+    return t('%symbol% LP', { symbol: stakingTokenSymbol })
   }
 
   return (
@@ -68,15 +68,14 @@ const StyledCardHeader: React.FC<{
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
-          {/* {pool.poolCategory === 'Lock' && (
-            <h1 style={{ color: 'red', paddingBottom: '10px' }}>TESTING (DO NOT STAKE)</h1>
-          )} */}
-          <Heading color={isFinished ? 'textDisabled' : '#05195a'} scale="lg">
+          <Heading color={isFinished ? 'textDisabled' : '#05195a'} scale='lg'>{getSubHeading()}</Heading>
+          <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>
             {`${getHeadingPrefix()} ${earningTokenSymbol}`}
-          </Heading>
-          <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{getSubHeading()}</Text>
+          </Text>
         </Flex>
-          <img src={ `/images/v2Farms/${farmImage}`} alt={earningTokenSymbol} width={75} height={75} />
+        {stakingTokenSymbol === 'HOBI-WBNB' ? <img src='https://i.ibb.co/tCZQJw6/hobi-wbnb.png' alt={earningTokenSymbol} width={75} height={75} /> :           
+          <img src='https://i.ibb.co/S0D1C6q/hobi-suteku.png' alt={earningTokenSymbol} width={75} height={75} />
+          }
       </Flex>
     </Wrapper>
   )
