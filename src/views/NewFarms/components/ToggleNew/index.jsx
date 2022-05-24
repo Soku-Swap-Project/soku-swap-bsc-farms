@@ -10,7 +10,7 @@ const ToggleNew = () => {
 
   return (
     <Wrapper>
-      <ButtonMenu activeIndex={isExact ? 0 : 1} scale="sm" variant="primary">
+      <ButtonMenu activeIndex={isExact ? 1 : 0} scale="sm" variant="primary">
         <ButtonMenuItem style={{ color: '#05195a' }} as={Link} to={`${'/bsc/farms'}`}>
           Farm V1
         </ButtonMenuItem>
@@ -26,7 +26,7 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 12px;
+  padding-bottom: 20px;
 `
 
 export default ToggleNew

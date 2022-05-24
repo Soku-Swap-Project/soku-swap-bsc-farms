@@ -1,20 +1,20 @@
 /* eslint-disable no-param-reassign */
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
-import poolsConfig from 'config/constants/pools'
+import farmsConfig from 'config/constants/farmsWithSmartChef'
 import { BIG_ZERO } from 'utils/bigNumber'
-import { PoolsState, Pool, CakeVault, VaultFees, VaultUser } from 'state/types'
-import { fetchPoolsBlockLimits, fetchPoolsStakingLimits, fetchPoolsTotalStaking } from './fetchPools'
+import { PoolsState as FarmsState, Pool as Farm, CakeVault, VaultFees, VaultUser } from 'state/types'
+import { fetchFarmsBlockLimits, fetchFarmsStakingLimits, fetchFarmsTotalStaking } from './fetchPools'
 import {
-  fetchPoolsAllowance,
-  fetchUserBalances,
-  fetchUserStakeBalances,
-  fetchUserPendingRewards,
+  fetchFarmsV2Allowance,
+  fetchUserBalancesFarmsV2,
+  fetchUserStakeBalancesFarmsV2,
+  fetchUserPendingRewardsFarmsV2,
 } from './fetchPoolsUser'
 import { fetchPublicVaultData, fetchVaultFees } from './fetchVaultPublic'
 import fetchVaultUser from './fetchVaultUser'
 
-const initialState: PoolsState = {
-  data: [...poolsConfig],
+const initialState: FarmsState = {
+  data: [...farmsConfig],
   cakeVault: {
     totalShares: null,
     pricePerFullShare: null,
@@ -38,11 +38,11 @@ const initialState: PoolsState = {
 }
 
 // Thunks
-export const fetchPoolsPublicDataAsync = (currentBlock: number) => async (dispatch) => {
-  const blockLimits = await fetchPoolsBlockLimits()
-  const totalStakings = await fetchPoolsTotalStaking()
+export const fetchFarmsV2PublicDataAsync = (currentBlock: number) => async (dispatch) => {
+  const blockLimits = await fetchFarmsBlockLimits()
+  const totalStakings = await fetchFarmsTotalStaking()
 
-  const liveData = poolsConfig.map((pool) => {
+  const liveData = farmsConfig.map((pool) => {
     const blockLimit = blockLimits.find((entry) => entry.sousId === pool.sousId)
     // console.log('limit', blockLimits)
     const totalStaking = totalStakings.find((entry) => entry.sousId === pool.sousId)
@@ -56,17 +56,17 @@ export const fetchPoolsPublicDataAsync = (currentBlock: number) => async (dispat
     }
   })
 
-  dispatch(setPoolsPublicData(liveData))
+  dispatch(setFarmsWithSmartChefPublicData(liveData))
 }
 
-export const fetchPoolsStakingLimitsAsync = () => async (dispatch, getState) => {
+export const fetchFarmsV2StakingLimitsAsync = () => async (dispatch, getState) => {
   const poolsWithStakingLimit = getState()
     .pools.data.filter(({ stakingLimit }) => stakingLimit !== null && stakingLimit !== undefined)
     .map((pool) => pool.sousId)
 
-  const stakingLimits = await fetchPoolsStakingLimits(poolsWithStakingLimit)
+  const stakingLimits = await fetchFarmsStakingLimits(poolsWithStakingLimit)
 
-  const stakingLimitData = poolsConfig.map((pool) => {
+  const stakingLimitData = farmsConfig.map((pool) => {
     if (poolsWithStakingLimit.includes(pool.sousId)) {
       return { sousId: pool.sousId }
     }
@@ -77,16 +77,16 @@ export const fetchPoolsStakingLimitsAsync = () => async (dispatch, getState) => 
     }
   })
 
-  dispatch(setPoolsPublicData(stakingLimitData))
+  dispatch(setFarmsWithSmartChefPublicData(stakingLimitData))
 }
 
-export const fetchPoolsUserDataAsync = (account) => async (dispatch) => {
-  const allowances = await fetchPoolsAllowance(account)
-  const stakingTokenBalances = await fetchUserBalances(account)
-  const stakedBalances = await fetchUserStakeBalances(account)
-  const pendingRewards = await fetchUserPendingRewards(account)
+export const fetchFarmsV2UserDataAsync = (account) => async (dispatch) => {
+  const allowances = await fetchFarmsV2Allowance(account)
+  const stakingTokenBalances = await fetchUserBalancesFarmsV2(account)
+  const stakedBalances = await fetchUserStakeBalancesFarmsV2(account)
+  const pendingRewards = await fetchUserPendingRewardsFarmsV2(account)
 
-  const userData = poolsConfig.map((pool) => ({
+  const userData = farmsConfig.map((pool) => ({
     sousId: pool.sousId,
     allowance: allowances[pool.sousId],
     stakingTokenBalance: stakingTokenBalances[pool.sousId],
@@ -94,9 +94,7 @@ export const fetchPoolsUserDataAsync = (account) => async (dispatch) => {
     pendingReward: pendingRewards[pool.sousId],
   }))
 
-  console.log(userData, 'user')
-
-  dispatch(setPoolsUserData(userData))
+  dispatch(setFarmsWithSmartChefUserData(userData))
   return { allowances, stakingTokenBalances, stakedBalances, pendingRewards }
 }
 // eslint-disable consistent-return
@@ -107,12 +105,12 @@ export const getUserPoolData = async (account) => {
   let pendingRewards
 
   try {
-    allowances = await fetchPoolsAllowance(account)
-    stakingTokenBalances = await fetchUserBalances(account)
-    stakedBalances = await fetchUserStakeBalances(account)
-    pendingRewards = await fetchUserPendingRewards(account)
+    allowances = await fetchFarmsV2Allowance(account)
+    stakingTokenBalances = await fetchUserBalancesFarmsV2(account)
+    stakedBalances = await fetchUserStakeBalancesFarmsV2(account)
+    pendingRewards = await fetchUserPendingRewardsFarmsV2(account)
 
-    const userData = poolsConfig.map((pool) => ({
+    const userData = farmsConfig.map((pool) => ({
       sousId: pool.sousId,
       allowance: allowances[pool.sousId],
       stakingTokenBalance: stakingTokenBalances[pool.sousId],
@@ -127,24 +125,24 @@ export const getUserPoolData = async (account) => {
   return { allowances, stakingTokenBalances, stakedBalances, pendingRewards }
 }
 
-export const updateUserAllowance = (sousId: number, account: string) => async (dispatch) => {
-  const allowances = await fetchPoolsAllowance(account)
-  dispatch(updatePoolsUserData({ sousId, field: 'allowance', value: allowances[sousId] }))
+export const updateUserAllowanceFarmsV2 = (sousId: number, account: string) => async (dispatch) => {
+  const allowances = await fetchFarmsV2Allowance(account)
+  dispatch(updateFarmsWithSmartChefUserData({ sousId, field: 'allowance', value: allowances[sousId] }))
 }
 
-export const updateUserBalance = (sousId: number, account: string) => async (dispatch) => {
-  const tokenBalances = await fetchUserBalances(account)
-  dispatch(updatePoolsUserData({ sousId, field: 'stakingTokenBalance', value: tokenBalances[sousId] }))
+export const updateUserBalanceFarmsV2 = (sousId: number, account: string) => async (dispatch) => {
+  const tokenBalances = await fetchUserBalancesFarmsV2(account)
+  dispatch(updateFarmsWithSmartChefUserData({ sousId, field: 'stakingTokenBalance', value: tokenBalances[sousId] }))
 }
 
-export const updateUserStakedBalance = (sousId: number, account: string) => async (dispatch) => {
-  const stakedBalances = await fetchUserStakeBalances(account)
-  dispatch(updatePoolsUserData({ sousId, field: 'stakedBalance', value: stakedBalances[sousId] }))
+export const updateUserStakedBalanceFarmsV2 = (sousId: number, account: string) => async (dispatch) => {
+  const stakedBalances = await fetchUserStakeBalancesFarmsV2(account)
+  dispatch(updateFarmsWithSmartChefUserData({ sousId, field: 'stakedBalance', value: stakedBalances[sousId] }))
 }
 
-export const updateUserPendingReward = (sousId: number, account: string) => async (dispatch) => {
-  const pendingRewards = await fetchUserPendingRewards(account)
-  dispatch(updatePoolsUserData({ sousId, field: 'pendingReward', value: pendingRewards[sousId] }))
+export const updateUserPendingRewardFarmsV2 = (sousId: number, account: string) => async (dispatch) => {
+  const pendingRewards = await fetchUserPendingRewardsFarmsV2(account)
+  dispatch(updateFarmsWithSmartChefUserData({ sousId, field: 'pendingReward', value: pendingRewards[sousId] }))
 }
 
 export const fetchCakeVaultPublicData = createAsyncThunk<CakeVault>('cakeVault/fetchPublicData', async () => {
@@ -165,25 +163,25 @@ export const fetchCakeVaultUserData = createAsyncThunk<VaultUser, { account: str
   },
 )
 
-export const PoolsSlice = createSlice({
-  name: 'Pools',
+export const FarmsWithSmartChefSlice = createSlice({
+  name: 'FarmsWithSmartChef',
   initialState,
   reducers: {
-    setPoolsPublicData: (state, action) => {
-      const livePoolsData: Pool[] = action.payload
+    setFarmsWithSmartChefPublicData: (state, action) => {
+      const liveFarmsWithSmartChefData: Farm[] = action.payload
       state.data = state.data.map((pool) => {
-        const livePoolData = livePoolsData.find((entry) => entry.sousId === pool.sousId)
+        const livePoolData = liveFarmsWithSmartChefData.find((entry) => entry.sousId === pool.sousId)
         return { ...pool, ...livePoolData }
       })
     },
-    setPoolsUserData: (state, action) => {
+    setFarmsWithSmartChefUserData: (state, action) => {
       const userData = action.payload
       state.data = state.data.map((pool) => {
         const userPoolData = userData.find((entry) => entry.sousId === pool.sousId)
         return { ...pool, userData: userPoolData }
       })
     },
-    updatePoolsUserData: (state, action) => {
+    updateFarmsWithSmartChefUserData: (state, action) => {
       const { field, value, sousId } = action.payload
       const index = state.data.findIndex((p) => p.sousId === sousId)
 
@@ -205,13 +203,13 @@ export const PoolsSlice = createSlice({
     // Vault user data
     builder.addCase(fetchCakeVaultUserData.fulfilled, (state, action: PayloadAction<VaultUser>) => {
       const userData = action.payload
-      // userData.isLoading = false
+      userData.isLoading = false
       state.cakeVault = { ...state.cakeVault, userData }
     })
   },
 })
 
 // Actions
-export const { setPoolsPublicData, setPoolsUserData, updatePoolsUserData } = PoolsSlice.actions
+export const { setFarmsWithSmartChefPublicData, setFarmsWithSmartChefUserData, updateFarmsWithSmartChefUserData } = FarmsWithSmartChefSlice.actions
 
-export default PoolsSlice.reducer
+export default FarmsWithSmartChefSlice.reducer

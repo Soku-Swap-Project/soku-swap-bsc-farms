@@ -9,10 +9,11 @@ import GitHubIcon from '@mui/icons-material/GitHub'
 // import { useMoralis } from 'react-moralis'
 import BigNumber from 'bignumber.js'
 import useEagerConnect from 'hooks/useEagerConnect'
-import { useFetchPriceList, useFetchPublicData } from 'state/hooks'
+import { useFetchPriceList, useFetchPublicData, useFetchPublicDataV2 } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 import detectEthereumProvider from '@metamask/detect-provider'
 import NewVersionModal from 'components/NewVersionModal'
+import NewFarms from 'views/NewFarms'
 import GlobalStyle from './style/Global'
 import Menu from './components/Menu'
 import SuspenseWithChunkError from './components/SuspenseWithChunkError'
@@ -84,6 +85,7 @@ const loadNetwork = async () => {
 const App: React.FC = () => {
   useEagerConnect()
   useFetchPublicData()
+  useFetchPublicDataV2()
   // useFetchProfile()
   useFetchPriceList()
 
@@ -121,6 +123,9 @@ const App: React.FC = () => {
           </Route> */}
           <Route path="/bsc/farms">
             <FarmsV2 />
+          </Route>
+          <Route path="/bsc/farms-v2/">
+            <NewFarms />
           </Route>
           <Route path="/bsc/staking/">
             <Pools />

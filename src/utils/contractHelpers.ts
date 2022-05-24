@@ -1,7 +1,7 @@
 import Web3 from 'web3'
 import { AbiItem } from 'web3-utils'
 import web3NoAccount from 'utils/web3'
-import { poolsConfig } from 'config/constants'
+import { poolsConfig, farmsWithSmartChefConfig } from 'config/constants'
 import { PoolCategory } from 'config/constants/types'
 
 // Addresses
@@ -80,12 +80,18 @@ export const getSouschefContract = (id: number, web3?: Web3) => {
   const config = poolsConfig.find((pool) => pool.sousId === id)
   // const abi = config.poolCategory === PoolCategory.BINANCE ? sousChefBnb : sousChef
   const abi = sousChef
-  return getContract(abi, getAddress(config.contractAddress), web3)
+  return getContract(sousChefV2, getAddress(config.contractAddress), web3)
 }
 export const getSouschefV2Contract = (id: number, web3?: Web3) => {
   const config = poolsConfig.find((pool) => pool.sousId === id)
   return getContract(sousChefV2, getAddress(config.contractAddress), web3)
 }
+
+export const getSouschefContractFarms = (id: number, web3?: Web3) => {
+  const config = farmsWithSmartChefConfig.find((pool) => pool.sousId === id)
+  return getContract(sousChefV2, getAddress(config.contractAddress), web3)
+}
+
 export const getPointCenterIfoContract = (web3?: Web3) => {
   return getContract(pointCenterIfo, getPointCenterIfoAddress(), web3)
 }
