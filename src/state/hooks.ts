@@ -21,6 +21,8 @@ import {
   fetchCakeVaultUserData,
   fetchCakeVaultFees,
   setBlock,
+  fetchFarmsV2PublicDataAsync as fetchFarmSmartChefPublicDataAsync,
+  fetchFarmsV2UserDataAsync as fetchFarmSmartChefUserDataAsync,
 } from './actions'
 import {
   State,
@@ -40,7 +42,10 @@ import { fetchPrices, bnbPrice } from './prices'
 import { fetchWalletNfts } from './collectibles'
 import { getCanClaim } from './predictions/helpers'
 import { transformPool } from './pools/helpers'
+import { transformPool as transformFarm } from './farmsWithSmartChef/helpers'
+
 import { fetchPoolsStakingLimitsAsync } from './pools'
+import { fetchFarmsV2StakingLimitsAsync } from './farmsWithSmartChef'
 
 const web3 = getWeb3NoAccount()
 
@@ -74,13 +79,13 @@ export const useFetchPublicDataV2 = () => {
   const { slowRefresh } = useRefresh()
   const web3 = getWeb3NoAccount()
   useEffect(() => {
-    const fetchPoolsPublicData = async () => {
+    const fetchFarmsPublicData = async () => {
       const blockNumber = await web3.eth.getBlockNumber()
-      dispatch(fetchPoolsPublicDataAsync(blockNumber))
+      dispatch(fetchFarmSmartChefPublicDataAsync(blockNumber))
     }
     dispatch(fetchFarmsPublicDataAsyncV2())
-    fetchPoolsPublicData()
-    dispatch(fetchPoolsStakingLimitsAsync())
+    fetchFarmsPublicData()
+    dispatch(fetchFarmsV2StakingLimitsAsync())
   }, [dispatch, slowRefresh, web3])
 
   useEffect(() => {
@@ -204,6 +209,52 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
   return BIG_ZERO
 }
 
+export const useBusdPriceFromPidV2 = (pid: number): BigNumber => {
+  const farm = useFarmFromPidV2(pid)
+  const bnbPriceBusd = usePriceBnbBusd()
+  // console.log('bnb price', bnbPriceBusd)
+  const quoteTokenFarm = useFarmFromTokenSymbolV2(farm?.quoteToken?.symbol)
+
+  // Catch in case a farm isn't found
+  if (!farm) {
+    return null
+  }
+
+  // With a quoteToken of BUSD or wBNB, it is straightforward to return the token price.
+  if (farm.quoteToken.symbol === 'BUSD') {
+    return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
+  if (farm.quoteToken.symbol === 'SOKU') {
+    // console.log('farm', farm.tokenPriceVsQuote)
+
+    return (bnbPriceBusd as BigNumber).isGreaterThan(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
+  if (farm.quoteToken.symbol === 'wBNB') {
+    return (bnbPriceBusd as BigNumber).isGreaterThan(0) ? bnbPriceBusd.times(farm.tokenPriceVsQuote) : BIG_ZERO
+  }
+
+  // Possible alternative farm quoteTokens:
+  // UST (i.e. MIR-UST), pBTC (i.e. PNT-pBTC), BTCB (i.e. bBADGER-BTCB), ETH (i.e. SUSHI-ETH)
+  // If the farm's quote token isn't BUSD or wBNB, we then use the quote token, of the original farm's quote token
+  // i.e. for farm PNT - pBTC
+  // we find the pBTC farm (pBTC - BNB)'s quote token - BNB
+  // from the BNB - pBTC BUSD price, we can calculate the PNT - BUSD price
+  // if (quoteTokenFarm?.quoteToken?.symbol === 'wBNB') {
+  //   const quoteTokenInBusd = bnbPriceBusd?.toNumber() > 0 && bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
+  //   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
+  // }
+
+  // if (quoteTokenFarm?.quoteToken?.symbol === 'BUSD') {
+  //   const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
+  //   return quoteTokenInBusd ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
+  // }
+
+  // Catch in case token does not have immediate or once-removed BUSD/wBNB quoteToken
+  return BIG_ZERO
+}
+
 export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
   const tokenFarm = useFarmFromTokenSymbol(tokenSymbol)
   const tokenPrice = useBusdPriceFromPid(tokenFarm?.pid)
@@ -213,6 +264,24 @@ export const useBusdPriceFromToken = (tokenSymbol: string): BigNumber => {
 export const useLpTokenPrice = (symbol: string) => {
   const farm = useFarmFromLpSymbol(symbol)
   const farmTokenPriceInUsd = useBusdPriceFromPid(farm.pid)
+  let lpTokenPrice = BIG_ZERO
+
+  if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
+    // Total value of base token in LP
+    const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(farm.tokenAmountTotal)
+    // Double it to get overall value in LP
+    const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2)
+    // Divide total value of all tokens, by the number of LP tokens
+    const totalLpTokens = getBalanceAmount(farm.lpTotalSupply)
+    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens)
+  }
+
+  return lpTokenPrice
+}
+
+export const useLpTokenPriceV2 = (symbol: string) => {
+  const farm = useFarmFromLpSymbolV2(symbol)
+  const farmTokenPriceInUsd = useBusdPriceFromPidV2(farm.pid)
   let lpTokenPrice = BIG_ZERO
 
   if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
@@ -247,6 +316,7 @@ export const usePoolFromPid = (sousId: number): Pool => {
   const pool = useSelector((state: State) => state.pools.data.find((p) => p.sousId === sousId))
   return transformPool(pool)
 }
+
 
 export const useFetchCakeVault = () => {
   const { account } = useWeb3React()
@@ -334,6 +404,113 @@ export const useCakeVault = () => {
     },
   }
 }
+
+// Farms With SmartChef
+
+export const useFarmsWithSmartChef = (account): Pool[] => {
+  const { fastRefresh } = useRefresh()
+  const dispatch = useAppDispatch()
+  useEffect(() => {
+    if (account) {
+      dispatch(fetchFarmSmartChefUserDataAsync(account))
+    }
+  }, [account, dispatch, fastRefresh])
+
+  const pools = useSelector((state: State) => state.farmsWithSmartChef.data)
+  return pools.map(transformFarm)
+}
+
+export const useFarmWithSmartChefFromPid = (sousId: number): Pool => {
+  const pool = useSelector((state: State) => state.farmsWithSmartChef.data.find((p) => p.sousId === sousId))
+  return transformFarm(pool)
+}
+
+// export const useFetchCakeVault = () => {
+//   const { account } = useWeb3React()
+//   const { fastRefresh } = useRefresh()
+//   const dispatch = useAppDispatch()
+
+//   useEffect(() => {
+//     dispatch(fetchCakeVaultPublicData())
+//   }, [dispatch, fastRefresh])
+
+//   useEffect(() => {
+//     dispatch(fetchCakeVaultUserData({ account }))
+//   }, [dispatch, fastRefresh, account])
+
+//   useEffect(() => {
+//     dispatch(fetchCakeVaultFees())
+//   }, [dispatch])
+// }
+
+// export const useCakeVault = () => {
+//   const {
+//     totalShares: totalSharesAsString,
+//     pricePerFullShare: pricePerFullShareAsString,
+//     totalCakeInVault: totalCakeInVaultAsString,
+//     estimatedCakeBountyReward: estimatedCakeBountyRewardAsString,
+//     totalPendingCakeHarvest: totalPendingCakeHarvestAsString,
+//     fees: { performanceFee, callFee, withdrawalFee, withdrawalFeePeriod },
+//     userData: {
+//       isLoading,
+//       userShares: userSharesAsString,
+//       cakeAtLastUserAction: cakeAtLastUserActionAsString,
+//       lastDepositedTime,
+//       lastUserActionTime,
+//     },
+//   } = useSelector((state: State) => state.pools.cakeVault)
+
+//   // console.log(pricePerFullShareAsString, 'pricePerFullShare')
+
+//   const estimatedCakeBountyReward = useMemo(() => {
+//     return new BigNumber(estimatedCakeBountyRewardAsString)
+//   }, [estimatedCakeBountyRewardAsString])
+
+//   const totalPendingCakeHarvest = useMemo(() => {
+//     return new BigNumber(totalPendingCakeHarvestAsString)
+//   }, [totalPendingCakeHarvestAsString])
+
+//   const totalShares = useMemo(() => {
+//     return new BigNumber(totalSharesAsString)
+//   }, [totalSharesAsString])
+
+//   const pricePerFullShare = useMemo(() => {
+//     return new BigNumber(pricePerFullShareAsString)
+//   }, [pricePerFullShareAsString])
+
+//   const totalCakeInVault = useMemo(() => {
+//     return new BigNumber(totalCakeInVaultAsString)
+//   }, [totalCakeInVaultAsString])
+
+//   const userShares = useMemo(() => {
+//     return new BigNumber(userSharesAsString)
+//   }, [userSharesAsString])
+
+//   const cakeAtLastUserAction = useMemo(() => {
+//     return new BigNumber(cakeAtLastUserActionAsString)
+//   }, [cakeAtLastUserActionAsString])
+
+//   return {
+//     totalShares,
+//     pricePerFullShare,
+//     totalCakeInVault,
+//     estimatedCakeBountyReward,
+//     totalPendingCakeHarvest,
+//     fees: {
+//       performanceFee,
+//       callFee,
+//       withdrawalFee,
+//       withdrawalFeePeriod,
+//     },
+//     userData: {
+//       isLoading,
+//       userShares,
+//       cakeAtLastUserAction,
+//       lastDepositedTime,
+//       lastUserActionTime,
+//     },
+//   }
+// }
 
 // Profile
 
@@ -472,10 +649,9 @@ export const useGetApiPrice = (address: string) => {
 }
 
 export const usePriceBnbBusd = (): BigNumber => {
-  const bnbBusdFarm = useFarmFromPid(1)
-  // return bnbBusdFarm.tokenPriceVsQuote ? new BigNumber(1).div(bnbBusdFarm.tokenPriceVsQuote) : BIG_ZERO
-
-  return bnbBusdFarm.tokenPriceVsQuote ? bnbBusdFarm.tokenPriceVsQuote : BIG_ZERO
+  const bnbBusdFarm = useFarmFromPidV2(11)
+  const bnbPrice = useTokenPrice('wbnb')
+  return new BigNumber(bnbPrice)
 }
 
 export const usePriceCakeBusd = (): BigNumber => {
@@ -495,11 +671,33 @@ export const usePriceBnbSuteku = (): BigNumber => {
   const sutekuFarm = useFarmFromPid(11)
   const soku_price = usePriceCakeBusd()
 
-  // console.log('farm', sutekuFarm)
-
   const sutekuPrice = sutekuFarm.tokenPriceVsQuote ? sutekuFarm.tokenPriceVsQuote : BIG_ZERO
 
   const price = new BigNumber(sutekuPrice).multipliedBy(soku_price)
+  // console.log(tmuFarm, 'tmu2')
+  return price
+}
+
+export const usePriceHobiSuteku = (): BigNumber => {
+  const hobiFarm = useFarmFromPidV2(18)
+  const suteku_price = usePriceBnbSuteku()
+
+  const hobiPrice = hobiFarm.tokenPriceVsQuote ? hobiFarm.tokenPriceVsQuote : BIG_ZERO
+
+
+  const price = new BigNumber(hobiPrice).multipliedBy(suteku_price)
+  // console.log(tmuFarm, 'tmu2')
+  return price
+}
+
+export const usePriceHobiBnb = (): BigNumber => {
+  const hobiFarm = useFarmFromPidV2(19)
+  const bnbPrice = usePriceBnbBusd()
+
+  const hobiPrice = hobiFarm.tokenPriceVsQuote ? hobiFarm.tokenPriceVsQuote : BIG_ZERO
+
+
+  const price = new BigNumber(hobiPrice).multipliedBy(bnbPrice)
   // console.log(tmuFarm, 'tmu2')
   return price
 }

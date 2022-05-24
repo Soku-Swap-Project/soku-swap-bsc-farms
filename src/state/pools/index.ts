@@ -205,7 +205,7 @@ export const PoolsSlice = createSlice({
     // Vault user data
     builder.addCase(fetchCakeVaultUserData.fulfilled, (state, action: PayloadAction<VaultUser>) => {
       const userData = action.payload
-      userData.isLoading = false
+      // userData.isLoading = false
       state.cakeVault = { ...state.cakeVault, userData }
     })
   },

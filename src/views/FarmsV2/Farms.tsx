@@ -35,6 +35,7 @@ import './index.css'
 import Web3 from 'web3'
 import { ColumnProps, ColumnsType } from 'antd/lib/table'
 import FarmTabButtons from './components/FarmTabButtons'
+import ToggleNew from './components/ToggleNew'
 
 const ControlContainer = styled.div`
   display: flex;
@@ -440,6 +441,7 @@ const Farms: React.FC = () => {
 
       <Page>
         <Toggle />
+        {/* <ToggleNew /> */}
         <ControlContainer>
           <FilterContainer>
             <LabelWrapper
