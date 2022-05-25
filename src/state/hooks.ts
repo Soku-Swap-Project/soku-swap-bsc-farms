@@ -212,7 +212,6 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
 export const useBusdPriceFromPidV2 = (pid: number): BigNumber => {
   const farm = useFarmFromPidV2(pid)
   const bnbPriceBusd = usePriceBnbBusd()
-  // console.log('bnb price', bnbPriceBusd)
   const quoteTokenFarm = useFarmFromTokenSymbolV2(farm?.quoteToken?.symbol)
 
   // Catch in case a farm isn't found
@@ -241,15 +240,15 @@ export const useBusdPriceFromPidV2 = (pid: number): BigNumber => {
   // i.e. for farm PNT - pBTC
   // we find the pBTC farm (pBTC - BNB)'s quote token - BNB
   // from the BNB - pBTC BUSD price, we can calculate the PNT - BUSD price
-  // if (quoteTokenFarm?.quoteToken?.symbol === 'wBNB') {
-  //   const quoteTokenInBusd = bnbPriceBusd?.toNumber() > 0 && bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
-  //   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
-  // }
+  if (quoteTokenFarm?.quoteToken?.symbol === 'wBNB') {
+    const quoteTokenInBusd = bnbPriceBusd?.toNumber() > 0 && bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
+    return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
+  }
 
-  // if (quoteTokenFarm?.quoteToken?.symbol === 'BUSD') {
-  //   const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
-  //   return quoteTokenInBusd ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
-  // }
+  if (quoteTokenFarm?.quoteToken?.symbol === 'BUSD') {
+    const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
+    return quoteTokenInBusd ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
+  }
 
   // Catch in case token does not have immediate or once-removed BUSD/wBNB quoteToken
   return BIG_ZERO
@@ -283,6 +282,7 @@ export const useLpTokenPriceV2 = (symbol: string) => {
   const farm = useFarmFromLpSymbolV2(symbol)
   const farmTokenPriceInUsd = useBusdPriceFromPidV2(farm.pid)
   let lpTokenPrice = BIG_ZERO
+
 
   if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
     // Total value of base token in LP
@@ -416,13 +416,13 @@ export const useFarmsWithSmartChef = (account): Pool[] => {
     }
   }, [account, dispatch, fastRefresh])
 
-  const pools = useSelector((state: State) => state.farmsWithSmartChef.data)
-  return pools.map(transformFarm)
+  const farms = useSelector((state: State) => state.farmsWithSmartChef.data)
+  return farms.map(transformFarm)
 }
 
 export const useFarmWithSmartChefFromPid = (sousId: number): Pool => {
-  const pool = useSelector((state: State) => state.farmsWithSmartChef.data.find((p) => p.sousId === sousId))
-  return transformFarm(pool)
+  const farm = useSelector((state: State) => state.farmsWithSmartChef.data.find((p) => p.sousId === sousId))
+  return transformFarm(farm)
 }
 
 // export const useFetchCakeVault = () => {

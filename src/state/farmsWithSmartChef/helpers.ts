@@ -1,15 +1,18 @@
 import BigNumber from 'bignumber.js'
-import { Pool } from 'state/types'
+import { Pool, Pool as Farm } from 'state/types'
 import { BIG_ZERO } from 'utils/bigNumber'
+
+
 
 type UserData =
   | Pool['userData']
-  | {
+  | Farm['userData'] | {
       allowance: number | string
       stakingTokenBalance: number | string
       stakedBalance: number | string
       pendingReward: number | string
     }
+
 
 export const transformUserData = (userData: UserData) => {
   return {
@@ -20,13 +23,13 @@ export const transformUserData = (userData: UserData) => {
   }
 }
 
-export const transformPool = (pool: Pool): Pool => {
-  const { totalStaked, stakingLimit, userData, ...rest } = pool
+export const transformPool = (farm: Farm): Farm => {
+  const { totalStaked, stakingLimit, userData, ...rest } = farm
 
   return {
     ...rest,
     userData: transformUserData(userData),
     totalStaked: new BigNumber(totalStaked),
     stakingLimit: new BigNumber(stakingLimit),
-  } as Pool
+  } as Farm
 }

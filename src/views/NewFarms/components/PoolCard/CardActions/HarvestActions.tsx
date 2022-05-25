@@ -43,11 +43,6 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const { toastSuccess, toastError } = useToast()
   const web3 = getWeb3NoAccount()
-  const newWeb3 = new Web3(Web3.givenProvider)
-  const { account } = useWeb3React()
-  const bnbPrice = useTokenPrice('wbnb')
-  const bnbPriceBig = new BigNumber(bnbPrice)
-  const sokuPrice = useTokenPrice('sokuswap')
   const hobiPrice = usePriceHobiBnb()
 
   const earningTokenPrice = hobiPrice
@@ -58,16 +53,12 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
     BIG_TEN.pow(earningToken.decimals),
   )
 
-  // console.log(earningTokenDollarBalance.toNumber(), 'earningTokenDollarBalance')
   const earningsDollarValue = formatNumber(earningTokenDollarBalance.toNumber())
   const formattedEarnings = web3.utils.fromWei(earnings.toString())
 
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const hasEarnings = parseFloat(earnings.toString()) > 0
   const isCompoundPool = sousId === 0
-
-  // console.log(earningTokenBalance, 'earningTokenBalance')
-  // console.log(hasEarnings, 'hasEarnings')
 
   const [onPresentCollect] = useModal(
     <CollectModal

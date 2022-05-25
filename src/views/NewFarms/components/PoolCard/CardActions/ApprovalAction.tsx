@@ -29,7 +29,7 @@ const ApprovalAction: React.FC<ApprovalActionProps> = ({ pool, isLoading = false
       if (txHash) {
         toastSuccess(
           t('Contract Enabled'),
-          t('You can now stake in the %symbol% pool!', { symbol: stakingToken.symbol }),
+          t('You can now stake in the %symbol% farm!', { symbol: stakingToken.symbol }),
         )
         setRequestedApproval(false)
       } else {

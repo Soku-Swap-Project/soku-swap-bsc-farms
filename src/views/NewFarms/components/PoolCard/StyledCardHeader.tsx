@@ -56,7 +56,7 @@ const StyledCardHeader: React.FC<{
     if (isSokuPool) {
       return t('Earn SOKU, stake SOKU')
     }
-    return t('%symbol% LP', { symbol: stakingTokenSymbol })
+    return t('%symbol%', { symbol: stakingTokenSymbol })
   }
 
   return (

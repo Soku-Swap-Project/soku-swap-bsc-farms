@@ -45,7 +45,7 @@ const CardActions: React.FC<CardActionsProps> = ({
   const allowance = userData?.allowance ? new BigNumber(userData.allowance) : BIG_ZERO
   // const stakingTokenBalance = userData?.stakingTokenBalance ? new BigNumber(userData.stakingTokenBalance) : BIG_ZERO
   // const earnings = userData?.pendingReward ? new BigNumber(userData.pendingReward) : BIG_ZERO
-  const needsApproval = !isApproved && !isBnbPool && !(stakedAmount > 0)
+  const needsApproval = !isApproved && !isBnbPool
   const isStaked = stakedAmount > 0
   const isLoading = !userData
 

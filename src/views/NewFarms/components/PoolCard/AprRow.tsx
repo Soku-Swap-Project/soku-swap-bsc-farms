@@ -15,6 +15,7 @@ import { BASE_EXCHANGE_URL } from 'config'
 import BigNumber from 'bignumber.js'
 import { getWeb3NoAccount } from 'utils/web3'
 import { getAddress } from 'utils/addressHelpers'
+import { BIG_ZERO } from 'utils/bigNumber'
 
 /* eslint-disable react/require-default-props */
 interface AprRowProps {
@@ -36,7 +37,6 @@ const AprRow: React.FC<AprRowProps> = ({
   const { stakingToken, earningToken, totalStaked, isFinished, tokenPerBlock } = pool
 
   const web3 = getWeb3NoAccount()
-  // const newWeb3 = new Web3(Web3.givenProvider)
 
   const tooltipContent = isAutoVault
     ? t('APY includes compounding, APR doesn’t. This pool’s SOKU is compounded automatically, so we show APY.')
@@ -45,23 +45,17 @@ const AprRow: React.FC<AprRowProps> = ({
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
 
   const hobiPrice = usePriceHobiBnb()
-  const hobiSutekuFarm = useFarmFromPidV2(18)
-  const hobiSutekuLPPrice = useLpTokenPriceV2(hobiSutekuFarm.lpSymbol)
-
-  console.log(totalStaked.multipliedBy(hobiSutekuLPPrice), 'Liquidity')
-
-  const hobiBnbFarm = useFarmFromPidV2(19)
-  const hobiBnbLPPrice = useLpTokenPriceV2(hobiBnbFarm.lpSymbol)
+  const farmLpToken = pool.stakingToken
 
   const earningTokenPrice = hobiPrice
   const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 
-  const stakingTokenPrice = stakingToken.symbol === 'Hobi-Suteku' ? hobiSutekuLPPrice : hobiBnbLPPrice
-  const stakingTokenPriceAsNumber = Number(stakingTokenPrice)
+  const stakingLpPrice = useLpTokenPriceV2(`${farmLpToken.symbol} LP`)
+  const stakingLpPriceAsNumber = Number(stakingLpPrice)
 
   const apr =
     getPoolApr(
-      stakingTokenPriceAsNumber,
+      stakingLpPriceAsNumber,
       earningTokenPriceAsNumber,
       getBalanceNumber(totalStaked, stakingToken.decimals),
       parseFloat(rewardPerBlock),
@@ -118,6 +112,7 @@ const AprRow: React.FC<AprRowProps> = ({
   )
 
   return (
+    <>
     <Flex alignItems="center" justifyContent="space-between">
       {tooltipVisible && tooltip}
       <TooltipText ref={targetRef}>{isAutoVault ? `${t('APY')}:` : `${t('APR')}:`}</TooltipText>
@@ -133,22 +128,10 @@ const AprRow: React.FC<AprRowProps> = ({
             unit="%"
             bold
           />
-          <IconButton
-            onClick={
-              pool.poolCategory === '30DayLock' ||
-              pool.poolCategory === '60DayLock' ||
-              pool.poolCategory === '90DayLock'
-                ? onPresentAprModal
-                : onPresentApyModal
-            }
-            variant="text"
-            scale="sm"
-          >
-            <CalculateIcon color="textSubtle" width="18px" />
-          </IconButton>
         </Flex>
       )}
     </Flex>
+    </>
   )
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import styled from 'styled-components'
@@ -17,13 +17,15 @@ import {
 } from '@pancakeswap/uikit'
 import LockClockIcon from '@mui/icons-material/LockClock'
 import { BASE_BSC_SCAN_URL, BASE_URL } from 'config'
-import { useBlock, useCakeVault } from 'state/hooks'
+import { useBlock, useCakeVault, useLpTokenPriceV2 } from 'state/hooks'
 import { Pool } from 'state/types'
 import { getAddress, getCakeVaultAddress } from 'utils/addressHelpers'
 import { registerToken } from 'utils/wallet'
 import Balance from 'components/Balance'
 import { getWeb3NoAccount } from 'utils/web3'
 import { AbiItem } from 'web3-utils'
+import { BIG_ZERO } from 'utils/bigNumber'
+import useRefresh from 'hooks/useRefresh'
 
 /* eslint-disable react/require-default-props */
 interface ExpandedFooterProps {
@@ -58,6 +60,16 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
   } = useCakeVault()
 
   const { stakingToken, earningToken, totalStaked, startBlock, endBlock, isFinished, contractAddress, sousId } = pool
+
+  const farmLpToken = pool.stakingToken
+  const stakingLpPrice = useLpTokenPriceV2(`${farmLpToken.symbol} LP`)
+
+  const stakingLpPriceAsNumber = stakingLpPrice ? Number(stakingLpPrice) : 0
+
+  const formattedTotalStaked = totalStaked ? web3.utils.fromWei(totalStaked.toString(), 'ether') : BIG_ZERO
+  const totalStakedAsNumber = parseFloat(formattedTotalStaked.toString()) 
+
+  const liquidity = totalStakedAsNumber * stakingLpPriceAsNumber
 
   const tokenAddress = earningToken.address ? getAddress(earningToken.address) : ''
   const poolContractAddress = getAddress(contractAddress)
@@ -97,9 +109,23 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
     return getBalanceNumber(totalStaked, stakingToken.decimals)
   }
 
+
   return (
     <ExpandedWrapper flexDirection="column">
       <Flex mb="2px" justifyContent="space-between" alignItems="center">
+        <Text small>{t('Total Liquidity')}:</Text>
+        <Flex alignItems="flex-start">
+          {liquidity ? (
+            <Flex alignItems='center'>
+              <Text>$</Text>
+              <Balance fontSize="14px" value={liquidity} />
+            </Flex>
+          ) : (
+            <Skeleton width="90px" height="21px" />
+          )}
+        </Flex>
+      </Flex>
+      {/* <Flex mb="2px" justifyContent="space-between" alignItems="center">
         <Text small>{t('Total staked')}:</Text>
         <Flex alignItems="flex-start">
           {totalStaked ? (
@@ -113,7 +139,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
             <Skeleton width="90px" height="21px" />
           )}
         </Flex>
-      </Flex>
+      </Flex> */}
       {shouldShowBlockCountdown && (
         <>
           <Flex mb="2px" justifyContent="space-between" alignItems="center">

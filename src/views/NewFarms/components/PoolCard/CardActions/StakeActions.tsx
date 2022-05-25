@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { Flex, Text, Button, IconButton, AddIcon, MinusIcon, useModal, Skeleton, useTooltip } from '@pancakeswap/uikit'
 import { useWeb3React } from '@web3-react/core'
 import Web3 from 'web3'
@@ -11,11 +11,11 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import { Pool } from 'state/types'
 import { useBusdPriceFromToken, useTokenPrice, usePriceHobiBnb, useFarmWithSmartChefFromPid, useLpTokenPrice, useFarmFromPidV2, useLpTokenPriceV2 } from 'state/hooks'
 import { getUserPoolData } from 'state/pools'
-
+import useRefresh from 'hooks/useRefresh'
 import Balance from 'components/Balance'
 import NotEnoughTokensModal from '../Modals/NotEnoughTokensModal'
 import StakeModal from '../Modals/StakeModal'
-import { BIG_TEN } from '../../../../../utils/bigNumber'
+import { BIG_TEN, BIG_ZERO } from '../../../../../utils/bigNumber'
 
 /* eslint-disable react/require-default-props */
 interface StakeActionsProps {
@@ -43,35 +43,18 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const web3 = getWeb3NoAccount()
-  // const newWeb3 = new Web3(Web3.givenProvider)
+
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
-  // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
-  const hobiSutekuFarm = useFarmFromPidV2(18)
-  const hobiSutekuLPPrice = useLpTokenPriceV2(hobiSutekuFarm.lpSymbol)
+  const stakedBalanceAsNumber = parseFloat(stakedTokenBalance.toString()) 
 
-  const hobiBnbFarm = useFarmFromPidV2(19)
-  const hobiBnbLPPrice = useLpTokenPriceV2(hobiBnbFarm.lpSymbol)
-
-  const stakingTokenPrice = stakingToken.symbol === 'Hobi-Suteku' ? hobiSutekuLPPrice : hobiBnbLPPrice
-
-
-  useEffect(() => {
-    const fetchUserData = async () => {
-      try {
-        const test = await getUserPoolData(account)
-        setUserInfo(test)
-      } catch (err) {
-        console.log(err, 'err')
-      }
-    }
-    fetchUserData()
-  }, [account])
+  const farmLpToken = pool.stakingToken
+  const stakingLpPrice = useLpTokenPriceV2(`${farmLpToken.symbol} LP`)
+  const stakingLpPriceAsNumber = stakingLpPrice ? Number(stakingLpPrice) : 0
   
-  const stakingTokenPriceAsNumber = stakingTokenPrice.toNumber()
-  const stakingDollarBalance = new BigNumber(stakedBalance.toNumber() * stakingTokenPriceAsNumber).dividedBy(
+  const stakingDollarBalance = new BigNumber(stakedBalance.toNumber() * stakingLpPriceAsNumber).dividedBy(
     BIG_TEN.pow(stakingToken.decimals),
   )
-  const tempStakingDollarBalance = stakedBalance.toNumber() * stakingTokenPriceAsNumber
+  const tempStakingDollarBalance = stakedBalanceAsNumber * stakingLpPriceAsNumber
 
   const [onPresentTokenRequired] = useModal(<NotEnoughTokensModal tokenSymbol={stakingToken.symbol} />)
 
@@ -81,7 +64,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
       pool={pool}
       stakingTokenBalance={stakingTokenBalance}
       stakedBalance={stakedBalance}
-      stakingTokenPrice={stakingTokenPriceAsNumber}
+      stakingTokenPrice={stakingLpPriceAsNumber}
     />,
   )
 
@@ -91,7 +74,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
       isBnbPool={isBnbPool}
       pool={pool}
       stakedBalance={stakedBalance}
-      stakingTokenPrice={stakingTokenPriceAsNumber}
+      stakingTokenPrice={stakingLpPriceAsNumber}
       isRemovingStake
     />,
   )
@@ -111,7 +94,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
         <Flex flexDirection="column">
           <>
             <Balance bold fontSize="20px" decimals={4} value={stakedTokenBalance} />
-            {/* {stakingTokenPriceAsNumber !== 0 && (
+            {stakingLpPriceAsNumber !== 0 && (
               <Text fontSize="12px" color="textSubtle">
                 <Balance
                   fontSize="12px"
@@ -122,7 +105,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
                   unit=" USD"
                 />
               </Text>
-            )} */}
+            )}
           </>
         </Flex>
         <Flex>
