@@ -182,6 +182,28 @@ const farmsV2: FarmConfig[] = [
     quoteToken: tokens.suteku,
     isFinished: true,
   },
+    {
+    pid: 18,
+    lpSymbol: 'HOBI-SUTEKU LP',
+    lpAddresses: {
+      97: '',
+      56: '0x602776649a0B301C32218E56C66CfA168b7D652E',
+    },
+    token: tokens.hobi,
+    quoteToken: tokens.suteku,
+    isFinished: true,
+  },
+  {
+    pid: 19,
+    lpSymbol: 'HOBI-WBNB LP',
+    lpAddresses: {
+      97: '',
+      56: '0x1586fd1298ca598d098e57533aff2927dc920704',
+    },
+    token: tokens.hobi,
+    quoteToken: tokens.wbnb,
+    isFinished: true,
+  },
 ]
 
 export default farmsV2

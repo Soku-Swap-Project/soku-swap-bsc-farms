@@ -13,6 +13,16 @@ const tokens = {
     decimals: 18,
     projectLink: 'https://sokuswap.org/',
   },
+  hobi: {
+    symbol: 'HOBI',
+    name: 'HOBI',
+    address: {
+      56: '0xa58223b144c645f8822707d77A0a3Fd9e08Aad08',
+      97: '',
+    },
+    decimals: 18,
+    projectLink: 'https://sokuswap.org/',
+  },
   suteku: {
     symbol: 'SUTEKU',
     name: 'Suteku Rewards Token',
@@ -142,7 +152,7 @@ const tokens = {
     projectLink: 'https://sokuswap.finance/',
   },
   wbnb: {
-    symbol: 'wBNB',
+    symbol: 'WBNB',
     address: {
       56: '0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c',
       97: '0xae13d989dac2f0debff460ac112a837c89baa7cd',
