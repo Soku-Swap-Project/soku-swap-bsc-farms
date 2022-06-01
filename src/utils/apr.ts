@@ -18,7 +18,7 @@ export const getPoolApr = (
   const totalRewardPricePerYear = new BigNumber(rewardTokenPrice).times(tokenPerBlock).times(BLOCKS_PER_YEAR)
 
   const totalStakingTokenInPool = new BigNumber(stakingTokenPrice).times(totalStaked)
-  const apr = totalRewardPricePerYear.div(totalStakingTokenInPool).times(100)
+  const apr = totalRewardPricePerYear.div(totalStakingTokenInPool ).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
@@ -31,13 +31,13 @@ export const getPoolApr = (
  */
 export const getFarmApr = (poolWeight: BigNumber, cakePriceUsd: BigNumber, poolLiquidityUsd: BigNumber): number => {
   const yearlyCakeRewardAllocation = SOKU_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
-  const apr = yearlyCakeRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd).times(100)
+  const apr = yearlyCakeRewardAllocation.times(cakePriceUsd).div(poolLiquidityUsd ).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 
 export const getV2FarmApr = (poolWeight: BigNumber, sutekuPrice: BigNumber, poolLiquidityUsd: BigNumber): number => {
   const yearlyCakeRewardAllocation = SUTEKU_PER_BLOCK.times(BLOCKS_PER_YEAR).times(poolWeight)
-  const apr = yearlyCakeRewardAllocation.times(sutekuPrice).div(poolLiquidityUsd).times(100)
+  const apr = yearlyCakeRewardAllocation.times(sutekuPrice).div(poolLiquidityUsd ).times(100)
   return apr.isNaN() || !apr.isFinite() ? null : apr.toNumber()
 }
 export default null

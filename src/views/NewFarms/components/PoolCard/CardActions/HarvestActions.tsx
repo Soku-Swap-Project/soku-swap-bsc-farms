@@ -50,7 +50,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 
   const earningTokenDollarBalance = new BigNumber(parseFloat(earnings.toString()) * earningTokenPriceAsNumber).dividedBy(
-    BIG_TEN.pow(earningToken.decimals),
+    BIG_TEN.pow(earningToken.decimals) ,
   )
 
   const earningsDollarValue = formatNumber(earningTokenDollarBalance.toNumber())

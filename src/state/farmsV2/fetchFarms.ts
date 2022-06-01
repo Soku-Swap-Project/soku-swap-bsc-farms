@@ -51,7 +51,7 @@ const fetchFarms = async (farmsToFetch: FarmConfig[]) => {
         await multicall(erc20, calls)
 
       // Ratio in % of LP tokens that are staked in the MC, vs the total number in circulation
-      const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply))
+      const lpTokenRatio = new BigNumber(lpTokenBalanceMC).div(new BigNumber(lpTotalSupply ))
 
       // Raw amount of token in the LP, including those not staked
       const tokenAmountTotal = new BigNumber(tokenBalanceLP).div(BIG_TEN.pow(tokenDecimals))
@@ -76,7 +76,7 @@ const fetchFarms = async (farmsToFetch: FarmConfig[]) => {
       ])
 
       const allocPoint = new BigNumber(info.allocPoint._hex)
-      const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint))
+      const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint ))
 
       return {
         ...farmConfig,

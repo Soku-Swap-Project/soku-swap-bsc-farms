@@ -80,15 +80,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const handleStakeInputChange = (input: string) => {
     if (input) {
       const convertedInput = getDecimalAmount(new BigNumber(input), stakingToken.decimals)
-      const percentage = Math.floor(convertedInput.dividedBy(getCalculatedStakingLimit()).multipliedBy(100).toNumber())
+      const percentage = Math.floor(convertedInput.dividedBy(getCalculatedStakingLimit() ).multipliedBy(100).toNumber())
       setPercent(Math.min(percentage, 100))
     } else {
       setPercent(0)
     }
     setStakeAmount(parseInt(input).toString())
   }
-
-  console.log(stakeAmount, 'stake amount')
 
   const handleChangePercent = (sliderPercent: number) => {
     if (sliderPercent > 0) {

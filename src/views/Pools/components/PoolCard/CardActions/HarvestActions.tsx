@@ -43,7 +43,6 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const { toastSuccess, toastError } = useToast()
   const web3 = getWeb3NoAccount()
-  const newWeb3 = new Web3(Web3.givenProvider)
   const { account } = useWeb3React()
   const bnbPrice = useTokenPrice('wbnb')
   const bnbPriceBig = new BigNumber(bnbPrice)
@@ -55,7 +54,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const earningTokenPriceAsNumber = earningTokenPrice
 
   const earningTokenDollarBalance = new BigNumber(parseFloat(earnings.toString()) * earningTokenPrice).dividedBy(
-    BIG_TEN.pow(earningToken.decimals),
+    BIG_TEN.pow(earningToken.decimals) ,
   )
 
   // console.log(earningTokenDollarBalance.toNumber(), 'earningTokenDollarBalance')

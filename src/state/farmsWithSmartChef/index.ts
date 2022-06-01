@@ -94,8 +94,6 @@ export const fetchFarmsV2UserDataAsync = (account) => async (dispatch) => {
     pendingReward: pendingRewards[pool.sousId],
   }))
 
-  console.log(allowances, stakingTokenBalances, stakedBalances, pendingRewards)
-
   dispatch(setFarmsWithSmartChefUserData(userData))
   return { allowances, stakingTokenBalances, stakedBalances, pendingRewards }
 }

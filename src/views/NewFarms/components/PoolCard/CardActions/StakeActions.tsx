@@ -52,7 +52,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const stakingLpPriceAsNumber = stakingLpPrice ? Number(stakingLpPrice) : 0
   
   const stakingDollarBalance = new BigNumber(stakedBalance.toNumber() * stakingLpPriceAsNumber).dividedBy(
-    BIG_TEN.pow(stakingToken.decimals),
+    BIG_TEN.pow(stakingToken.decimals) ,
   )
   const tempStakingDollarBalance = stakedBalanceAsNumber * stakingLpPriceAsNumber
 

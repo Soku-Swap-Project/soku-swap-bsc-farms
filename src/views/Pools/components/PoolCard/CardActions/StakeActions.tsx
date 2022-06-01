@@ -38,33 +38,19 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   lockTime,
 }) => {
   const { stakingToken, stakingLimit, isFinished, userData, contractAddress } = pool
-  // const [lockTime, setLockTime] = useState()
   const { account } = useWeb3React()
   const { t } = useTranslation()
   const web3 = getWeb3NoAccount()
-  // const newWeb3 = new Web3(Web3.givenProvider)
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
   const sokuPrice = useTokenPrice('sokuswap')
   const sutekuPrice = usePriceBnbSuteku()
 
-  // useEffect(() => {
-  //   const fetchUserData = async () => {
-  //     try {
-  //       const test = await getUserPoolData(account)
-  //       console.log(test, 'test')
-  //     } catch (err) {
-  //       console.log(err, 'err')
-  //     }
-  //   }
-  //   fetchUserData()
-  // }, [account])
-
   const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
 
   const stakingTokenPriceAsNumber = stakingTokenPrice
   const stakedTokenDollarBalance = new BigNumber(stakedBalance.toNumber() * stakingTokenPrice).dividedBy(
-    BIG_TEN.pow(stakingToken.decimals),
+    BIG_TEN.pow(stakingToken.decimals) ,
   )
 
   const [onPresentTokenRequired] = useModal(<NotEnoughTokensModal tokenSymbol={stakingToken.symbol} />)

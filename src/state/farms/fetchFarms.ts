@@ -76,7 +76,7 @@ const fetchFarms = async (farmsToFetch: FarmConfig[]) => {
       ])
 
       const allocPoint = new BigNumber(info.allocPoint._hex)
-      const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint))
+      const poolWeight = allocPoint.div(new BigNumber(totalAllocPoint ))
 
       return {
         ...farmConfig,
@@ -86,7 +86,7 @@ const fetchFarms = async (farmsToFetch: FarmConfig[]) => {
         quoteTokenAmountTotal: quoteTokenAmountTotal.toJSON(),
         lpTotalSupply: new BigNumber(lpTotalSupply).toJSON(),
         lpTotalInQuoteToken: lpTotalInQuoteToken.toJSON(),
-        tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal).toJSON(),
+        tokenPriceVsQuote: quoteTokenAmountTotal.div(tokenAmountTotal ).toJSON(),
         poolWeight: poolWeight.toJSON(),
         multiplier: `${allocPoint.div(100).toString()}X`,
       }
