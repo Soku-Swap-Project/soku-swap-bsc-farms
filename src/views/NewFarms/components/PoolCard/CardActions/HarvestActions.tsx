@@ -54,7 +54,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   )
 
   const earningsDollarValue = formatNumber(earningTokenDollarBalance.toNumber())
-  const formattedEarnings = web3.utils.fromWei(earnings.toString())
+  const formattedEarnings = web3.utils.fromWei(earnings.toString(), 'ether')
 
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const hasEarnings = parseFloat(earnings.toString()) > 0

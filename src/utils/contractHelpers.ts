@@ -47,6 +47,7 @@ import masterChef from 'config/abi/masterchef.json'
 import masterChefV2 from 'config/abi/masterchefV2.json'
 import sousChef from 'config/abi/sousChef.json'
 import sousChefV2 from 'config/abi/sousChefV2.json'
+import sousChefV2Farms from 'config/abi/sousChefV2Farms.json'
 import sousChefBnb from 'config/abi/sousChefBnb.json'
 import claimRefundAbi from 'config/abi/claimRefund.json'
 import tradingCompetitionAbi from 'config/abi/tradingCompetition.json'
@@ -89,7 +90,7 @@ export const getSouschefV2Contract = (id: number, web3?: Web3) => {
 
 export const getSouschefContractFarms = (id: number, web3?: Web3) => {
   const config = farmsWithSmartChefConfig.find((pool) => pool.sousId === id)
-  return getContract(sousChefV2, getAddress(config.contractAddress), web3)
+  return getContract(sousChefV2Farms, getAddress(config.contractAddress), web3)
 }
 
 export const getPointCenterIfoContract = (web3?: Web3) => {

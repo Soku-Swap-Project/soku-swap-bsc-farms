@@ -108,6 +108,15 @@ export const soushHarvest = async (sousChefContract, account) => {
     })
 }
 
+export const soushHarvestHobi = async (sousChefContract, account) => {
+  return sousChefContract.methods
+    .deposit('0')
+    .send({ from: account, gas: DEFAULT_GAS })
+    .on('transactionHash', (tx) => {
+      return tx.transactionHash
+    })
+}
+
 export const soushHarvestBnb = async (sousChefContract, account) => {
   return sousChefContract.methods
     .deposit()

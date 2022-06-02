@@ -27,10 +27,6 @@ const Menu = (props) => {
 
   const { onPresentConnectModal } = useWalletModal(login, logout)
 
-  const truncatedFirstHalf = account?.substring(0, 5)
-  const truncatedLastHalf = account?.substring(account.length - 5, account.length)
-  const truncatedAddress = `${truncatedFirstHalf}...${truncatedLastHalf}`
-
   const openHiddenLinks = () => {
     const hiddenLinks = document.getElementsByClassName('hidden_navLinks')
     // console.log(hiddenLinks)
@@ -70,7 +66,7 @@ const Menu = (props) => {
               <a className="nav_link" href={`${origin}/bridge`}>
                 <li>Bridge</li>
               </a>
-              <NavLink className="nav_link" activeClassName="active" to={'/bsc/farms' || '/bsc/farms-v2/'}>
+              <NavLink className="nav_link" activeClassName="active" to="/bsc/farms">
                 <li>Farms</li>
               </NavLink>
               <NavLink className="nav_link" activeClassName="active" to="/bsc/staking/">

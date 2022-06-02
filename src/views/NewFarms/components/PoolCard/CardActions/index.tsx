@@ -1,7 +1,6 @@
 import BigNumber from 'bignumber.js'
 import React, { useState, useEffect } from 'react'
 import Web3 from 'web3'
-
 import styled from 'styled-components'
 import { BIG_ZERO } from 'utils/bigNumber'
 import { Flex, Text, Box } from '@pancakeswap/uikit'

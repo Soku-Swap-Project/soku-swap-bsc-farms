@@ -6,7 +6,14 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import { getPoolApr } from 'utils/apr'
 import { AbiItem } from 'web3-utils'
 import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
-import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku, useFarmFromPidV2, useLpTokenPriceV2, usePriceHobiBnb } from 'state/hooks'
+import {
+  useBusdPriceFromToken,
+  useTokenPrice,
+  usePriceBnbSuteku,
+  useFarmFromPidV2,
+  useLpTokenPriceV2,
+  usePriceHobiBnb,
+} from 'state/hooks'
 import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
 import AprCalculatorModal from 'components/AprCalculatorModal'
@@ -40,7 +47,7 @@ const AprRow: React.FC<AprRowProps> = ({
 
   const tooltipContent = isAutoVault
     ? t('APY includes compounding, APR doesn’t. This pool’s SOKU is compounded automatically, so we show APY.')
-    : t('This pool’s rewards aren’t compounded automatically, so we show APR')
+    : t('This farm’s rewards aren’t compounded automatically, so we show APR')
 
   const { targetRef, tooltip, tooltipVisible } = useTooltip(tooltipContent, { placement: 'bottom-start' })
 
@@ -60,7 +67,7 @@ const AprRow: React.FC<AprRowProps> = ({
       getBalanceNumber(totalStaked, stakingToken.decimals),
       parseFloat(rewardPerBlock),
     ) * 0.75
-  
+
   // special handling for tokens like tBTC or BIFI where the daily token rewards for $1000 dollars will be less than 0.001 of that token
   const isHighValueToken = Math.round(earningTokenPriceAsNumber / 1000) > 0
   const roundingDecimals = isHighValueToken ? 4 : 2
@@ -113,24 +120,24 @@ const AprRow: React.FC<AprRowProps> = ({
 
   return (
     <>
-    <Flex alignItems="center" justifyContent="space-between">
-      {tooltipVisible && tooltip}
-      <TooltipText ref={targetRef}>{isAutoVault ? `${t('APY')}:` : `${t('APR')}:`}</TooltipText>
-      {isFinished || !apr ? (
-        <Skeleton width="82px" height="32px" />
-      ) : (
-        <Flex alignItems="center">
-          <Balance
-            fontSize="16px"
-            isDisabled={isFinished}
-            value={earningsPercentageToDisplay()}
-            decimals={2}
-            unit="%"
-            bold
-          />
-        </Flex>
-      )}
-    </Flex>
+      <Flex alignItems="center" justifyContent="space-between">
+        {tooltipVisible && tooltip}
+        <TooltipText ref={targetRef}>{isAutoVault ? `${t('APY')}:` : `${t('APR')}:`}</TooltipText>
+        {isFinished || !apr ? (
+          <Skeleton width="82px" height="32px" />
+        ) : (
+          <Flex alignItems="center">
+            <Balance
+              fontSize="16px"
+              isDisabled={isFinished}
+              value={earningsPercentageToDisplay()}
+              decimals={2}
+              unit="%"
+              bold
+            />
+          </Flex>
+        )}
+      </Flex>
     </>
   )
 }

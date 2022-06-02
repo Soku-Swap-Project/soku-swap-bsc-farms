@@ -4,7 +4,7 @@ import { Modal, Text, Flex, Image, Button, BalanceInput, AutoRenewIcon, Link } f
 import Web3 from 'web3'
 import { useTranslation } from 'contexts/Localization'
 import { BASE_EXCHANGE_URL } from 'config'
-import { useSousStakeFarms} from 'hooks/useStake'
+import { useSousStakeFarms } from 'hooks/useStake'
 import { useSousUnstakeFarms } from 'hooks/useUnstake'
 import { AbiItem } from 'web3-utils'
 import { getAddress } from 'utils/addressHelpers'
@@ -16,7 +16,6 @@ import BigNumber from 'bignumber.js'
 import { getFullDisplayBalance, formatNumber, getDecimalAmount } from 'utils/formatBalance'
 import { Pool } from 'state/types'
 import Slider from 'components/Slider'
-
 import PercentageButton from './PercentageButton'
 
 /* eslint-disable react/require-default-props */
@@ -51,14 +50,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const web3 = getWeb3NoAccount()
   // const newWeb3 = new Web3(Web3.givenProvider)
 
-  const { onStake } = useSousStakeFarms(sousId, isBnbPool)
-  const { onUnstake } = useSousUnstakeFarms(sousId, pool.enableEmergencyWithdraw)
+  const { onStake, stakeInFarm } = useSousStakeFarms(sousId, isBnbPool)
+  const { onUnstake, unStakeInFarm } = useSousUnstakeFarms(sousId, pool.enableEmergencyWithdraw)
   const { toastSuccess, toastError } = useToast()
   const [pendingTx, setPendingTx] = useState(false)
   const [stakeAmount, setStakeAmount] = useState('')
   const [hasReachedStakeLimit, setHasReachedStakedLimit] = useState(false)
   const [percent, setPercent] = useState(0)
-
 
   const getCalculatedStakingLimit = () => {
     if (isRemovingStake) {
@@ -98,14 +96,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
     setPercent(sliderPercent)
   }
 
-
   const handleConfirmClick = async () => {
     setPendingTx(true)
 
     if (isRemovingStake) {
       // unstaking
       try {
-        await onUnstake(stakeAmount, stakingToken.decimals)
+        await unStakeInFarm(stakeAmount, stakingToken.decimals)
         toastSuccess(
           `${t('Unstaked')}!`,
           t('Your %symbol% earnings have been automatically sent to your wallet!', {
@@ -121,7 +118,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
     } else {
       try {
         // staking
-        await onStake(stakeAmount, stakingToken.decimals)
+        await stakeInFarm(stakeAmount, stakingToken.decimals)
         toastSuccess(
           `${t('Staked')}!`,
           t('Your %symbol% LP tokens have been staked in the pool!', {
@@ -154,13 +151,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
         <Text bold>{isRemovingStake ? t('Unstake') : t('Stake')}:</Text>
         <Flex alignItems="center" minWidth="70px">
           {/* <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} /> */}
-            <img
-              src={ `/images/v2Farms/${stakingToken.symbol}.png`}
-              width={24}
-              height={24}
-              alt={stakingToken.symbol}
-              style={{ objectFit: 'contain' }}
-            />
+          <img
+            src={`/images/v2Farms/${stakingToken.symbol}.png`}
+            width={24}
+            height={24}
+            alt={stakingToken.symbol}
+            style={{ objectFit: 'contain' }}
+          />
 
           <Text ml="4px" bold>
             {stakingToken.symbol} LP
