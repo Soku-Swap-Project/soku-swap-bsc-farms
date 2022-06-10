@@ -182,7 +182,7 @@ const farmsV2: FarmConfig[] = [
     quoteToken: tokens.suteku,
     isFinished: true,
   },
-    {
+  {
     pid: 18,
     lpSymbol: 'HOBI-SUTEKU LP',
     lpAddresses: {

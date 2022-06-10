@@ -128,6 +128,13 @@ export const useFarmFromLpSymbolV2 = (lpSymbol: string): Farm => {
   return farm
 }
 
+export const useFarmFromLpSymbolSmartChef = (lpSymbol: string): Pool => {
+  const farm = useSelector((state: State) =>
+    state.farmsWithSmartChef.data.find((f) => f.stakingToken.symbol === lpSymbol),
+  )
+  return farm
+}
+
 export const useFarmUser = (pid) => {
   const farm = useFarmFromPid(pid)
 
@@ -272,7 +279,7 @@ export const useLpTokenPrice = (symbol: string) => {
     const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2)
     // Divide total value of all tokens, by the number of LP tokens
     const totalLpTokens = getBalanceAmount(farm.lpTotalSupply)
-    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens )
+    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens)
   }
 
   return lpTokenPrice
@@ -283,7 +290,6 @@ export const useLpTokenPriceV2 = (symbol: string) => {
   const farmTokenPriceInUsd = useBusdPriceFromPidV2(farm.pid)
   let lpTokenPrice = BIG_ZERO
 
-
   if (farm.lpTotalSupply && farm.lpTotalInQuoteToken) {
     // Total value of base token in LP
     const valueOfBaseTokenInFarm = farmTokenPriceInUsd.times(farm.tokenAmountTotal)
@@ -291,7 +297,7 @@ export const useLpTokenPriceV2 = (symbol: string) => {
     const overallValueOfAllTokensInFarm = valueOfBaseTokenInFarm.times(2)
     // Divide total value of all tokens, by the number of LP tokens
     const totalLpTokens = getBalanceAmount(farm.lpTotalSupply)
-    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens )
+    lpTokenPrice = overallValueOfAllTokensInFarm.div(totalLpTokens)
   }
 
   return lpTokenPrice
@@ -316,7 +322,6 @@ export const usePoolFromPid = (sousId: number): Pool => {
   const pool = useSelector((state: State) => state.pools.data.find((p) => p.sousId === sousId))
   return transformPool(pool)
 }
-
 
 export const useFetchCakeVault = () => {
   const { account } = useWeb3React()
@@ -684,7 +689,6 @@ export const usePriceHobiSuteku = (): BigNumber => {
 
   const hobiPrice = hobiFarm.tokenPriceVsQuote ? hobiFarm.tokenPriceVsQuote : BIG_ZERO
 
-
   const price = new BigNumber(hobiPrice).multipliedBy(suteku_price)
   // console.log(tmuFarm, 'tmu2')
   return price
@@ -695,7 +699,6 @@ export const usePriceHobiBnb = (): BigNumber => {
   const bnbPrice = usePriceBnbBusd()
 
   const hobiPrice = hobiFarm.tokenPriceVsQuote ? hobiFarm.tokenPriceVsQuote : BIG_ZERO
-
 
   const price = new BigNumber(hobiPrice).multipliedBy(bnbPrice)
   // console.log(tmuFarm, 'tmu2')

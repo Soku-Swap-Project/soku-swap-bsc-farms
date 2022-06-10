@@ -9,7 +9,15 @@ import BigNumber from 'bignumber.js'
 import { useTranslation } from 'contexts/Localization'
 import { getBalanceNumber } from 'utils/formatBalance'
 import { Pool } from 'state/types'
-import { useBusdPriceFromToken, useTokenPrice, usePriceHobiBnb, useFarmWithSmartChefFromPid, useLpTokenPrice, useFarmFromPidV2, useLpTokenPriceV2 } from 'state/hooks'
+import {
+  useBusdPriceFromToken,
+  useTokenPrice,
+  usePriceHobiBnb,
+  useFarmWithSmartChefFromPid,
+  useLpTokenPrice,
+  useFarmFromPidV2,
+  useLpTokenPriceV2,
+} from 'state/hooks'
 import { getUserPoolData } from 'state/pools'
 import useRefresh from 'hooks/useRefresh'
 import Balance from 'components/Balance'
@@ -45,14 +53,14 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   const web3 = getWeb3NoAccount()
 
   const stakedTokenBalance = getBalanceNumber(stakedBalance, stakingToken.decimals)
-  const stakedBalanceAsNumber = parseFloat(stakedTokenBalance.toString()) 
+  const stakedBalanceAsNumber = parseFloat(stakedTokenBalance.toString())
 
   const farmLpToken = pool.stakingToken
   const stakingLpPrice = useLpTokenPriceV2(`${farmLpToken.symbol} LP`)
   const stakingLpPriceAsNumber = stakingLpPrice ? Number(stakingLpPrice) : 0
-  
+
   const stakingDollarBalance = new BigNumber(stakedBalance.toNumber() * stakingLpPriceAsNumber).dividedBy(
-    BIG_TEN.pow(stakingToken.decimals) ,
+    BIG_TEN.pow(stakingToken.decimals),
   )
   const tempStakingDollarBalance = stakedBalanceAsNumber * stakingLpPriceAsNumber
 

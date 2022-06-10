@@ -6,23 +6,13 @@ import { getBalanceNumber } from 'utils/formatBalance'
 import { getPoolApr } from 'utils/apr'
 import { AbiItem } from 'web3-utils'
 import { tokenEarnedPerThousandDollarsCompounding, getRoi } from 'utils/compoundApyHelpers'
-import {
-  useBusdPriceFromToken,
-  useTokenPrice,
-  usePriceBnbSuteku,
-  useFarmFromPidV2,
-  useLpTokenPriceV2,
-  usePriceHobiBnb,
-} from 'state/hooks'
+import { useLpTokenPriceV2, usePriceHobiBnb } from 'state/hooks'
 import Balance from 'components/Balance'
 import ApyCalculatorModal from 'components/ApyCalculatorModal'
 import AprCalculatorModal from 'components/AprCalculatorModal'
 import { Pool } from 'state/types'
 import { BASE_EXCHANGE_URL } from 'config'
-import BigNumber from 'bignumber.js'
 import { getWeb3NoAccount } from 'utils/web3'
-import { getAddress } from 'utils/addressHelpers'
-import { BIG_ZERO } from 'utils/bigNumber'
 
 /* eslint-disable react/require-default-props */
 interface AprRowProps {
@@ -43,8 +33,6 @@ const AprRow: React.FC<AprRowProps> = ({
   const { t } = useTranslation()
   const { stakingToken, earningToken, totalStaked, isFinished, tokenPerBlock } = pool
 
-  const web3 = getWeb3NoAccount()
-
   const tooltipContent = isAutoVault
     ? t('APY includes compounding, APR doesn’t. This pool’s SOKU is compounded automatically, so we show APY.')
     : t('This farm’s rewards aren’t compounded automatically, so we show APR')
@@ -55,10 +43,10 @@ const AprRow: React.FC<AprRowProps> = ({
   const farmLpToken = pool.stakingToken
 
   const earningTokenPrice = hobiPrice
-  const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
+  const earningTokenPriceAsNumber = earningTokenPrice.toNumber() ?? 0
 
   const stakingLpPrice = useLpTokenPriceV2(`${farmLpToken.symbol} LP`)
-  const stakingLpPriceAsNumber = Number(stakingLpPrice)
+  const stakingLpPriceAsNumber = Number(stakingLpPrice) ?? 0
 
   const apr =
     getPoolApr(

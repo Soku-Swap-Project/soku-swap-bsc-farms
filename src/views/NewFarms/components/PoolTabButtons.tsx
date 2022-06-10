@@ -37,10 +37,6 @@ const PoolTabButtons = ({ stakedOnly, setStakedOnly, hasStakeInFinishedPools }) 
   const pathname = window.location.pathname
   const newUrl = pathname.replace(/\/?$/, '/')
 
-  // console.log(pathname)
-
-  // console.log(newUrl === pathname)
-
   return (
     <Flex alignItems="center" justifyContent="center" mb="32px">
       <Flex alignItems="center" flexDirection={['column', null, 'row', null]}>

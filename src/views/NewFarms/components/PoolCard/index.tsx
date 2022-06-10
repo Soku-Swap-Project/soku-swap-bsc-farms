@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import { CardBody, Flex, Text, CardRibbon } from '@pancakeswap/uikit'
 import UnlockButton from 'components/UnlockButton'
 import LPTokenABI from 'config/abi/lpToken.json'
+import SmartChefABI from 'config/abi/SmartChefInitializable.json'
 import erc20ABI from 'config/abi/erc20.json'
 import useRefresh from 'hooks/useRefresh'
 import { useTranslation } from 'contexts/Localization'
@@ -958,7 +959,25 @@ const PoolCard: React.FC<{ pool: Pool; account: string }> = ({ pool, account }) 
         setStakingTokenBalance(bal)
       }
 
+      const getLockTime = async (address) => {
+        try {
+          const abi = SmartChefABI
+          if (
+            pool.poolCategory === '30DayLock' ||
+            pool.poolCategory === '60DayLock' ||
+            pool.poolCategory === '90DayLock'
+          ) {
+            const contract = new web3.eth.Contract(abi as unknown as AbiItem, getAddress(pool.contractAddress))
+            const remainingTime = await contract.methods.getRemainingLockTime(address).call()
+            setLockTime(remainingTime)
+          }
+        } catch (error) {
+          // console.log('lock time error', error)
+        }
+      }
+
       checkApprovalStatus()
+      getLockTime(account)
       getPendingReward(account)
       getStakingBalance(account)
       getBalance(account)
