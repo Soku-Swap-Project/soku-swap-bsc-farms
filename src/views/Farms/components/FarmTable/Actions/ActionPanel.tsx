@@ -24,7 +24,6 @@ export interface ActionPanelProps {
 const Button = styled.button`
   // border: 1px solid red;
   min-width: 49.5%;
-  padding: 5px;
 `
 
 const Container = styled.div<{ expanded }>`

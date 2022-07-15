@@ -22,16 +22,41 @@ const GlobalStyle = createGlobalStyle`
     margin-right: -2px;
   }
  
-  body {
-    min-height: 100vh;
-    padding-bottom: 100px;    
-    background: linear-gradient(250deg, #05195a 20%, #040f31);
+  // body {
+  //   min-height: 100vh;
+  //   padding-bottom: 100px;    
+  //   background: linear-gradient(250deg, #05195a 20%, #040f31);
 
+
+  //   img {
+  //     height: auto;
+  //     max-width: 100%;
+  //   }
+  // }
+
+  html,
+  body {
+    font-family:'Poppins', 'sans-serif';
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background-color: #e0e6f0;
+    color: #05195a;
+  }
+
+  body {
+    position: relative;
+    margin: 0;
+    min-height: 100vh;
 
     img {
       height: auto;
       max-width: 100%;
     }
+  }
+
+  .logo_shadow {
+    filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.2));
   }
 
   .sokuswap__toggleContainer {
@@ -133,9 +158,6 @@ input:checked + .slider:before {
     fill: #04bbfb;
   }
 
-  button {
-    box-shadow: none !important;
-  }
 
   svg[color="textSubtle"] {
     fill: #04bbfb;
@@ -143,9 +165,9 @@ input:checked + .slider:before {
 
   }
 
-  input[pattern='^[0-9]*[.,]?[0-9]*$']:focus:not(:disabled) {
-    box-shadow: 0px 0px 4px 2px #04bbfb
-}
+//   input[pattern='^[0-9]*[.,]?[0-9]*$']:focus:not(:disabled) {
+//     box-shadow: 0px 0px 4px 2px #04bbfb
+// }
 
 input[pattern='^[0-9]*[.,]?[0-9]*$']::placeholder {
   /* Chrome, Firefox, Opera, Safari 10.1+ */
@@ -181,9 +203,6 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
     border: none;
   }
 
-  div[color='textSubtle'] {
-    color: #05489c;
-  }
   
 
   div[color="text"], p[color="text"] {
@@ -209,17 +228,19 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
   }
 
   div[data-popper-reference-hidden="false"] {
-    background: #fff;
+    background: rgb(236, 241, 248);
+      box-shadow: 12px 24px 12px 3px rgb(0 0 0 / 18%) !important;
+
     color: #04bbfb;
   }
 
    div[data-popper-reference-hidden="false"] div::before {
-     background: #fff;
+     background: rgb(236, 241, 248);
    }
  
   a[variant="primary"] {
-    background: #04bbfb;
-    color: #fff !important;
+    background: transparent;
+    color: #05195a;
   }
 
   a[color="primary"] {
@@ -259,8 +280,8 @@ input[pattern='^[0-9]*[.,]?[0-9]*$'] {
   .farm_liquidity_buttons {
     background: #05195a;
     border: none;
-    padding: 0.75rem 1rem !important;
-    border-radius: 24px;
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
     color: #fff;
     font-size: 1rem;
     cursor: pointer;
@@ -337,7 +358,7 @@ img[alt="icon"] {
   }
   
   div[role='presentation'] {
-    background: rgba(0, 0, 0, 0.603);
+    background: rgba(0, 0, 0, 0.5);
   }
   
   h2[color='text'] {
@@ -350,9 +371,13 @@ img[alt="icon"] {
     fill: #04bbfb;
   }
   
+  // div[color='textSubtle'] {
+  //   color: #05489c;
+  // }
+
   div[color='textSubtle'] {
-    color: #05489c;
-  }
+    color: rgb(127 127 127);
+}
   
   svg[stroke='#8f80ba'] {
     stroke: #05195a;
@@ -372,6 +397,7 @@ img[alt="icon"] {
 
   .Toastify__toast {
     width: 350px;
+    background: transparent;
   }
 
   .how_to_remove_liquidity {

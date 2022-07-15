@@ -67,7 +67,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
   const stakingLpPriceAsNumber = stakingLpPrice ? Number(stakingLpPrice) : 0
 
   const formattedTotalStaked = totalStaked ? web3.utils.fromWei(totalStaked.toString(), 'ether') : BIG_ZERO
-  const totalStakedAsNumber = parseFloat(formattedTotalStaked.toString()) 
+  const totalStakedAsNumber = parseFloat(formattedTotalStaked.toString())
 
   const liquidity = totalStakedAsNumber * stakingLpPriceAsNumber
 
@@ -109,14 +109,13 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
     return getBalanceNumber(totalStaked, stakingToken.decimals)
   }
 
-
   return (
     <ExpandedWrapper flexDirection="column">
       <Flex mb="2px" justifyContent="space-between" alignItems="center">
         <Text small>{t('Total Liquidity')}:</Text>
         <Flex alignItems="flex-start">
           {liquidity ? (
-            <Flex alignItems='center'>
+            <Flex alignItems="center">
               <Text>$</Text>
               <Balance fontSize="14px" value={liquidity} />
             </Flex>
@@ -144,7 +143,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
         <>
           <Flex mb="2px" justifyContent="space-between" alignItems="center">
             <Text small>{hasPoolStarted ? t('End') : t('Start')}:</Text>
-            <Flex alignItems="center">
+            <Flex className="hover_shadow_icon_sm" alignItems="center">
               {blocksRemaining || blocksUntilStart ? (
                 <Balance
                   color="primary"
@@ -190,7 +189,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
         <>
           <Flex mb="2px" justifyContent="space-between" alignItems="center">
             <Text small>Lock Time:</Text>
-            <Flex alignItems="center">
+            <Flex className="hover_shadow_icon_sm" alignItems="center">
               {blocksRemaining || blocksUntilStart ? (
                 <Balance color="primary" fontSize="14px" value={stakedAmount > 0 ? lockTime : 0} decimals={0} />
               ) : (
@@ -239,7 +238,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
         </Flex>
       )}
       <Flex mb="2px" justifyContent="flex-end">
-        <LinkExternal bold={false} small href={earningToken.projectLink}>
+        <LinkExternal className="hover_shadow_icon_sm" bold={false} small href={earningToken.projectLink}>
           {t('View Project Site')}
         </LinkExternal>
       </Flex>
@@ -248,6 +247,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
           <LinkExternal
             bold={false}
             small
+            className="hover_shadow_icon_sm"
             href={`${BASE_BSC_SCAN_URL}/address/${isAutoVault ? cakeVaultContractAddress : poolContractAddress}`}
           >
             {t('View Contract')}
@@ -257,6 +257,7 @@ const ExpandedFooter: React.FC<ExpandedFooterProps> = ({
       {account && isMetaMaskInScope && tokenAddress && (
         <Flex justifyContent="flex-end">
           <Button
+            className="hover_shadow_icon_sm"
             variant="text"
             p="0"
             height="auto"

@@ -7,7 +7,10 @@ import { useTranslation } from 'contexts/Localization'
 interface FarmTabButtonsProps {
   hasStakeInFinishedFarms: boolean
 }
-
+const StyledButtonMenu = styled(ButtonMenu)`
+  border: none;
+  background: transparent;
+`
 const FarmTabButtons: React.FC<FarmTabButtonsProps> = ({ hasStakeInFinishedFarms }) => {
   const { url } = useRouteMatch()
   const location = useLocation()
@@ -31,16 +34,26 @@ const FarmTabButtons: React.FC<FarmTabButtonsProps> = ({ hasStakeInFinishedFarms
 
   return (
     <Wrapper>
-      <ButtonMenu activeIndex={activeIndex} scale="sm" variant="primary">
-        <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to="/bsc/farms">
+      <StyledButtonMenu activeIndex={activeIndex} scale="sm" variant="primary">
+        <ButtonMenuItem
+          className={activeIndex === 0 ? 'hover_shadow emphasized-selected' : 'hover_shadow'}
+          style={{ color: '#05195a', opacity: '0.9', borderRadius: '10px', marginRight: '14px' }}
+          as={Link}
+          to="/bsc/farms"
+        >
           {t('Live')}
         </ButtonMenuItem>
         <NotificationDot show={hasStakeInFinishedFarms}>
-          <ButtonMenuItem style={{ color: '#05195a', opacity: '0.9' }} as={Link} to="/bsc/farms/history">
+          <ButtonMenuItem
+            className={activeIndex === 1 ? 'hover_shadow emphasized-selected' : 'hover_shadow'}
+            style={{ color: '#05195a', opacity: '0.9', borderRadius: '10px' }}
+            as={Link}
+            to="/bsc/farms/history"
+          >
             {t('Finished')}
           </ButtonMenuItem>
         </NotificationDot>
-      </ButtonMenu>
+      </StyledButtonMenu>
     </Wrapper>
   )
 }

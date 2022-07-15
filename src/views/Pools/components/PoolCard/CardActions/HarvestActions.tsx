@@ -2,6 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { Flex, Text, Button, Heading, useModal, Skeleton } from '@pancakeswap/uikit'
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
+import { toast } from 'react-toastify'
+import { ToastError } from 'style/Toasts'
 import { Token } from 'config/constants/types'
 import { Pool } from 'state/types'
 import { getWeb3NoAccount } from 'utils/web3'
@@ -54,7 +56,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const earningTokenPriceAsNumber = earningTokenPrice
 
   const earningTokenDollarBalance = new BigNumber(parseFloat(earnings.toString()) * earningTokenPrice).dividedBy(
-    BIG_TEN.pow(earningToken.decimals) ,
+    BIG_TEN.pow(earningToken.decimals),
   )
 
   // console.log(earningTokenDollarBalance.toNumber(), 'earningTokenDollarBalance')
@@ -115,6 +117,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         </Flex>
         <Flex>
           <Button
+            className="hover_shadow emphasize_swap_button"
             style={{ background: 'rgb(4, 187, 251)' }}
             disabled={!hasEarnings || pool.isFinished}
             onClick={() => {
@@ -123,10 +126,12 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
                 (pool.poolCategory === '60DayLock' && lockTime !== '0') ||
                 (pool.poolCategory === '90DayLock' && lockTime !== '0')
               ) {
-                toastError(
-                  t('Canceled'),
-                  t(
-                    'Your lock time has not yet expired. You can view your lock time for the current pool in the "Details" section.',
+                toast.error(
+                  ToastError(
+                    t('Canceled'),
+                    t(
+                      'Your lock time has not yet expired. You can view your lock time for the current pool in the "Details" section.',
+                    ),
                   ),
                 )
               } else {

@@ -11,6 +11,7 @@ import {
   HelpIcon,
   useTooltip,
 } from '@pancakeswap/uikit'
+import { toast } from 'react-toastify'
 import { useWeb3React } from '@web3-react/core'
 import { useTranslation } from 'contexts/Localization'
 import useTheme from 'hooks/useTheme'
@@ -23,6 +24,7 @@ import { useSousStakeFarms } from 'hooks/useStake'
 import useToast from 'hooks/useToast'
 import { Token } from 'config/constants/types'
 import useWeb3 from 'hooks/useWeb3'
+import { ToastError, ToastSuccess } from 'style/Toasts'
 import { useSousChefV2Farms } from 'hooks/useContract'
 import { SmartChefABI } from '../../../helpers'
 
@@ -74,14 +76,16 @@ const CollectModal: React.FC<CollectModalProps> = ({
     if (shouldCompound) {
       try {
         await onStake(fullBalance, earningToken.decimals)
-        toastSuccess(
-          `${t('Compounded')}!`,
-          t('Your %symbol% earnings have been re-invested into the pool!', { symbol: earningToken.symbol }),
+        toast.error(
+          ToastSuccess(
+            `${t('Compounded')}!`,
+            t('Your %symbol% earnings have been re-invested into the pool!', { symbol: earningToken.symbol }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     } else {
@@ -89,15 +93,17 @@ const CollectModal: React.FC<CollectModalProps> = ({
       try {
         await claimRewards()
 
-        toastSuccess(
-          `${t('Claimed')}!`,
-          t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningToken.symbol }),
+        toast.success(
+          ToastSuccess(
+            `${t('Claimed')}!`,
+            t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningToken.symbol }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
         console.log(e)
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     }

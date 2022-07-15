@@ -58,13 +58,12 @@ const StyledCardHeader: React.FC<{
     }
     return t('%symbol%', { symbol: stakingTokenSymbol })
   }
-
   return (
     <Wrapper
       isPromotedPool={isPromotedPool}
       isFinished={isFinished}
-      background={background}
-      style={{ borderBottom: '1px solid #d8d8d8' }}
+      // background={background}
+      style={{ borderBottom: '1px solid #d8d8d8', background: '#ecf1f8' }}
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
@@ -73,7 +72,13 @@ const StyledCardHeader: React.FC<{
           </Heading>
           <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{`${getHeadingPrefix()} ${earningTokenSymbol}`}</Text>
         </Flex>
-        <img src={`/images/v2Farms/${farmImage}`} alt={earningTokenSymbol} width={75} height={75} />
+        <img
+          className="logo_shadow hover_shadow_icon"
+          src={`/images/v2Farms/${farmImage}`}
+          alt={earningTokenSymbol}
+          width={75}
+          height={75}
+        />
       </Flex>
     </Wrapper>
   )

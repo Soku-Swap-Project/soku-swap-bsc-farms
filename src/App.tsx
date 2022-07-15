@@ -30,6 +30,7 @@ import ComingSoon from './views/ComingSoon'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 import './MobileFooter.css'
+import './styles/index.css'
 
 // Route-based code splitting
 // Only pool is included in the main bundle because of it's the most visited page
@@ -61,24 +62,22 @@ const loadNetwork = async () => {
     })
   } catch (error) {
     /* eslint-disable dot-notation */
-    if (error['code'] === 4902 || error['data']['originalError'].code === 4902) {
-      await detectProvider.request({
-        method: 'wallet_addEthereumChain',
-        params: [
-          {
-            chainId: '0x38',
-            chainName: 'Binance Smart Chain',
-            rpcUrls: ['https://bsc-dataseed.binance.org/'],
-            nativeCurrency: {
-              name: 'BNB',
-              symbol: 'BNB',
-              decimals: 18,
-            },
-            blockExplorerUrls: ['https://bscscan.com'],
-          },
-        ],
-      })
-    }
+    // await detectProvider.request({
+    //   method: 'wallet_addEthereumChain',
+    //   params: [
+    //     {
+    //       chainId: '0x38',
+    //       chainName: 'Binance Smart Chain',
+    //       rpcUrls: ['https://bsc-dataseed.binance.org/'],
+    //       nativeCurrency: {
+    //         name: 'BNB',
+    //         symbol: 'BNB',
+    //         decimals: 18,
+    //       },
+    //       blockExplorerUrls: ['https://bscscan.com'],
+    //     },
+    //   ],
+    // })
   }
 }
 
@@ -89,10 +88,10 @@ const App: React.FC = () => {
   // useFetchProfile()
   useFetchPriceList()
 
-  useEffect(() => {
-    loadNetwork()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  // useEffect(() => {
+  //   loadNetwork()
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, [])
 
   const { account } = useWeb3React()
   const { login, logout } = useAuth()

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Modal, Text, Flex, Image, Button, BalanceInput, AutoRenewIcon, Link } from '@pancakeswap/uikit'
 import Web3 from 'web3'
+import { toast } from 'react-toastify'
 import { useTranslation } from 'contexts/Localization'
 import { BASE_EXCHANGE_URL } from 'config'
 import { useSousStakeFarms } from 'hooks/useStake'
@@ -11,6 +12,7 @@ import { getAddress } from 'utils/addressHelpers'
 import { useWeb3React } from '@web3-react/core'
 import { getWeb3NoAccount } from 'utils/web3'
 import useTheme from 'hooks/useTheme'
+import { ToastError, ToastSuccess } from 'style/Toasts'
 import useToast from 'hooks/useToast'
 import BigNumber from 'bignumber.js'
 import { getFullDisplayBalance, formatNumber, getDecimalAmount } from 'utils/formatBalance'
@@ -103,32 +105,36 @@ const StakeModal: React.FC<StakeModalProps> = ({
       // unstaking
       try {
         await unStakeInFarm(stakeAmount, stakingToken.decimals)
-        toastSuccess(
-          `${t('Unstaked')}!`,
-          t('Your %symbol% earnings have been automatically sent to your wallet!', {
-            symbol: earningToken.symbol,
-          }),
+        toast.success(
+          ToastSuccess(
+            `${t('Unstaked')}!`,
+            t('Your %symbol% earnings have been automatically sent to your wallet!', {
+              symbol: earningToken.symbol,
+            }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     } else {
       try {
         // staking
         await stakeInFarm(stakeAmount, stakingToken.decimals)
-        toastSuccess(
-          `${t('Staked')}!`,
-          t('Your %symbol% LP tokens have been staked in the pool!', {
-            symbol: stakingToken.symbol,
-          }),
+        toast.success(
+          ToastSuccess(
+            `${t('Staked')}!`,
+            t('Your %symbol% LP tokens have been staked in the pool!', {
+              symbol: stakingToken.symbol,
+            }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     }

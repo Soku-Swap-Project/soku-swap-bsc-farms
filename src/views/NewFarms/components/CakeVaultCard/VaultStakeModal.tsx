@@ -177,7 +177,12 @@ const VaultStakeModal: React.FC<VaultStakeModalProps> = ({ pool, stakingMax, isR
   // console.log(stakingMax, 'stakingMax')
 
   return (
-    <Modal title={isRemovingStake ? t('Unstake') : t('Stake in Pool')} onDismiss={onDismiss} headerBackground="#f9f9fa">
+    <Modal
+      className="network_modal"
+      title={isRemovingStake ? t('Unstake') : t('Stake in Pool')}
+      onDismiss={onDismiss}
+      headerBackground="#f9f9fa"
+    >
       <Flex alignItems="center" justifyContent="space-between" mb="8px">
         <Text bold>{isRemovingStake ? t('Unstake') : t('Stake')}:</Text>
         <Flex alignItems="center" minWidth="70px">

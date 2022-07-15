@@ -73,7 +73,7 @@ const AprCalculatorModal: React.FC<AprCalculatorModalProps> = ({
   // console.log(tokenEarnedPerThousand365D, '365')
 
   return (
-    <Modal title={t('ROI')} onDismiss={onDismiss}>
+    <Modal className="network_modal emphasized_swap_layout hover_shadow" title={t('ROI')} onDismiss={onDismiss}>
       <Grid>
         <GridItem>
           <Text fontSize="12px" bold color="textSubtle" textTransform="uppercase" mb="20px">

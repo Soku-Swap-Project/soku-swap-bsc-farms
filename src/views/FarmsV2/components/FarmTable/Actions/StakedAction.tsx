@@ -23,6 +23,11 @@ const IconButtonWrapper = styled.div`
   display: flex;
 `
 
+const StyledButton = styled(Button)`
+  border-radius: 14px;
+  height: 52px;
+`
+
 interface StackedActionProps extends FarmWithStakedValue {
   userDataReady: boolean
 }
@@ -152,14 +157,15 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
           <Title>{lpSymbol}</Title>
         </ActionTitles>
         <ActionContent>
-          <Button
-            style={{ background: '#04bbfb', borderRadius: '24px' }}
+          <StyledButton
+            className="hover_shadow emphasize_swap_button"
+            style={{ background: '#04bbfb', borderRadius: '14px' }}
             width="100%"
             onClick={onPresentDeposit}
             disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
           >
             {t('Stake LP')}
-          </Button>
+          </StyledButton>
         </ActionContent>
       </ActionContainer>
     )
@@ -184,14 +190,15 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
         <Subtle>{t('Enable Farm').toUpperCase()}</Subtle>
       </ActionTitles> */}
       <ActionContent>
-        <Button
+        <StyledButton
+          className="hover_shadow emphasize_swap_button"
           width="100%"
           disabled={requestedApproval}
           onClick={handleApprove}
-          style={{ background: '#04bbfb', borderRadius: '24px', fontWeight: 'normal' }}
+          style={{ background: '#04bbfb', borderRadius: '14px', fontWeight: 'normal' }}
         >
           {t('Approve')}
-        </Button>
+        </StyledButton>
       </ActionContent>
     </ActionContainer>
   )

@@ -51,8 +51,6 @@ const NewFarms: React.FC = () => {
 
   const [finishedPools, openPools] = useMemo(() => partition(pools, (pool) => pool.isFinished), [pools])
 
-
-
   useEffect(() => {
     const fetchUserData = async () => {
       try {
@@ -106,8 +104,6 @@ const NewFarms: React.FC = () => {
     }
   }, [observerIsSet])
 
-
-
   return (
     <div style={{ paddingTop: '1.85rem' }} className="farm_heading">
       <PageHeader>
@@ -115,13 +111,17 @@ const NewFarms: React.FC = () => {
           <Flex flexDirection="column" mr={['8px', 0]}>
             <Heading
               as="h1"
-              color="white"
+              color="#05195a"
               mb="20px"
               style={{ fontSize: '3.25rem', marginBottom: '12px', textAlign: 'center' }}
             >
               {t('Farms V2')}
             </Heading>
-            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center', paddingBottom: '25px' }}>
+            <Heading
+              scale="lg"
+              color="#05195a"
+              style={{ opacity: '0.85', fontSize: '1.25rem', textAlign: 'center', paddingBottom: '25px' }}
+            >
               {t('Stake Liquidity Pool (LP) tokens to earn HOBI!')}
             </Heading>
             {/* <Heading
@@ -131,7 +131,7 @@ const NewFarms: React.FC = () => {
             >
               {t('High APR, low risk.')}
             </Heading> */}
-            <ToggleNew />
+            {/* <ToggleNew /> */}
             {/* <div
               style={{
                 width: '100%',
