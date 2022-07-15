@@ -29,7 +29,7 @@ import ComingSoon from './views/ComingSoon'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-import './MobileFooter.css'
+// import './MobileFooter.css'
 import './styles/index.css'
 
 // Route-based code splitting
@@ -107,7 +107,7 @@ const App: React.FC = () => {
     }
   }
 
-  const isMobile = window.innerWidth <= 500
+  const isMobile = window.innerWidth <= 1000
 
   return (
     <Router history={history}>
@@ -131,7 +131,7 @@ const App: React.FC = () => {
           </Route>
           <Route component={NotFound} />
         </Switch>
-        <div className="connectWallet__options__MOBILE">
+        {/* <div className="connectWallet__options__MOBILE">
           <ul>
             {account ? (
               <li className="account__footer">
@@ -193,7 +193,7 @@ const App: React.FC = () => {
               </a>
             </li>
           </ul>
-        </div>
+        </div> */}
         {/* <NewVersionModal /> */}
       </SuspenseWithChunkError>
       <EasterEgg iterations={2} />

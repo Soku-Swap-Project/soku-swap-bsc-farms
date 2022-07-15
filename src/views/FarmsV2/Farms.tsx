@@ -433,7 +433,7 @@ const Farms: React.FC = () => {
         <Heading
           scale="lg"
           color="#05195a"
-          style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center', padding: '8px 0px' }}
+          style={{ opacity: '0.85', fontSize: '1.25rem', textAlign: 'center', padding: '8px 0px' }}
         >
           {t('Stake Liquidity Pool (LP) tokens to earn SUTEKU!')}
         </Heading>

@@ -106,6 +106,7 @@ export default function ClaimSokuModal() {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         className="network_modal_container"
+        role="none"
       >
         {body}
       </Modal>

@@ -65,7 +65,7 @@ const Menu = (props) => {
                 <div className="sokuswap__navbar">
                   <nav className="soku_nav">
                     <ul className="navbar__items">
-                      <a className="nav_link hover_shadow" href="/bsc/#/swap">
+                      <a className="nav_link hover_shadow" href={`${origin}/swap`}>
                         Trade
                       </a>
                       {isMobile ? (

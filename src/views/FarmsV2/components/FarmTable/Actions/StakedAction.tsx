@@ -114,6 +114,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
             </div>
             <IconButtonWrapper>
               <IconButton
+                className="hover_shadow emphasize_swap_button"
                 style={{ background: 'transparent', border: '2px solid #05195a' }}
                 onClick={onPresentWithdraw}
                 mr="6px"
@@ -121,6 +122,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
                 <MinusIcon color="#05195a" width="14px" />
               </IconButton>
               <IconButton
+                className="hover_shadow emphasize_swap_button"
                 style={{ background: 'transparent', border: '2px solid #05195a' }}
                 onClick={onPresentDeposit}
                 disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}

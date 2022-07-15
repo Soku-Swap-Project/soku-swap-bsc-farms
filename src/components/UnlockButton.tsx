@@ -17,7 +17,7 @@ const UnlockButton = (props) => {
   return (
     <StyledButton
       className="hover_shadow emphasize_swap_button"
-      style={{ background: '#04bbfb', fontWeight: '200' }}
+      style={{ background: '#05195a', fontWeight: 700 }}
       onClick={onPresentConnectModal}
       {...props}
     >

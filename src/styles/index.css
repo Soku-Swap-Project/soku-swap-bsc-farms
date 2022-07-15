@@ -235,6 +235,7 @@ input[type='range']::-webkit-slider-thumb {
   transition: all 0.2s ease-in-out !important;
   box-shadow: 7px 6px 8px 0.2px rgb(0 0 0 / 18%) !important;
   border-radius: 32px;
+  background: #ecf1f8 !important;
 }
 
 .emphasized-selected:hover,
@@ -653,6 +654,7 @@ color: #fff;
 .claimSoku__navButton_mobile {
   border-radius: 14px;
   font-size: 14px;
+  color: #fff;
 }
 
 .logo_shadow,
@@ -698,7 +700,7 @@ color: #fff;
 
 .active_mobile_link {
   border-radius: 14px;
-  width: 5rem;
+  /* width: 5rem; */
   padding: 4px;
   color: #05195a;
   font-weight: bold;
