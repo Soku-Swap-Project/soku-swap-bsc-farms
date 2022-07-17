@@ -217,7 +217,7 @@ const Farms: React.FC = () => {
   }
 
   const loadMoreRef = useRef<HTMLDivElement>(null)
-  const isMobile = window.innerWidth <= 500
+  const isMobile = window.innerWidth <= 1200
 
   const [numberOfFarmsVisible, setNumberOfFarmsVisible] = useState(NUMBER_OF_FARMS_VISIBLE)
   const [observerIsSet, setObserverIsSet] = useState(false)
