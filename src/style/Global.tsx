@@ -9,8 +9,16 @@ declare module 'styled-components' {
 
 const GlobalStyle = createGlobalStyle`
   * {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif !important;
 
+  }
+
+  a {
+  text-decoration: none !important;
+    }
+
+  p {
+    margin-bottom: 0px !important;
   }
 
   .start_and_endBlocks:hover {

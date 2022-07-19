@@ -28,10 +28,6 @@ html {
   overflow-x: hidden;
 }
 
-a {
-  text-decoration: none !important;
-}
-
 html,
 body {
   font-family: 'Poppins', 'sans-serif';
@@ -387,7 +383,7 @@ input[type='range']::-webkit-slider-thumb {
   padding: 10px 14px;
   width: 90vw;
   box-shadow: none;
-  margin-bottom: -20px;
+  margin-bottom: -10px;
 }
 
 @media (max-height: 930px) and (max-width: 650px) {
@@ -687,7 +683,7 @@ color: #fff;
 .account_logout {
   display: flex;
   align-items: center;
-  margin-top: 25px;
+  /* margin-top: 25px; */
 }
 
 .view_on_scan span,

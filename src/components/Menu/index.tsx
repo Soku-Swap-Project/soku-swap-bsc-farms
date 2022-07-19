@@ -156,7 +156,7 @@ const Menu = (props) => {
                           target="_blank"
                         >
                           <SchoolIcon />
-                          <p style={{ marginBottom: '0px' }}>Docs</p>
+                          <p>Docs</p>
                         </a>
                       </li>
                       <li className="hidden_navLink">
