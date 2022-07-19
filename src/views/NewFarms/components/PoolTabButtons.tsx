@@ -69,7 +69,7 @@ const PoolTabButtons = ({ stakedOnly, setStakedOnly, hasStakeInFinishedPools }) 
           </NotificationDot>
         </StyledButtonMenu>
         <Flex mt={['4px', null, 0, null]} ml={[0, null, '24px', null]} justifyContent="center" alignItems="center">
-          <ToggleSwitch className="shadow" checked={stakedOnly} onChange={() => setStakedOnly((prev) => !prev)} />
+          <ToggleSwitch checked={stakedOnly} onChange={() => setStakedOnly((prev) => !prev)} />
           <Text color="#05195a" ml="8px">
             {t('Staked only')}
           </Text>
