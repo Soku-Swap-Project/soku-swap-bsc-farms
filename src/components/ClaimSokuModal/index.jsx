@@ -45,7 +45,7 @@ export default function ClaimSokuModal() {
   const body = (
     <div className="flex flex-col gap-6 network_modal">
       <div className="modal_header">
-        <h1 className="text-blue font-bold" style={{ fontWeight: 700 }}>
+        <h1 className="text-blue font-bold" style={{ fontWeight: 700, fontSize: '16px' }}>
           Claim SOKU
         </h1>
         <CloseIcon

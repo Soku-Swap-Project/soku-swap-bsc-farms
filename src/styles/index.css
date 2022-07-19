@@ -383,7 +383,6 @@ input[type='range']::-webkit-slider-thumb {
   padding: 10px 14px;
   width: 90vw;
   box-shadow: none;
-  margin-bottom: -10px;
 }
 
 @media (max-height: 930px) and (max-width: 650px) {
@@ -632,6 +631,7 @@ color: #fff;
   cursor: pointer;
   flex-direction: column;
   border-radius: 14px;
+  padding: 10px;
 }
 
 .account_modal_mobile {

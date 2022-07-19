@@ -51,7 +51,7 @@ export default function AccountModal() {
   const body = (
     <div className="flex flex-col gap-6 network_modal">
       <div className="modal_header">
-        <h1 className="text-blue font-bold" style={{ fontWeight: 700 }}>
+        <h1 className="text-blue font-bold" style={{ fontWeight: 700, fontSize: '16px' }}>
           Account Details
         </h1>
         <CloseIcon
@@ -78,7 +78,9 @@ export default function AccountModal() {
           style={{ color: '#fff', background: '#05195a', padding: '12px 24px', borderRadius: '14px' }}
           href={getBscScanLink(chainId, account, 'address')}
         >
-          <h2 className="pr-2">View on BscScan</h2>
+          <h2 className="pr-2" style={{ fontSize: '16px' }}>
+            View on BscScan
+          </h2>
           <OpenInNewIcon />
         </a>
         {/* <button className="account_logout" onClick={logoutAccount()}>
