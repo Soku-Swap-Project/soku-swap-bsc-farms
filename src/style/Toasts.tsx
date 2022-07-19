@@ -9,7 +9,7 @@ export const ToastError = (title: any, description: any) => (
       padding: '10px',
     }}
   >
-    <h1 style={{ fontWeight: 'bold', color: '#e74c3c' }}>{title}</h1>
+    <h3 style={{ fontWeight: 'bold', color: '#e74c3c', fontSize: '16px' }}>{title}</h3>
     <p style={{ paddingTop: '20px' }}>{description}</p>
   </div>
 )
@@ -23,7 +23,7 @@ export const ToastSuccess = (title: any, description: any) => (
       padding: '10px',
     }}
   >
-    <h1 style={{ fontWeight: 'bold', color: '#07bc0c' }}>{title}</h1>
+    <h3 style={{ fontWeight: 'bold', color: '#07bc0c', fontSize: '16px' }}>{title}</h3>
     <p style={{ paddingTop: '20px' }}>{description}</p>
   </div>
 )
