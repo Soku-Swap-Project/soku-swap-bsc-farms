@@ -92,7 +92,7 @@ const ModalInput: React.FC<ModalInputProps> = ({
         </Flex>
         <Flex alignItems="flex-end" justifyContent="space-around">
           <StyledInput
-            className="hover_shadow"
+            className="hover_transparent"
             pattern="^[0-9]*[.,]?[0-9]*$"
             inputMode="decimal"
             step="any"

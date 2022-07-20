@@ -36,7 +36,7 @@ const FarmTabButtons: React.FC<FarmTabButtonsProps> = ({ hasStakeInFinishedFarms
     <Wrapper>
       <StyledButtonMenu activeIndex={activeIndex} scale="sm" variant="primary">
         <ButtonMenuItem
-          className={activeIndex === 0 ? 'hover_shadow emphasized-selected' : 'hover_shadow'}
+          className={activeIndex === 0 ? 'hover_transparent emphasized-selected' : 'hover_transparent'}
           style={{ color: '#05195a', opacity: '0.9', borderRadius: '10px', marginRight: '14px' }}
           as={Link}
           to="/bsc/farms"
@@ -45,7 +45,7 @@ const FarmTabButtons: React.FC<FarmTabButtonsProps> = ({ hasStakeInFinishedFarms
         </ButtonMenuItem>
         <NotificationDot show={hasStakeInFinishedFarms}>
           <ButtonMenuItem
-            className={activeIndex === 1 ? 'hover_shadow emphasized-selected' : 'hover_shadow'}
+            className={activeIndex === 1 ? 'hover_transparent emphasized-selected' : 'hover_transparent'}
             style={{ color: '#05195a', opacity: '0.9', borderRadius: '10px' }}
             as={Link}
             to="/bsc/farms/history"

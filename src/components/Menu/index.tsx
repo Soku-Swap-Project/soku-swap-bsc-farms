@@ -65,40 +65,40 @@ const Menu = (props) => {
                 <div className="sokuswap__navbar">
                   <nav className="soku_nav">
                     <ul className="navbar__items">
-                      <a className="nav_link hover_shadow" href={`${origin}/swap`}>
+                      <a className="nav_link hover_transparent" href={`${origin}/swap`}>
                         Trade
                       </a>
                       {isMobile ? (
-                        <a className="nav_link hover_shadow" href="/bsc/#/limit-order">
+                        <a className="nav_link hover_transparent" href="/bsc/#/limit-order">
                           Limit
                         </a>
                       ) : (
-                        <a className="nav_link hover_shadow" href="/bsc/#/limit-order">
+                        <a className="nav_link hover_transparent" href="/bsc/#/limit-order">
                           Limit Orders
                         </a>
                       )}
-                      <a className="nav_link hover_shadow" href="/bsc/#/pool">
+                      <a className="nav_link hover_transparent" href="/bsc/#/pool">
                         Pool
                       </a>
-                      <a className="nav_link hover_shadow" href={`${origin}/bridge`}>
+                      <a className="nav_link hover_transparent" href={`${origin}/bridge`}>
                         Bridge
                       </a>
                       <NavLink
-                        className="nav_link hover_shadow"
+                        className="nav_link hover_transparent"
                         activeClassName="emphasized-selected active_mobile_link"
                         to="/bsc/farms-v2/"
                       >
                         Farms
                       </NavLink>
                       <NavLink
-                        className="nav_link hover_shadow"
+                        className="nav_link hover_transparent"
                         activeClassName="emphasized-selected active_mobile_link"
                         to="/bsc/staking/"
                       >
                         Staking
                       </NavLink>
 
-                      <a className="nav_link hover_shadow" onClick={() => launchTransak()}>
+                      <a className="nav_link hover_transparent" onClick={() => launchTransak()}>
                         Deposit
                       </a>
                     </ul>
@@ -118,7 +118,7 @@ const Menu = (props) => {
                       {account ? (
                         <AccountModal />
                       ) : (
-                        <li className="hover_shadow account_modal">
+                        <li className="hover_transparent account_modal">
                           <button
                             type="button"
                             style={{ color: '#05195a', fontWeight: 'bold' }}
