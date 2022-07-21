@@ -197,7 +197,6 @@ const StakeModal: React.FC<StakeModalProps> = ({
         style={{
           background: 'rgb(239 238 238 / 79%)',
           border: 'none',
-          boxShadow: 'rgb(33 33 33 / 20%) 0px 0px 16px',
           margin: '10px',
         }}
       />

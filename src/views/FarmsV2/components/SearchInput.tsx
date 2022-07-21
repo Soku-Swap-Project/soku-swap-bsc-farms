@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react'
 import { useTranslation } from 'contexts/Localization'
+import SearchIcon from '@mui/icons-material/Search'
 import { Input } from '@pancakeswap/uikit'
 import styled from 'styled-components'
 import debounce from 'lodash/debounce'
@@ -56,7 +57,7 @@ const SearchInput: React.FC<Props> = ({ onChange: onChangeCallback }) => {
           placeholder={t('Search by name, symbol, address')}
           onBlur={() => setToggled(false)}
         />
-        <span
+        <SearchIcon
           style={{
             right: '0',
             padding: '0.65rem 1.5rem',
@@ -69,10 +70,7 @@ const SearchInput: React.FC<Props> = ({ onChange: onChangeCallback }) => {
             borderTopLeftRadius: '0',
             borderBottomLeftRadius: '0',
           }}
-          className="material-icons"
-        >
-          search
-        </span>
+        />
       </InputWrapper>
     </Container>
   )
