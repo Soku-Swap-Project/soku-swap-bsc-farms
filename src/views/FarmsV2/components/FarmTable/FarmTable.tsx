@@ -77,7 +77,11 @@ const FarmTable: React.FC<ITableProps> = (props) => {
           <StyledTable>
             <TableBody>
               {rows.map((row) => {
-                return <Row {...row.original} userDataReady={userDataReady} key={`table-row-${row.id}`} />
+                return (
+                  row.original.farm.pid !== 19 && (
+                    <Row {...row.original} userDataReady={userDataReady} key={`table-row-${row.id}`} />
+                  )
+                )
               })}
             </TableBody>
           </StyledTable>

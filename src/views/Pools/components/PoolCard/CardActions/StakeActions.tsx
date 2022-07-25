@@ -45,6 +45,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
   // const stakingTokenPrice = useBusdPriceFromToken(stakingToken.symbol)
   const sokuPrice = useTokenPrice('sokuswap')
   const sutekuPrice = usePriceBnbSuteku()
+  const disabled = true
 
   const stakingTokenPrice = stakingToken.symbol === 'SOKU' ? sokuPrice : sutekuPrice.toNumber()
 
@@ -146,11 +147,11 @@ const StakeAction: React.FC<StakeActionsProps> = ({
             <IconButton
               className="hover_shadow emphasize_swap_button"
               variant="secondary"
-              style={isFinished ? { border: '0' } : { border: '2px solid #05195a' }}
+              style={isFinished || disabled ? { border: '0' } : { border: '2px solid #05195a' }}
               onClick={stakingTokenBalance.gt(0) ? onPresentStake : onPresentTokenRequired}
-              disabled={isFinished}
+              disabled
             >
-              <AddIcon color={isFinished ? 'gray' : '#05195a'} width="24px" height="24px" />
+              <AddIcon color={isFinished || disabled ? 'gray' : '#05195a'} width="24px" height="24px" />
             </IconButton>
           )}
         </Flex>
@@ -160,7 +161,7 @@ const StakeAction: React.FC<StakeActionsProps> = ({
       <Button
         className="hover_shadow emphasize_swap_button"
         style={{ backgroundColor: '#04bbfb', marginTop: '12px' }}
-        disabled={isFinished}
+        disabled={isFinished || disabled}
         onClick={stakingTokenBalance.gt(0) ? onPresentStake : onPresentTokenRequired}
       >
         {t('Stake')}

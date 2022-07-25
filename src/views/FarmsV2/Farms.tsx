@@ -394,7 +394,6 @@ const Farms: React.FC = () => {
     if (viewMode === ViewMode.TABLE && rowData.length) {
       return <Table data={rowData} columns={columns} userDataReady={userDataReady} />
     }
-
     return (
       <div>
         <FlexLayout>
