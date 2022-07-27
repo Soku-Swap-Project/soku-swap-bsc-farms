@@ -217,7 +217,7 @@ const Farms: React.FC = () => {
   }
 
   const loadMoreRef = useRef<HTMLDivElement>(null)
-  const isMobile = window.innerWidth <= 500
+  const isMobile = window.innerWidth <= 1200
 
   const [numberOfFarmsVisible, setNumberOfFarmsVisible] = useState(NUMBER_OF_FARMS_VISIBLE)
   const [observerIsSet, setObserverIsSet] = useState(false)
@@ -394,7 +394,6 @@ const Farms: React.FC = () => {
     if (viewMode === ViewMode.TABLE && rowData.length) {
       return <Table data={rowData} columns={columns} userDataReady={userDataReady} />
     }
-
     return (
       <div>
         <FlexLayout>
@@ -427,13 +426,13 @@ const Farms: React.FC = () => {
   return (
     <div style={{ paddingTop: '2.5rem' }} className="farm_heading">
       <PageHeader>
-        <Heading as="h1" color="white" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '10px' }}>
+        <Heading as="h1" color="#05195a" mb="20px" style={{ fontSize: '3.25rem', marginBottom: '10px' }}>
           {t('Farms')}
         </Heading>
         <Heading
           scale="lg"
-          color="white"
-          style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center', padding: '8px 0px' }}
+          color="#05195a"
+          style={{ opacity: '0.85', fontSize: '1.25rem', textAlign: 'center', padding: '8px 0px' }}
         >
           {t('Stake Liquidity Pool (LP) tokens to earn SUTEKU!')}
         </Heading>

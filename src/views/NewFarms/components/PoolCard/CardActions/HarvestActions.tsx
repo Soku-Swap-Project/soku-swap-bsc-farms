@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { Flex, Text, Button, Heading, useModal, Skeleton } from '@pancakeswap/uikit'
+import { toast } from 'react-toastify'
 import Web3 from 'web3'
 import BigNumber from 'bignumber.js'
 import { Token } from 'config/constants/types'
@@ -12,6 +13,7 @@ import { useTranslation } from 'contexts/Localization'
 import { getFullDisplayBalance, getBalanceNumber, formatNumber } from 'utils/formatBalance'
 import { useBusdPriceFromToken, useTokenPrice, usePriceBnbSuteku, usePriceHobiBnb } from 'state/hooks'
 import useToast from 'hooks/useToast'
+import { ToastError } from 'style/Toasts'
 import Balance from 'components/Balance'
 import CollectModal from '../Modals/CollectModal'
 import { BIG_TEN } from '../../../../../utils/bigNumber'
@@ -43,31 +45,22 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
   const formattedBalance = formatNumber(earningTokenBalance, 3, 3)
   const { toastSuccess, toastError } = useToast()
   const web3 = getWeb3NoAccount()
-  const newWeb3 = new Web3(Web3.givenProvider)
-  const { account } = useWeb3React()
-  const bnbPrice = useTokenPrice('wbnb')
-  const bnbPriceBig = new BigNumber(bnbPrice)
-  const sokuPrice = useTokenPrice('sokuswap')
   const hobiPrice = usePriceHobiBnb()
 
   const earningTokenPrice = hobiPrice
 
   const earningTokenPriceAsNumber = earningTokenPrice.toNumber()
 
-  const earningTokenDollarBalance = new BigNumber(parseFloat(earnings.toString()) * earningTokenPriceAsNumber).dividedBy(
-    BIG_TEN.pow(earningToken.decimals),
-  )
+  const earningTokenDollarBalance = new BigNumber(
+    parseFloat(earnings.toString()) * earningTokenPriceAsNumber,
+  ).dividedBy(BIG_TEN.pow(earningToken.decimals))
 
-  // console.log(earningTokenDollarBalance.toNumber(), 'earningTokenDollarBalance')
   const earningsDollarValue = formatNumber(earningTokenDollarBalance.toNumber())
-  const formattedEarnings = web3.utils.fromWei(earnings.toString())
+  const formattedEarnings = web3.utils.fromWei(earnings.toString(), 'ether')
 
   const fullBalance = getFullDisplayBalance(earnings, earningToken.decimals)
   const hasEarnings = parseFloat(earnings.toString()) > 0
   const isCompoundPool = sousId === 0
-
-  // console.log(earningTokenBalance, 'earningTokenBalance')
-  // console.log(hasEarnings, 'hasEarnings')
 
   const [onPresentCollect] = useModal(
     <CollectModal
@@ -116,6 +109,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
         </Flex>
         <Flex>
           <Button
+            className="hover_shadow emphasize_swap_button"
             style={{ background: 'rgb(4, 187, 251)' }}
             disabled={!hasEarnings || pool.isFinished}
             onClick={() => {
@@ -124,10 +118,12 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
                 (pool.poolCategory === '60DayLock' && lockTime !== '0') ||
                 (pool.poolCategory === '90DayLock' && lockTime !== '0')
               ) {
-                toastError(
-                  t('Canceled'),
-                  t(
-                    'Your lock time has not yet expired. You can view your lock time for the current pool in the "Details" section.',
+                toast.error(
+                  ToastError(
+                    t('Canceled'),
+                    t(
+                      'Your lock time has not yet expired. You can view your lock time for the current pool in the "Details" section.',
+                    ),
                   ),
                 )
               } else {

@@ -65,7 +65,7 @@ const StyledCardHeader: React.FC<{
       isPromotedPool={isPromotedPool}
       isFinished={isFinished}
       background={background}
-      style={{ borderBottom: '1px solid #d8d8d8' }}
+      style={{ borderBottom: '1px solid #d8d8d8', background: '#ecf1f8' }}
     >
       <Flex alignItems="center" justifyContent="space-between">
         <Flex flexDirection="column">
@@ -78,9 +78,21 @@ const StyledCardHeader: React.FC<{
           <Text color={isFinished ? 'textDisabled' : '#04bbfb'}>{getSubHeading()}</Text>
         </Flex>
         {earningTokenSymbol === 'SUTEKU' ? (
-          <img src="https://i.ibb.co/qp3JZv7/SOKU-SUTEKU.png" alt={earningTokenSymbol} width={75} height={75} />
+          <img
+            className="logo_shadow hover_shadow_icon"
+            src="https://i.ibb.co/qp3JZv7/SOKU-SUTEKU.png"
+            alt={earningTokenSymbol}
+            width={75}
+            height={75}
+          />
         ) : (
-          <img src="https://i.ibb.co/pLMpbtZ/suteku-soku.png" alt={earningTokenSymbol} width={75} height={75} />
+          <img
+            className="logo_shadow hover_shadow_icon"
+            src="https://i.ibb.co/pLMpbtZ/suteku-soku.png"
+            alt={earningTokenSymbol}
+            width={75}
+            height={75}
+          />
         )}
       </Flex>
     </Wrapper>

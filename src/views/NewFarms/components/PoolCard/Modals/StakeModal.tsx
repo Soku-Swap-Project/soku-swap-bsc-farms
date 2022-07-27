@@ -2,21 +2,22 @@ import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import { Modal, Text, Flex, Image, Button, BalanceInput, AutoRenewIcon, Link } from '@pancakeswap/uikit'
 import Web3 from 'web3'
+import { toast } from 'react-toastify'
 import { useTranslation } from 'contexts/Localization'
 import { BASE_EXCHANGE_URL } from 'config'
-import { useSousStakeFarms} from 'hooks/useStake'
+import { useSousStakeFarms } from 'hooks/useStake'
 import { useSousUnstakeFarms } from 'hooks/useUnstake'
 import { AbiItem } from 'web3-utils'
 import { getAddress } from 'utils/addressHelpers'
 import { useWeb3React } from '@web3-react/core'
 import { getWeb3NoAccount } from 'utils/web3'
 import useTheme from 'hooks/useTheme'
+import { ToastError, ToastSuccess } from 'style/Toasts'
 import useToast from 'hooks/useToast'
 import BigNumber from 'bignumber.js'
 import { getFullDisplayBalance, formatNumber, getDecimalAmount } from 'utils/formatBalance'
 import { Pool } from 'state/types'
 import Slider from 'components/Slider'
-
 import PercentageButton from './PercentageButton'
 
 /* eslint-disable react/require-default-props */
@@ -51,14 +52,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
   const web3 = getWeb3NoAccount()
   // const newWeb3 = new Web3(Web3.givenProvider)
 
-  const { onStake } = useSousStakeFarms(sousId, isBnbPool)
-  const { onUnstake } = useSousUnstakeFarms(sousId, pool.enableEmergencyWithdraw)
+  const { onStake, stakeInFarm } = useSousStakeFarms(sousId, isBnbPool)
+  const { onUnstake, unStakeInFarm } = useSousUnstakeFarms(sousId, pool.enableEmergencyWithdraw)
   const { toastSuccess, toastError } = useToast()
   const [pendingTx, setPendingTx] = useState(false)
   const [stakeAmount, setStakeAmount] = useState('')
   const [hasReachedStakeLimit, setHasReachedStakedLimit] = useState(false)
   const [percent, setPercent] = useState(0)
-
 
   const getCalculatedStakingLimit = () => {
     if (isRemovingStake) {
@@ -98,40 +98,43 @@ const StakeModal: React.FC<StakeModalProps> = ({
     setPercent(sliderPercent)
   }
 
-
   const handleConfirmClick = async () => {
     setPendingTx(true)
 
     if (isRemovingStake) {
       // unstaking
       try {
-        await onUnstake(stakeAmount, stakingToken.decimals)
-        toastSuccess(
-          `${t('Unstaked')}!`,
-          t('Your %symbol% earnings have been automatically sent to your wallet!', {
-            symbol: earningToken.symbol,
-          }),
+        await unStakeInFarm(stakeAmount, stakingToken.decimals)
+        toast.success(
+          ToastSuccess(
+            `${t('Unstaked')}!`,
+            t('Your %symbol% earnings have been automatically sent to your wallet!', {
+              symbol: earningToken.symbol,
+            }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     } else {
       try {
         // staking
-        await onStake(stakeAmount, stakingToken.decimals)
-        toastSuccess(
-          `${t('Staked')}!`,
-          t('Your %symbol% LP tokens have been staked in the pool!', {
-            symbol: stakingToken.symbol,
-          }),
+        await stakeInFarm(stakeAmount, stakingToken.decimals)
+        toast.success(
+          ToastSuccess(
+            `${t('Staked')}!`,
+            t('Your %symbol% LP tokens have been staked in the pool!', {
+              symbol: stakingToken.symbol,
+            }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     }
@@ -141,7 +144,12 @@ const StakeModal: React.FC<StakeModalProps> = ({
   // console.log(web3.utils.fromWei(stakedBalance.toString()), 'staking balance')
 
   return (
-    <Modal title={isRemovingStake ? t('Unstake') : t('Stake in Farm')} onDismiss={onDismiss} headerBackground="#f9f9fa">
+    <Modal
+      title={isRemovingStake ? t('Unstake') : t('Stake in Farm')}
+      onDismiss={onDismiss}
+      headerBackground="#ecf1f8"
+      className="emphasized_swap_layout hover_shadow"
+    >
       {stakingLimit.gt(0) && !isRemovingStake && (
         <Text color="#04bbfb" bold mb="24px" style={{ textAlign: 'center' }} fontSize="16px">
           {t('Max stake: %amount% %token% LP', {
@@ -154,13 +162,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
         <Text bold>{isRemovingStake ? t('Unstake') : t('Stake')}:</Text>
         <Flex alignItems="center" minWidth="70px">
           {/* <Image src={`/images/tokens/${stakingToken.symbol}.png`} width={24} height={24} alt={stakingToken.symbol} /> */}
-            <img
-              src={ `/images/v2Farms/${stakingToken.symbol}.png`}
-              width={24}
-              height={24}
-              alt={stakingToken.symbol}
-              style={{ objectFit: 'contain' }}
-            />
+          <img
+            src={`/images/v2Farms/${stakingToken.symbol}.png`}
+            width={24}
+            height={24}
+            alt={stakingToken.symbol}
+            style={{ objectFit: 'contain' }}
+          />
 
           <Text ml="4px" bold>
             {stakingToken.symbol} LP
@@ -168,11 +176,16 @@ const StakeModal: React.FC<StakeModalProps> = ({
         </Flex>
       </Flex>
       <BalanceInput
+        className="hover_shadow"
         value={stakeAmount}
         onUserInput={handleStakeInputChange}
         currencyValue={stakingTokenPrice !== 0 && `~${usdValueStaked || 0} USD`}
         isWarning={hasReachedStakeLimit}
-        style={{ background: 'rgb(239 238 238 / 79%)', border: 'none' }}
+        style={{
+          background: 'rgb(239 238 238 / 79%)',
+          border: 'none',
+          margin: '10px',
+        }}
       />
       {hasReachedStakeLimit && (
         <Text color="failure" fontSize="12px" style={{ textAlign: 'right' }} mt="4px">
@@ -218,6 +231,7 @@ const StakeModal: React.FC<StakeModalProps> = ({
         </>
       )}
       <Button
+        className="hover_shadow emphasize_swap_button"
         style={{ background: '#05195a' }}
         isLoading={pendingTx}
         endIcon={pendingTx ? <AutoRenewIcon spin color="currentColor" /> : null}
@@ -229,7 +243,13 @@ const StakeModal: React.FC<StakeModalProps> = ({
       </Button>
       {!isRemovingStake && (
         <StyledLink external href={BASE_EXCHANGE_URL}>
-          <Button style={{ background: '#05195a' }} width="100%" mt="8px" variant="primary">
+          <Button
+            className="hover_shadow emphasize_swap_button"
+            style={{ background: '#05195a' }}
+            width="100%"
+            mt="8px"
+            variant="primary"
+          >
             <Text color="#fff" fontWeight="bolder">
               {' '}
               {t('Get %symbol%', { symbol: stakingToken.symbol })}

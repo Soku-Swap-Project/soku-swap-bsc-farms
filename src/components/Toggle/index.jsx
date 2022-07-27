@@ -58,7 +58,7 @@ const Toggle = () => {
         <CheckBox id="checkbox" type="checkbox" defaultChecked={!false} />
         <CheckBoxLabel htmlFor="checkbox" />
       </CheckBoxWrapper>
-      <p className="form-check-label bscToggle toggleActive">BSC</p>
+      <p className="form-check-label bscToggle emphasized-selected">BSC</p>
     </div>
   )
 }

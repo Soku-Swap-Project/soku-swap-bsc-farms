@@ -1,8 +1,17 @@
 import { useCallback } from 'react'
 import { useWeb3React } from '@web3-react/core'
+import BigNumber from 'bignumber.js'
 import { useAppDispatch } from 'state'
-import { fetchFarmUserDataAsync, updateUserStakedBalance, updateUserBalance, updateUserStakedBalanceFarmsV2, updateUserBalanceFarmsV2 } from 'state/actions'
+import {
+  fetchFarmUserDataAsync,
+  updateUserStakedBalance,
+  updateUserBalance,
+  updateUserStakedBalanceFarmsV2,
+  updateUserBalanceFarmsV2,
+} from 'state/actions'
+
 import { stake, sousStake, sousStakeBnb } from 'utils/callHelpers'
+import { BIG_TEN } from 'utils/bigNumber'
 import { useMasterchef, useMasterchefV2, useSousChef, useSousChefV2Farms } from './useContract'
 
 const useStake = (pid: number) => {
@@ -69,6 +78,19 @@ export const useSousStakeFarms = (sousId: number, isUsingBnb = false) => {
   const masterChefContract = useMasterchef()
   const sousChefContract = useSousChefV2Farms(sousId)
 
+  const stakeInFarm = async (amount, decimals) => {
+    const stakeTx = await sousChefContract.methods
+      .deposit(new BigNumber(amount).times(BIG_TEN.pow(decimals)).toString())
+      .send({ from: account })
+      .then((receipt) => {
+        console.log('receipt', receipt)
+      })
+    dispatch(updateUserStakedBalanceFarmsV2(sousId, account))
+    dispatch(updateUserBalanceFarmsV2(sousId, account))
+
+    return stakeTx
+  }
+
   const handleStake = useCallback(
     async (amount: string, decimals: number) => {
       if (sousId === 0) {
@@ -84,7 +106,7 @@ export const useSousStakeFarms = (sousId: number, isUsingBnb = false) => {
     [account, dispatch, isUsingBnb, masterChefContract, sousChefContract, sousId],
   )
 
-  return { onStake: handleStake }
+  return { onStake: handleStake, stakeInFarm }
 }
 
 export default useStake

@@ -19,6 +19,7 @@ interface PromotedStyleCardProps {
 
 export const StyledCard = styled(Card)<{ isPromoted?: PromotedStyleCardProps; isFinished?: boolean }>`
   max-width: 352px;
+  background: #ecf1f8 !important;
   margin: 0 8px 24px;
   display: flex;
   flex-direction: column;
@@ -49,7 +50,7 @@ export const StyledCard = styled(Card)<{ isPromoted?: PromotedStyleCardProps; is
 `
 
 export const StyledCardInner = styled(Box)<{ isPromotedPool?: boolean }>`
-  background: ${({ theme }) => theme.card.background};
+  background: #ecf1f8 !important;
   border-radius: ${({ isPromotedPool, theme }) => (isPromotedPool ? '31px' : theme.radii.card)};
 `
 

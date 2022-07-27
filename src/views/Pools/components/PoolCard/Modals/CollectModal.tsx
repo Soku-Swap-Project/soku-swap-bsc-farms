@@ -23,6 +23,8 @@ import { useSousStake } from 'hooks/useStake'
 import useToast from 'hooks/useToast'
 import { Token } from 'config/constants/types'
 import useWeb3 from 'hooks/useWeb3'
+import { ToastSuccess, ToastError } from 'style/Toasts'
+import { toast } from 'react-toastify'
 
 /* eslint-disable react/require-default-props */
 interface CollectModalProps {
@@ -422,14 +424,16 @@ const CollectModal: React.FC<CollectModalProps> = ({
     if (shouldCompound) {
       try {
         await onStake(fullBalance, earningToken.decimals)
-        toastSuccess(
-          `${t('Compounded')}!`,
-          t('Your %symbol% earnings have been re-invested into the pool!', { symbol: earningToken.symbol }),
+        toast.success(
+          ToastSuccess(
+            `${t('Compounded')}!`,
+            t('Your %symbol% earnings have been re-invested into the pool!', { symbol: earningToken.symbol }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     } else {
@@ -444,15 +448,17 @@ const CollectModal: React.FC<CollectModalProps> = ({
         } else {
           await onReward()
         }
-        toastSuccess(
-          `${t('Claimed')}!`,
-          t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningToken.symbol }),
+        toast.success(
+          ToastSuccess(
+            `${t('Claimed')}!`,
+            t('Your %symbol% earnings have been sent to your wallet!', { symbol: earningToken.symbol }),
+          ),
         )
         setPendingTx(false)
         onDismiss()
       } catch (e) {
         console.log(e)
-        toastError(t('Canceled'), t('Please try again and confirm the transaction.'))
+        toast.error(ToastError(t('Canceled'), t('Please try again and confirm the transaction.')))
         setPendingTx(false)
       }
     }
@@ -462,7 +468,8 @@ const CollectModal: React.FC<CollectModalProps> = ({
     <Modal
       title={`${earningToken.symbol} ${isCompoundPool ? t('Collect') : t('Claim')}`}
       onDismiss={onDismiss}
-      headerBackground="#f9f9fa"
+      headerBackground="#ecf1f8"
+      className="emphasized_swap_layout hover_shadow"
     >
       {isCompoundPool && (
         <Flex justifyContent="center" alignItems="center" mb="24px">
@@ -493,6 +500,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
       </Flex>
 
       <Button
+        className="hover_shadow emphasize_swap_button"
         mt="8px"
         style={{ backgroundColor: '#04bbfb' }}
         onClick={handleHarvestConfirm}
@@ -501,7 +509,7 @@ const CollectModal: React.FC<CollectModalProps> = ({
       >
         {pendingTx ? t('Confirming') : t('Confirm')}
       </Button>
-      <Button variant="text" style={{ color: '#04bbfb' }} onClick={onDismiss} pb="0px">
+      <Button className="hover_shadow_icon" variant="text" style={{ color: '#04bbfb' }} onClick={onDismiss} pb="0px">
         {t('Close Window')}
       </Button>
     </Modal>

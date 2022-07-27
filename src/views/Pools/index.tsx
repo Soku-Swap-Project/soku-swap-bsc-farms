@@ -109,19 +109,19 @@ const Pools: React.FC = () => {
           <Flex flexDirection="column" mr={['8px', 0]}>
             <Heading
               as="h1"
-              color="white"
+              color="#05195a"
               mb="20px"
               style={{ fontSize: '3.25rem', marginBottom: '12px', textAlign: 'center' }}
             >
               {t('Staking Pools')}
             </Heading>
-            <Heading scale="lg" color="white" style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center' }}>
+            <Heading scale="lg" color="#05195a" style={{ opacity: '0.85', fontSize: '1.25rem', textAlign: 'center' }}>
               {t('Just stake some tokens to earn.')}
             </Heading>
             <Heading
               scale="lg"
-              color="white"
-              style={{ opacity: '0.65', fontSize: '1.25rem', textAlign: 'center', marginBottom: '15px' }}
+              color="#05195a"
+              style={{ opacity: '0.85', fontSize: '1.25rem', textAlign: 'center', marginBottom: '15px' }}
             >
               {t('High APR, low risk.')}
             </Heading>
@@ -135,9 +135,9 @@ const Pools: React.FC = () => {
               }}
             >
               {/* eslint-disable-next-line */}
-              <p style={{ color: '#04bbfb', fontSize: '16px', cursor: 'pointer' }} onClick={() => setOpen(true)}>
+              {/* <p style={{ color: '#04bbfb', fontSize: '16px', cursor: 'pointer' }} onClick={() => setOpen(true)}>
                 How to stake?
-              </p>
+              </p> */}
             </div>
           </Flex>
           {/* <Flex height="fit-content" justifyContent="center" alignItems="center" mt={['24px', null, '0']}>

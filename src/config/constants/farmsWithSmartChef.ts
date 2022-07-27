@@ -18,7 +18,20 @@ const farmsWithSmartChef: FarmsWithSmartChefConfig[] = [
   //   isFinished: false,
   // },
 
-  // 90 Day Locked Staking Pools
+  // {
+  //   sousId: 7,
+  //   stakingToken: LpTokens.hobi_wbnb,
+  //   earningToken: tokens.hobi,
+  //   contractAddress: {
+  //     97: '',
+  //     56: '0x6c25710BC684a67F8A5e49D02Bd9610dBB5c3b6b',
+  //   },
+  //   poolCategory: FarmsWithSmartChefCategory.CORE,
+  //   harvest: true,
+  //   tokenPerBlock: '1',
+  //   sortOrder: 999,
+  //   isFinished: false,
+  // },
 
   {
     sousId: 1,
@@ -26,23 +39,51 @@ const farmsWithSmartChef: FarmsWithSmartChefConfig[] = [
     earningToken: tokens.hobi,
     contractAddress: {
       97: '',
-      56: '0x6c25710BC684a67F8A5e49D02Bd9610dBB5c3b6b',
+      56: '0x75D951F17507D63d1c74Ce801A5C336809DB4bc6',
     },
-    poolCategory: FarmsWithSmartChefCategory.CORE,
+    poolCategory: FarmsWithSmartChefCategory['30DAYLOCK'],
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,
     isFinished: false,
   },
-    {
+  {
     sousId: 2,
     stakingToken: LpTokens.hobi_suteku,
     earningToken: tokens.hobi,
     contractAddress: {
       97: '',
-      56: '0x51a72eb1844eed2220542eff1f96be36a91f02d6',
+      56: '0x3e9964Ad64761100929C8756e95B11D32Ba62DE2',
     },
-    poolCategory: FarmsWithSmartChefCategory.CORE,
+    poolCategory: FarmsWithSmartChefCategory['30DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '1',
+    sortOrder: 999,
+    isFinished: false,
+  },
+  {
+    sousId: 4,
+    stakingToken: LpTokens.soku_bnb,
+    earningToken: tokens.hobi,
+    contractAddress: {
+      97: '',
+      56: '0x3bc842Af95f0c01AB35Ed8d5EDa2437d37Ab0911',
+    },
+    poolCategory: FarmsWithSmartChefCategory['30DAYLOCK'],
+    harvest: true,
+    tokenPerBlock: '1',
+    sortOrder: 999,
+    isFinished: false,
+  },
+  {
+    sousId: 3,
+    stakingToken: LpTokens.suteku_bnb,
+    earningToken: tokens.hobi,
+    contractAddress: {
+      97: '',
+      56: '0x6F546e4F9C38799073a779ca06d5Ae7EF8b107FB',
+    },
+    poolCategory: FarmsWithSmartChefCategory['30DAYLOCK'],
     harvest: true,
     tokenPerBlock: '1',
     sortOrder: 999,

@@ -135,7 +135,7 @@ const AprRow: React.FC<AprRowProps> = ({
             variant="text"
             scale="sm"
           >
-            <CalculateIcon color="textSubtle" width="18px" />
+            <CalculateIcon className="hover_shadow_icon" color="textSubtle" width="18px" />
           </IconButton>
         </Flex>
       )}

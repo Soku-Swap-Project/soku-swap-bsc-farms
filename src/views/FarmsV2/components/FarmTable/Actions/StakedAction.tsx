@@ -17,10 +17,15 @@ import { useUnstakeV2 } from 'hooks/useUnstake'
 import useWeb3 from 'hooks/useWeb3'
 import DepositModal from '../../DepositModal'
 import WithdrawModal from '../../WithdrawModal'
-import { ActionContainer, ActionTitles, ActionContent, Earned, Title, Subtle } from './styles'
+import { ActionContainer, ActionTitles, ActionContent, Earned, Title, Subtle, ActionContentNoAccount } from './styles'
 
 const IconButtonWrapper = styled.div`
   display: flex;
+`
+
+const StyledButton = styled(Button)`
+  border-radius: 14px;
+  height: 52px;
 `
 
 interface StackedActionProps extends FarmWithStakedValue {
@@ -82,15 +87,17 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
     }
   }, [onApprove])
 
+  const isMobile = window.innerWidth <= 1200
+
   if (!account) {
     return (
       <ActionContainer>
         {/* <ActionTitles>
           <Subtle>{t('Start Farming').toUpperCase()}</Subtle>
         </ActionTitles> */}
-        <ActionContent>
-          <UnlockButton width="100%" />
-        </ActionContent>
+        <ActionContentNoAccount>
+          <UnlockButton width={isMobile ? '100%' : '50%'} />
+        </ActionContentNoAccount>
       </ActionContainer>
     )
   }
@@ -109,6 +116,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
             </div>
             <IconButtonWrapper>
               <IconButton
+                className="hover_shadow emphasize_swap_button"
                 style={{ background: 'transparent', border: '2px solid #05195a' }}
                 onClick={onPresentWithdraw}
                 mr="6px"
@@ -116,6 +124,7 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
                 <MinusIcon color="#05195a" width="14px" />
               </IconButton>
               <IconButton
+                className="hover_shadow emphasize_swap_button"
                 style={{ background: 'transparent', border: '2px solid #05195a' }}
                 onClick={onPresentDeposit}
                 disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
@@ -152,14 +161,15 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
           <Title>{lpSymbol}</Title>
         </ActionTitles>
         <ActionContent>
-          <Button
-            style={{ background: '#04bbfb', borderRadius: '24px' }}
+          <StyledButton
+            className="hover_shadow emphasize_swap_button"
+            style={{ background: '#04bbfb', borderRadius: '14px' }}
             width="100%"
             onClick={onPresentDeposit}
             disabled={['history', 'archived'].some((item) => location.pathname.includes(item))}
           >
             {t('Stake LP')}
-          </Button>
+          </StyledButton>
         </ActionContent>
       </ActionContainer>
     )
@@ -184,14 +194,15 @@ const Staked: React.FunctionComponent<StackedActionProps> = ({
         <Subtle>{t('Enable Farm').toUpperCase()}</Subtle>
       </ActionTitles> */}
       <ActionContent>
-        <Button
+        <StyledButton
+          className="hover_shadow emphasize_swap_button"
           width="100%"
           disabled={requestedApproval}
           onClick={handleApprove}
-          style={{ background: '#04bbfb', borderRadius: '24px', fontWeight: 'normal' }}
+          style={{ background: '#04bbfb', borderRadius: '14px', fontWeight: 'normal' }}
         >
           {t('Approve')}
-        </Button>
+        </StyledButton>
       </ActionContent>
     </ActionContainer>
   )

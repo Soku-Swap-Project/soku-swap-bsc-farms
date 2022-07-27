@@ -43,7 +43,6 @@ const collapseAnimation = keyframes`
 const Button = styled.button`
   // border: 1px solid red;
   min-width: 49.5%;
-  padding: 5px;
 `
 
 const Container = styled.div<{ expanded }>`
@@ -162,10 +161,12 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
       expanded={expanded}
       style={{
         minHeight: 'auto',
-        width: '100%',
+        // width: '100%',
         display: 'flex',
+        justifyContent: 'center',
         flexDirection: 'column',
         borderBottom: '1px solid #ebebeb',
+        background: '#ecf1f8',
       }}
     >
       <div className="add_remove_liquidity">
@@ -173,7 +174,15 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           onClick={() => {
             window.location.href = `${origin}/bsc/#/add/${token.address[56]}/${quoteToken.address[56]}`
           }}
-          className="farm_liquidity_buttons add"
+          style={{
+            border: 'none',
+            background: 'none',
+            color: '#05195a',
+            fontWeight: 700,
+            fontSize: '16px',
+            height: '52px',
+          }}
+          className="hover_transparent"
         >
           Add Liquidity
         </Button>
@@ -181,7 +190,15 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           onClick={() => {
             window.location.href = `${origin}/bsc/#/remove/${token.address[56]}/${quoteToken.address[56]}`
           }}
-          className="farm_liquidity_buttons remove"
+          style={{
+            border: 'none',
+            background: 'none',
+            color: '#05195a',
+            fontWeight: 700,
+            fontSize: '16px',
+            height: '52px',
+          }}
+          className="hover_transparent"
         >
           Remove Liquidity
         </Button>
@@ -215,7 +232,7 @@ const ActionPanel: React.FunctionComponent<ActionPanelProps> = ({
           <Liquidity {...liquidity} />
         </ValueWrapper>
       </ValueContainer>
-      <ActionContainer>
+      <ActionContainer style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <HarvestAction {...farm} userDataReady={userDataReady} />
         <StakedAction {...farm} userDataReady={userDataReady} />
       </ActionContainer>

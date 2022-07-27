@@ -128,6 +128,13 @@ export const useFarmFromLpSymbolV2 = (lpSymbol: string): Farm => {
   return farm
 }
 
+export const useFarmFromLpSymbolSmartChef = (lpSymbol: string): Pool => {
+  const farm = useSelector((state: State) =>
+    state.farmsWithSmartChef.data.find((f) => f.stakingToken.symbol === lpSymbol),
+  )
+  return farm
+}
+
 export const useFarmUser = (pid) => {
   const farm = useFarmFromPid(pid)
 
@@ -212,7 +219,6 @@ export const useBusdPriceFromPid = (pid: number): BigNumber => {
 export const useBusdPriceFromPidV2 = (pid: number): BigNumber => {
   const farm = useFarmFromPidV2(pid)
   const bnbPriceBusd = usePriceBnbBusd()
-  // console.log('bnb price', bnbPriceBusd)
   const quoteTokenFarm = useFarmFromTokenSymbolV2(farm?.quoteToken?.symbol)
 
   // Catch in case a farm isn't found
@@ -241,15 +247,15 @@ export const useBusdPriceFromPidV2 = (pid: number): BigNumber => {
   // i.e. for farm PNT - pBTC
   // we find the pBTC farm (pBTC - BNB)'s quote token - BNB
   // from the BNB - pBTC BUSD price, we can calculate the PNT - BUSD price
-  // if (quoteTokenFarm?.quoteToken?.symbol === 'wBNB') {
-  //   const quoteTokenInBusd = bnbPriceBusd?.toNumber() > 0 && bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
-  //   return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
-  // }
+  if (quoteTokenFarm?.quoteToken?.symbol === 'wBNB') {
+    const quoteTokenInBusd = bnbPriceBusd?.toNumber() > 0 && bnbPriceBusd.times(quoteTokenFarm.tokenPriceVsQuote)
+    return farm.tokenPriceVsQuote ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
+  }
 
-  // if (quoteTokenFarm?.quoteToken?.symbol === 'BUSD') {
-  //   const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
-  //   return quoteTokenInBusd ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
-  // }
+  if (quoteTokenFarm?.quoteToken?.symbol === 'BUSD') {
+    const quoteTokenInBusd = quoteTokenFarm.tokenPriceVsQuote
+    return quoteTokenInBusd ? new BigNumber(farm.tokenPriceVsQuote).times(quoteTokenInBusd) : BIG_ZERO
+  }
 
   // Catch in case token does not have immediate or once-removed BUSD/wBNB quoteToken
   return BIG_ZERO
@@ -316,7 +322,6 @@ export const usePoolFromPid = (sousId: number): Pool => {
   const pool = useSelector((state: State) => state.pools.data.find((p) => p.sousId === sousId))
   return transformPool(pool)
 }
-
 
 export const useFetchCakeVault = () => {
   const { account } = useWeb3React()
@@ -416,13 +421,13 @@ export const useFarmsWithSmartChef = (account): Pool[] => {
     }
   }, [account, dispatch, fastRefresh])
 
-  const pools = useSelector((state: State) => state.farmsWithSmartChef.data)
-  return pools.map(transformFarm)
+  const farms = useSelector((state: State) => state.farmsWithSmartChef.data)
+  return farms.map(transformFarm)
 }
 
 export const useFarmWithSmartChefFromPid = (sousId: number): Pool => {
-  const pool = useSelector((state: State) => state.farmsWithSmartChef.data.find((p) => p.sousId === sousId))
-  return transformFarm(pool)
+  const farm = useSelector((state: State) => state.farmsWithSmartChef.data.find((p) => p.sousId === sousId))
+  return transformFarm(farm)
 }
 
 // export const useFetchCakeVault = () => {
@@ -654,11 +659,10 @@ export const usePriceBnbBusd = (): BigNumber => {
   return new BigNumber(bnbPrice)
 }
 
+// Soku BUSD
 export const usePriceCakeBusd = (): BigNumber => {
   const cakeBnbFarm = useFarmFromPid(2)
   const bnbBusdPrice = usePriceBnbBusd()
-
-  // console.log(cakeBnbFarm)
 
   // const cakeBusdPrice = cakeBnbFarm.tokenPriceVsQuote ? bnbBusdPrice.times(cakeBnbFarm.tokenPriceVsQuote) : BIG_ZERO
 
@@ -684,7 +688,6 @@ export const usePriceHobiSuteku = (): BigNumber => {
 
   const hobiPrice = hobiFarm.tokenPriceVsQuote ? hobiFarm.tokenPriceVsQuote : BIG_ZERO
 
-
   const price = new BigNumber(hobiPrice).multipliedBy(suteku_price)
   // console.log(tmuFarm, 'tmu2')
   return price
@@ -695,7 +698,6 @@ export const usePriceHobiBnb = (): BigNumber => {
   const bnbPrice = usePriceBnbBusd()
 
   const hobiPrice = hobiFarm.tokenPriceVsQuote ? hobiFarm.tokenPriceVsQuote : BIG_ZERO
-
 
   const price = new BigNumber(hobiPrice).multipliedBy(bnbPrice)
   // console.log(tmuFarm, 'tmu2')
