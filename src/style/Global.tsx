@@ -329,7 +329,7 @@ button[id='wallet-connect-binance chain wallet'] div,
 button[id='wallet-connect-metamask'],
 button[id='wallet-connect-walletconnect'],
 button[id='wallet-connect-binance chain wallet'] {
-    transition: all 0.2s ease-in-out !important;
+  transition: all 0.2s ease-in-out !important;
   background: transparent;
   border-radius: 7px;
 }
