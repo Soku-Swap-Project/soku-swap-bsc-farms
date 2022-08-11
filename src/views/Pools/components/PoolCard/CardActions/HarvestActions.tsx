@@ -119,7 +119,7 @@ const HarvestActions: React.FC<HarvestActionsProps> = ({
           <Button
             className="hover_shadow emphasize_swap_button"
             style={{ background: 'rgb(4, 187, 251)' }}
-            disabled={!hasEarnings || pool.isFinished}
+            disabled={!hasEarnings || pool.isFinished || hasEarnings}
             onClick={() => {
               if (
                 (pool.poolCategory === '30DayLock' && lockTime !== '0') ||
