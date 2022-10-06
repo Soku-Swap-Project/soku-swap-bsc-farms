@@ -11,6 +11,7 @@ import useAuth from 'hooks/useAuth'
 import ClaimSokuModal from 'components/ClaimSokuModal'
 import AccountModal from 'components/AccountModal'
 import { useWalletModal } from '@pancakeswap/uikit'
+import SwitchNetworkModal from 'components/SwitchNetworkModal'
 
 // import '../Menu/Menu.css'
 
@@ -94,6 +95,11 @@ const menuOverlay = css`
 
 const SlideOutMenu: FC = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const toggleNetworkModal = () => {
+    setIsModalOpen(!isModalOpen)
+  }
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen)
@@ -148,6 +154,7 @@ const SlideOutMenu: FC = () => {
                     color: '#05195a',
                     justifyContent: 'center',
                   }}
+                  onClick={toggleNetworkModal}
                 >
                   <img
                     src={NETWORK_ICON[chainId as number]}
@@ -159,6 +166,7 @@ const SlideOutMenu: FC = () => {
                   {NETWORK_LABEL_SHORT[chainId as number]}
                 </div>
               )}
+              <SwitchNetworkModal isModalOpen={isModalOpen} toggleNetworkModal={toggleNetworkModal} />
             </div>
             <div className="mobile_menu_list">
               <a className="nav_link_mobile" href="https://swap.app.sokuswap.finance">

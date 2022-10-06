@@ -12,6 +12,7 @@ import useEagerConnect from 'hooks/useEagerConnect'
 import { useFetchPriceList, useFetchPublicData, useFetchPublicDataV2 } from 'state/hooks'
 import useAuth from 'hooks/useAuth'
 import detectEthereumProvider from '@metamask/detect-provider'
+import { SupportedChainId } from 'config/networks'
 import NewVersionModal from 'components/NewVersionModal'
 import NewFarms from 'views/NewFarms'
 import GlobalStyle from './style/Global'
@@ -93,19 +94,7 @@ const App: React.FC = () => {
   //   // eslint-disable-next-line react-hooks/exhaustive-deps
   // }, [])
 
-  const { account } = useWeb3React()
   const { login, logout } = useAuth()
-
-  const { onPresentConnectModal } = useWalletModal(login, logout)
-
-  const openHiddenLinks = () => {
-    const hiddenLinks = document.getElementsByClassName('hidden_navLinksMobile')
-    if (hiddenLinks[0]?.id === 'hidden_navLinks') {
-      hiddenLinks[0].id = 'open'
-    } else if (hiddenLinks[0]?.id === 'open') {
-      hiddenLinks[0].id = 'hidden_navLinks'
-    }
-  }
 
   const isMobile = window.innerWidth <= 1200
 
@@ -126,9 +115,9 @@ const App: React.FC = () => {
           <Route path="/bsc/staking/">
             <Pools />
           </Route>
-          <Route path="/bsc/bridge">
+          {/* <Route path="/bsc/bridge">
             <ComingSoon />
-          </Route>
+          </Route> */}
           <Route component={NotFound} />
         </Switch>
         {/* <div className="connectWallet__options__MOBILE">

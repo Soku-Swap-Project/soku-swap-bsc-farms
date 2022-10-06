@@ -18,16 +18,16 @@ const NotFound = () => {
   return (
     <Page>
       <StyledNotFound>
-        <img
+        {/* <img
           src="https://i.ibb.co/Qfm7690/Soku-Swap-Web-Logo-White.png"
           className="sokuswap__logo"
           alt="Soku Swap Logo"
           style={{ height: '100px' }}
-        />{' '}
+        />{' '} */}
         {/* <Heading color="#04bbfb" scale="xxl">
           404
         </Heading> */}
-        <Text fontSize="20px" color="white" mb="24px">
+        <Text fontSize="20px" color="#05195a" mb="24px">
           {t('Oops, page not found.')}
         </Text>
         <Button style={{ background: '#04bbfb' }} as="a" href="/" scale="sm">
