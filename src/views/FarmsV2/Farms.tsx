@@ -439,7 +439,7 @@ const Farms: React.FC = () => {
       </PageHeader>
 
       <Page>
-        <Toggle />
+        {/* <Toggle /> */}
         {/* <ToggleNew /> */}
         <ControlContainer>
           <FilterContainer>
