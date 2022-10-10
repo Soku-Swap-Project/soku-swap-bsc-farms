@@ -49,6 +49,8 @@ export default function AccountModal() {
   //     return deactivate
   // }
 
+  window.alert(connector?.constructor?.name)
+
   const body = (
     <div className="flex flex-col gap-6 network_modal">
       <div className="modal_header">
