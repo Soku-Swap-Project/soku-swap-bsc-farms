@@ -49,8 +49,6 @@ export default function AccountModal() {
   //     return deactivate
   // }
 
-  window.alert(connector?.constructor?.name)
-
   const body = (
     <div className="flex flex-col gap-6 network_modal">
       <div className="modal_header">
@@ -86,7 +84,8 @@ export default function AccountModal() {
           </h2>
           <OpenInNewIcon />
         </a>
-        {((isMobile && connector?.constructor?.name !== 'InjectedConnector') || !isMobile) && (
+        {((isMobile && connector?.constructor?.name !== 'InjectedConnector' && connector?.constructor?.name !== 't') ||
+          !isMobile) && (
           <button
             style={{
               color: 'rgb(255, 255, 255)',
