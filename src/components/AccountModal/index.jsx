@@ -28,7 +28,7 @@ export default function AccountModal() {
   const classes = useStyles()
   const [open, setOpen] = React.useState(false)
   // const { login, logout } = useAuth()
-  const { account, chainId, deactivate } = useWeb3React()
+  const { account, chainId, deactivate, connector } = useWeb3React()
 
   const truncatedFirstHalf = account?.substring(0, 5)
   const truncatedLastHalf = account?.substring(account.length - 5, account.length)
@@ -84,20 +84,22 @@ export default function AccountModal() {
           </h2>
           <OpenInNewIcon />
         </a>
-        <button
-          style={{
-            color: 'rgb(255, 255, 255)',
-            background: 'rgb(5, 25, 90)',
-            padding: ' 9px 18px',
-            borderRadius: '7px',
-            fontSize: '14px',
-          }}
-          className="account_logout view_on_scan hover_shadow"
-          onClick={deactivate}
-        >
-          <h2 style={{ paddingRight: '8px' }}>Sign Out</h2>
-          <LogoutIcon />
-        </button>
+        {((isMobile && connector?.constructor?.name !== 'InjectedConnector') || !isMobile) && (
+          <button
+            style={{
+              color: 'rgb(255, 255, 255)',
+              background: 'rgb(5, 25, 90)',
+              padding: ' 9px 18px',
+              borderRadius: '7px',
+              fontSize: '14px',
+            }}
+            className="account_logout view_on_scan hover_shadow"
+            onClick={deactivate}
+          >
+            <h2 style={{ paddingRight: '8px' }}>Sign Out</h2>
+            <LogoutIcon />
+          </button>
+        )}
       </div>
     </div>
   )
